@@ -8,13 +8,8 @@
 # define LIBRARY_EXTENTION ".ospl"
 # define VERSION_MAJOR 0
 # define VERSION_MINOR 1
-# define CREATE_OPTS "vj"
-# define IMPORT_OPTS "vjfF"
-
-extern char *ARGS[ARGS_COUNT];
-extern char *g_library_path;
-extern char *g_database_path;
-extern int  print_mode;
+# define CREATE_OPTS "v"
+# define IMPORT_OPTS "vfF"
 
 /*
  * 

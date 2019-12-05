@@ -1,8 +1,14 @@
 #include <thumbnailer.h>
 #include "includes/ospl.h"
+#include "includes/ospl_cli.h"
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+
+char *ARGS[ARGS_COUNT] = {"create", "import", "export", "album", "folder"};
+char *g_library_path = NULL;
+char *g_database_path = NULL;
+int print_mode = 0; // 0 = normal printing, 1 = verbose printing, 2 = json printing
 
 void show_usage()
 {
@@ -72,7 +78,6 @@ static int indexof_arg(const char *arg)
 	return 0;
 }
 
-
 /**
   * \brief Initiate the library global variables
   *
@@ -116,13 +121,6 @@ void usage_unrecognized(char *arg)
 {
 	printf("ospl: did not recognize verb '%s' type \"ospl\" for a list\n", arg);
 }
-
-
-char *ARGS[ARGS_COUNT] = {"create", "import", "export", "album", "folder"};
-char *g_library_path = NULL;
-char *g_database_path = NULL;
-int print_mode = 0; // 0 = normal printing, 1 = verbose printing, 2 = json printing
-
 
 static int return_1()
 {
