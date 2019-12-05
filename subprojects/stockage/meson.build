@@ -1,0 +1,24 @@
+# Project
+project('stockage', 'c')
+
+# Dependencies
+deps = [dependency('threads'),
+		dependency('sqlite3')]
+
+# Library
+stockage = shared_library(	'stockage', 'src/stockage.c',
+						            install: true,
+						            include_directories : 'include',
+					             	dependencies : deps,
+						            soversion: 0, version: '0.0.1'
+)
+
+install_headers('include/stockage.h',  subdir : 'ospl')
+
+# CLI
+executable( 'cli', 'main.c', 
+			link_with: stockage, 
+			dependencies : deps
+)
+
+stockage_dep = declare_dependency(include_directories: 'include', link_with: stockage)
