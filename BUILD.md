@@ -16,7 +16,6 @@ the following command will build ospl:
 ## Linux
 ###### Dependencies
 Before continuing, assure that these packages are installed:
-
 - libjpeg-dev
 - libsqlite3-dev
 - libmagic-dev

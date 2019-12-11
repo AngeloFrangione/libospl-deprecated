@@ -23,7 +23,7 @@ There are multiple modules in the subproject folder, for now, there is the thumb
 ## DB structure
 Images are worth a million words so here is a diagram for the .db file.   
 There is also a .sql file at the [root directory](https://github.com/AngeloFrangione/libospl/blob/master/database.sql)
-![database structure](https://raw.githubusercontent.com/AngeloFrangione/libospl/master/database_diagram.png)
+![database structure](https://raw.githubusercontent.com/AngeloFrangione/libospl/master/database_diagram.png?token=AA5NSBIRSPUSTH2QOIAPK2S57IJL6)
 
 ## Milestones
 
@@ -42,9 +42,10 @@ There is also a .sql file at the [root directory](https://github.com/AngeloFrang
 
 What plan to use following external libraries for making all this working:
 
-- sqlite for storing data
-- libexif for extracting exif informations
-- epeg for fast jpeg thumbnail creation (wich uses libjpeg and libexif)
-- pngscale for png thumbnail creation
-- libimobiledevice for importing photos from iDevices
-- libraw for reading raw photos from cameras
+- [cwalk](https://github.com/likle/cwalk/tree/master) for managing paths on windows and unix
+- [sqlite](https://www.sqlite.org/index.html) for storing data
+- [libexif](https://libexif.github.io/) for extracting exif informations
+- [epeg](https://github.com/mattes/epeg) for fast jpeg thumbnail creation (wich uses libjpeg and libexif)
+- [pngscale](https://github.com/dcoetzee/pngscale) for png thumbnail creation
+- [libimobiledevice](https://www.libimobiledevice.org/) for importing photos from iDevices
+- [libraw](https://www.libraw.org/) for reading raw photos from cameras

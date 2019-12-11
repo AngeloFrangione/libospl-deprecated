@@ -1,5 +1,6 @@
 # Project
 project('ospl', 'c')
+cmake = import('cmake')
 
 # Subprojects
 
@@ -7,6 +8,7 @@ thumbnailer_proj = subproject('thumbnailer')
 thumbnailer = thumbnailer_proj.get_variable('thumbnailer_dep')
 stockage_proj = subproject('stockage')
 stockage = stockage_proj.get_variable('stockage_dep')
+libcwalk = cmake.subproject('cwalk')
 
 # Dependencies
 deps = [thumbnailer,
@@ -15,6 +17,7 @@ deps = [thumbnailer,
 		dependency('libexif'),
 		dependency('threads'),
 		dependency('sqlite3'),
+		libcwalk.dependency('cwalk'),
 		meson.get_compiler('c').find_library('magic')]
 
 source =['srcs/ospl.c', 'srcs/common.c', 
