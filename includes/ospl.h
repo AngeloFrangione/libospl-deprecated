@@ -21,13 +21,13 @@ int ospl_create_library(char *library);
 int ospl_import_picture(char *library, char *path);
 int ospl_import_folder(char *library, char *path);
 
-int ospl_export_picture(char *library);
-int ospl_export_album(char *library);
+int ospl_export_picture(char *library, unsigned id);
+int ospl_export_album(char *library, unsigned id);
 
-int ospl_album_create(char *library, int id);
-int ospl_album_rename(char *library, int id, char *name);
-int ospl_album_remove(char *library, int id);
-char *ospl_album_getname(char *library, int id);
+int ospl_album_create(char *library, unsigned id);
+int ospl_album_rename(char *library, unsigned id, char *name);
+int ospl_album_remove(char *library, unsigned id);
+char *ospl_album_getname(char *library, unsigned id);
 
 /*
  * 
