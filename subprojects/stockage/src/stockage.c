@@ -17,19 +17,20 @@
 /**
  * \brief Checks sqlite return
  *
- * Checks whether db or query execution is OK or not. If not, prints the error message to stderr and quits with error code 1
+ * Checks whether db or query execution is OK or not. If not, prints the error message to stderr and returns error code 1
  * \param rc Return code
  * \param db database data structur
  */
 
-void check_sqlite_return(int rc, t_db *db)
+int check_sqlite_return(int rc, t_db *db)
 {
 	if (rc != SQLITE_OK)
 	{
 		fprintf(stderr, "Error: %s\n", sqlite3_errmsg(db->db));
 		sqlite3_close(db->db);
-		exit(1);
+		return 1;
 	}
+	return 0;
 }
 
 /**
@@ -42,12 +43,13 @@ void check_sqlite_return(int rc, t_db *db)
  * \param db database data structur
  */
 
-void init_db_rw(t_db *db, char *path)
+int init_db_rw(t_db *db, char *path)
 {
 	int rc;
 
 	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
 	check_sqlite_return(rc, db);
+	return 0;
 }
 
 /**
@@ -61,7 +63,7 @@ void init_db_rw(t_db *db, char *path)
  * \param db database data structur
  */
 
-void init_db_transaction_rw(t_db *db, char *path)
+int init_db_transaction_rw(t_db *db, char *path)
 {
 	int rc;
 
@@ -74,6 +76,7 @@ void init_db_transaction_rw(t_db *db, char *path)
 	check_sqlite_return(rc, db);
 	rc = sqlite3_exec(db->db, "BEGIN TRANSACTION", NULL, NULL, NULL);
 	check_sqlite_return(rc, db);
+	return 0;
 }
 
 /**
@@ -84,19 +87,20 @@ void init_db_transaction_rw(t_db *db, char *path)
  * \param path path to the db file
  */
 
-void create_database(char *path)
+int create_database(char *path)
 {
 	t_db	db;
 	int				rc;
 	char			*vacuum = "PRAGMA auto_vacuum = FULL;";
 
-	memset(&db, 0, sizeof(t_db));
+	init_connection(&db);
 	init_db_rw(&db, path);
 	rc = sqlite3_exec(db.db, vacuum, 0, 0, NULL);
 	check_sqlite_return(rc, &db);
 	rc = sqlite3_exec(db.db, TABLE, 0, 0, NULL);
 	check_sqlite_return(rc, &db);
 	sqlite3_close(db.db);
+	return 0;
 }
 
 /**
@@ -108,7 +112,7 @@ void create_database(char *path)
  * \param db database data structure
  */
 
-void insert_transaction(char *query, t_db *db)
+int insert_transaction(char *query, t_db *db)
 {
 	int rc;
 
@@ -119,6 +123,7 @@ void insert_transaction(char *query, t_db *db)
 	}
 	rc = sqlite3_exec(db->db, query, 0, 0, NULL);
 	check_sqlite_return(rc, db);
+	return 0;
 }
 
 /**
@@ -130,7 +135,7 @@ void insert_transaction(char *query, t_db *db)
  * \param callback callback function should be prototyped with these arguments callback(void *unused, int argc, char **argv, char **column_name)
  */
 
-void select_transaction(char *query, t_db *db, int callback())
+int select_transaction(char *query, t_db *db, int callback())
 {
 	int rc;
 
@@ -141,6 +146,7 @@ void select_transaction(char *query, t_db *db, int callback())
 	}
 	rc = sqlite3_exec(db->db, query, callback, 0, NULL);
 	check_sqlite_return(rc, db);
+	return 0;
 }
 
 /**
@@ -154,7 +160,7 @@ void select_transaction(char *query, t_db *db, int callback())
  * \param data data that will be passed to the callback function
  */
 
-void select_transaction_data(char *query, t_db *db, int callback(), void *data)
+int select_transaction_data(char *query, t_db *db, int callback(), void *data)
 {
 	int rc;
 
@@ -165,6 +171,7 @@ void select_transaction_data(char *query, t_db *db, int callback(), void *data)
 	}
 	rc = sqlite3_exec(db->db, query, callback, data, NULL);
 	check_sqlite_return(rc, db);
+	return 0;
 }
 
 /**
@@ -174,13 +181,14 @@ void select_transaction_data(char *query, t_db *db, int callback(), void *data)
  * \param db database data structure
  */
 
-void finalize_transaction(t_db *db)
+int finalize_transaction(t_db *db)
 {
 	int rc;
 
 	rc = sqlite3_exec(db->db, "END TRANSACTION", NULL, NULL, NULL);
 	check_sqlite_return(rc, db);
 	sqlite3_close(db->db);
+	return 0;
 }
 
 /**
@@ -190,7 +198,8 @@ void finalize_transaction(t_db *db)
  * \param db database data structure
  */
 
-void init_connection(t_db *db)
+int init_connection(t_db *db)
 {
 	memset(db, 0, sizeof(t_db));
+	return 0;
 }

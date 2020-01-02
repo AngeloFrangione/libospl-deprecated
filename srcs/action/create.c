@@ -2,6 +2,8 @@
 #include <sqlite3.h>
 #include <stockage.h>
 #include <cwalk.h>
+#include <stdlib.h>
+#include <string.h>
 #include "ospl.h"
 
 static int create_folder(char *path)
@@ -17,10 +19,17 @@ static int create_folder(char *path)
 
 static int create_database_file(char *path)
 {
+	int r = 0;
 	int len = strlen(path) + DATABASE_NAME_LEN;
 	char *dbpath = calloc(len, sizeof(char) + 1);
-	cwk_path_join(path, DATABASE_FILENAME, dbpath, len);
-	create_database(dbpath);
+	r = cwk_path_join(path, DATABASE_FILENAME, dbpath, len);
+	if (r != len)
+		return 1;
+	r = create_database(dbpath);
+	if (r)
+		return r;
+	free(dbpath);
+	return 0;
 }
 
 int ospl_create_library(char *path)

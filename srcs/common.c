@@ -1,5 +1,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
+#include <magic.h>
+#include <stdlib.h>
 #include "ospl.h"
 
 /**
@@ -76,4 +78,26 @@ int indexof(char *s, char c)
 		++i;
 	}
 	return (-1);
+}
+
+int get_magic(char *file_path, char **magic)
+{
+	magic_t magic_cookie;
+
+	magic_cookie = magic_open(MAGIC_MIME_TYPE);	
+	if (magic_cookie == NULL)
+	{
+		printf("unable to initialize magic library\n");
+		return 1;
+	}
+	printf("Loading default magic database\n");
+	if (magic_load(magic_cookie, NULL) != 0)
+	{
+		printf("cannot load magic database - %s\n", magic_error(magic_cookie));
+		magic_close(magic_cookie);
+		return 1;
+	}
+	*magic = strdup(magic_file(magic_cookie, file_path));
+	magic_close(magic_cookie);
+	return 0;
 }

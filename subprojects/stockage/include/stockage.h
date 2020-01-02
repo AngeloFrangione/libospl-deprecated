@@ -62,15 +62,15 @@ typedef struct			s_db
 	int					transaction;
 }						t_db;
 
-void check_sqlite_return(int rc, t_db *db);
-void init_db_rw(t_db *db, char *path);
-void init_db_transaction_rw(t_db *db, char *path);
-void create_database(char *path);
-void insert_transaction(char *query, t_db *db);
-void select_transaction(char *query, t_db *db, int callback());
-void select_transaction_data(char *query, t_db *db, int callback(), void *data);
-void finalize_transaction(t_db *db);
-void init_connection(t_db *db);
+int check_sqlite_return(int rc, t_db *db);
+int init_db_rw(t_db *db, char *path);
+int init_db_transaction_rw(t_db *db, char *path);
+int create_database(char *path);
+int insert_transaction(char *query, t_db *db);
+int select_transaction(char *query, t_db *db, int callback());
+int select_transaction_data(char *query, t_db *db, int callback(), void *data);
+int finalize_transaction(t_db *db);
+int init_connection(t_db *db);
 
 
 #endif
