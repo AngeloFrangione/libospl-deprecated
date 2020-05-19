@@ -30,7 +30,7 @@ void usage_create()
 {
 	printf("Creates a shiny new ospl library at <librarypath>\n");
 	printf("-------------------------------------------------------------------------\n");
-	printf("Usage :  ospl create [options] <librarypath>\n");
+	printf("Usage :  ospl create <librarypath> [options]\n");
 	printf("Options that are not mandatory (only one of these):\n");
 	printf("-v verbose printing\n");
 }
