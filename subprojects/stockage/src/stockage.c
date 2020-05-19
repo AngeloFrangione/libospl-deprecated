@@ -48,8 +48,7 @@ int init_db_rw(t_db *db, char *path)
 	int rc;
 
 	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
-	check_sqlite_return(rc, db);
-	return 0;
+	return check_sqlite_return(rc, db);
 }
 
 /**
@@ -76,7 +75,7 @@ int init_db_transaction_rw(t_db *db, char *path)
 	check_sqlite_return(rc, db);
 	rc = sqlite3_exec(db->db, "BEGIN TRANSACTION", NULL, NULL, NULL);
 	check_sqlite_return(rc, db);
-	return 0;
+	return check_sqlite_return(rc, db);
 }
 
 /**
@@ -100,7 +99,7 @@ int create_database(char *path)
 	rc = sqlite3_exec(db.db, TABLE, 0, 0, NULL);
 	check_sqlite_return(rc, &db);
 	sqlite3_close(db.db);
-	return 0;
+	return check_sqlite_return(rc, &db);
 }
 
 /**
@@ -123,7 +122,7 @@ int insert_transaction(char *query, t_db *db)
 	}
 	rc = sqlite3_exec(db->db, query, 0, 0, NULL);
 	check_sqlite_return(rc, db);
-	return 0;
+	return check_sqlite_return(rc, db);
 }
 
 /**
@@ -146,7 +145,7 @@ int select_transaction(char *query, t_db *db, int callback())
 	}
 	rc = sqlite3_exec(db->db, query, callback, 0, NULL);
 	check_sqlite_return(rc, db);
-	return 0;
+	return check_sqlite_return(rc, db);
 }
 
 /**
@@ -171,7 +170,7 @@ int select_transaction_data(char *query, t_db *db, int callback(), void *data)
 	}
 	rc = sqlite3_exec(db->db, query, callback, data, NULL);
 	check_sqlite_return(rc, db);
-	return 0;
+	return check_sqlite_return(rc, db);
 }
 
 /**
@@ -188,7 +187,7 @@ int finalize_transaction(t_db *db)
 	rc = sqlite3_exec(db->db, "END TRANSACTION", NULL, NULL, NULL);
 	check_sqlite_return(rc, db);
 	sqlite3_close(db->db);
-	return 0;
+	return check_sqlite_return(rc, db);
 }
 
 /**
