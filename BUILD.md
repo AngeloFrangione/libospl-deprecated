@@ -5,7 +5,7 @@
 Before continuing, assure that these packages are installed (via brew or macports):
 
 - libjpeg
-- libsqlite3
+- sqlite3
 - libmagic
 - libexif
 
