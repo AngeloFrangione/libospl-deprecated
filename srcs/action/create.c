@@ -23,7 +23,7 @@ static int create_database_file(char *path)
 	int len = strlen(path) + DATABASE_NAME_LEN;
 	char *dbpath = calloc(len, sizeof(char) + 1);
 	r = cwk_path_join(path, DATABASE_FILENAME, dbpath, len);
-	if (r != len)
+	if (r != len - 1)
 		return 1;
 	r = create_database(dbpath);
 	if (r)
