@@ -32,7 +32,7 @@ static int is_supported(char *src)
 	return 0;
 }
 
-int create_thumbnail_jpeg(const char *src, const char *dst, const int width)
+int create_thumbnail_jpeg(char *src, char *dst, int width)
 {
 		float ratio;
 		int thumb_width = width;
@@ -59,9 +59,9 @@ int create_thumbnail_jpeg(const char *src, const char *dst, const int width)
 			return 0;
 }
 
-int create_thumbnail(const char *src, const char *dst, const int width)
+int create_thumbnail(char *src, char *dst, int width)
 {
-	switch (is_supported(src))
+	switch (is_supported((char*)src))
 	{
 		case JPEG:
 			return create_thumbnail_jpeg(src, dst, width);

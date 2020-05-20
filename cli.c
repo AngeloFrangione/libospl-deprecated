@@ -70,7 +70,7 @@ static int library_exists()
   * \param arg Argument to get index of
   * \return The index of arg in available arguments
   */
-static int indexof_arg(const char *arg)
+static int indexof_arg(char *arg)
 {
 	for (int i = 0; i < ARGS_COUNT; i++)
 		if (!strcmp(ARGS[i], arg))
@@ -84,7 +84,7 @@ static int indexof_arg(const char *arg)
   * \param av library path
   * \return 0 with success and 1 when an error occurs
   */
-static int initiate_path(const char *path)
+static int initiate_path(char *path)
 {
 	int path_len = strlen(path);
 
@@ -127,21 +127,32 @@ static int return_1()
 	return 1;
 }
 
-static int import(const char **av)
+static int import(int ac, char **av)
 {
-	printf("c/ 1: %s 2: %s\n", av[0], av[1]);
+	printf("create/ (args: %d) 1: %s 2: %s\n", ac, av[0], av[1]);
+	if (ac < 5)
+	{
+		usage_import();
+		return 0;
+	}
+	if (!strcmp(av[1], "-f"))
+	{
+		if (library_exists(av[0]))
+			ospl_import_picture(av[0], av[2]);
+		else
+			printf("Library not found: %s\n", av[0]);
+	}
 	return 0;
 }
 
-static int export(const char **av)
+static int export(int ac, char **av)
 {
-	printf("e/ 1: %s 2: %s\n", av[0], av[1]);
+	printf("export/ (args: %d) 1: %s 2: %s\n", ac, av[0], av[1]);
 	return 0;
 }
 
-static int create(const char **av)
+static int create(int ac, char **av)
 {
-	int ret;
 	initiate_path(av[0]);
 	if (av[1] && !strcmp(av[1], "-v"))
 	{
@@ -149,13 +160,11 @@ static int create(const char **av)
 				g_library_path, g_database_path);
 	}
 	if (ospl_create_library(g_library_path))
-	{
 		perror(NULL);
-	}
 	return 0;
 }
 
-int main(int ac, char const *av[])
+int main(int ac, char *av[])
 {
 if (ac == 1)
 		show_usage();
@@ -168,7 +177,7 @@ if (ac == 1)
 	{
 		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_export};
 		int (*function_launcher[1 + ARGS_COUNT])() = {return_1, create, import, export};
-		if (function_launcher[indexof_arg(av[1])](&av[2]) == 1)
+		if (function_launcher[indexof_arg(av[1])](ac, &av[2]) == 1)
 			usage_launcher[indexof_arg(av[1])](av[2]);
 	}
 	free(g_library_path);
