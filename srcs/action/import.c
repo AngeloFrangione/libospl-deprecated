@@ -1,9 +1,14 @@
+#include <stdio.h>
+#include <thumbnailer.h>
 #include "ospl.h"
 
 int ospl_import_picture(char *library, char *path)
 {
-	char **p = SUPPORTED_IMAGES;
-	char *magic;
+	if(!is_supported(path))
+	{
+		printf("image %s not supported\n", path);
+		return 1;
+	}
 
-	get_magic(path, magic); 
+	return 0;
 }
