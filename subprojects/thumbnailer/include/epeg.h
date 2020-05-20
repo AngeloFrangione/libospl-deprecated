@@ -151,14 +151,14 @@ struct
 };
 
 // METHODDEF(void)						_jpeg_decompress_error_exit(j_common_ptr cinfo);
-METHODDEF(void) 					_jpeg_init_source(j_decompress_ptr cinfo);
-METHODDEF(boolean)					_jpeg_fill_input_buffer(j_decompress_ptr cinfo);
-METHODDEF(void) 					_jpeg_skip_input_data(j_decompress_ptr cinfo, long num_bytes);
-METHODDEF(void)						_jpeg_term_source(j_decompress_ptr cinfo);
+void 					_jpeg_init_source(j_decompress_ptr cinfo);
+boolean					_jpeg_fill_input_buffer(j_decompress_ptr cinfo);
+void 					_jpeg_skip_input_data(j_decompress_ptr cinfo, long num_bytes);
+void					_jpeg_term_source(j_decompress_ptr cinfo);
 
-METHODDEF(void)						_jpeg_init_destination(j_compress_ptr cinfo);
-METHODDEF(boolean)					_jpeg_empty_output_buffer (j_compress_ptr cinfo);
-METHODDEF(void)						_jpeg_term_destination (j_compress_ptr cinfo);
+void					_jpeg_init_destination(j_compress_ptr cinfo);
+boolean					_jpeg_empty_output_buffer (j_compress_ptr cinfo);
+void					_jpeg_term_destination (j_compress_ptr cinfo);
 	
 // METHODDEF(void)						_emit_message (j_common_ptr cinfo, int msg_level);
 // METHODDEF(void)						_output_message (j_common_ptr cinfo);

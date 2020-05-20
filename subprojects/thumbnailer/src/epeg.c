@@ -1322,12 +1322,12 @@ _epeg_fatal_error_handler(j_common_ptr cinfo)
 // }
 
 
-METHODDEF(void)
+void
 _jpeg_init_source(j_decompress_ptr cinfo)
 {
 }
 
-METHODDEF(boolean)
+boolean
 _jpeg_fill_input_buffer(j_decompress_ptr cinfo)
 {
    WARNMS(cinfo, JWRN_JPEG_EOF);
@@ -1339,7 +1339,7 @@ _jpeg_fill_input_buffer(j_decompress_ptr cinfo)
 }
 
 
-METHODDEF(void)
+void
 _jpeg_skip_input_data(j_decompress_ptr cinfo, long num_bytes)
 {
    if (num_bytes > (long)(cinfo)->src->bytes_in_buffer)
@@ -1349,14 +1349,14 @@ _jpeg_skip_input_data(j_decompress_ptr cinfo, long num_bytes)
    (cinfo)->src->bytes_in_buffer -= num_bytes;
 }
 
-METHODDEF(void)
+void
 _jpeg_term_source(j_decompress_ptr cinfo)
 {
 }
 
 
 /* destination manager methods */
-METHODDEF(void)
+void
 _jpeg_init_destination(j_compress_ptr cinfo)
 {
    struct epeg_destination_mgr *dst_mgr;
@@ -1366,7 +1366,7 @@ _jpeg_init_destination(j_compress_ptr cinfo)
    dst_mgr->dst_mgr.next_output_byte = (JOCTET *)dst_mgr->buf;
 }
 
-METHODDEF(boolean)
+boolean
 _jpeg_empty_output_buffer(j_compress_ptr cinfo)
 {
    struct epeg_destination_mgr *dst_mgr;
@@ -1389,7 +1389,7 @@ _jpeg_empty_output_buffer(j_compress_ptr cinfo)
    return TRUE;
 }
 
-METHODDEF(void)
+void
 _jpeg_term_destination(j_compress_ptr cinfo)
 {
    struct epeg_destination_mgr *dst_mgr;
