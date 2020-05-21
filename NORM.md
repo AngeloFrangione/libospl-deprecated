@@ -17,16 +17,16 @@ Naming variables, functions names and other stuff like file names must follow th
 * Some data structures must be prefixed like this :
 
 |data structure|prefix|
-|---------|---|
-|structure|s_ |
-|typedef  |t_ |
-|union    |u_ |
-|enum     |e_ |
+|--------------|---|
+|structure     |s_ |
+|typedef       |t_ |
+|union         |u_ |
+|enum          |e_ |
 
 * You can use shortcuts for the names if they are explicit enough (like `nb_thing` but not `nb_thg`)
 * Every declaration of a variable must be used
 
-## Part 2: formatting
+## Part 2: formatting{}
 The code itself should respect a few things:
 
 * You must indent the code with tabulations with a size of _4_. ___tabulations___ not _spaces_.
@@ -54,7 +54,7 @@ int main(void)
 
 ```
 
-## Part 3: functions
+## Part 3: functions()
 
 * Avoid to put more than 4 parameters in a function.  
   If your function needs more than 4 parameters then it probably can be split  
@@ -86,7 +86,7 @@ int my_second(void)
 
 ```
 * Try to make a little comment over each function to explain it (if it's not clear enough)
-* You can also add what it takes and what it returns
+* You can also add what parameters it takes and what it returns
 * We use Doxygen for generating a html documentation so please use the doxygen format.
 
 ```C
@@ -110,6 +110,7 @@ int my_superb_function(int param1)
   If it conatins only one function, it should have the function name as its own name.
 * A file should never contain functions that are not related one to each other.
 * Use static keyword when a function is reachable only in the file where it is defined.
+* Please write the short licence at the top of the file
 
 ## Part 5: header.h
 
@@ -120,6 +121,7 @@ int my_superb_function(int param1)
   * Structure, union and enum
   * Typedefs
 * Defines are in uppercase (ex: `#define RED_COLOR \033[0;31m`)
+* Please write the short licence at the top of the file
 
 ## Part 6: things that aren't allowed
 
@@ -134,6 +136,25 @@ typedef t_matrix *t_matrix_ptr;
 ## Example
 
 ```C
+/*	libospl - Open Source Photo Library
+	an opensource and multiplateform photo library management that can be used
+	to store and sort all your pictures.
+	Copyright (C) 2019-2020 Angelo Frangione
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along
+	with this program; if not, write to the Free Software Foundation, Inc.,
+	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
 
 /**
  * \file matrix.h
@@ -149,9 +170,9 @@ typedef t_matrix *t_matrix_ptr;
 
 typedef struct s_matrix
 {
-    float **matrix;
-    int   lines;
-    int   columns;
+	float **matrix;
+	int   lines;
+	int   columns;
 } t_matrix;
 
 t_matrix *matrix_alloc(int lines, int columns);
@@ -172,19 +193,19 @@ t_matrix *matrix_multiplication(t_matrix *m, float k);
 
 t_matrix *matrix_multiplication(t_matrix *m, int k)
 {
-    t_matrix *ret;
-    
-    if (!(ret = matrix_alloc(ret->lines, ret->columns)))
-        return NULL;
-    
-    for (int l = 0; l < m->lines; l++)
-    {
-        for (int c = 0; c < m->columns; c++)
+	t_matrix *ret;
+	
+	if (!(ret = matrix_alloc(ret->lines, ret->columns)))
+		return NULL;
+
+	for (int l = 0; l < m->lines; l++)
 	{
-	    ret->matrix[l][c] = k * m->matrix[l][c];
+		for (int c = 0; c < m->columns; c++)
+		{
+			ret->matrix[l][c] = k * m->matrix[l][c];
+		}
 	}
-    }
-    
-    return ret;
+
+	return ret;
 }
 ```
