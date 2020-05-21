@@ -1,0 +1,193 @@
+\hypertarget{stockage_8c}{}\doxysection{subprojects/stockage/src/stockage.c File Reference}
+\label{stockage_8c}\index{subprojects/stockage/src/stockage.c@{subprojects/stockage/src/stockage.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$strings.\+h$>$}\newline
+{\ttfamily \#include $<$sqlite3.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}stockage.\+h\char`\"{}}\newline
+Include dependency graph for stockage.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stockage_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{stockage_8c_a4aab354c4b4154df226d4d5a1d8359cc}{check\+\_\+sqlite\+\_\+return}} (int rc, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em Checks sqlite return. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_a5106122440c5251508d8b7db6db59e6f}{init\+\_\+db\+\_\+rw}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create connection to the database in read write mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create connection to the database in read write / transaction mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_a9da674dd7bbcf228a2321f881c553062}{create\+\_\+database}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create an empty ospl databse. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_a05c68bfb007d3e9c5ff9501730fa1db3}{insert\+\_\+transaction}} (char $\ast$query, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em Executes the I\+N\+S\+E\+RT query executes the I\+N\+S\+E\+RT query into the initiated database. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_a140a9f8e9acdf252973c2a9a1992da78}{select\+\_\+transaction}} (char $\ast$query, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int callback())
+\begin{DoxyCompactList}\small\item\em Executes the S\+E\+L\+E\+CT query executes any S\+E\+L\+E\+CT query and sends the rows to a callback function. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_aaf2f867857df8ac5210e77a947d09327}{select\+\_\+transaction\+\_\+data}} (char $\ast$query, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int callback(), void $\ast$data)
+\begin{DoxyCompactList}\small\item\em Executes the S\+E\+L\+E\+CT query executes the S\+E\+L\+E\+CT query and sends the rows to a callback function Additionally this function takes a data parameter for storing the result. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_a99574d8e5a09e90c6629de98a39eab3f}{finalize\+\_\+transaction}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em finalizes a transaction connection This function should be called after every use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8c_af4c64ec9e537c3117f9fc67c55cea765}{init\+\_\+connection}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em initiate the db data structure This function should be called before the use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{stockage_8c_a4aab354c4b4154df226d4d5a1d8359cc}\label{stockage_8c_a4aab354c4b4154df226d4d5a1d8359cc}} 
+\index{stockage.c@{stockage.c}!check\_sqlite\_return@{check\_sqlite\_return}}
+\index{check\_sqlite\_return@{check\_sqlite\_return}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{check\_sqlite\_return()}{check\_sqlite\_return()}}
+{\footnotesize\ttfamily int check\+\_\+sqlite\+\_\+return (\begin{DoxyParamCaption}\item[{int}]{rc,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+Checks sqlite return. 
+
+Checks whether db or query execution is OK or not. If not,prints the error message to stderr and returns error code 1 
+\begin{DoxyParams}{Parameters}
+{\em rc} & Return code \\
+\hline
+{\em db} & database data structur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_a9da674dd7bbcf228a2321f881c553062}\label{stockage_8c_a9da674dd7bbcf228a2321f881c553062}} 
+\index{stockage.c@{stockage.c}!create\_database@{create\_database}}
+\index{create\_database@{create\_database}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{create\_database()}{create\_database()}}
+{\footnotesize\ttfamily int create\+\_\+database (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create an empty ospl databse. 
+
+Creates the whole tables needed for ospl into the databases. Creates the database file if it doesn\textquotesingle{}t exists 
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the db file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_a99574d8e5a09e90c6629de98a39eab3f}\label{stockage_8c_a99574d8e5a09e90c6629de98a39eab3f}} 
+\index{stockage.c@{stockage.c}!finalize\_transaction@{finalize\_transaction}}
+\index{finalize\_transaction@{finalize\_transaction}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{finalize\_transaction()}{finalize\_transaction()}}
+{\footnotesize\ttfamily int finalize\+\_\+transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+finalizes a transaction connection This function should be called after every use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_af4c64ec9e537c3117f9fc67c55cea765}\label{stockage_8c_af4c64ec9e537c3117f9fc67c55cea765}} 
+\index{stockage.c@{stockage.c}!init\_connection@{init\_connection}}
+\index{init\_connection@{init\_connection}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{init\_connection()}{init\_connection()}}
+{\footnotesize\ttfamily int init\+\_\+connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+initiate the db data structure This function should be called before the use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_a5106122440c5251508d8b7db6db59e6f}\label{stockage_8c_a5106122440c5251508d8b7db6db59e6f}} 
+\index{stockage.c@{stockage.c}!init\_db\_rw@{init\_db\_rw}}
+\index{init\_db\_rw@{init\_db\_rw}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{init\_db\_rw()}{init\_db\_rw()}}
+{\footnotesize\ttfamily int init\+\_\+db\+\_\+rw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create connection to the database in read write mode. 
+
+This function is not used. Create connection to the database in read and write mode. Creates the database file if it doesn\textquotesingle{}t exists 
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the db file \\
+\hline
+{\em db} & database data structur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}\label{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}} 
+\index{stockage.c@{stockage.c}!init\_db\_transaction\_rw@{init\_db\_transaction\_rw}}
+\index{init\_db\_transaction\_rw@{init\_db\_transaction\_rw}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{init\_db\_transaction\_rw()}{init\_db\_transaction\_rw()}}
+{\footnotesize\ttfamily int init\+\_\+db\+\_\+transaction\+\_\+rw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create connection to the database in read write / transaction mode. 
+
+Create connection to the database in read and write mode. Creates the database file if it doesn\textquotesingle{}t exists This start a sql transaction, need to be closed with \mbox{\hyperlink{stockage_8c_a99574d8e5a09e90c6629de98a39eab3f}{finalize\+\_\+transaction()}} Use this if there is multiples queries (speed\textquotesingle{}s up the process) 
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the db file \\
+\hline
+{\em db} & database data structur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_a05c68bfb007d3e9c5ff9501730fa1db3}\label{stockage_8c_a05c68bfb007d3e9c5ff9501730fa1db3}} 
+\index{stockage.c@{stockage.c}!insert\_transaction@{insert\_transaction}}
+\index{insert\_transaction@{insert\_transaction}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{insert\_transaction()}{insert\_transaction()}}
+{\footnotesize\ttfamily int insert\+\_\+transaction (\begin{DoxyParamCaption}\item[{char $\ast$}]{query,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+Executes the I\+N\+S\+E\+RT query executes the I\+N\+S\+E\+RT query into the initiated database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & pointer to the S\+QL query \\
+\hline
+{\em db} & database data structure \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_a140a9f8e9acdf252973c2a9a1992da78}\label{stockage_8c_a140a9f8e9acdf252973c2a9a1992da78}} 
+\index{stockage.c@{stockage.c}!select\_transaction@{select\_transaction}}
+\index{select\_transaction@{select\_transaction}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{select\_transaction()}{select\_transaction()}}
+{\footnotesize\ttfamily int select\+\_\+transaction (\begin{DoxyParamCaption}\item[{char $\ast$}]{query,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int }]{callback() }\end{DoxyParamCaption})}
+
+
+
+Executes the S\+E\+L\+E\+CT query executes any S\+E\+L\+E\+CT query and sends the rows to a callback function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & pointer to the S\+QL query \\
+\hline
+{\em db} & database data structure \\
+\hline
+{\em callback} & callback function should be prototyped with these arguments\+: callback(void $\ast$unused, int argc, char $\ast$$\ast$argv, char $\ast$$\ast$column\+\_\+name) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8c_aaf2f867857df8ac5210e77a947d09327}\label{stockage_8c_aaf2f867857df8ac5210e77a947d09327}} 
+\index{stockage.c@{stockage.c}!select\_transaction\_data@{select\_transaction\_data}}
+\index{select\_transaction\_data@{select\_transaction\_data}!stockage.c@{stockage.c}}
+\doxysubsubsection{\texorpdfstring{select\_transaction\_data()}{select\_transaction\_data()}}
+{\footnotesize\ttfamily int select\+\_\+transaction\+\_\+data (\begin{DoxyParamCaption}\item[{char $\ast$}]{query,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int }]{callback(),  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Executes the S\+E\+L\+E\+CT query executes the S\+E\+L\+E\+CT query and sends the rows to a callback function Additionally this function takes a data parameter for storing the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & pointer to the S\+QL query \\
+\hline
+{\em db} & database data structure \\
+\hline
+{\em callback} & callback function should be prototyped with these arguments\+: callback(void $\ast$data, int argc, char $\ast$$\ast$argv, char $\ast$$\ast$column\+\_\+name) \\
+\hline
+{\em data} & data that will be passed to the callback function \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,42 @@
+First of all, thanks for being interested in contributing ! ~\newline
+ Let\textquotesingle{}s help us to make this photo library the best open source solution !\hypertarget{md_CONTRIBUTING_autotoc_md3}{}\doxysection{Main guidelines}\label{md_CONTRIBUTING_autotoc_md3}
+
+\begin{DoxyItemize}
+\item You should not go too fast ~\newline
+ We prepared milestones with progressive goals, and we prefer that everybody focuses on the current milestone.
+\item Please follow the \href{https://github.com/AngeloFrangione/libospl/blob/master/NORM.md}{\texttt{ N\+O\+R\+M.\+md}} We are following a code norm that you must follow in order to get your contribution accepted. ~\newline
+ Our norm is not very restrictive and aims to have a code that is coherent and readable to other contributors.
+\item Your commit messages should be clear. ~\newline
+ We ask you to make clear and exhaustive commit messages. ~\newline
+ You should choose a clear title and then have a line for each change you made. Each line should be prefixed with the type of change you made like this \+: {\ttfamily \mbox{[}A\+DD\mbox{]}}, {\ttfamily \mbox{[}F\+IX\mbox{]}}, ...
+\item We use git flow. Take a look at \href{https://medium.com/@muneebsajjad/git-flow-explained-quick-and-simple-7a753313572f}{\texttt{ this}} article about git-\/flow
+\item For build instructions see \href{https://github.com/AngeloFrangione/libospl/blob/master/BUILD.md}{\texttt{ B\+U\+I\+L\+D.\+md}}
+\end{DoxyItemize}\hypertarget{md_CONTRIBUTING_autotoc_md4}{}\doxysubsection{Subprojects}\label{md_CONTRIBUTING_autotoc_md4}
+There are multiple modules in the subproject folder, for now, there is the thumbnailer module, and the interface between sqlite (stockage) module. Theses two meant to be upgradable without modifying the main code of the library. For example, the thumbnailer has a generic thumbnail creation function that determines the image format and create automaticly the thumbnail. So adding a supported format shouldn\textquotesingle{}t affect libospl\hypertarget{md_CONTRIBUTING_autotoc_md5}{}\doxysection{D\+B structure}\label{md_CONTRIBUTING_autotoc_md5}
+Images are worth a million words so here is a diagram for the .db file. ~\newline
+ There is also a .sql file at the \href{https://github.com/AngeloFrangione/libospl/blob/master/database.sql}{\texttt{ root directory}} \hypertarget{md_CONTRIBUTING_autotoc_md6}{}\doxysection{Milestones}\label{md_CONTRIBUTING_autotoc_md6}
+
+\begin{DoxyItemize}
+\item First step ~\newline
+ {\itshape The ability to add files to the library and also exporting them. (create the thumbnail, import all exif into the database)} {\itshape Supporting at least two or three image formats such as jpeg, png and raw}
+\item Second step ~\newline
+ {\itshape The ability to group images to albums (and folders), the ability to remove files from your ospl}
+\item Third step ~\newline
+ {\itshape not defined}
+\end{DoxyItemize}\hypertarget{md_CONTRIBUTING_autotoc_md7}{}\doxysection{Big ideas}\label{md_CONTRIBUTING_autotoc_md7}
+
+\begin{DoxyItemize}
+\item For all awesome ideas look at \href{https://github.com/AngeloFrangione/libospl/blob/master/IDEAS.md}{\texttt{ I\+D\+E\+A\+S.\+md}}
+\end{DoxyItemize}\hypertarget{md_CONTRIBUTING_autotoc_md8}{}\doxysection{External libraries}\label{md_CONTRIBUTING_autotoc_md8}
+What plan to use following external libraries for making all this working\+:
+
+
+\begin{DoxyItemize}
+\item \href{https://github.com/likle/cwalk/tree/master}{\texttt{ cwalk}} for managing paths on windows and unix
+\item \href{https://www.sqlite.org/index.html}{\texttt{ sqlite}} for storing data
+\item \href{https://libexif.github.io/}{\texttt{ libexif}} for extracting exif informations
+\item \href{https://github.com/mattes/epeg}{\texttt{ epeg}} for fast jpeg thumbnail creation (wich uses libjpeg and libexif)
+\item \href{https://github.com/dcoetzee/pngscale}{\texttt{ pngscale}} for png thumbnail creation
+\item \href{https://www.libimobiledevice.org/}{\texttt{ libimobiledevice}} for importing photos from i\+Devices
+\item \href{https://www.libraw.org/}{\texttt{ libraw}} for reading raw photos from cameras 
+\end{DoxyItemize}

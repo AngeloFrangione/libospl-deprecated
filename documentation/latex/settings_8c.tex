@@ -1,0 +1,102 @@
+\hypertarget{settings_8c}{}\doxysection{subprojects/stockage/src/queries/settings.c File Reference}
+\label{settings_8c}\index{subprojects/stockage/src/queries/settings.c@{subprojects/stockage/src/queries/settings.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}include/stockage.\+h\char`\"{}}\newline
+Include dependency graph for settings.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{settings_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{settings_8c_a72e89022660889ae0763f0848e33ef32}{insert\+\_\+setting}} (char $\ast$dbpath, char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em insert a row into settings \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{settings_8c_a1c20b504df67984072940cc1974cca4f}{update\+\_\+setting}} (char $\ast$dbpath, char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em update a row into settings \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{settings_8c_a6077eeadd9acd881757b7fcfecf7b0fe}{select\+\_\+setting}} (char $\ast$dbpath, char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em select a row into settings \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{settings_8c_a05bce6353cd292df3774927d790bff80}{delete\+\_\+setting}} (char $\ast$dbpath, char $\ast$name)
+\begin{DoxyCompactList}\small\item\em delete a row into settings \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{settings_8c_a05bce6353cd292df3774927d790bff80}\label{settings_8c_a05bce6353cd292df3774927d790bff80}} 
+\index{settings.c@{settings.c}!delete\_setting@{delete\_setting}}
+\index{delete\_setting@{delete\_setting}!settings.c@{settings.c}}
+\doxysubsubsection{\texorpdfstring{delete\_setting()}{delete\_setting()}}
+{\footnotesize\ttfamily int delete\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+delete a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting to be removed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{settings_8c_a72e89022660889ae0763f0848e33ef32}\label{settings_8c_a72e89022660889ae0763f0848e33ef32}} 
+\index{settings.c@{settings.c}!insert\_setting@{insert\_setting}}
+\index{insert\_setting@{insert\_setting}!settings.c@{settings.c}}
+\doxysubsubsection{\texorpdfstring{insert\_setting()}{insert\_setting()}}
+{\footnotesize\ttfamily int insert\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+insert a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting \\
+\hline
+{\em value} & value of the setting \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{settings_8c_a6077eeadd9acd881757b7fcfecf7b0fe}\label{settings_8c_a6077eeadd9acd881757b7fcfecf7b0fe}} 
+\index{settings.c@{settings.c}!select\_setting@{select\_setting}}
+\index{select\_setting@{select\_setting}!settings.c@{settings.c}}
+\doxysubsubsection{\texorpdfstring{select\_setting()}{select\_setting()}}
+{\footnotesize\ttfamily int select\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+select a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting to be selected \\
+\hline
+{\em value} & initialized pointer for the value setting to be stored \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{settings_8c_a1c20b504df67984072940cc1974cca4f}\label{settings_8c_a1c20b504df67984072940cc1974cca4f}} 
+\index{settings.c@{settings.c}!update\_setting@{update\_setting}}
+\index{update\_setting@{update\_setting}!settings.c@{settings.c}}
+\doxysubsubsection{\texorpdfstring{update\_setting()}{update\_setting()}}
+{\footnotesize\ttfamily int update\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+update a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting \\
+\hline
+{\em value} & value of the setting \\
+\hline
+\end{DoxyParams}
