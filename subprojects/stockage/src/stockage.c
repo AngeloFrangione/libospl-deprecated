@@ -98,7 +98,7 @@ int create_database(char *path)
 	check_sqlite_return(rc, &db);
 	rc = sqlite3_exec(db.db, TABLE, 0, 0, NULL);
 	check_sqlite_return(rc, &db);
-	sqlite3_close(db.db);
+	rc = sqlite3_close(db.db);
 	return check_sqlite_return(rc, &db);
 }
 
@@ -140,7 +140,7 @@ int select_transaction(char *query, t_db *db, int callback())
 
 	if (!db->transaction)
 	{
-		printf("Using insert_transaction without an transaction initiated db\n");
+		printf("Using select_transaction without an transaction initiated db\n");
 		exit(0);
 	}
 	rc = sqlite3_exec(db->db, query, callback, 0, NULL);
@@ -165,7 +165,7 @@ int select_transaction_data(char *query, t_db *db, int callback(), void *data)
 
 	if (!db->transaction)
 	{
-		printf("Using insert_transaction without an transaction initiated db\n");
+		printf("Using select_transaction_data without an transaction initiated db\n");
 		exit(0);
 	}
 	rc = sqlite3_exec(db->db, query, callback, data, NULL);

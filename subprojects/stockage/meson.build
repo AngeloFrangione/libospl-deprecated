@@ -5,8 +5,12 @@ project('stockage', 'c')
 deps = [dependency('threads'),
 		dependency('sqlite3')]
 
+# Sources
+source =['src/stockage.c',
+		'src/queries/settings.c']
+
 # Library
-stockage = shared_library(	'stockage', 'src/stockage.c',
+stockage = shared_library(	'stockage', source,
 						            install: true,
 						            include_directories : 'include',
 					             	dependencies : deps,
