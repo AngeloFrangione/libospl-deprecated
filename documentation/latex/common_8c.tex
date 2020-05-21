@@ -1,0 +1,180 @@
+\hypertarget{common_8c}{}\doxysection{srcs/common.c File Reference}
+\label{common_8c}\index{srcs/common.c@{srcs/common.c}}
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$magic.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$cwalk.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ospl.\+h\char`\"{}}\newline
+Include dependency graph for common.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{common_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{common_8c_ae2768daf3376fe0d281d35cfd0cf3654}{create\+\_\+directory}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Creates a directory for windows and U\+N\+IX. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{common_8c_adbdeef32cfeb5513ae16b4c3a9a76dd3}{file\+\_\+exists}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Checks if file the given in parameter exists. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{common_8c_af2fde87825efc035776ec57459e12e61}{folder\+\_\+exists}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Checks if folder given in paramter exists. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{common_8c_aebc25e1cf36ffb92d076aa7699c6813b}{indexof}} (char $\ast$s, char c)
+\begin{DoxyCompactList}\small\item\em Get the index of $\ast$c in $\ast$s. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{common_8c_aaba60721d70ab30407738752e031496a}{is\+\_\+supported}} (char $\ast$src)
+\begin{DoxyCompactList}\small\item\em Check if an image is supported. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{common_8c_ada846d17be088e2b488af04d7eda4199}{get\+\_\+magic}} (char $\ast$file\+\_\+path, char $\ast$$\ast$magic)
+\begin{DoxyCompactList}\small\item\em Get the mime type from file with the magic number. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{common_8c_ab988cdc167fe2781dee335fd423c3af9}{library\+\_\+exists}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Checks if libarary exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{common_8c_ae2768daf3376fe0d281d35cfd0cf3654}\label{common_8c_ae2768daf3376fe0d281d35cfd0cf3654}} 
+\index{common.c@{common.c}!create\_directory@{create\_directory}}
+\index{create\_directory@{create\_directory}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{create\_directory()}{create\_directory()}}
+{\footnotesize\ttfamily int create\+\_\+directory (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Creates a directory for windows and U\+N\+IX. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & the path were to create new folder \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the return of the system mkdir function 
+\end{DoxyReturn}
+\mbox{\Hypertarget{common_8c_adbdeef32cfeb5513ae16b4c3a9a76dd3}\label{common_8c_adbdeef32cfeb5513ae16b4c3a9a76dd3}} 
+\index{common.c@{common.c}!file\_exists@{file\_exists}}
+\index{file\_exists@{file\_exists}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{file\_exists()}{file\_exists()}}
+{\footnotesize\ttfamily int file\+\_\+exists (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Checks if file the given in parameter exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & location to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the file exists 
+
+0 if the file does not exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{common_8c_af2fde87825efc035776ec57459e12e61}\label{common_8c_af2fde87825efc035776ec57459e12e61}} 
+\index{common.c@{common.c}!folder\_exists@{folder\_exists}}
+\index{folder\_exists@{folder\_exists}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{folder\_exists()}{folder\_exists()}}
+{\footnotesize\ttfamily int folder\+\_\+exists (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Checks if folder given in paramter exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & location to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the folder exists 
+
+0 if the folder does not exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{common_8c_ada846d17be088e2b488af04d7eda4199}\label{common_8c_ada846d17be088e2b488af04d7eda4199}} 
+\index{common.c@{common.c}!get\_magic@{get\_magic}}
+\index{get\_magic@{get\_magic}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{get\_magic()}{get\_magic()}}
+{\footnotesize\ttfamily int get\+\_\+magic (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+\_\+path,  }\item[{char $\ast$$\ast$}]{magic }\end{DoxyParamCaption})}
+
+
+
+Get the mime type from file with the magic number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & path of the file to look for the magic \\
+\hline
+{\em magic} & buffer were the mimetype will be put in (don\textquotesingle{}t have to be allocaded) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if an error occured 
+
+0 if the mime type was succefully put into magic 
+\end{DoxyReturn}
+\mbox{\Hypertarget{common_8c_aebc25e1cf36ffb92d076aa7699c6813b}\label{common_8c_aebc25e1cf36ffb92d076aa7699c6813b}} 
+\index{common.c@{common.c}!indexof@{indexof}}
+\index{indexof@{indexof}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{indexof()}{indexof()}}
+{\footnotesize\ttfamily int indexof (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{char}]{c }\end{DoxyParamCaption})}
+
+
+
+Get the index of $\ast$c in $\ast$s. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & string to search in \\
+\hline
+{\em c} & character to search with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index from c in s 
+
+if c was not found in s returns -\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{common_8c_aaba60721d70ab30407738752e031496a}\label{common_8c_aaba60721d70ab30407738752e031496a}} 
+\index{common.c@{common.c}!is\_supported@{is\_supported}}
+\index{is\_supported@{is\_supported}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{is\_supported()}{is\_supported()}}
+{\footnotesize\ttfamily int is\+\_\+supported (\begin{DoxyParamCaption}\item[{char $\ast$}]{src }\end{DoxyParamCaption})}
+
+
+
+Check if an image is supported. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & path of the image to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index of the Mime\+Type + 1 if supported 
+
+0 if not supported 
+\end{DoxyReturn}
+\mbox{\Hypertarget{common_8c_ab988cdc167fe2781dee335fd423c3af9}\label{common_8c_ab988cdc167fe2781dee335fd423c3af9}} 
+\index{common.c@{common.c}!library\_exists@{library\_exists}}
+\index{library\_exists@{library\_exists}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{library\_exists()}{library\_exists()}}
+{\footnotesize\ttfamily int library\+\_\+exists (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Checks if libarary exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & location to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the library exists 
+
+0 if the library does not exists 
+\end{DoxyReturn}

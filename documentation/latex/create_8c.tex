@@ -1,0 +1,42 @@
+\hypertarget{create_8c}{}\doxysection{srcs/action/create.c File Reference}
+\label{create_8c}\index{srcs/action/create.c@{srcs/action/create.c}}
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stockage.\+h$>$}\newline
+{\ttfamily \#include $<$cwalk.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ospl.\+h\char`\"{}}\newline
+Include dependency graph for create.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{create_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{create_8c_ab59c6be8401712f452ee8445333359e8}{ospl\+\_\+create\+\_\+library}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Creates an O\+S\+PL library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{create_8c_ab59c6be8401712f452ee8445333359e8}\label{create_8c_ab59c6be8401712f452ee8445333359e8}} 
+\index{create.c@{create.c}!ospl\_create\_library@{ospl\_create\_library}}
+\index{ospl\_create\_library@{ospl\_create\_library}!create.c@{create.c}}
+\doxysubsubsection{\texorpdfstring{ospl\_create\_library()}{ospl\_create\_library()}}
+{\footnotesize\ttfamily int ospl\+\_\+create\+\_\+library (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Creates an O\+S\+PL library. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & new library path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 with success and 1 when an error occurs 
+\end{DoxyReturn}

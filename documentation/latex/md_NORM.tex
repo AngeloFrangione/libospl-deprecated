@@ -1,0 +1,209 @@
+This norm aims to make a code that is coherent and readable to other contributors. ~\newline
+ You should follow these rules as much as you can. ~\newline
+ Not following formatting rules will likely make your pull request rejected. ~\newline
+ Doing forbidden things will make us reject your pull request. ~\newline
+ If you have any question or remark about this norm, open an issue. We will read it carefully.\hypertarget{md_NORM_autotoc_md13}{}\doxysection{Part 1\+: naming}\label{md_NORM_autotoc_md13}
+Naming variables, functions names and other stuff like file names must follow these guidelines\+:
+
+
+\begin{DoxyItemize}
+\item Names must be clear and in english and as explicit as possible (except for counters)
+\item Counters with explicit names are appreciated (l for line counter, c for column counter, ...)
+\item Only lower case ascii characters allowed
+\item Words must be separated with underscore \textquotesingle{}\+\_\+\textquotesingle{} (ex\+: {\ttfamily my\+\_\+var})
+\item Some data structures must be prefixed like this \+:
+\end{DoxyItemize}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ data structure }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ prefix  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ data structure }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ prefix  }\\\cline{1-2}
+\endhead
+structure &s\+\_\+  \\\cline{1-2}
+typedef &t\+\_\+  \\\cline{1-2}
+union &u\+\_\+  \\\cline{1-2}
+enum &e\+\_\+  \\\cline{1-2}
+\end{longtabu}
+
+
+
+\begin{DoxyItemize}
+\item You can use shortcuts for the names if they are explicit enough (like {\ttfamily nb\+\_\+thing} but not {\ttfamily nb\+\_\+thg})
+\item Every declaration of a variable must be used
+\end{DoxyItemize}\hypertarget{md_NORM_autotoc_md14}{}\doxysection{Part 2\+: formatting\{\}}\label{md_NORM_autotoc_md14}
+The code itself should respect a few things\+:
+
+
+\begin{DoxyItemize}
+\item You must indent the code with . \+\_\+\+\_\+\+\_\+tabulations\+\_\+\+\_\+\+\_\+ not {\itshape spaces}.
+\item Try to avoid making functions over 30-\/35 lines. Try to {\itshape split} the code {\bfseries{as most as you can}}. Avoid making functions that can be done \+\_\+\+\_\+\+\_\+reéusable\+\_\+\+\_\+\+\_\+.
+\item Try to avoid writing lines that are larger than 100 columns. Do not forget that tabulations are 4 columns large.
+\item Try to get the smallest form of your conditions. Smaller conditions are often easier to understand and optimized.
+\item Only one instruction per line.
+\item An empty line is an {\itshape empty} line. No spaces, no tabulations. Empty.
+\item Declaring variable on the top of the function is often clearer but not mandatory.
+\item Try to space out your code sensibly. Avoid using more than one empty line.
+\item The end of a line should be empty. {\itshape Empty} like empty lines.
+\item You must put the curly braces at the next line\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// this is NOT right}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{cli_8c_adacbe0175a79dff748855d8c9839f82b}{main}}(\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// this is right}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{cli_8c_adacbe0175a79dff748855d8c9839f82b}{main}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+\hypertarget{md_NORM_autotoc_md15}{}\doxysection{Part 3\+: functions()}\label{md_NORM_autotoc_md15}
+
+\begin{DoxyItemize}
+\item Avoid to put more than 4 parameters in a function. ~\newline
+ If your function needs more than 4 parameters then it probably can be split ~\newline
+ or you probably can create data structures handling some of thoses parameters.
+\item A function that returns nothing should be prototyped with void as argument.
+\item For spacing-\/out reason please add a single empty line after each function\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// This is NOT right}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} my\_function(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} my\_second(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 2;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// This is right}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} my\_function(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} my\_second(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 2;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Try to make a little comment over each function to explain it (if it\textquotesingle{}s not clear enough)
+\item You can also add what parameters it takes and what it returns
+\item We use Doxygen for generating a html documentation so please use the doxygen format.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} my\_superb\_function(\textcolor{keywordtype}{int} param1)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} param1;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+\hypertarget{md_NORM_autotoc_md16}{}\doxysection{Part 4\+: files.\+c}\label{md_NORM_autotoc_md16}
+
+\begin{DoxyItemize}
+\item File names must be explicit about what they contain. ~\newline
+ If it contains only a struct definition, it should have the struct name as its own name. If it conatins only one function, it should have the function name as its own name.
+\item A file should never contain functions that are not related one to each other.
+\item Use static keyword when a function is reachable only in the file where it is defined.
+\item Please write the short licence at the top of the file
+\end{DoxyItemize}\hypertarget{md_NORM_autotoc_md17}{}\doxysection{Part 5\+: header.\+h}\label{md_NORM_autotoc_md17}
+
+\begin{DoxyItemize}
+\item Protect it against double inclusion. If the file is named name.\+h you should {\ttfamily \#define N\+A\+M\+E\+\_\+H}
+\item These definitions must be in header files
+\begin{DoxyItemize}
+\item Function prototypes
+\item Structure, union and enum
+\item Typedefs
+\end{DoxyItemize}
+\item Defines are in uppercase (ex\+: {\ttfamily \#define R\+E\+D\+\_\+\+C\+O\+L\+OR \textbackslash{}033\mbox{[}0;31m})
+\item Please write the short licence at the top of the file
+\end{DoxyItemize}\hypertarget{md_NORM_autotoc_md18}{}\doxysection{Part 6\+: things that aren\textquotesingle{}t allowed}\label{md_NORM_autotoc_md18}
+
+\begin{DoxyItemize}
+\item Variable length array (V\+LA)
+\item Typedefs for pointers (or arrays) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{typedef} t\_matrix *t\_matrix\_ptr;}
+\DoxyCodeLine{\textcolor{comment}{// allows to declare t\_matrix *m as t\_matrix\_ptr m}}
+\DoxyCodeLine{\textcolor{comment}{// forbidden}}
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{md_NORM_autotoc_md19}{}\doxysection{Example}\label{md_NORM_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/*  libospl -\/ Open Source Photo Library}}
+\DoxyCodeLine{\textcolor{comment}{    an opensource and multiplateform photo library management that can be used}}
+\DoxyCodeLine{\textcolor{comment}{    to store and sort all your pictures.}}
+\DoxyCodeLine{\textcolor{comment}{    Copyright (C) 2019-\/2020 Angelo Frangione}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    This program is free software; you can redistribute it and/or modify}}
+\DoxyCodeLine{\textcolor{comment}{    it under the terms of the GNU General Public License as published by}}
+\DoxyCodeLine{\textcolor{comment}{    the Free Software Foundation; either version 2 of the License, or}}
+\DoxyCodeLine{\textcolor{comment}{    (at your option) any later version.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    This program is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{\textcolor{comment}{    but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{\textcolor{comment}{    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the}}
+\DoxyCodeLine{\textcolor{comment}{    GNU General Public License for more details.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    You should have received a copy of the GNU General Public License along}}
+\DoxyCodeLine{\textcolor{comment}{    with this program; if not, write to the Free Software Foundation, Inc.,}}
+\DoxyCodeLine{\textcolor{comment}{    51 Franklin Street, Fifth Floor, Boston, MA 02110-\/1301 USA.}}
+\DoxyCodeLine{\textcolor{comment}{*/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Header file}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef MATRIX\_H}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define MATRIX\_H}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{typedef} \textcolor{keyword}{struct }s\_matrix}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordtype}{float} **matrix;}
+\DoxyCodeLine{    \textcolor{keywordtype}{int}   lines;}
+\DoxyCodeLine{    \textcolor{keywordtype}{int}   columns;}
+\DoxyCodeLine{\} t\_matrix;}
+\DoxyCodeLine{}
+\DoxyCodeLine{t\_matrix *matrix\_alloc(\textcolor{keywordtype}{int} lines, \textcolor{keywordtype}{int} columns);}
+\DoxyCodeLine{t\_matrix *matrix\_multiplication(t\_matrix *m, \textcolor{keywordtype}{float} k);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif // MATRIX\_H}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//Source file}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "matrix.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{t\_matrix *matrix\_multiplication(t\_matrix *m, \textcolor{keywordtype}{int} k)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    t\_matrix *ret;}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!(ret = matrix\_alloc(ret-\/>lines, ret-\/>columns)))}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} l = 0; l < m-\/>lines; l++)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} c = 0; c < m-\/>columns; c++)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            ret-\/>matrix[l][c] = k * m-\/>matrix[l][c];}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 

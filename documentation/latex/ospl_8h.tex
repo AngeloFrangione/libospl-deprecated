@@ -1,0 +1,312 @@
+\hypertarget{ospl_8h}{}\doxysection{includes/ospl.h File Reference}
+\label{ospl_8h}\index{includes/ospl.h@{includes/ospl.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ospl_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ospl_8h_a41e001837d3319b24e2ecfdae3316e25}{A\+R\+G\+S\+\_\+\+C\+O\+U\+NT}}~5
+\begin{DoxyCompactList}\small\item\em Number of ospl verbs that are available. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{ospl_8h_ad40f28636fa0af0970dd94cdafc021e0}{D\+A\+T\+A\+B\+A\+S\+E\+\_\+\+F\+I\+L\+E\+N\+A\+ME}}~\char`\"{}database.\+db\char`\"{}
+\item 
+\#define \mbox{\hyperlink{ospl_8h_a8e4ed29a8fb97b9a71211793c5d4f324}{D\+A\+T\+A\+B\+A\+S\+E\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN}}~12
+\item 
+\#define \mbox{\hyperlink{ospl_8h_a82e7bbb3d760e680b8eb504b763d9fdb}{L\+I\+B\+R\+A\+R\+Y\+\_\+\+E\+X\+T\+E\+N\+T\+I\+O\+N\+\_\+\+L\+EN}}~5
+\item 
+\#define \mbox{\hyperlink{ospl_8h_a65ba9abfd6e80edd057c0e9c81287c81}{L\+I\+B\+R\+A\+R\+Y\+\_\+\+E\+X\+T\+E\+N\+T\+I\+ON}}~\char`\"{}.ospl\char`\"{}
+\item 
+\#define \mbox{\hyperlink{ospl_8h_a1a53b724b6de666faa8a9e0d06d1055f}{V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}~0
+\item 
+\#define \mbox{\hyperlink{ospl_8h_ae0cb52afb79b185b1bf82c7e235f682b}{V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}}~1
+\item 
+\#define \mbox{\hyperlink{ospl_8h_afbb7cddcf3e397af8cfc4239264816e1}{C\+R\+E\+A\+T\+E\+\_\+\+O\+P\+TS}}~\char`\"{}v\char`\"{}
+\item 
+\#define \mbox{\hyperlink{ospl_8h_a3e2fb97a6b0a03e35bdf6483516c7766}{I\+M\+P\+O\+R\+T\+\_\+\+O\+P\+TS}}~\char`\"{}vfF\char`\"{}
+\item 
+\#define \mbox{\hyperlink{ospl_8h_ab35aff9d1dd9c2e0e050016b60b2a0b7}{S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+I\+M\+A\+G\+ES}}~(char $\ast$\mbox{[}$\,$\mbox{]}) \{\char`\"{}image/jpeg\char`\"{}\}
+\item 
+\#define \mbox{\hyperlink{ospl_8h_a2ce5e82a253f03c75268e75e9c7f6f18}{N\+B\+\_\+\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+I\+M\+A\+G\+ES}}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ospl_8h_af7716407bac19250fa1a0ce37fce86bb}{ospl\+\_\+create\+\_\+library}} (char $\ast$library)
+\begin{DoxyCompactList}\small\item\em Creates an O\+S\+PL library. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_a5ca2885a6c18fa8404bddeb3df32be65}{ospl\+\_\+import\+\_\+picture}} (char $\ast$library, char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Import a picture into the library. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_ae2768daf3376fe0d281d35cfd0cf3654}{create\+\_\+directory}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Creates a directory for windows and U\+N\+IX. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_adbdeef32cfeb5513ae16b4c3a9a76dd3}{file\+\_\+exists}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Checks if file the given in parameter exists. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_af2fde87825efc035776ec57459e12e61}{folder\+\_\+exists}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Checks if folder given in paramter exists. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_a93f108b28914d593f8ea3d7becd90097}{indexof}} (char $\ast$string, char character)
+\begin{DoxyCompactList}\small\item\em Get the index of $\ast$c in $\ast$s. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_aaba60721d70ab30407738752e031496a}{is\+\_\+supported}} (char $\ast$src)
+\begin{DoxyCompactList}\small\item\em Check if an image is supported. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_ada846d17be088e2b488af04d7eda4199}{get\+\_\+magic}} (char $\ast$file\+\_\+path, char $\ast$$\ast$magic)
+\begin{DoxyCompactList}\small\item\em Get the mime type from file with the magic number. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ospl_8h_ab988cdc167fe2781dee335fd423c3af9}{library\+\_\+exists}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Checks if libarary exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ospl_8h_a41e001837d3319b24e2ecfdae3316e25}\label{ospl_8h_a41e001837d3319b24e2ecfdae3316e25}} 
+\index{ospl.h@{ospl.h}!ARGS\_COUNT@{ARGS\_COUNT}}
+\index{ARGS\_COUNT@{ARGS\_COUNT}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{ARGS\_COUNT}{ARGS\_COUNT}}
+{\footnotesize\ttfamily \#define A\+R\+G\+S\+\_\+\+C\+O\+U\+NT~5}
+
+
+
+Number of ospl verbs that are available. 
+
+\mbox{\Hypertarget{ospl_8h_afbb7cddcf3e397af8cfc4239264816e1}\label{ospl_8h_afbb7cddcf3e397af8cfc4239264816e1}} 
+\index{ospl.h@{ospl.h}!CREATE\_OPTS@{CREATE\_OPTS}}
+\index{CREATE\_OPTS@{CREATE\_OPTS}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{CREATE\_OPTS}{CREATE\_OPTS}}
+{\footnotesize\ttfamily \#define C\+R\+E\+A\+T\+E\+\_\+\+O\+P\+TS~\char`\"{}v\char`\"{}}
+
+\mbox{\Hypertarget{ospl_8h_ad40f28636fa0af0970dd94cdafc021e0}\label{ospl_8h_ad40f28636fa0af0970dd94cdafc021e0}} 
+\index{ospl.h@{ospl.h}!DATABASE\_FILENAME@{DATABASE\_FILENAME}}
+\index{DATABASE\_FILENAME@{DATABASE\_FILENAME}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{DATABASE\_FILENAME}{DATABASE\_FILENAME}}
+{\footnotesize\ttfamily \#define D\+A\+T\+A\+B\+A\+S\+E\+\_\+\+F\+I\+L\+E\+N\+A\+ME~\char`\"{}database.\+db\char`\"{}}
+
+\mbox{\Hypertarget{ospl_8h_a8e4ed29a8fb97b9a71211793c5d4f324}\label{ospl_8h_a8e4ed29a8fb97b9a71211793c5d4f324}} 
+\index{ospl.h@{ospl.h}!DATABASE\_NAME\_LEN@{DATABASE\_NAME\_LEN}}
+\index{DATABASE\_NAME\_LEN@{DATABASE\_NAME\_LEN}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{DATABASE\_NAME\_LEN}{DATABASE\_NAME\_LEN}}
+{\footnotesize\ttfamily \#define D\+A\+T\+A\+B\+A\+S\+E\+\_\+\+N\+A\+M\+E\+\_\+\+L\+EN~12}
+
+\mbox{\Hypertarget{ospl_8h_a3e2fb97a6b0a03e35bdf6483516c7766}\label{ospl_8h_a3e2fb97a6b0a03e35bdf6483516c7766}} 
+\index{ospl.h@{ospl.h}!IMPORT\_OPTS@{IMPORT\_OPTS}}
+\index{IMPORT\_OPTS@{IMPORT\_OPTS}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{IMPORT\_OPTS}{IMPORT\_OPTS}}
+{\footnotesize\ttfamily \#define I\+M\+P\+O\+R\+T\+\_\+\+O\+P\+TS~\char`\"{}vfF\char`\"{}}
+
+\mbox{\Hypertarget{ospl_8h_a65ba9abfd6e80edd057c0e9c81287c81}\label{ospl_8h_a65ba9abfd6e80edd057c0e9c81287c81}} 
+\index{ospl.h@{ospl.h}!LIBRARY\_EXTENTION@{LIBRARY\_EXTENTION}}
+\index{LIBRARY\_EXTENTION@{LIBRARY\_EXTENTION}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{LIBRARY\_EXTENTION}{LIBRARY\_EXTENTION}}
+{\footnotesize\ttfamily \#define L\+I\+B\+R\+A\+R\+Y\+\_\+\+E\+X\+T\+E\+N\+T\+I\+ON~\char`\"{}.ospl\char`\"{}}
+
+\mbox{\Hypertarget{ospl_8h_a82e7bbb3d760e680b8eb504b763d9fdb}\label{ospl_8h_a82e7bbb3d760e680b8eb504b763d9fdb}} 
+\index{ospl.h@{ospl.h}!LIBRARY\_EXTENTION\_LEN@{LIBRARY\_EXTENTION\_LEN}}
+\index{LIBRARY\_EXTENTION\_LEN@{LIBRARY\_EXTENTION\_LEN}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{LIBRARY\_EXTENTION\_LEN}{LIBRARY\_EXTENTION\_LEN}}
+{\footnotesize\ttfamily \#define L\+I\+B\+R\+A\+R\+Y\+\_\+\+E\+X\+T\+E\+N\+T\+I\+O\+N\+\_\+\+L\+EN~5}
+
+\mbox{\Hypertarget{ospl_8h_a2ce5e82a253f03c75268e75e9c7f6f18}\label{ospl_8h_a2ce5e82a253f03c75268e75e9c7f6f18}} 
+\index{ospl.h@{ospl.h}!NB\_SUPPORTED\_IMAGES@{NB\_SUPPORTED\_IMAGES}}
+\index{NB\_SUPPORTED\_IMAGES@{NB\_SUPPORTED\_IMAGES}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{NB\_SUPPORTED\_IMAGES}{NB\_SUPPORTED\_IMAGES}}
+{\footnotesize\ttfamily \#define N\+B\+\_\+\+S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+I\+M\+A\+G\+ES~1}
+
+\mbox{\Hypertarget{ospl_8h_ab35aff9d1dd9c2e0e050016b60b2a0b7}\label{ospl_8h_ab35aff9d1dd9c2e0e050016b60b2a0b7}} 
+\index{ospl.h@{ospl.h}!SUPPORTED\_IMAGES@{SUPPORTED\_IMAGES}}
+\index{SUPPORTED\_IMAGES@{SUPPORTED\_IMAGES}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{SUPPORTED\_IMAGES}{SUPPORTED\_IMAGES}}
+{\footnotesize\ttfamily \#define S\+U\+P\+P\+O\+R\+T\+E\+D\+\_\+\+I\+M\+A\+G\+ES~(char $\ast$\mbox{[}$\,$\mbox{]}) \{\char`\"{}image/jpeg\char`\"{}\}}
+
+\mbox{\Hypertarget{ospl_8h_a1a53b724b6de666faa8a9e0d06d1055f}\label{ospl_8h_a1a53b724b6de666faa8a9e0d06d1055f}} 
+\index{ospl.h@{ospl.h}!VERSION\_MAJOR@{VERSION\_MAJOR}}
+\index{VERSION\_MAJOR@{VERSION\_MAJOR}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{VERSION\_MAJOR}{VERSION\_MAJOR}}
+{\footnotesize\ttfamily \#define V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR~0}
+
+\mbox{\Hypertarget{ospl_8h_ae0cb52afb79b185b1bf82c7e235f682b}\label{ospl_8h_ae0cb52afb79b185b1bf82c7e235f682b}} 
+\index{ospl.h@{ospl.h}!VERSION\_MINOR@{VERSION\_MINOR}}
+\index{VERSION\_MINOR@{VERSION\_MINOR}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{VERSION\_MINOR}{VERSION\_MINOR}}
+{\footnotesize\ttfamily \#define V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR~1}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ospl_8h_ae2768daf3376fe0d281d35cfd0cf3654}\label{ospl_8h_ae2768daf3376fe0d281d35cfd0cf3654}} 
+\index{ospl.h@{ospl.h}!create\_directory@{create\_directory}}
+\index{create\_directory@{create\_directory}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{create\_directory()}{create\_directory()}}
+{\footnotesize\ttfamily int create\+\_\+directory (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Creates a directory for windows and U\+N\+IX. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & the path were to create new folder \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the return of the system mkdir function 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_adbdeef32cfeb5513ae16b4c3a9a76dd3}\label{ospl_8h_adbdeef32cfeb5513ae16b4c3a9a76dd3}} 
+\index{ospl.h@{ospl.h}!file\_exists@{file\_exists}}
+\index{file\_exists@{file\_exists}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{file\_exists()}{file\_exists()}}
+{\footnotesize\ttfamily int file\+\_\+exists (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Checks if file the given in parameter exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & location to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the file exists 
+
+0 if the file does not exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_af2fde87825efc035776ec57459e12e61}\label{ospl_8h_af2fde87825efc035776ec57459e12e61}} 
+\index{ospl.h@{ospl.h}!folder\_exists@{folder\_exists}}
+\index{folder\_exists@{folder\_exists}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{folder\_exists()}{folder\_exists()}}
+{\footnotesize\ttfamily int folder\+\_\+exists (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Checks if folder given in paramter exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & location to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the folder exists 
+
+0 if the folder does not exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_ada846d17be088e2b488af04d7eda4199}\label{ospl_8h_ada846d17be088e2b488af04d7eda4199}} 
+\index{ospl.h@{ospl.h}!get\_magic@{get\_magic}}
+\index{get\_magic@{get\_magic}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{get\_magic()}{get\_magic()}}
+{\footnotesize\ttfamily int get\+\_\+magic (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+\_\+path,  }\item[{char $\ast$$\ast$}]{magic }\end{DoxyParamCaption})}
+
+
+
+Get the mime type from file with the magic number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & path of the file to look for the magic \\
+\hline
+{\em magic} & buffer were the mimetype will be put in (don\textquotesingle{}t have to be allocaded) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if an error occured 
+
+0 if the mime type was succefully put into magic 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_a93f108b28914d593f8ea3d7becd90097}\label{ospl_8h_a93f108b28914d593f8ea3d7becd90097}} 
+\index{ospl.h@{ospl.h}!indexof@{indexof}}
+\index{indexof@{indexof}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{indexof()}{indexof()}}
+{\footnotesize\ttfamily int indexof (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{char}]{c }\end{DoxyParamCaption})}
+
+
+
+Get the index of $\ast$c in $\ast$s. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & string to search in \\
+\hline
+{\em c} & character to search with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index from c in s 
+
+if c was not found in s returns -\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_aaba60721d70ab30407738752e031496a}\label{ospl_8h_aaba60721d70ab30407738752e031496a}} 
+\index{ospl.h@{ospl.h}!is\_supported@{is\_supported}}
+\index{is\_supported@{is\_supported}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{is\_supported()}{is\_supported()}}
+{\footnotesize\ttfamily int is\+\_\+supported (\begin{DoxyParamCaption}\item[{char $\ast$}]{src }\end{DoxyParamCaption})}
+
+
+
+Check if an image is supported. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & path of the image to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the index of the Mime\+Type + 1 if supported 
+
+0 if not supported 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_ab988cdc167fe2781dee335fd423c3af9}\label{ospl_8h_ab988cdc167fe2781dee335fd423c3af9}} 
+\index{ospl.h@{ospl.h}!library\_exists@{library\_exists}}
+\index{library\_exists@{library\_exists}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{library\_exists()}{library\_exists()}}
+{\footnotesize\ttfamily int library\+\_\+exists (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Checks if libarary exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & location to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the library exists 
+
+0 if the library does not exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_af7716407bac19250fa1a0ce37fce86bb}\label{ospl_8h_af7716407bac19250fa1a0ce37fce86bb}} 
+\index{ospl.h@{ospl.h}!ospl\_create\_library@{ospl\_create\_library}}
+\index{ospl\_create\_library@{ospl\_create\_library}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{ospl\_create\_library()}{ospl\_create\_library()}}
+{\footnotesize\ttfamily int ospl\+\_\+create\+\_\+library (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Creates an O\+S\+PL library. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & new library path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 with success and 1 when an error occurs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ospl_8h_a5ca2885a6c18fa8404bddeb3df32be65}\label{ospl_8h_a5ca2885a6c18fa8404bddeb3df32be65}} 
+\index{ospl.h@{ospl.h}!ospl\_import\_picture@{ospl\_import\_picture}}
+\index{ospl\_import\_picture@{ospl\_import\_picture}!ospl.h@{ospl.h}}
+\doxysubsubsection{\texorpdfstring{ospl\_import\_picture()}{ospl\_import\_picture()}}
+{\footnotesize\ttfamily int ospl\+\_\+import\+\_\+picture (\begin{DoxyParamCaption}\item[{char $\ast$}]{library,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Import a picture into the library. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em library} & library path \\
+\hline
+{\em path} & picture path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 with success and 1 when an error occurs 
+\end{DoxyReturn}
