@@ -1,0 +1,335 @@
+\hypertarget{stockage_8h}{}\doxysection{subprojects/stockage/include/stockage.h File Reference}
+\label{stockage_8h}\index{subprojects/stockage/include/stockage.h@{subprojects/stockage/include/stockage.h}}
+{\ttfamily \#include $<$sqlite3.\+h$>$}\newline
+Include dependency graph for stockage.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{stockage_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stockage_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structs__db}{s\+\_\+db}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stockage_8h_af407374125b6031f6f73b26ffc033166}{J\+O\+U\+R\+N\+A\+L\+\_\+\+M\+O\+D\+E\+\_\+\+M\+E\+M\+O\+RY}}~\char`\"{}P\+R\+A\+G\+MA journal\+\_\+mode = M\+E\+M\+O\+RY;\char`\"{}
+\item 
+\#define \mbox{\hyperlink{stockage_8h_ab64c96b4b60885417fe148cc410782b8}{S\+Y\+N\+C\+R\+O\+N\+O\+U\+S\+\_\+\+O\+FF}}~\char`\"{}P\+R\+A\+G\+MA synchronous = 0;\char`\"{}
+\item 
+\#define \mbox{\hyperlink{stockage_8h_acadaccd8321f8569f31a11bdad1829da}{T\+A\+B\+LE}}~\char`\"{}B\+E\+G\+IN T\+R\+A\+N\+S\+A\+C\+T\+I\+ON;\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}settings\`{} (\textbackslash{}	\`{}name\`{}	T\+E\+XT N\+OT N\+U\+LL U\+N\+I\+Q\+UE,\textbackslash{}	\`{}value\`{}	T\+E\+XT,\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}name\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}photos\`{} (\textbackslash{}	\`{}id\`{}	I\+N\+T\+E\+G\+ER N\+OT N\+U\+LL P\+R\+I\+M\+A\+RY K\+EY A\+U\+T\+O\+I\+N\+C\+R\+E\+M\+E\+NT U\+N\+I\+Q\+UE,\textbackslash{}	\`{}hash\`{}	T\+E\+XT,\textbackslash{}	\`{}original\+\_\+name\`{}	T\+E\+XT,\textbackslash{}	\`{}import\+\_\+date\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}import\+\_\+time\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}exif\+\_\+height\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}exif\+\_\+width\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}exif\+\_\+brand\`{}	T\+E\+XT,\textbackslash{}	\`{}exif\+\_\+peripheral\`{}	T\+E\+XT,\textbackslash{}	\`{}fav\`{}	I\+N\+T\+E\+G\+ER D\+E\+F\+A\+U\+LT 0\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}includes\`{} (\textbackslash{}	\`{}including\+\_\+folder\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}included\+\_\+folder\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}included\+\_\+folder\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}folders\`{}(\`{}id\`{}),\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}including\+\_\+folder\`{},\`{}included\+\_\+folder\`{}),\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}including\+\_\+folder\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}folders\`{}(\`{}id\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}holds\`{} (\textbackslash{}	\`{}holding\+\_\+folder\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}holded\+\_\+album\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}holded\+\_\+album\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}albums\`{}(\`{}id\`{}),\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}holding\+\_\+folder\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}folders\`{}(\`{}id\`{}),\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}holding\+\_\+folder\`{},\`{}holded\+\_\+album\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}folders\`{} (\textbackslash{}	\`{}id\`{}	I\+N\+T\+E\+G\+ER N\+OT N\+U\+LL P\+R\+I\+M\+A\+RY K\+EY A\+U\+T\+O\+I\+N\+C\+R\+E\+M\+E\+NT U\+N\+I\+Q\+UE,\textbackslash{}	\`{}name\`{}	I\+N\+T\+E\+G\+E\+R\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}contains\`{} (\textbackslash{}	\`{}containing\+\_\+album\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}contained\+\_\+photo\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}contained\+\_\+photo\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}photos\`{}(\`{}id\`{}),\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}containing\+\_\+album\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}albums\`{}(\`{}id\`{}),\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}containing\+\_\+album\`{},\`{}contained\+\_\+photo\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}albums\`{} (\textbackslash{}	\`{}id\`{}	I\+N\+T\+E\+G\+ER N\+OT N\+U\+LL P\+R\+I\+M\+A\+RY K\+EY A\+U\+T\+O\+I\+N\+C\+R\+E\+M\+E\+NT U\+N\+I\+Q\+UE,\textbackslash{}	\`{}name\`{}	T\+E\+X\+T\textbackslash{});\textbackslash{}C\+O\+M\+M\+IT;\char`\"{}
+\item 
+\#define \mbox{\hyperlink{stockage_8h_a6b20d41d6252e9871430c242cb1a56e7}{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}~512
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structs__db}{s\+\_\+db}} \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{stockage_8h_a4aab354c4b4154df226d4d5a1d8359cc}{check\+\_\+sqlite\+\_\+return}} (int rc, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em Checks sqlite return. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a5106122440c5251508d8b7db6db59e6f}{init\+\_\+db\+\_\+rw}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create connection to the database in read write mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create connection to the database in read write / transaction mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a9da674dd7bbcf228a2321f881c553062}{create\+\_\+database}} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Create an empty ospl databse. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a05c68bfb007d3e9c5ff9501730fa1db3}{insert\+\_\+transaction}} (char $\ast$query, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em Executes the I\+N\+S\+E\+RT query executes the I\+N\+S\+E\+RT query into the initiated database. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a140a9f8e9acdf252973c2a9a1992da78}{select\+\_\+transaction}} (char $\ast$query, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int callback())
+\begin{DoxyCompactList}\small\item\em Executes the S\+E\+L\+E\+CT query executes any S\+E\+L\+E\+CT query and sends the rows to a callback function. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_aaf2f867857df8ac5210e77a947d09327}{select\+\_\+transaction\+\_\+data}} (char $\ast$query, \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int callback(), void $\ast$data)
+\begin{DoxyCompactList}\small\item\em Executes the S\+E\+L\+E\+CT query executes the S\+E\+L\+E\+CT query and sends the rows to a callback function Additionally this function takes a data parameter for storing the result. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a99574d8e5a09e90c6629de98a39eab3f}{finalize\+\_\+transaction}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em finalizes a transaction connection This function should be called after every use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_af4c64ec9e537c3117f9fc67c55cea765}{init\+\_\+connection}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db)
+\begin{DoxyCompactList}\small\item\em initiate the db data structure This function should be called before the use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a72e89022660889ae0763f0848e33ef32}{insert\+\_\+setting}} (char $\ast$dbpath, char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em insert a row into settings \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a1c20b504df67984072940cc1974cca4f}{update\+\_\+setting}} (char $\ast$dbpath, char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em update a row into settings \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a6077eeadd9acd881757b7fcfecf7b0fe}{select\+\_\+setting}} (char $\ast$dbpath, char $\ast$name, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em select a row into settings \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{stockage_8h_a05bce6353cd292df3774927d790bff80}{delete\+\_\+setting}} (char $\ast$dbpath, char $\ast$name)
+\begin{DoxyCompactList}\small\item\em delete a row into settings \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{stockage_8h_a6b20d41d6252e9871430c242cb1a56e7}\label{stockage_8h_a6b20d41d6252e9871430c242cb1a56e7}} 
+\index{stockage.h@{stockage.h}!BUFFER\_SIZE@{BUFFER\_SIZE}}
+\index{BUFFER\_SIZE@{BUFFER\_SIZE}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{BUFFER\_SIZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~512}
+
+\mbox{\Hypertarget{stockage_8h_af407374125b6031f6f73b26ffc033166}\label{stockage_8h_af407374125b6031f6f73b26ffc033166}} 
+\index{stockage.h@{stockage.h}!JOURNAL\_MODE\_MEMORY@{JOURNAL\_MODE\_MEMORY}}
+\index{JOURNAL\_MODE\_MEMORY@{JOURNAL\_MODE\_MEMORY}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{JOURNAL\_MODE\_MEMORY}{JOURNAL\_MODE\_MEMORY}}
+{\footnotesize\ttfamily \#define J\+O\+U\+R\+N\+A\+L\+\_\+\+M\+O\+D\+E\+\_\+\+M\+E\+M\+O\+RY~\char`\"{}P\+R\+A\+G\+MA journal\+\_\+mode = M\+E\+M\+O\+RY;\char`\"{}}
+
+\mbox{\Hypertarget{stockage_8h_ab64c96b4b60885417fe148cc410782b8}\label{stockage_8h_ab64c96b4b60885417fe148cc410782b8}} 
+\index{stockage.h@{stockage.h}!SYNCRONOUS\_OFF@{SYNCRONOUS\_OFF}}
+\index{SYNCRONOUS\_OFF@{SYNCRONOUS\_OFF}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{SYNCRONOUS\_OFF}{SYNCRONOUS\_OFF}}
+{\footnotesize\ttfamily \#define S\+Y\+N\+C\+R\+O\+N\+O\+U\+S\+\_\+\+O\+FF~\char`\"{}P\+R\+A\+G\+MA synchronous = 0;\char`\"{}}
+
+\mbox{\Hypertarget{stockage_8h_acadaccd8321f8569f31a11bdad1829da}\label{stockage_8h_acadaccd8321f8569f31a11bdad1829da}} 
+\index{stockage.h@{stockage.h}!TABLE@{TABLE}}
+\index{TABLE@{TABLE}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{TABLE}{TABLE}}
+{\footnotesize\ttfamily \#define T\+A\+B\+LE~\char`\"{}B\+E\+G\+IN T\+R\+A\+N\+S\+A\+C\+T\+I\+ON;\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}settings\`{} (\textbackslash{}	\`{}name\`{}	T\+E\+XT N\+OT N\+U\+LL U\+N\+I\+Q\+UE,\textbackslash{}	\`{}value\`{}	T\+E\+XT,\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}name\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}photos\`{} (\textbackslash{}	\`{}id\`{}	I\+N\+T\+E\+G\+ER N\+OT N\+U\+LL P\+R\+I\+M\+A\+RY K\+EY A\+U\+T\+O\+I\+N\+C\+R\+E\+M\+E\+NT U\+N\+I\+Q\+UE,\textbackslash{}	\`{}hash\`{}	T\+E\+XT,\textbackslash{}	\`{}original\+\_\+name\`{}	T\+E\+XT,\textbackslash{}	\`{}import\+\_\+date\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}import\+\_\+time\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}exif\+\_\+height\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}exif\+\_\+width\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}exif\+\_\+brand\`{}	T\+E\+XT,\textbackslash{}	\`{}exif\+\_\+peripheral\`{}	T\+E\+XT,\textbackslash{}	\`{}fav\`{}	I\+N\+T\+E\+G\+ER D\+E\+F\+A\+U\+LT 0\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}includes\`{} (\textbackslash{}	\`{}including\+\_\+folder\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}included\+\_\+folder\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}included\+\_\+folder\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}folders\`{}(\`{}id\`{}),\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}including\+\_\+folder\`{},\`{}included\+\_\+folder\`{}),\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}including\+\_\+folder\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}folders\`{}(\`{}id\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}holds\`{} (\textbackslash{}	\`{}holding\+\_\+folder\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}holded\+\_\+album\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}holded\+\_\+album\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}albums\`{}(\`{}id\`{}),\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}holding\+\_\+folder\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}folders\`{}(\`{}id\`{}),\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}holding\+\_\+folder\`{},\`{}holded\+\_\+album\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}folders\`{} (\textbackslash{}	\`{}id\`{}	I\+N\+T\+E\+G\+ER N\+OT N\+U\+LL P\+R\+I\+M\+A\+RY K\+EY A\+U\+T\+O\+I\+N\+C\+R\+E\+M\+E\+NT U\+N\+I\+Q\+UE,\textbackslash{}	\`{}name\`{}	I\+N\+T\+E\+G\+E\+R\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}contains\`{} (\textbackslash{}	\`{}containing\+\_\+album\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	\`{}contained\+\_\+photo\`{}	I\+N\+T\+E\+G\+ER,\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}contained\+\_\+photo\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}photos\`{}(\`{}id\`{}),\textbackslash{}	F\+O\+R\+E\+I\+GN K\+EY(\`{}containing\+\_\+album\`{}) R\+E\+F\+E\+R\+E\+N\+C\+ES \`{}albums\`{}(\`{}id\`{}),\textbackslash{}	P\+R\+I\+M\+A\+RY K\+EY(\`{}containing\+\_\+album\`{},\`{}contained\+\_\+photo\`{})\textbackslash{});\textbackslash{}C\+R\+E\+A\+TE T\+A\+B\+LE IF N\+OT E\+X\+I\+S\+TS \`{}albums\`{} (\textbackslash{}	\`{}id\`{}	I\+N\+T\+E\+G\+ER N\+OT N\+U\+LL P\+R\+I\+M\+A\+RY K\+EY A\+U\+T\+O\+I\+N\+C\+R\+E\+M\+E\+NT U\+N\+I\+Q\+UE,\textbackslash{}	\`{}name\`{}	T\+E\+X\+T\textbackslash{});\textbackslash{}C\+O\+M\+M\+IT;\char`\"{}}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}\label{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}} 
+\index{stockage.h@{stockage.h}!t\_db@{t\_db}}
+\index{t\_db@{t\_db}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{t\_db}{t\_db}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structs__db}{s\+\_\+db}} \mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{stockage_8h_a4aab354c4b4154df226d4d5a1d8359cc}\label{stockage_8h_a4aab354c4b4154df226d4d5a1d8359cc}} 
+\index{stockage.h@{stockage.h}!check\_sqlite\_return@{check\_sqlite\_return}}
+\index{check\_sqlite\_return@{check\_sqlite\_return}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{check\_sqlite\_return()}{check\_sqlite\_return()}}
+{\footnotesize\ttfamily int check\+\_\+sqlite\+\_\+return (\begin{DoxyParamCaption}\item[{int}]{rc,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+Checks sqlite return. 
+
+Checks whether db or query execution is OK or not. If not,prints the error message to stderr and returns error code 1 
+\begin{DoxyParams}{Parameters}
+{\em rc} & Return code \\
+\hline
+{\em db} & database data structur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a9da674dd7bbcf228a2321f881c553062}\label{stockage_8h_a9da674dd7bbcf228a2321f881c553062}} 
+\index{stockage.h@{stockage.h}!create\_database@{create\_database}}
+\index{create\_database@{create\_database}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{create\_database()}{create\_database()}}
+{\footnotesize\ttfamily int create\+\_\+database (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create an empty ospl databse. 
+
+Creates the whole tables needed for ospl into the databases. Creates the database file if it doesn\textquotesingle{}t exists 
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the db file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a05bce6353cd292df3774927d790bff80}\label{stockage_8h_a05bce6353cd292df3774927d790bff80}} 
+\index{stockage.h@{stockage.h}!delete\_setting@{delete\_setting}}
+\index{delete\_setting@{delete\_setting}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{delete\_setting()}{delete\_setting()}}
+{\footnotesize\ttfamily int delete\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+delete a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting to be removed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a99574d8e5a09e90c6629de98a39eab3f}\label{stockage_8h_a99574d8e5a09e90c6629de98a39eab3f}} 
+\index{stockage.h@{stockage.h}!finalize\_transaction@{finalize\_transaction}}
+\index{finalize\_transaction@{finalize\_transaction}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{finalize\_transaction()}{finalize\_transaction()}}
+{\footnotesize\ttfamily int finalize\+\_\+transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+finalizes a transaction connection This function should be called after every use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_af4c64ec9e537c3117f9fc67c55cea765}\label{stockage_8h_af4c64ec9e537c3117f9fc67c55cea765}} 
+\index{stockage.h@{stockage.h}!init\_connection@{init\_connection}}
+\index{init\_connection@{init\_connection}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{init\_connection()}{init\_connection()}}
+{\footnotesize\ttfamily int init\+\_\+connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+initiate the db data structure This function should be called before the use of \mbox{\hyperlink{stockage_8c_a4fcc1b668a5b06348dc6d7ac12f30d0c}{init\+\_\+db\+\_\+transaction\+\_\+rw()}}; 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a5106122440c5251508d8b7db6db59e6f}\label{stockage_8h_a5106122440c5251508d8b7db6db59e6f}} 
+\index{stockage.h@{stockage.h}!init\_db\_rw@{init\_db\_rw}}
+\index{init\_db\_rw@{init\_db\_rw}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{init\_db\_rw()}{init\_db\_rw()}}
+{\footnotesize\ttfamily int init\+\_\+db\+\_\+rw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create connection to the database in read write mode. 
+
+This function is not used. Create connection to the database in read and write mode. Creates the database file if it doesn\textquotesingle{}t exists 
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the db file \\
+\hline
+{\em db} & database data structur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a4fcc1b668a5b06348dc6d7ac12f30d0c}\label{stockage_8h_a4fcc1b668a5b06348dc6d7ac12f30d0c}} 
+\index{stockage.h@{stockage.h}!init\_db\_transaction\_rw@{init\_db\_transaction\_rw}}
+\index{init\_db\_transaction\_rw@{init\_db\_transaction\_rw}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{init\_db\_transaction\_rw()}{init\_db\_transaction\_rw()}}
+{\footnotesize\ttfamily int init\+\_\+db\+\_\+transaction\+\_\+rw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Create connection to the database in read write / transaction mode. 
+
+Create connection to the database in read and write mode. Creates the database file if it doesn\textquotesingle{}t exists This start a sql transaction, need to be closed with \mbox{\hyperlink{stockage_8c_a99574d8e5a09e90c6629de98a39eab3f}{finalize\+\_\+transaction()}} Use this if there is multiples queries (speed\textquotesingle{}s up the process) 
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the db file \\
+\hline
+{\em db} & database data structur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a72e89022660889ae0763f0848e33ef32}\label{stockage_8h_a72e89022660889ae0763f0848e33ef32}} 
+\index{stockage.h@{stockage.h}!insert\_setting@{insert\_setting}}
+\index{insert\_setting@{insert\_setting}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{insert\_setting()}{insert\_setting()}}
+{\footnotesize\ttfamily int insert\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+insert a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting \\
+\hline
+{\em value} & value of the setting \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a05c68bfb007d3e9c5ff9501730fa1db3}\label{stockage_8h_a05c68bfb007d3e9c5ff9501730fa1db3}} 
+\index{stockage.h@{stockage.h}!insert\_transaction@{insert\_transaction}}
+\index{insert\_transaction@{insert\_transaction}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{insert\_transaction()}{insert\_transaction()}}
+{\footnotesize\ttfamily int insert\+\_\+transaction (\begin{DoxyParamCaption}\item[{char $\ast$}]{query,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db }\end{DoxyParamCaption})}
+
+
+
+Executes the I\+N\+S\+E\+RT query executes the I\+N\+S\+E\+RT query into the initiated database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & pointer to the S\+QL query \\
+\hline
+{\em db} & database data structure \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a6077eeadd9acd881757b7fcfecf7b0fe}\label{stockage_8h_a6077eeadd9acd881757b7fcfecf7b0fe}} 
+\index{stockage.h@{stockage.h}!select\_setting@{select\_setting}}
+\index{select\_setting@{select\_setting}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{select\_setting()}{select\_setting()}}
+{\footnotesize\ttfamily int select\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+select a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting to be selected \\
+\hline
+{\em value} & initialized pointer for the value setting to be stored \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a140a9f8e9acdf252973c2a9a1992da78}\label{stockage_8h_a140a9f8e9acdf252973c2a9a1992da78}} 
+\index{stockage.h@{stockage.h}!select\_transaction@{select\_transaction}}
+\index{select\_transaction@{select\_transaction}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{select\_transaction()}{select\_transaction()}}
+{\footnotesize\ttfamily int select\+\_\+transaction (\begin{DoxyParamCaption}\item[{char $\ast$}]{query,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int }]{callback() }\end{DoxyParamCaption})}
+
+
+
+Executes the S\+E\+L\+E\+CT query executes any S\+E\+L\+E\+CT query and sends the rows to a callback function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & pointer to the S\+QL query \\
+\hline
+{\em db} & database data structure \\
+\hline
+{\em callback} & callback function should be prototyped with these arguments\+: callback(void $\ast$unused, int argc, char $\ast$$\ast$argv, char $\ast$$\ast$column\+\_\+name) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_aaf2f867857df8ac5210e77a947d09327}\label{stockage_8h_aaf2f867857df8ac5210e77a947d09327}} 
+\index{stockage.h@{stockage.h}!select\_transaction\_data@{select\_transaction\_data}}
+\index{select\_transaction\_data@{select\_transaction\_data}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{select\_transaction\_data()}{select\_transaction\_data()}}
+{\footnotesize\ttfamily int select\+\_\+transaction\+\_\+data (\begin{DoxyParamCaption}\item[{char $\ast$}]{query,  }\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int }]{callback(),  }\item[{void $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Executes the S\+E\+L\+E\+CT query executes the S\+E\+L\+E\+CT query and sends the rows to a callback function Additionally this function takes a data parameter for storing the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & pointer to the S\+QL query \\
+\hline
+{\em db} & database data structure \\
+\hline
+{\em callback} & callback function should be prototyped with these arguments\+: callback(void $\ast$data, int argc, char $\ast$$\ast$argv, char $\ast$$\ast$column\+\_\+name) \\
+\hline
+{\em data} & data that will be passed to the callback function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stockage_8h_a1c20b504df67984072940cc1974cca4f}\label{stockage_8h_a1c20b504df67984072940cc1974cca4f}} 
+\index{stockage.h@{stockage.h}!update\_setting@{update\_setting}}
+\index{update\_setting@{update\_setting}!stockage.h@{stockage.h}}
+\doxysubsubsection{\texorpdfstring{update\_setting()}{update\_setting()}}
+{\footnotesize\ttfamily int update\+\_\+setting (\begin{DoxyParamCaption}\item[{char $\ast$}]{dbpath,  }\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+update a row into settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dbpath} & path of the database \\
+\hline
+{\em name} & name of the setting \\
+\hline
+{\em value} & value of the setting \\
+\hline
+\end{DoxyParams}
