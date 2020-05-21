@@ -43,7 +43,7 @@ int create_directory(char *path)
 }
 
 /**
-  * \brief Checks if file given in parameter exists
+  * \brief Checks if file the given in parameter exists
   *
   * \param path location to test
   * \return 1 if the file exists
@@ -61,7 +61,7 @@ int file_exists(char *path)
 }
 
 /**
-  * \brief Checks if folder exists
+  * \brief Checks if folder given in paramter exists
   *
   * \param path location to check
   * \return 1 if the folder exists 
@@ -80,7 +80,7 @@ int folder_exists(char *path)
 }
 
 /**
-  * \brief Get the index of a character in a string
+  * \brief Get the index of *c in *s
   *
   * \param s string to search in
   * \param c character to search with
@@ -161,12 +161,12 @@ int get_magic(char *file_path, char **magic)
   * \return 1 if the library exists
   * \return 0 if the library does not exists
   */
-int library_exists(char *lib)
+int library_exists(char *path)
 {
 	char db[512];
 
-	cwk_path_join(lib, "database.db", db, sizeof(db));
-	if (folder_exists(lib) && file_exists(db))
+	cwk_path_join(path, "database.db", db, sizeof(db));
+	if (folder_exists(path) && file_exists(db))
 		return 1;
 	else
 		return 0;

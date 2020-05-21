@@ -42,7 +42,6 @@
  * \param rc Return code
  * \param db database data structur
  */
-
 int check_sqlite_return(int rc, t_db *db)
 {
 	if (rc != SQLITE_OK)
@@ -63,7 +62,6 @@ int check_sqlite_return(int rc, t_db *db)
  * \param path path to the db file
  * \param db database data structur
  */
-
 int init_db_rw(t_db *db, char *path)
 {
 	int rc;
@@ -83,7 +81,6 @@ int init_db_rw(t_db *db, char *path)
  * \param path path to the db file
  * \param db database data structur
  */
-
 int init_db_transaction_rw(t_db *db, char *path)
 {
 	int rc;
@@ -108,7 +105,6 @@ int init_db_transaction_rw(t_db *db, char *path)
  * Creates the database file if it doesn't exists
  * \param path path to the db file
  */
-
 int create_database(char *path)
 {
 	t_db	db;
@@ -132,7 +128,6 @@ int create_database(char *path)
  * \param query pointer to the SQL query
  * \param db database data structure
  */
-
 int insert_transaction(char *query, t_db *db)
 {
 	int rc;
@@ -156,7 +151,6 @@ int insert_transaction(char *query, t_db *db)
  * \param callback callback function should be prototyped with these arguments:
  * callback(void *unused, int argc, char **argv, char **column_name)
  */
-
 int select_transaction(char *query, t_db *db, int callback())
 {
 	int rc;
@@ -182,7 +176,6 @@ int select_transaction(char *query, t_db *db, int callback())
  * callback(void *data, int argc, char **argv, char **column_name)
  * \param data data that will be passed to the callback function
  */
-
 int select_transaction_data(char *query, t_db *db, int callback(), void *data)
 {
 	int rc;
@@ -203,7 +196,6 @@ int select_transaction_data(char *query, t_db *db, int callback(), void *data)
  *
  * \param db database data structure
  */
-
 int finalize_transaction(t_db *db)
 {
 	int rc;
@@ -220,7 +212,6 @@ int finalize_transaction(t_db *db)
  *
  * \param db database data structure
  */
-
 int init_connection(t_db *db)
 {
 	memset(db, 0, sizeof(t_db));

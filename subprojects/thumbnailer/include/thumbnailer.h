@@ -18,8 +18,6 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "epeg.h"
-
 #ifndef H_THUMBNAILER
 # define H_THUMBNAILER
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}

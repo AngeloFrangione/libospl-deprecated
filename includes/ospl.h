@@ -21,6 +21,7 @@
 #ifndef OSPL_H
 #define OSPL_H
 
+/// Number of ospl verbs that are available
 # define ARGS_COUNT 5
 # define DATABASE_FILENAME "database.db"
 # define DATABASE_NAME_LEN 12
@@ -33,36 +34,27 @@
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
 # define NB_SUPPORTED_IMAGES 1
 
-/*
- * 
- * Library related functions
- * 
- */
+
+// Library related functions
 int ospl_create_library(char *library);
-
 int ospl_import_picture(char *library, char *path);
-int ospl_import_folder(char *library, char *path);
 
+/*int ospl_import_folder(char *library, char *path);
 int ospl_export_picture(char *library, unsigned id);
 int ospl_export_album(char *library, unsigned id);
-
 int ospl_album_create(char *library, unsigned id);
 int ospl_album_rename(char *library, unsigned id, char *name);
 int ospl_album_remove(char *library, unsigned id);
 char *ospl_album_getname(char *library, unsigned id);
+*/
 
-/*
- * 
- * Common usage functions
- * 
- */
+// Common usage functions
 int create_directory(char *path);
 int file_exists(char *path);
 int folder_exists(char *path);
-int indexof(char *s, char c);
+int indexof(char *string, char character);
 int is_supported(char *src);
 int get_magic(char *file_path, char **magic);
-int library_exists(char *lib);
-
+int library_exists(char *path);
 
 #endif

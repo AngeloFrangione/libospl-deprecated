@@ -18,10 +18,10 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include <thumbnailer.h>
 #include "includes/ospl.h"
 #include "includes/ospl_cli.h"
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 
