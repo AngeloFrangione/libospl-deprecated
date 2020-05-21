@@ -13,7 +13,7 @@ Before continuing, assure that these packages are installed (via brew or macport
 the following command will build ospl:   
 `meson . build && cd build && ninja`
 
-## Linux
+## GNU/Linux
 ###### Dependencies
 Before continuing, assure that these packages are installed:
 - libjpeg-dev
