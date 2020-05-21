@@ -8,7 +8,7 @@
 #define TABLE 				"BEGIN TRANSACTION;\
 CREATE TABLE IF NOT EXISTS `settings` (\
 	`name`	TEXT NOT NULL UNIQUE,\
-	`value`	INTEGER,\
+	`value`	TEXT,\
 	PRIMARY KEY(`name`)\
 );\
 CREATE TABLE IF NOT EXISTS `photos` (\
@@ -60,8 +60,15 @@ typedef struct			s_db
 {
 	sqlite3 			*db;
 	int					transaction;
+	void				*param;
 }						t_db;
 
+
+/*
+ * 
+ * Generic read / write functions
+ * 
+ */
 int check_sqlite_return(int rc, t_db *db);
 int init_db_rw(t_db *db, char *path);
 int init_db_transaction_rw(t_db *db, char *path);
@@ -72,5 +79,13 @@ int select_transaction_data(char *query, t_db *db, int callback(), void *data);
 int finalize_transaction(t_db *db);
 int init_connection(t_db *db);
 
+
+/*
+ * 
+ * Queries
+ * 
+ */
+int insert_setting(char *name, int value);
+int select_setting(char *name, int *value);
 
 #endif
