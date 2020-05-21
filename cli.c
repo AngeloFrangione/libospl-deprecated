@@ -137,6 +137,7 @@ static int import(int ac, char **av)
 	}
 	if (!strcmp(av[1], "-f"))
 	{
+		initiate_path(av[0]);
 		if (library_exists(av[0]))
 			ospl_import_picture(av[0], av[2]);
 		else
@@ -161,6 +162,7 @@ static int create(int ac, char **av)
 	}
 	if (ospl_create_library(g_library_path))
 		perror(NULL);
+	printf("created library at path: %s\n", av[0]);
 	return 0;
 }
 
