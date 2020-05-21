@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `albums` (\
 );\
 COMMIT;"
 
-#define BUFFER_SIZE			256
+#define BUFFER_SIZE			512
 
 typedef struct			s_db
 {
@@ -85,7 +85,8 @@ int init_connection(t_db *db);
  * Queries
  * 
  */
-int insert_setting(char *name, int value);
-int select_setting(char *name, int *value);
-
+int insert_setting(char *dbpath, char *name, char *value);
+int update_setting(char *dbpath, char *name, char *value);
+int select_setting(char *dbpath, char *name, char *value);
+int delete_setting(char *dbpath, char *name);
 #endif
