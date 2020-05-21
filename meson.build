@@ -3,7 +3,6 @@ project('ospl', 'c')
 cmake = import('cmake')
 
 # Subprojects
-
 thumbnailer_proj = subproject('thumbnailer')
 thumbnailer = thumbnailer_proj.get_variable('thumbnailer_dep')
 stockage_proj = subproject('stockage')
@@ -11,8 +10,6 @@ stockage = stockage_proj.get_variable('stockage_dep')
 
 cwalk_proj = subproject('cwalk')
 cwalk = cwalk_proj.get_variable('cwalk_dep')
-
-#libcwalk = cmake.subproject('cwalk')
 
 # Dependencies
 deps = [thumbnailer,

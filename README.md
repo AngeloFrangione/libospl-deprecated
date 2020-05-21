@@ -1,4 +1,4 @@
-# LIBOSPL - Open Source Photo Library
+# libospl - Open Source Photo Library
 ----------------------------------------
 ### OSP what?
 OSPL is a opensource and multiplateform photo library management that can be used to store and sort all your pictures.
@@ -21,7 +21,7 @@ OSPL is meant to be compatible with all photos types and metadata types, such as
 ### What are we working on?
 - The basic structure and functions of ospl such as create import export.
 
-### What is planed
+### What is planed ?
 - See [IDEAS.md](https://github.com/AngeloFrangione/libospl/blob/master/IDEAS.md) for more details
 
 ### Contribute
