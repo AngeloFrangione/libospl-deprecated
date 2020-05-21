@@ -22,6 +22,13 @@
 #include <thumbnailer.h>
 #include "ospl.h"
 
+/**
+  * \brief Import a picture into the library
+  *
+  * \param library library path
+  * \param path picture path
+  * \return 0 with success and 1 when an error occurs
+  */
 int ospl_import_picture(char *library, char *path)
 {
 	if(!is_supported(path))

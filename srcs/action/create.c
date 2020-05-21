@@ -52,6 +52,12 @@ static int create_database_file(char *path)
 	return 0;
 }
 
+/**
+  * \brief Creates an OSPL library
+  *
+  * \param path new library path
+  * \return 0 with success and 1 when an error occurs
+  */
 int ospl_create_library(char *path)
 {
 	int r;

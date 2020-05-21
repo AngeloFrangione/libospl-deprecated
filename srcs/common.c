@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <cwalk.h>
 #include "ospl.h"
 
 /**
@@ -151,4 +152,22 @@ int get_magic(char *file_path, char **magic)
 	*magic = strdup(magic_file(magic_cookie, file_path));
 	magic_close(magic_cookie);
 	return 0;
+}
+
+/**
+  * \brief Checks if libarary exists
+  *
+  * \param path location to test
+  * \return 1 if the library exists
+  * \return 0 if the library does not exists
+  */
+int library_exists(char *lib)
+{
+	char db[512];
+
+	cwk_path_join(lib, "database.db", db, sizeof(db));
+	if (folder_exists(lib) && file_exists(db))
+		return 1;
+	else
+		return 0;
 }
