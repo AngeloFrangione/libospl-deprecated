@@ -45,7 +45,6 @@ static int callback(t_db *param, int argc, char **argv, char **column)
  * \param name name of the setting
  * \param value value of the setting
  */
-
 int insert_setting(char *dbpath, char *name, char *value)
 {
 	t_db	db;
@@ -67,7 +66,6 @@ int insert_setting(char *dbpath, char *name, char *value)
  * \param name name of the setting
  * \param value value of the setting
  */
-
 int update_setting(char *dbpath, char *name, char *value)
 {
 	t_db	db;
@@ -89,7 +87,6 @@ int update_setting(char *dbpath, char *name, char *value)
  * \param name name of the setting to be selected
  * \param value initialized pointer for the value setting to be stored
  */
-
 int select_setting(char *dbpath, char *name, char *value)
 {
 	t_db	db;
@@ -112,8 +109,6 @@ int select_setting(char *dbpath, char *name, char *value)
  * \param dbpath path of the database
  * \param name name of the setting to be removed
  */
-
-
 int delete_setting(char *dbpath, char *name)
 {
 	t_db	db;

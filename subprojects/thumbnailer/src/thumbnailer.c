@@ -19,6 +19,7 @@
 */
 
 #include <magic.h>
+#include "epeg.h"
 #include "thumbnailer.h"
 
 static int get_magic(char *actual_file, char **magic)
