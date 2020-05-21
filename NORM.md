@@ -29,7 +29,7 @@ Naming variables, functions names and other stuff like file names must follow th
 ## Part 2: formatting{}
 The code itself should respect a few things:
 
-* You must indent the code with tabulations with a size of _4_. ___tabulations___ not _spaces_.
+* You must indent the code with . ___tabulations___ not _spaces_.
 * Try to avoid making functions over 30-35 lines. Try to _split_ the code **as most as you can**. Avoid making functions that can be done ___reéusable___.
 * Try to avoid writing lines that are larger than 100 columns. Do not forget that tabulations are 4 columns large.
 * Try to get the smallest form of your conditions. Smaller conditions are often easier to understand and optimized.
