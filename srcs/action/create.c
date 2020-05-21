@@ -19,7 +19,6 @@
 */
 
 #include <errno.h>
-#include <sqlite3.h>
 #include <stockage.h>
 #include <cwalk.h>
 #include <stdlib.h>
