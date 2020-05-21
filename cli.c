@@ -35,7 +35,7 @@ void show_usage()
 	printf("OSPL - Open source picture library v%d.%d\n", VERSION_MAJOR, VERSION_MINOR);
 	printf("Utility to manage an OSPL\n");
 	printf("=========================================================================\n");
-	printf("Usage :  ospl <verb> <librarypath> <options>, where <verb> is as follows:\n");
+	printf("Usage: ospl <verb> <librarypath> <options>, where <verb> is as follows:\n");
 	printf("-------------------------------------------------------------------------\n");
 	printf("ospl  create         creating library\n");
 	printf("ospl  import         importing pictures\n");
@@ -50,7 +50,7 @@ void usage_create()
 {
 	printf("Creates a shiny new ospl library at <librarypath>\n");
 	printf("-------------------------------------------------------------------------\n");
-	printf("Usage :  ospl create <librarypath> [options]\n");
+	printf("Usage: ospl create <librarypath> [options]\n");
 	printf("Options that are not mandatory (only one of these):\n");
 	printf("-v verbose printing\n");
 }
@@ -59,7 +59,7 @@ void usage_import()
 {
 	printf("Import specified pictures into <librarypath>\n");
 	printf("-------------------------------------------------------------------------\n");
-	printf("Usage:  ospl import <librarypath> <options>\n");
+	printf("Usage: ospl import <librarypath> <options>\n");
 	printf("OPTIONS:\n");
 	printf("At least one of the following :\n");
 	printf("    -f <path> : specifies a file to import\n");
@@ -69,19 +69,19 @@ void usage_import()
 	printf("//  -a <album_id> : import into album_id album (not implemented yet)\n");
 }
 
-/**
-  * \brief Checks if libarary exists
-  *
-  * \param path location to test
-  * \return 1 if the library exists
-  * \return 0 if the library does not exists
-  */
-static int library_exists()
+void usage_export(char *arg)
 {
-	if (folder_exists(g_library_path) && file_exists(g_database_path))
-		return 1;
-	else
-		return 0;
+
+}
+
+void usage_album(char *arg)
+{
+
+}
+
+void usage_folder(char *arg)
+{
+
 }
 
 /**
@@ -99,7 +99,7 @@ static int indexof_arg(char *arg)
 }
 
 /**
-  * \brief Initiate the library global variables
+  * \brief Initiate the cli global variables
   *
   * \param av library path
   * \return 0 with success and 1 when an error occurs
@@ -120,21 +120,6 @@ static int initiate_path(char *path)
 	strcat(g_database_path, g_library_path);
 	strcat(g_database_path, DATABASE_FILENAME);
 	return 0;
-}
-
-void usage_export(char *arg)
-{
-
-}
-
-void usage_album(char *arg)
-{
-
-}
-
-void usage_folder(char *arg)
-{
-
 }
 
 void usage_unrecognized(char *arg)

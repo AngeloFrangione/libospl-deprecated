@@ -18,6 +18,14 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+/**
+ * \file setting.c
+ * \brief This file contains setting manipulation wrapper
+ * \author Angelo Frangione
+ *
+ * There is a function for every sql query type.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -28,6 +36,15 @@ static int callback(t_db *param, int argc, char **argv, char **column)
 	param->param = strdup(argv[1]);
 	return 0;
 }
+
+/**
+ * \brief insert a row into settings
+ *
+ * 
+ * \param dbpath path of the database
+ * \param name name of the setting
+ * \param value value of the setting
+ */
 
 int insert_setting(char *dbpath, char *name, char *value)
 {
@@ -42,6 +59,15 @@ int insert_setting(char *dbpath, char *name, char *value)
 	return 0;
 }
 
+/**
+ * \brief update a row into settings
+ *
+ * 
+ * \param dbpath path of the database
+ * \param name name of the setting
+ * \param value value of the setting
+ */
+
 int update_setting(char *dbpath, char *name, char *value)
 {
 	t_db	db;
@@ -54,6 +80,15 @@ int update_setting(char *dbpath, char *name, char *value)
 	finalize_transaction(&db);
 	return 0;
 }
+
+/**
+ * \brief select a row into settings
+ *
+ * 
+ * \param dbpath path of the database
+ * \param name name of the setting to be selected
+ * \param value initialized pointer for the value setting to be stored
+ */
 
 int select_setting(char *dbpath, char *name, char *value)
 {
@@ -69,6 +104,15 @@ int select_setting(char *dbpath, char *name, char *value)
 	finalize_transaction(&db);
 	return 0;
 }
+
+/**
+ * \brief delete a row into settings
+ *
+ * 
+ * \param dbpath path of the database
+ * \param name name of the setting to be removed
+ */
+
 
 int delete_setting(char *dbpath, char *name)
 {

@@ -37,7 +37,8 @@
 /**
  * \brief Checks sqlite return
  *
- * Checks whether db or query execution is OK or not. If not, prints the error message to stderr and returns error code 1
+ * Checks whether db or query execution is OK or not. 
+ * If not,prints the error message to stderr and returns error code 1
  * \param rc Return code
  * \param db database data structur
  */
@@ -67,12 +68,13 @@ int init_db_rw(t_db *db, char *path)
 {
 	int rc;
 
-	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
+	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | 
+							SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
 	return check_sqlite_return(rc, db);
 }
 
 /**
- * \brief Create connection to the database in read write mode and start a transaction
+ * \brief Create connection to the database in read write / transaction mode
  *
  * Create connection to the database in read and write mode.
  * Creates the database file if it doesn't exists
@@ -87,7 +89,8 @@ int init_db_transaction_rw(t_db *db, char *path)
 	int rc;
 
 	db->transaction = 1;
-	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
+	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | 
+							SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
 	check_sqlite_return(rc, db);
 	rc = sqlite3_exec(db->db, JOURNAL_MODE_MEMORY, 0, 0, NULL);
 	check_sqlite_return(rc, db);
@@ -124,10 +127,9 @@ int create_database(char *path)
 
 /**
  * \brief Executes the INSERT query
- * This function executes the INSERT query into the initiated database
+ * executes the INSERT query into the initiated database
  *
- *
- * \param query the SQL query (ex: "INSERT INTO library (hash) VALUES ('hash');")
+ * \param query pointer to the SQL query
  * \param db database data structure
  */
 
@@ -147,11 +149,12 @@ int insert_transaction(char *query, t_db *db)
 
 /**
  * \brief Executes the SELECT query
- * This function executes the SELECT query and sends the rows to a callback function
+ * executes any SELECT query and sends the rows to a callback function
  *
- * \param query the SQL query (ex: "INSERT INTO library (hash) VALUES ('hash');")
+ * \param query pointer to the SQL query
  * \param db database data structure
- * \param callback callback function should be prototyped with these arguments callback(void *unused, int argc, char **argv, char **column_name)
+ * \param callback callback function should be prototyped with these arguments:
+ * callback(void *unused, int argc, char **argv, char **column_name)
  */
 
 int select_transaction(char *query, t_db *db, int callback())
@@ -170,12 +173,13 @@ int select_transaction(char *query, t_db *db, int callback())
 
 /**
  * \brief Executes the SELECT query
- * This function executes the SELECT query and sends the rows to a callback function
+ * executes the SELECT query and sends the rows to a callback function
  * Additionally this function takes a data parameter for storing the result
  *
- * \param query the SQL query (ex: "INSERT INTO library (hash) VALUES ('hash');")
+ * \param query pointer to the SQL query
  * \param db database data structure
- * \param callback callback function should be prototyped with these arguments callback(void *data, int argc, char **argv, char **column_name)
+ * \param callback callback function should be prototyped with these arguments:
+ * callback(void *data, int argc, char **argv, char **column_name)
  * \param data data that will be passed to the callback function
  */
 

@@ -62,5 +62,7 @@ int folder_exists(char *path);
 int indexof(char *s, char c);
 int is_supported(char *src);
 int get_magic(char *file_path, char **magic);
+int library_exists(char *lib);
+
 
 #endif
