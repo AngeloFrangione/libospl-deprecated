@@ -44,11 +44,11 @@
  */
 int check_sqlite_return(int rc, t_db *db)
 {
-	if (rc != SQLITE_OK)
+	if (rc != SQLITE_OK && rc != SQLITE_ROW && rc != SQLITE_DONE)
 	{
-		fprintf(stderr, "Error: %s\n", sqlite3_errmsg(db->db));
+		fprintf(stderr, "Error %d: %s\n", rc, sqlite3_errmsg(db->db));
 		sqlite3_close(db->db);
-		return 1;
+		return rc;
 	}
 	return 0;
 }
@@ -138,7 +138,6 @@ int insert_transaction(char *query, t_db *db)
 		exit(0);
 	}
 	rc = sqlite3_exec(db->db, query, 0, 0, NULL);
-	check_sqlite_return(rc, db);
 	return check_sqlite_return(rc, db);
 }
 
@@ -161,7 +160,6 @@ int select_transaction(char *query, t_db *db, int callback())
 		exit(0);
 	}
 	rc = sqlite3_exec(db->db, query, callback, 0, NULL);
-	check_sqlite_return(rc, db);
 	return check_sqlite_return(rc, db);
 }
 
@@ -186,7 +184,6 @@ int select_transaction_data(char *query, t_db *db, int callback(), void *data)
 		exit(0);
 	}
 	rc = sqlite3_exec(db->db, query, callback, data, NULL);
-	check_sqlite_return(rc, db);
 	return check_sqlite_return(rc, db);
 }
 
@@ -202,7 +199,7 @@ int finalize_transaction(t_db *db)
 
 	rc = sqlite3_exec(db->db, "END TRANSACTION", NULL, NULL, NULL);
 	check_sqlite_return(rc, db);
-	sqlite3_close(db->db);
+	rc = sqlite3_close_v2(db->db);
 	return check_sqlite_return(rc, db);
 }
 
