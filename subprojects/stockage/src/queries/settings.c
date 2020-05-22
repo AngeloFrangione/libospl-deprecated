@@ -20,7 +20,7 @@
 
 /**
  * \file setting.c
- * \brief This file contains setting manipulation wrapper
+ * \brief This file contains setting table manipulation wrapper
  * \author Angelo Frangione
  *
  * There is a function for every sql query type.
@@ -31,14 +31,8 @@
 #include <stdlib.h>
 #include "include/stockage.h"
 
-static int callback(t_db *param, int argc, char **argv, char **column)
-{
-	param->param = strdup(argv[1]);
-	return 0;
-}
-
 /**
- * \brief insert a row into settings
+ * \brief insert a row into settings table
  *
  * 
  * \param dbpath path of the database
@@ -59,7 +53,7 @@ int insert_setting(char *dbpath, char *name, char *value)
 }
 
 /**
- * \brief update a row into settings
+ * \brief update a row into settings table
  *
  * 
  * \param dbpath path of the database
@@ -79,8 +73,14 @@ int update_setting(char *dbpath, char *name, char *value)
 	return 0;
 }
 
+static int callback(t_db *param, int argc, char **argv, char **column)
+{
+	param->param = strdup(argv[1]);
+	return 0;
+}
+
 /**
- * \brief select a row into settings
+ * \brief select a row into settings table
  *
  * 
  * \param dbpath path of the database
@@ -103,7 +103,7 @@ int select_setting(char *dbpath, char *name, char *value)
 }
 
 /**
- * \brief delete a row into settings
+ * \brief delete a row into settings table
  *
  * 
  * \param dbpath path of the database
