@@ -85,7 +85,8 @@ static int callback(t_db *param, int argc, char **argv, char **column)
  * 
  * \param dbpath path of the database
  * \param name name of the setting to be selected
- * \param value initialized pointer for the value setting to be stored
+ * \param value a pointer to an initialized memory location where 
+ * the value will be stored into
  */
 int select_setting(char *dbpath, char *name, char *value)
 {
