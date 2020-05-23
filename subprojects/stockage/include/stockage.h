@@ -32,16 +32,22 @@ CREATE TABLE IF NOT EXISTS `settings` (\
 	PRIMARY KEY(`name`)\
 );\
 CREATE TABLE IF NOT EXISTS `photos` (\
-	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
-	`hash`	TEXT,\
-	`original_name`	TEXT,\
-	`import_date`	INTEGER,\
-	`import_time`	INTEGER,\
-	`exif_height`	INTEGER,\
-	`exif_width`	INTEGER,\
-	`exif_brand`	TEXT,\
+	`id`				INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
+	`hash`				TEXT,\
+	`original_name`		TEXT,\
+	`new_name`			TEXT,\
+	`import_datetime`	TEXT,\
+	`import_year`		INTEGER,\
+	`import_month`		INTEGER,\
+	`import_day`		INTEGER,\
+	`import_hour`		INTEGER,\
+	`import_minut`		INTEGER,\
+	`import_second`		INTEGER,\
+	`exif_height`		INTEGER,\
+	`exif_width`		INTEGER,\
+	`exif_brand`		TEXT,\
 	`exif_peripheral`	TEXT,\
-	`fav`	INTEGER DEFAULT 0\
+	`fav`				INTEGER DEFAULT 0\
 );\
 CREATE TABLE IF NOT EXISTS `includes` (\
 	`including_folder`	INTEGER,\
