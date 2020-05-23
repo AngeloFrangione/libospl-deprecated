@@ -40,7 +40,7 @@ There is also a .sql file at the [root directory](https://github.com/AngeloFrang
 
 ## External libraries
 
-What plan to use following external libraries for making all this working:
+We plan to use following external libraries for making all this working:
 
 - [cwalk](https://github.com/likle/cwalk/tree/master) for managing paths on windows and unix
 - [sqlite](https://www.sqlite.org/index.html) for storing data
