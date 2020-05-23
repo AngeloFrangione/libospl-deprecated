@@ -21,9 +21,10 @@ Let's help us to make this photo library the best open source solution !
 There are multiple modules in the subproject folder, for now, there is the thumbnailer module, and the interface between sqlite (stockage) module. Theses two meant to be upgradable without modifying the main code of the library. For example, the thumbnailer has a generic thumbnail creation function that determines the image format and create automaticly the thumbnail. So adding a supported format shouldn't affect libospl
 
 ## DB structure
-Images are worth a million words so here is a diagram for the .db file.   
+Images are worth a million words so here is a diagram for the .db file.
+You can also look [here](https://dbdiagram.io/d/5ec97ad039d18f5553ffa8cf) for a maintained version 
 There is also a .sql file at the [root directory](https://github.com/AngeloFrangione/libospl/blob/master/database.sql)
-![database structure](https://raw.githubusercontent.com/AngeloFrangione/libospl/master/database_diagram.png?token=AA5NSBIRSPUSTH2QOIAPK2S57IJL6)
+![database structure](https://raw.githubusercontent.com/AngeloFrangione/libospl/master/database_diagram.png)
 
 ## Milestones
 
