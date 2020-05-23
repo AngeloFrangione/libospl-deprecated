@@ -22,6 +22,7 @@
 # define STOCKAGE_H
 
 #include <sqlite3.h>
+#include <stdint.h>
 
 #define JOURNAL_MODE_MEMORY "PRAGMA journal_mode = MEMORY;"
 #define SYNCRONOUS_OFF 		"PRAGMA synchronous = 0;"
@@ -80,7 +81,26 @@ CREATE TABLE IF NOT EXISTS `albums` (\
 );\
 COMMIT;"
 
-#define BUFFER_SIZE			512
+#define BUFFER_SIZE			1024
+
+typedef struct			s_photos
+{
+	char				hash[33];
+	char				original_name[255];
+	char				new_name[255];
+	char				import_datetime[32];
+	uint16_t			import_year;
+	int					import_month;
+	int					import_day;
+	int					import_hour;
+	int					import_minut;
+	int					import_second;
+	int					exif_height;
+	int					exif_width;
+	char				exif_brand[32];
+	char				exif_peripheral[32];
+	uint8_t				fav;
+}						t_photos;
 
 typedef struct			s_db
 {
@@ -108,11 +128,25 @@ int init_connection(t_db *db);
 
 /*
  * 
- * Queries
+ * Queries - settings table
  * 
  */
 int insert_setting(char *dbpath, char *name, char *value);
 int update_setting(char *dbpath, char *name, char *value);
 int select_setting(char *dbpath, char *name, char *value);
 int delete_setting(char *dbpath, char *name);
+
+/*
+ * 
+ * Queries - photos table
+ * 
+ */
+int insert_photo(char *dbpath, t_photos *pic);
+int update_photo_int(char *dbpath, int id, char *col, int value);
+int update_photo_char(char *dbpath, int id, char *col, char *value);
+int update_photo_null(char *dbpath, int id, char *col);
+int select_photo_single(char *dbpath, int id, char *col, char *value);
+int select_photo(char *dbpath, int id, t_photos *pic);
+int delete_photo(char *dbpath, int id);
+
 #endif
