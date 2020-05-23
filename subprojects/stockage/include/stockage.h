@@ -105,8 +105,8 @@ typedef struct			s_photos
 typedef struct			s_db
 {
 	sqlite3 			*db;
+	char				*path;
 	int					transaction;
-	void				*param;
 }						t_db;
 
 
@@ -116,14 +116,12 @@ typedef struct			s_db
  * 
  */
 int check_sqlite_return(int rc, t_db *db);
-int init_db_rw(t_db *db, char *path);
-int init_db_transaction_rw(t_db *db, char *path);
+int init_db_transaction_rw(t_db *db);
 int create_database(char *path);
 int insert_transaction(char *query, t_db *db);
 int select_transaction(char *query, t_db *db, int callback());
 int select_transaction_data(char *query, t_db *db, int callback(), void *data);
 int finalize_transaction(t_db *db);
-int init_connection(t_db *db);
 
 
 /*
@@ -131,22 +129,22 @@ int init_connection(t_db *db);
  * Queries - settings table
  * 
  */
-int insert_setting(char *dbpath, char *name, char *value);
-int update_setting(char *dbpath, char *name, char *value);
-int select_setting(char *dbpath, char *name, char *value);
-int delete_setting(char *dbpath, char *name);
+int insert_setting(t_db *db, char *name, char *value);
+int update_setting(t_db *db, char *name, char *value);
+int select_setting(t_db *db, char *name, char *value);
+int delete_setting(t_db *db, char *name);
 
 /*
  * 
  * Queries - photos table
  * 
  */
-int insert_photo(char *dbpath, t_photos *pic);
-int update_photo_int(char *dbpath, int id, char *col, int value);
-int update_photo_char(char *dbpath, int id, char *col, char *value);
-int update_photo_null(char *dbpath, int id, char *col);
-int select_photo_single(char *dbpath, int id, char *col, char *value);
-int select_photo(char *dbpath, int id, t_photos *pic);
-int delete_photo(char *dbpath, int id);
+int insert_photo(t_db *db, t_photos *pic);
+int update_photo_int(t_db *db, int id, char *col, int value);
+int update_photo_char(t_db *db, int id, char *col, char *value);
+int update_photo_null(t_db *db, int id, char *col);
+int select_photo_single(t_db *db, int id, char *col, char *value);
+int select_photo(t_db *db, int id, t_photos *pic);
+int delete_photo(t_db *db, int id);
 
 #endif
