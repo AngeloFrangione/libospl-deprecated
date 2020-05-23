@@ -54,24 +54,6 @@ int check_sqlite_return(int rc, t_db *db)
 }
 
 /**
- * \brief Create connection to the database in read write mode
- *
- * This function is not used.
- * Create connection to the database in read and write mode.
- * Creates the database file if it doesn't exists
- * \param path path to the db file
- * \param db database data structur
- */
-int init_db_rw(t_db *db, char *path)
-{
-	int rc;
-
-	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | 
-							SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
-	return check_sqlite_return(rc, db);
-}
-
-/**
  * \brief Create connection to the database in read write / transaction mode
  *
  * Create connection to the database in read and write mode.
@@ -81,12 +63,12 @@ int init_db_rw(t_db *db, char *path)
  * \param path path to the db file
  * \param db database data structur
  */
-int init_db_transaction_rw(t_db *db, char *path)
+int init_db_transaction_rw(t_db *db)
 {
 	int rc;
 
 	db->transaction = 1;
-	rc = sqlite3_open_v2(path, &db->db, SQLITE_OPEN_READWRITE | 
+	rc = sqlite3_open_v2(db->path, &db->db, SQLITE_OPEN_READWRITE | 
 							SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
 	check_sqlite_return(rc, db);
 	rc = sqlite3_exec(db->db, JOURNAL_MODE_MEMORY, 0, 0, NULL);
@@ -107,18 +89,16 @@ int init_db_transaction_rw(t_db *db, char *path)
  */
 int create_database(char *path)
 {
-	t_db	db;
+	sqlite3 		*db;
 	int				rc;
 	char			*vacuum = "PRAGMA auto_vacuum = FULL;";
 
-	init_connection(&db);
-	init_db_rw(&db, path);
-	rc = sqlite3_exec(db.db, vacuum, 0, 0, NULL);
-	check_sqlite_return(rc, &db);
-	rc = sqlite3_exec(db.db, TABLE, 0, 0, NULL);
-	check_sqlite_return(rc, &db);
-	rc = sqlite3_close(db.db);
-	return check_sqlite_return(rc, &db);
+	rc = sqlite3_open_v2(path, &db, SQLITE_OPEN_READWRITE | 
+							SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
+	rc = sqlite3_exec(db, vacuum, 0, 0, NULL);
+	rc = sqlite3_exec(db, TABLE, 0, 0, NULL);
+	rc = sqlite3_close(db);
+	return rc;
 }
 
 /**
@@ -201,16 +181,4 @@ int finalize_transaction(t_db *db)
 	check_sqlite_return(rc, db);
 	rc = sqlite3_close_v2(db->db);
 	return check_sqlite_return(rc, db);
-}
-
-/**
- * \brief initiate the db data structure
- * This function should be called before the use of init_db_transaction_rw();
- *
- * \param db database data structure
- */
-int init_connection(t_db *db)
-{
-	memset(db, 0, sizeof(t_db));
-	return 0;
 }
