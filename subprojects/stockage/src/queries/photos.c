@@ -161,6 +161,20 @@ int select_photo_single(char *dbpath, int id, char *col, char *value)
 static int callback(t_photos *pic, int ac, char **av, char **column)
 {
 	strcpy(pic->hash, av[1]);
+	strcpy(pic->original_name, av[2]);
+	strcpy(pic->new_name, av[3]);
+	strcpy(pic->import_datetime, av[4]);
+	pic->import_year = atoi(av[5]);
+	pic->import_month = atoi(av[6]);
+	pic->import_day = atoi(av[7]);
+	pic->import_hour = atoi(av[8]);
+	pic->import_minut = atoi(av[9]);
+	pic->import_second = atoi(av[10]);
+	pic->exif_height = atoi(av[11]);
+	pic->exif_width = atoi(av[12]);
+	strcpy(pic->exif_brand, av[13]);
+	strcpy(pic->exif_peripheral, av[14]);
+	pic->fav = atoi(av[15]);
 	return 0;
 }
 
