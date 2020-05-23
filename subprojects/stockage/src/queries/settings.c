@@ -73,9 +73,9 @@ int update_setting(char *dbpath, char *name, char *value)
 	return 0;
 }
 
-static int callback(t_db *param, int argc, char **argv, char **column)
+static int callback(char *param, int argc, char **argv, char **column)
 {
-	param->param = strdup(argv[1]);
+	strcpy(param, argv[1]);
 	return 0;
 }
 
@@ -96,9 +96,7 @@ int select_setting(char *dbpath, char *name, char *value)
 	sprintf(query + 23, "where name = \"%s\"", name);
 	init_connection(&db);
 	init_db_transaction_rw(&db, dbpath);	
-	select_transaction_data(query, &db, callback, &db);
-	strcpy(value, db.param);
-	free(db.param);
+	select_transaction_data(query, &db, callback, value);
 	finalize_transaction(&db);
 	return 0;
 }
