@@ -115,25 +115,31 @@ typedef struct			s_photos
 
 typedef struct			s_db
 {
-	sqlite3 			*db;
+	sqlite3				*db;
 	char				*path;
-	int					transaction;
+	uint8_t				transaction;
+	uint8_t				commit;
 }						t_db;
-
 
 /*
  * 
  * Generic read / write functions
  * 
  */
-int check_sqlite_return(int rc, t_db *db);
-int init_db_transaction_rw(t_db *db);
+int check_sqlite_return(int rc, t_db *db, char *query);
+int stockage_init(t_db *db);
 int create_database(char *path);
-int insert_transaction(char *query, t_db *db);
-int select_transaction(char *query, t_db *db, int callback());
-int select_transaction_data(char *query, t_db *db, int callback(), void *data);
-int finalize_transaction(t_db *db);
+int stockage_query_write(char *query, t_db *db);
+int stockage_query_read(char *query, t_db *db, int callback(), void *data);
+int stockage_commit(t_db *db);
 
+/*
+ * 
+ * Higher level read / write functions
+ * 
+ */
+int stockage_write(t_db *db, char *query);
+int stockage_read(t_db *db, char *query, int callback(), void *value);
 
 /*
  * 

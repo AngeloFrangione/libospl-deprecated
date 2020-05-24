@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transaction_125',['transaction',['../structs__db.html#a6454bcea17b516689d902c4228bcbcfb',1,'s_db']]]
+  ['fav_161',['fav',['../structs__photos.html#a51f194f9a14735532dfcbf38be1ca34a',1,'s_photos']]]
 ];
