@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['ospl_2ec_41',['ospl.c',['../ospl_8c.html',1,'']]],
-  ['ospl_2eh_42',['ospl.h',['../ospl_8h.html',1,'']]],
-  ['ospl_5fcli_2eh_43',['ospl_cli.h',['../ospl__cli_8h.html',1,'']]],
-  ['ospl_5fcreate_5flibrary_44',['ospl_create_library',['../ospl_8h.html#af7716407bac19250fa1a0ce37fce86bb',1,'ospl_create_library(char *library):&#160;create.c'],['../create_8c.html#ab59c6be8401712f452ee8445333359e8',1,'ospl_create_library(char *path):&#160;create.c']]],
-  ['ospl_5fimport_5fpicture_45',['ospl_import_picture',['../ospl_8h.html#a5ca2885a6c18fa8404bddeb3df32be65',1,'ospl_import_picture(char *library, char *path):&#160;import.c'],['../import_8c.html#a5ca2885a6c18fa8404bddeb3df32be65',1,'ospl_import_picture(char *library, char *path):&#160;import.c']]]
+  ['nb_5fsupported_5fimages_51',['NB_SUPPORTED_IMAGES',['../ospl_8h.html#a2ce5e82a253f03c75268e75e9c7f6f18',1,'ospl.h']]],
+  ['new_5fname_52',['new_name',['../structs__photos.html#a7e4c58d09ce1526f4a3d38145e5e2aac',1,'s_photos']]],
+  ['norm_2emd_53',['NORM.md',['../NORM_8md.html',1,'']]]
 ];

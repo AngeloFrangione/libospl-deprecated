@@ -103,13 +103,15 @@ $(document).ready(function(){initNavTree('stockage_8h.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;sqlite3.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for stockage.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="stockage_8h__incl.png" border="0" usemap="#subprojects_2stockage_2include_2stockage_8h" alt=""/></div>
 <map name="subprojects_2stockage_2include_2stockage_8h" id="subprojects_2stockage_2include_2stockage_8h">
-<area shape="rect" title=" " alt="" coords="5,5,164,47"/>
-<area shape="rect" title=" " alt="" coords="45,95,124,121"/>
+<area shape="rect" title=" " alt="" coords="15,5,173,47"/>
+<area shape="rect" title=" " alt="" coords="5,95,84,121"/>
+<area shape="rect" title=" " alt="" coords="108,95,179,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -117,11 +119,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="stockage_8h__dep__incl.png" border="0" usemap="#subprojects_2stockage_2include_2stockage_8hdep" alt=""/></div>
 <map name="subprojects_2stockage_2include_2stockage_8hdep" id="subprojects_2stockage_2include_2stockage_8hdep">
-<area shape="rect" title=" " alt="" coords="269,5,428,47"/>
+<area shape="rect" title=" " alt="" coords="360,5,519,47"/>
 <area shape="rect" href="create_8c.html" title=" " alt="" coords="5,102,153,129"/>
 <area shape="rect" href="main_8c.html" title=" " alt="" coords="177,95,336,136"/>
-<area shape="rect" href="settings_8c.html" title=" " alt="" coords="360,95,524,136"/>
-<area shape="rect" href="stockage_8c.html" title=" " alt="" coords="548,95,707,136"/>
+<area shape="rect" href="photos_8c.html" title=" " alt="" coords="360,95,519,136"/>
+<area shape="rect" href="settings_8c.html" title=" " alt="" coords="543,95,707,136"/>
+<area shape="rect" href="stockage_8c.html" title=" " alt="" coords="731,95,889,136"/>
 </map>
 </div>
 </div>
@@ -129,6 +132,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__photos.html">s_photos</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs__db.html">s_db</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -138,57 +143,77 @@ Macros</h2></td></tr>
 <tr class="separator:af407374125b6031f6f73b26ffc033166"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab64c96b4b60885417fe148cc410782b8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#ab64c96b4b60885417fe148cc410782b8">SYNCRONOUS_OFF</a>&#160;&#160;&#160;&quot;PRAGMA synchronous = 0;&quot;</td></tr>
 <tr class="separator:ab64c96b4b60885417fe148cc410782b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acadaccd8321f8569f31a11bdad1829da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#acadaccd8321f8569f31a11bdad1829da">TABLE</a>&#160;&#160;&#160;&quot;BEGIN TRANSACTION;\CREATE TABLE IF NOT EXISTS `settings` (\	`name`	TEXT NOT NULL UNIQUE,\	`value`	TEXT,\	PRIMARY KEY(`name`)\);\CREATE TABLE IF NOT EXISTS `photos` (\	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\	`hash`	TEXT,\	`original_name`	TEXT,\	`import_date`	INTEGER,\	`import_time`	INTEGER,\	`exif_height`	INTEGER,\	`exif_width`	INTEGER,\	`exif_brand`	TEXT,\	`exif_peripheral`	TEXT,\	`fav`	INTEGER DEFAULT 0\);\CREATE TABLE IF NOT EXISTS `includes` (\	`including_folder`	INTEGER,\	`included_folder`	INTEGER,\	FOREIGN KEY(`included_folder`) REFERENCES `folders`(`id`),\	PRIMARY KEY(`including_folder`,`included_folder`),\	FOREIGN KEY(`including_folder`) REFERENCES `folders`(`id`)\);\CREATE TABLE IF NOT EXISTS `holds` (\	`holding_folder`	INTEGER,\	`holded_album`	INTEGER,\	FOREIGN KEY(`holded_album`) REFERENCES `albums`(`id`),\	FOREIGN KEY(`holding_folder`) REFERENCES `folders`(`id`),\	PRIMARY KEY(`holding_folder`,`holded_album`)\);\CREATE TABLE IF NOT EXISTS `folders` (\	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\	`name`	INTEGER\);\CREATE TABLE IF NOT EXISTS `contains` (\	`containing_album`	INTEGER,\	`contained_photo`	INTEGER,\	FOREIGN KEY(`contained_photo`) REFERENCES `photos`(`id`),\	FOREIGN KEY(`containing_album`) REFERENCES `albums`(`id`),\	PRIMARY KEY(`containing_album`,`contained_photo`)\);\CREATE TABLE IF NOT EXISTS `albums` (\	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\	`name`	TEXT\);\COMMIT;&quot;</td></tr>
+<tr class="memitem:acadaccd8321f8569f31a11bdad1829da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#acadaccd8321f8569f31a11bdad1829da">TABLE</a></td></tr>
 <tr class="separator:acadaccd8321f8569f31a11bdad1829da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b20d41d6252e9871430c242cb1a56e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</a>&#160;&#160;&#160;512</td></tr>
+<tr class="memitem:a6b20d41d6252e9871430c242cb1a56e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</a>&#160;&#160;&#160;1024</td></tr>
 <tr class="separator:a6b20d41d6252e9871430c242cb1a56e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:a75ff6c8e548d6350256ae886e1b4c54c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structs__photos.html">s_photos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a75ff6c8e548d6350256ae886e1b4c54c">t_photos</a></td></tr>
+<tr class="separator:a75ff6c8e548d6350256ae886e1b4c54c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd4765b18adf821209c91cadda4b16d"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structs__db.html">s_db</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a></td></tr>
 <tr class="separator:a9cd4765b18adf821209c91cadda4b16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4aab354c4b4154df226d4d5a1d8359cc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a4aab354c4b4154df226d4d5a1d8359cc">check_sqlite_return</a> (int rc, <a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db)</td></tr>
-<tr class="memdesc:a4aab354c4b4154df226d4d5a1d8359cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks sqlite return.  <a href="stockage_8h.html#a4aab354c4b4154df226d4d5a1d8359cc">More...</a><br /></td></tr>
-<tr class="separator:a4aab354c4b4154df226d4d5a1d8359cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5106122440c5251508d8b7db6db59e6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a5106122440c5251508d8b7db6db59e6f">init_db_rw</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *path)</td></tr>
-<tr class="memdesc:a5106122440c5251508d8b7db6db59e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create connection to the database in read write mode.  <a href="stockage_8h.html#a5106122440c5251508d8b7db6db59e6f">More...</a><br /></td></tr>
-<tr class="separator:a5106122440c5251508d8b7db6db59e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fcc1b668a5b06348dc6d7ac12f30d0c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a4fcc1b668a5b06348dc6d7ac12f30d0c">init_db_transaction_rw</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *path)</td></tr>
-<tr class="memdesc:a4fcc1b668a5b06348dc6d7ac12f30d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create connection to the database in read write / transaction mode.  <a href="stockage_8h.html#a4fcc1b668a5b06348dc6d7ac12f30d0c">More...</a><br /></td></tr>
-<tr class="separator:a4fcc1b668a5b06348dc6d7ac12f30d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab37c81237a990ce0b6c8e20e64a44960"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#ab37c81237a990ce0b6c8e20e64a44960">check_sqlite_return</a> (int rc, <a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *query)</td></tr>
+<tr class="memdesc:ab37c81237a990ce0b6c8e20e64a44960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks sqlite return.  <a href="stockage_8h.html#ab37c81237a990ce0b6c8e20e64a44960">More...</a><br /></td></tr>
+<tr class="separator:ab37c81237a990ce0b6c8e20e64a44960"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ee60232f9d863d77d1691e909c059c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#ad6ee60232f9d863d77d1691e909c059c">stockage_init</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db)</td></tr>
+<tr class="memdesc:ad6ee60232f9d863d77d1691e909c059c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create connection to the database in read write / transaction mode.  <a href="stockage_8h.html#ad6ee60232f9d863d77d1691e909c059c">More...</a><br /></td></tr>
+<tr class="separator:ad6ee60232f9d863d77d1691e909c059c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9da674dd7bbcf228a2321f881c553062"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a9da674dd7bbcf228a2321f881c553062">create_database</a> (char *path)</td></tr>
 <tr class="memdesc:a9da674dd7bbcf228a2321f881c553062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty ospl databse.  <a href="stockage_8h.html#a9da674dd7bbcf228a2321f881c553062">More...</a><br /></td></tr>
 <tr class="separator:a9da674dd7bbcf228a2321f881c553062"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05c68bfb007d3e9c5ff9501730fa1db3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a05c68bfb007d3e9c5ff9501730fa1db3">insert_transaction</a> (char *query, <a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db)</td></tr>
-<tr class="memdesc:a05c68bfb007d3e9c5ff9501730fa1db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the INSERT query executes the INSERT query into the initiated database.  <a href="stockage_8h.html#a05c68bfb007d3e9c5ff9501730fa1db3">More...</a><br /></td></tr>
-<tr class="separator:a05c68bfb007d3e9c5ff9501730fa1db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a140a9f8e9acdf252973c2a9a1992da78"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a140a9f8e9acdf252973c2a9a1992da78">select_transaction</a> (char *query, <a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int callback())</td></tr>
-<tr class="memdesc:a140a9f8e9acdf252973c2a9a1992da78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the SELECT query executes any SELECT query and sends the rows to a callback function.  <a href="stockage_8h.html#a140a9f8e9acdf252973c2a9a1992da78">More...</a><br /></td></tr>
-<tr class="separator:a140a9f8e9acdf252973c2a9a1992da78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf2f867857df8ac5210e77a947d09327"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#aaf2f867857df8ac5210e77a947d09327">select_transaction_data</a> (char *query, <a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int callback(), void *data)</td></tr>
-<tr class="memdesc:aaf2f867857df8ac5210e77a947d09327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the SELECT query executes the SELECT query and sends the rows to a callback function Additionally this function takes a data parameter for storing the result.  <a href="stockage_8h.html#aaf2f867857df8ac5210e77a947d09327">More...</a><br /></td></tr>
-<tr class="separator:aaf2f867857df8ac5210e77a947d09327"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99574d8e5a09e90c6629de98a39eab3f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a99574d8e5a09e90c6629de98a39eab3f">finalize_transaction</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db)</td></tr>
-<tr class="memdesc:a99574d8e5a09e90c6629de98a39eab3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalizes a transaction connection This function should be called after every use of <a class="el" href="stockage_8c.html#a4fcc1b668a5b06348dc6d7ac12f30d0c" title="Create connection to the database in read write / transaction mode.">init_db_transaction_rw()</a>;  <a href="stockage_8h.html#a99574d8e5a09e90c6629de98a39eab3f">More...</a><br /></td></tr>
-<tr class="separator:a99574d8e5a09e90c6629de98a39eab3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4c64ec9e537c3117f9fc67c55cea765"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#af4c64ec9e537c3117f9fc67c55cea765">init_connection</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db)</td></tr>
-<tr class="memdesc:af4c64ec9e537c3117f9fc67c55cea765"><td class="mdescLeft">&#160;</td><td class="mdescRight">initiate the db data structure This function should be called before the use of <a class="el" href="stockage_8c.html#a4fcc1b668a5b06348dc6d7ac12f30d0c" title="Create connection to the database in read write / transaction mode.">init_db_transaction_rw()</a>;  <a href="stockage_8h.html#af4c64ec9e537c3117f9fc67c55cea765">More...</a><br /></td></tr>
-<tr class="separator:af4c64ec9e537c3117f9fc67c55cea765"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72e89022660889ae0763f0848e33ef32"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a72e89022660889ae0763f0848e33ef32">insert_setting</a> (char *dbpath, char *name, char *value)</td></tr>
-<tr class="memdesc:a72e89022660889ae0763f0848e33ef32"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert a row into settings  <a href="stockage_8h.html#a72e89022660889ae0763f0848e33ef32">More...</a><br /></td></tr>
-<tr class="separator:a72e89022660889ae0763f0848e33ef32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c20b504df67984072940cc1974cca4f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a1c20b504df67984072940cc1974cca4f">update_setting</a> (char *dbpath, char *name, char *value)</td></tr>
-<tr class="memdesc:a1c20b504df67984072940cc1974cca4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">update a row into settings  <a href="stockage_8h.html#a1c20b504df67984072940cc1974cca4f">More...</a><br /></td></tr>
-<tr class="separator:a1c20b504df67984072940cc1974cca4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6077eeadd9acd881757b7fcfecf7b0fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a6077eeadd9acd881757b7fcfecf7b0fe">select_setting</a> (char *dbpath, char *name, char *value)</td></tr>
-<tr class="memdesc:a6077eeadd9acd881757b7fcfecf7b0fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">select a row into settings  <a href="stockage_8h.html#a6077eeadd9acd881757b7fcfecf7b0fe">More...</a><br /></td></tr>
-<tr class="separator:a6077eeadd9acd881757b7fcfecf7b0fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05bce6353cd292df3774927d790bff80"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a05bce6353cd292df3774927d790bff80">delete_setting</a> (char *dbpath, char *name)</td></tr>
-<tr class="memdesc:a05bce6353cd292df3774927d790bff80"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete a row into settings  <a href="stockage_8h.html#a05bce6353cd292df3774927d790bff80">More...</a><br /></td></tr>
-<tr class="separator:a05bce6353cd292df3774927d790bff80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc75ac5cccb0fe77baed63f6934d5d81"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#acc75ac5cccb0fe77baed63f6934d5d81">stockage_query_write</a> (char *query, <a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db)</td></tr>
+<tr class="memdesc:acc75ac5cccb0fe77baed63f6934d5d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">executes any writing query  <a href="stockage_8h.html#acc75ac5cccb0fe77baed63f6934d5d81">More...</a><br /></td></tr>
+<tr class="separator:acc75ac5cccb0fe77baed63f6934d5d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e204e5c89e46b05807c9320d60ec536"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a7e204e5c89e46b05807c9320d60ec536">stockage_query_read</a> (char *query, <a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int callback(), void *data)</td></tr>
+<tr class="memdesc:a7e204e5c89e46b05807c9320d60ec536"><td class="mdescLeft">&#160;</td><td class="mdescRight">executes any reading query  <a href="stockage_8h.html#a7e204e5c89e46b05807c9320d60ec536">More...</a><br /></td></tr>
+<tr class="separator:a7e204e5c89e46b05807c9320d60ec536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3b6e6b7fcacc05b1372e9481041e68"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#abd3b6e6b7fcacc05b1372e9481041e68">stockage_commit</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db)</td></tr>
+<tr class="memdesc:abd3b6e6b7fcacc05b1372e9481041e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalizes a transaction connection and writes data to the disk  <a href="stockage_8h.html#abd3b6e6b7fcacc05b1372e9481041e68">More...</a><br /></td></tr>
+<tr class="separator:abd3b6e6b7fcacc05b1372e9481041e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3c5fd060c9543687beaa5ed106efbd6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#ab3c5fd060c9543687beaa5ed106efbd6">stockage_write</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *query)</td></tr>
+<tr class="memdesc:ab3c5fd060c9543687beaa5ed106efbd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">high level interface for writing data in db  <a href="stockage_8h.html#ab3c5fd060c9543687beaa5ed106efbd6">More...</a><br /></td></tr>
+<tr class="separator:ab3c5fd060c9543687beaa5ed106efbd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ae3f53cb660d84195c64773c08086be"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a4ae3f53cb660d84195c64773c08086be">stockage_read</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *query, int callback(), void *value)</td></tr>
+<tr class="memdesc:a4ae3f53cb660d84195c64773c08086be"><td class="mdescLeft">&#160;</td><td class="mdescRight">high level interface for reading data from db  <a href="stockage_8h.html#a4ae3f53cb660d84195c64773c08086be">More...</a><br /></td></tr>
+<tr class="separator:a4ae3f53cb660d84195c64773c08086be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae21c28b98f4cc7acae1499f5d77a3822"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#ae21c28b98f4cc7acae1499f5d77a3822">insert_setting</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *name, char *value)</td></tr>
+<tr class="memdesc:ae21c28b98f4cc7acae1499f5d77a3822"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert a row into settings table  <a href="stockage_8h.html#ae21c28b98f4cc7acae1499f5d77a3822">More...</a><br /></td></tr>
+<tr class="separator:ae21c28b98f4cc7acae1499f5d77a3822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61cfa427032d8d0210d0366d1944828d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a61cfa427032d8d0210d0366d1944828d">update_setting</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *name, char *value)</td></tr>
+<tr class="memdesc:a61cfa427032d8d0210d0366d1944828d"><td class="mdescLeft">&#160;</td><td class="mdescRight">update a row into settings table  <a href="stockage_8h.html#a61cfa427032d8d0210d0366d1944828d">More...</a><br /></td></tr>
+<tr class="separator:a61cfa427032d8d0210d0366d1944828d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e49ffc2831677b334ceec5c849b76a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a3e49ffc2831677b334ceec5c849b76a1">select_setting</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *name, char *value)</td></tr>
+<tr class="memdesc:a3e49ffc2831677b334ceec5c849b76a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">select a row into settings table  <a href="stockage_8h.html#a3e49ffc2831677b334ceec5c849b76a1">More...</a><br /></td></tr>
+<tr class="separator:a3e49ffc2831677b334ceec5c849b76a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680e286cf39a7d93d1298f950c514d86"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a680e286cf39a7d93d1298f950c514d86">delete_setting</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, char *name)</td></tr>
+<tr class="memdesc:a680e286cf39a7d93d1298f950c514d86"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete a row into settings table  <a href="stockage_8h.html#a680e286cf39a7d93d1298f950c514d86">More...</a><br /></td></tr>
+<tr class="separator:a680e286cf39a7d93d1298f950c514d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cead3d3c0a36d0b2c32d50cb2321349"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a0cead3d3c0a36d0b2c32d50cb2321349">insert_photo</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, <a class="el" href="stockage_8h.html#a75ff6c8e548d6350256ae886e1b4c54c">t_photos</a> *pic)</td></tr>
+<tr class="memdesc:a0cead3d3c0a36d0b2c32d50cb2321349"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert a photo row into photos table  <a href="stockage_8h.html#a0cead3d3c0a36d0b2c32d50cb2321349">More...</a><br /></td></tr>
+<tr class="separator:a0cead3d3c0a36d0b2c32d50cb2321349"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c663f1e07e0c1b5129abeb04eada04"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a48c663f1e07e0c1b5129abeb04eada04">update_photo_int</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int id, char *col, int value)</td></tr>
+<tr class="memdesc:a48c663f1e07e0c1b5129abeb04eada04"><td class="mdescLeft">&#160;</td><td class="mdescRight">update a photo column that has a INTEGER type  <a href="stockage_8h.html#a48c663f1e07e0c1b5129abeb04eada04">More...</a><br /></td></tr>
+<tr class="separator:a48c663f1e07e0c1b5129abeb04eada04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dea76eff135a216b9c4bcac10db6a40"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a9dea76eff135a216b9c4bcac10db6a40">update_photo_char</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int id, char *col, char *value)</td></tr>
+<tr class="memdesc:a9dea76eff135a216b9c4bcac10db6a40"><td class="mdescLeft">&#160;</td><td class="mdescRight">update a photo column that has a TEXT type  <a href="stockage_8h.html#a9dea76eff135a216b9c4bcac10db6a40">More...</a><br /></td></tr>
+<tr class="separator:a9dea76eff135a216b9c4bcac10db6a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5605efa2bcf80705544c7ef605889ae2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a5605efa2bcf80705544c7ef605889ae2">update_photo_null</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int id, char *col)</td></tr>
+<tr class="memdesc:a5605efa2bcf80705544c7ef605889ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">update a photo column to NULL  <a href="stockage_8h.html#a5605efa2bcf80705544c7ef605889ae2">More...</a><br /></td></tr>
+<tr class="separator:a5605efa2bcf80705544c7ef605889ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a67fc89a391ae685b58f43c4b6e8c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#ad5a67fc89a391ae685b58f43c4b6e8c7">select_photo_single</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int id, char *col, char *value)</td></tr>
+<tr class="memdesc:ad5a67fc89a391ae685b58f43c4b6e8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">select a single column into photos table  <a href="stockage_8h.html#ad5a67fc89a391ae685b58f43c4b6e8c7">More...</a><br /></td></tr>
+<tr class="separator:ad5a67fc89a391ae685b58f43c4b6e8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a8514f73635948ddbb64ebcf571ad8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#a45a8514f73635948ddbb64ebcf571ad8">select_photo</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int id, <a class="el" href="stockage_8h.html#a75ff6c8e548d6350256ae886e1b4c54c">t_photos</a> *pic)</td></tr>
+<tr class="memdesc:a45a8514f73635948ddbb64ebcf571ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">select a single column into photos table  <a href="stockage_8h.html#a45a8514f73635948ddbb64ebcf571ad8">More...</a><br /></td></tr>
+<tr class="separator:a45a8514f73635948ddbb64ebcf571ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd6420d46f98a6659eb0607ba88c2633"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stockage_8h.html#afd6420d46f98a6659eb0607ba88c2633">delete_photo</a> (<a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *db, int id)</td></tr>
+<tr class="memdesc:afd6420d46f98a6659eb0607ba88c2633"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete a row into photos table  <a href="stockage_8h.html#afd6420d46f98a6659eb0607ba88c2633">More...</a><br /></td></tr>
+<tr class="separator:afd6420d46f98a6659eb0607ba88c2633"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a6b20d41d6252e9871430c242cb1a56e7"></a>
@@ -198,7 +223,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BUFFER_SIZE&#160;&#160;&#160;512</td>
+          <td class="memname">#define BUFFER_SIZE&#160;&#160;&#160;1024</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -240,7 +265,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TABLE&#160;&#160;&#160;&quot;BEGIN TRANSACTION;\CREATE TABLE IF NOT EXISTS `settings` (\	`name`	TEXT NOT NULL UNIQUE,\	`value`	TEXT,\	PRIMARY KEY(`name`)\);\CREATE TABLE IF NOT EXISTS `photos` (\	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\	`hash`	TEXT,\	`original_name`	TEXT,\	`import_date`	INTEGER,\	`import_time`	INTEGER,\	`exif_height`	INTEGER,\	`exif_width`	INTEGER,\	`exif_brand`	TEXT,\	`exif_peripheral`	TEXT,\	`fav`	INTEGER DEFAULT 0\);\CREATE TABLE IF NOT EXISTS `includes` (\	`including_folder`	INTEGER,\	`included_folder`	INTEGER,\	FOREIGN KEY(`included_folder`) REFERENCES `folders`(`id`),\	PRIMARY KEY(`including_folder`,`included_folder`),\	FOREIGN KEY(`including_folder`) REFERENCES `folders`(`id`)\);\CREATE TABLE IF NOT EXISTS `holds` (\	`holding_folder`	INTEGER,\	`holded_album`	INTEGER,\	FOREIGN KEY(`holded_album`) REFERENCES `albums`(`id`),\	FOREIGN KEY(`holding_folder`) REFERENCES `folders`(`id`),\	PRIMARY KEY(`holding_folder`,`holded_album`)\);\CREATE TABLE IF NOT EXISTS `folders` (\	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\	`name`	INTEGER\);\CREATE TABLE IF NOT EXISTS `contains` (\	`containing_album`	INTEGER,\	`contained_photo`	INTEGER,\	FOREIGN KEY(`contained_photo`) REFERENCES `photos`(`id`),\	FOREIGN KEY(`containing_album`) REFERENCES `albums`(`id`),\	PRIMARY KEY(`containing_album`,`contained_photo`)\);\CREATE TABLE IF NOT EXISTS `albums` (\	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\	`name`	TEXT\);\COMMIT;&quot;</td>
+          <td class="memname">#define TABLE</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -262,9 +287,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a75ff6c8e548d6350256ae886e1b4c54c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75ff6c8e548d6350256ae886e1b4c54c">&#9670;&nbsp;</a></span>t_photos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structs__photos.html">s_photos</a> <a class="el" href="stockage_8h.html#a75ff6c8e548d6350256ae886e1b4c54c">t_photos</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a4aab354c4b4154df226d4d5a1d8359cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4aab354c4b4154df226d4d5a1d8359cc">&#9670;&nbsp;</a></span>check_sqlite_return()</h2>
+<a id="ab37c81237a990ce0b6c8e20e64a44960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab37c81237a990ce0b6c8e20e64a44960">&#9670;&nbsp;</a></span>check_sqlite_return()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,7 +318,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
-          <td class="paramname"><em>db</em>&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>query</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -292,11 +337,12 @@ Functions</h2></td></tr>
 <p>Checks sqlite return. </p>
 <p>Checks whether db or query execution is OK or not. If not,prints the error message to stderr and returns error code 1 </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rc</td><td>Return code </td></tr>
+    <tr><td class="paramname">rc</td><td>return code to check </td></tr>
     <tr><td class="paramname">db</td><td>database data structur </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, or the sqlite error code if failed </dd></dl>
 
 </div>
 </div>
@@ -323,11 +369,49 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>the sqlite return code; </dd></dl>
 
 </div>
 </div>
-<a id="a05bce6353cd292df3774927d790bff80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05bce6353cd292df3774927d790bff80">&#9670;&nbsp;</a></span>delete_setting()</h2>
+<a id="afd6420d46f98a6659eb0607ba88c2633"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd6420d46f98a6659eb0607ba88c2633">&#9670;&nbsp;</a></span>delete_photo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int delete_photo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>delete a row into photos table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">id</td><td>the unique identifier of the picture </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a680e286cf39a7d93d1298f950c514d86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a680e286cf39a7d93d1298f950c514d86">&#9670;&nbsp;</a></span>delete_setting()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -335,8 +419,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int delete_setting </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>dbpath</em>, </td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -352,10 +436,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>delete a row into settings </p>
+<p>delete a row into settings table </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dbpath</td><td>path of the database </td></tr>
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
     <tr><td class="paramname">name</td><td>name of the setting to be removed </td></tr>
   </table>
   </dd>
@@ -363,66 +447,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a99574d8e5a09e90c6629de98a39eab3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99574d8e5a09e90c6629de98a39eab3f">&#9670;&nbsp;</a></span>finalize_transaction()</h2>
+<a id="a0cead3d3c0a36d0b2c32d50cb2321349"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cead3d3c0a36d0b2c32d50cb2321349">&#9670;&nbsp;</a></span>insert_photo()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int finalize_transaction </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
-          <td class="paramname"><em>db</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>finalizes a transaction connection This function should be called after every use of <a class="el" href="stockage_8c.html#a4fcc1b668a5b06348dc6d7ac12f30d0c" title="Create connection to the database in read write / transaction mode.">init_db_transaction_rw()</a>; </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">db</td><td>database data structure </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="af4c64ec9e537c3117f9fc67c55cea765"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4c64ec9e537c3117f9fc67c55cea765">&#9670;&nbsp;</a></span>init_connection()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int init_connection </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
-          <td class="paramname"><em>db</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>initiate the db data structure This function should be called before the use of <a class="el" href="stockage_8c.html#a4fcc1b668a5b06348dc6d7ac12f30d0c" title="Create connection to the database in read write / transaction mode.">init_db_transaction_rw()</a>; </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">db</td><td>database data structure </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a5106122440c5251508d8b7db6db59e6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5106122440c5251508d8b7db6db59e6f">&#9670;&nbsp;</a></span>init_db_rw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int init_db_rw </td>
+          <td class="memname">int insert_photo </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
           <td class="paramname"><em>db</em>, </td>
@@ -430,8 +462,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>path</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a75ff6c8e548d6350256ae886e1b4c54c">t_photos</a> *&#160;</td>
+          <td class="paramname"><em>pic</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -441,56 +473,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create connection to the database in read write mode. </p>
-<p>This function is not used. Create connection to the database in read and write mode. Creates the database file if it doesn't exists </p><dl class="params"><dt>Parameters</dt><dd>
+<p>insert a photo row into photos table </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>path to the db file </td></tr>
-    <tr><td class="paramname">db</td><td>database data structur </td></tr>
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">pic</td><td>structure containing the photo data </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a4fcc1b668a5b06348dc6d7ac12f30d0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fcc1b668a5b06348dc6d7ac12f30d0c">&#9670;&nbsp;</a></span>init_db_transaction_rw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int init_db_transaction_rw </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>path</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create connection to the database in read write / transaction mode. </p>
-<p>Create connection to the database in read and write mode. Creates the database file if it doesn't exists This start a sql transaction, need to be closed with <a class="el" href="stockage_8c.html#a99574d8e5a09e90c6629de98a39eab3f" title="finalizes a transaction connection This function should be called after every use of init_db_transact...">finalize_transaction()</a> Use this if there is multiples queries (speed's up the process) </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path</td><td>path to the db file </td></tr>
-    <tr><td class="paramname">db</td><td>database data structur </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a72e89022660889ae0763f0848e33ef32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72e89022660889ae0763f0848e33ef32">&#9670;&nbsp;</a></span>insert_setting()</h2>
+<a id="ae21c28b98f4cc7acae1499f5d77a3822"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae21c28b98f4cc7acae1499f5d77a3822">&#9670;&nbsp;</a></span>insert_setting()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -498,8 +493,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int insert_setting </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>dbpath</em>, </td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -521,10 +516,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>insert a row into settings </p>
+<p>insert a row into settings table </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dbpath</td><td>path of the database </td></tr>
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
     <tr><td class="paramname">name</td><td>name of the setting </td></tr>
     <tr><td class="paramname">value</td><td>value of the setting </td></tr>
   </table>
@@ -533,23 +528,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a05c68bfb007d3e9c5ff9501730fa1db3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05c68bfb007d3e9c5ff9501730fa1db3">&#9670;&nbsp;</a></span>insert_transaction()</h2>
+<a id="a45a8514f73635948ddbb64ebcf571ad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45a8514f73635948ddbb64ebcf571ad8">&#9670;&nbsp;</a></span>select_photo()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int insert_transaction </td>
+          <td class="memname">int select_photo </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>query</em>, </td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
-          <td class="paramname"><em>db</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a75ff6c8e548d6350256ae886e1b4c54c">t_photos</a> *&#160;</td>
+          <td class="paramname"><em>pic</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -559,19 +560,71 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes the INSERT query executes the INSERT query into the initiated database. </p>
+<p>select a single column into photos table </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">query</td><td>pointer to the SQL query </td></tr>
     <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">id</td><td>the unique identifier of the picture </td></tr>
+    <tr><td class="paramname">pic</td><td>a pointer to an initialized memory location that points to a t_photos structure, every will be stored into this structure. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a6077eeadd9acd881757b7fcfecf7b0fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6077eeadd9acd881757b7fcfecf7b0fe">&#9670;&nbsp;</a></span>select_setting()</h2>
+<a id="ad5a67fc89a391ae685b58f43c4b6e8c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5a67fc89a391ae685b58f43c4b6e8c7">&#9670;&nbsp;</a></span>select_photo_single()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int select_photo_single </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>select a single column into photos table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">id</td><td>the unique identifier of the picture </td></tr>
+    <tr><td class="paramname">col</td><td>the coloumn name you want to select </td></tr>
+    <tr><td class="paramname">value</td><td>a pointer to an initialized memory location where the column will be stored into </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3e49ffc2831677b334ceec5c849b76a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e49ffc2831677b334ceec5c849b76a1">&#9670;&nbsp;</a></span>select_setting()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -579,8 +632,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int select_setting </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>dbpath</em>, </td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -602,70 +655,81 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>select a row into settings </p>
+<p>select a row into settings table </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dbpath</td><td>path of the database </td></tr>
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
     <tr><td class="paramname">name</td><td>name of the setting to be selected </td></tr>
-    <tr><td class="paramname">value</td><td>initialized pointer for the value setting to be stored </td></tr>
+    <tr><td class="paramname">value</td><td>a pointer to an initialized memory location where the value will be stored into </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a140a9f8e9acdf252973c2a9a1992da78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a140a9f8e9acdf252973c2a9a1992da78">&#9670;&nbsp;</a></span>select_transaction()</h2>
+<a id="abd3b6e6b7fcacc05b1372e9481041e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd3b6e6b7fcacc05b1372e9481041e68">&#9670;&nbsp;</a></span>stockage_commit()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int select_transaction </td>
+          <td class="memname">int stockage_commit </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>query</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
-          <td class="paramname"><em>db</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>db</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int &#160;</td>
-          <td class="paramname"><em>callback</em>()&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes the SELECT query executes any SELECT query and sends the rows to a callback function. </p>
+<p>finalizes a transaction connection and writes data to the disk </p>
+<p>this function should be called after every use of <a class="el" href="stockage_8c.html#ad6ee60232f9d863d77d1691e909c059c" title="Create connection to the database in read write / transaction mode.">stockage_init()</a>; and of course after you read and wrote all necessary data. In a sqlite transaction, if the commit fails because of any reason (such as power loss, system crash) no previous query will be saved.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">query</td><td>pointer to the SQL query </td></tr>
     <tr><td class="paramname">db</td><td>database data structure </td></tr>
-    <tr><td class="paramname">callback</td><td>callback function should be prototyped with these arguments: callback(void *unused, int argc, char **argv, char **column_name) </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>the sqlite return code; </dd></dl>
 
 </div>
 </div>
-<a id="aaf2f867857df8ac5210e77a947d09327"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf2f867857df8ac5210e77a947d09327">&#9670;&nbsp;</a></span>select_transaction_data()</h2>
+<a id="ad6ee60232f9d863d77d1691e909c059c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ee60232f9d863d77d1691e909c059c">&#9670;&nbsp;</a></span>stockage_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int select_transaction_data </td>
+          <td class="memname">int stockage_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create connection to the database in read write / transaction mode. </p>
+<p>Create connection to the database in read and write mode. This start a sql transaction, need to be closed with <a class="el" href="stockage_8c.html#abd3b6e6b7fcacc05b1372e9481041e68" title="finalizes a transaction connection and writes data to the disk">stockage_commit()</a> </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structur </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the sqlite return code; </dd></dl>
+
+</div>
+</div>
+<a id="a7e204e5c89e46b05807c9320d60ec536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e204e5c89e46b05807c9320d60ec536">&#9670;&nbsp;</a></span>stockage_query_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int stockage_query_read </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>query</em>, </td>
@@ -696,7 +760,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes the SELECT query executes the SELECT query and sends the rows to a callback function Additionally this function takes a data parameter for storing the result. </p>
+<p>executes any reading query </p>
+<p>executes any reading query and sends the rows to a callback function Additionally this function takes a data parameter for storing the result (select...)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">query</td><td>pointer to the SQL query </td></tr>
@@ -706,11 +771,288 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>the sqlite return code; </dd></dl>
 
 </div>
 </div>
-<a id="a1c20b504df67984072940cc1974cca4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c20b504df67984072940cc1974cca4f">&#9670;&nbsp;</a></span>update_setting()</h2>
+<a id="acc75ac5cccb0fe77baed63f6934d5d81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc75ac5cccb0fe77baed63f6934d5d81">&#9670;&nbsp;</a></span>stockage_query_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int stockage_query_write </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>query</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>executes any writing query </p>
+<p>executes any query that writes into an initiated database insert, delete, update...</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">query</td><td>pointer to the SQL query </td></tr>
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the sqlite return code; </dd></dl>
+
+</div>
+</div>
+<a id="a4ae3f53cb660d84195c64773c08086be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ae3f53cb660d84195c64773c08086be">&#9670;&nbsp;</a></span>stockage_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int stockage_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>query</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &#160;</td>
+          <td class="paramname"><em>callback</em>(), </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>high level interface for reading data from db </p>
+<p>this function is a wrapper of the wrapper, by default it will commit every query. if you don't want this behavior you need to set the transaction variable into the t_db structure to 1; it will be set to two after first transaction sucessfully sent. to commit you will need to set the commit variable to 1 in the t_db parameter.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">query</td><td>read query (select...) </td></tr>
+    <tr><td class="paramname">callback</td><td>callback function should be prototyped with these arguments: callback(void *data, int argc, char **argv, char **column_name) </td></tr>
+    <tr><td class="paramname">value</td><td>the data argument passed to the callback function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab3c5fd060c9543687beaa5ed106efbd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3c5fd060c9543687beaa5ed106efbd6">&#9670;&nbsp;</a></span>stockage_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int stockage_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>query</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>high level interface for writing data in db </p>
+<p>this function is a wrapper of the wrapper, by default it will commit every query. if you don't want this behavior you need to set the transaction variable into the t_db structure to 1; it will be set to two after first transaction sucessfully sent. to commit you will need to set the commit variable to 1 in the t_db parameter.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">query</td><td>read query (insert, update, delete...) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9dea76eff135a216b9c4bcac10db6a40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dea76eff135a216b9c4bcac10db6a40">&#9670;&nbsp;</a></span>update_photo_char()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int update_photo_char </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>update a photo column that has a TEXT type </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">id</td><td>the identifier of the picture </td></tr>
+    <tr><td class="paramname">col</td><td>the coloumn name you want to update </td></tr>
+    <tr><td class="paramname">value</td><td>the text value to be inserted instead of the old one </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a48c663f1e07e0c1b5129abeb04eada04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48c663f1e07e0c1b5129abeb04eada04">&#9670;&nbsp;</a></span>update_photo_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int update_photo_int </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>update a photo column that has a INTEGER type </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">id</td><td>the unique identifier of the picture </td></tr>
+    <tr><td class="paramname">col</td><td>the coloumn name you want to update </td></tr>
+    <tr><td class="paramname">value</td><td>the integer value to be inserted instead of the old one </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5605efa2bcf80705544c7ef605889ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5605efa2bcf80705544c7ef605889ae2">&#9670;&nbsp;</a></span>update_photo_null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int update_photo_null </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>update a photo column to NULL </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
+    <tr><td class="paramname">id</td><td>the unique identifier of the picture </td></tr>
+    <tr><td class="paramname">col</td><td>the coloumn name you want to update </td></tr>
+    <tr><td class="paramname">value</td><td>the integer value to be inserted instead of the old one </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a61cfa427032d8d0210d0366d1944828d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61cfa427032d8d0210d0366d1944828d">&#9670;&nbsp;</a></span>update_setting()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,8 +1060,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int update_setting </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>dbpath</em>, </td>
+          <td class="paramtype"><a class="el" href="stockage_8h.html#a9cd4765b18adf821209c91cadda4b16d">t_db</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -741,10 +1083,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>update a row into settings </p>
+<p>update a row into settings table </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dbpath</td><td>path of the database </td></tr>
+    <tr><td class="paramname">db</td><td>database data structure </td></tr>
     <tr><td class="paramname">name</td><td>name of the setting </td></tr>
     <tr><td class="paramname">value</td><td>value of the setting </td></tr>
   </table>
@@ -760,7 +1102,7 @@ Functions</h2></td></tr>
 			<ul>
 				<li class="navelem"><a class="el" href="dir_f8b92b099185c2eecab759fa5fb24630.html">subprojects</a></li><li class="navelem"><a class="el" href="dir_356c6f8a97c5dff08c774cde2821ed37.html">stockage</a></li><li class="navelem"><a class="el" href="dir_9a0ef91bf6d0f63195ba4d0c72c8e2f8.html">include</a></li><li class="navelem"><a class="el" href="stockage_8h.html">stockage.h</a></li>
 				<li class="footer">
-					Generated on Thu May 21 2020 18:03:23 for libospl by <a href="http://www.doxygen.org/index.html">
+					Generated on Sun May 24 2020 14:59:51 for libospl by <a href="http://www.doxygen.org/index.html">
 					<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17.
 					Dark theme by <a href="http://majerle.eu" target="_new">Tilen Majerle</a>. All rights reserved.
 				</li>

@@ -20,7 +20,7 @@
 
 /**
  * \file setting.c
- * \brief This file contains setting manipulation wrapper
+ * \brief This file contains photos table manipulation wrapper
  * \author Angelo Frangione
  *
  * There is a function for every sql query type.
@@ -35,7 +35,7 @@
  * \brief insert a photo row into photos table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param pic structure containing the photo data
  */
 int insert_photo(t_db *db, t_photos *pic)
@@ -52,10 +52,7 @@ int insert_photo(t_db *db, t_photos *pic)
 		pic->import_day, pic->import_hour, pic->import_minut,
 		pic->import_second, pic->exif_height, pic->exif_width,
 		pic->exif_brand, pic->exif_peripheral);
-	printf("%s\n", query);
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }
 
@@ -63,7 +60,7 @@ int insert_photo(t_db *db, t_photos *pic)
  * \brief update a photo column that has a TEXT type
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param id the identifier of the picture
  * \param col the coloumn name you want to update
  * \param value the text value to be inserted instead of the old one
@@ -73,9 +70,7 @@ int update_photo_char(t_db *db, int id, char *col, char *value)
 	char	query[BUFFER_SIZE] = "update photos set ";
 
 	sprintf(query + 18, "%s=\"%s\" where id=%d;", col, value, id);
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }
 
@@ -83,7 +78,7 @@ int update_photo_char(t_db *db, int id, char *col, char *value)
  * \brief update a photo column that has a INTEGER type
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param id the unique identifier of the picture
  * \param col the coloumn name you want to update
  * \param value the integer value to be inserted instead of the old one
@@ -93,10 +88,7 @@ int update_photo_int(t_db *db, int id, char *col, int value)
 	char	query[BUFFER_SIZE] = "update photos set ";
 
 	sprintf(query + 18, "%s=%d where id=%d;", col, value, id);
-	printf("%s\n", query);
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }
 
@@ -104,7 +96,7 @@ int update_photo_int(t_db *db, int id, char *col, int value)
  * \brief update a photo column to NULL
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param id the unique identifier of the picture
  * \param col the coloumn name you want to update
  * \param value the integer value to be inserted instead of the old one
@@ -114,10 +106,7 @@ int update_photo_null(t_db *db, int id, char *col)
 	char	query[BUFFER_SIZE] = "update photos set ";
 
 	sprintf(query + 18, "%s=NULL where id=%d;", col, id);
-	printf("%s\n", query);
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }
 
@@ -131,7 +120,7 @@ static int callback_single(char *value, int ac, char **av, char **column)
  * \brief select a single column into photos table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param id the unique identifier of the picture
  * \param col the coloumn name you want to select
  * \param value a pointer to an initialized memory location where 
@@ -143,9 +132,7 @@ int select_photo_single(t_db *db, int id, char *col, char *value)
 	char	query[BUFFER_SIZE];
 
 	sprintf(query, "select %s from photos where id=%d", col, id);
-	init_db_transaction_rw(db);	
-	select_transaction_data(query, db, callback_single, value);
-	finalize_transaction(db);
+	stockage_read(db, query, callback_single, value);
 	return 0;
 }
 
@@ -175,19 +162,17 @@ static int callback(t_photos *pic, int ac, char **av, char **column)
  * \brief select a single column into photos table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param id the unique identifier of the picture 
  * \param pic a pointer to an initialized memory location that points 
- * to an t_photos structure, every will be stored into this structure. 
+ * to a t_photos structure, every will be stored into this structure. 
  */
 int select_photo(t_db *db, int id, t_photos *pic)
 {
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos where id=%d", id);
-	init_db_transaction_rw(db);	
-	select_transaction_data(query, db, callback, pic);
-	finalize_transaction(db);
+	stockage_read(db, query, callback, pic);
 	return 0;
 }
 
@@ -195,7 +180,7 @@ int select_photo(t_db *db, int id, t_photos *pic)
  * \brief delete a row into photos table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param id the unique identifier of the picture
  */
 int delete_photo(t_db *db, int id)
@@ -203,8 +188,6 @@ int delete_photo(t_db *db, int id)
 	char	query[BUFFER_SIZE] = "delete from photos where id=";
 	
 	sprintf(query + 28, "%d;", id);
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }

@@ -1,7 +1,7 @@
 var settings_8c =
 [
-    [ "delete_setting", "settings_8c.html#a05bce6353cd292df3774927d790bff80", null ],
-    [ "insert_setting", "settings_8c.html#a72e89022660889ae0763f0848e33ef32", null ],
-    [ "select_setting", "settings_8c.html#a6077eeadd9acd881757b7fcfecf7b0fe", null ],
-    [ "update_setting", "settings_8c.html#a1c20b504df67984072940cc1974cca4f", null ]
+    [ "delete_setting", "settings_8c.html#a680e286cf39a7d93d1298f950c514d86", null ],
+    [ "insert_setting", "settings_8c.html#ae21c28b98f4cc7acae1499f5d77a3822", null ],
+    [ "select_setting", "settings_8c.html#a3e49ffc2831677b334ceec5c849b76a1", null ],
+    [ "update_setting", "settings_8c.html#a61cfa427032d8d0210d0366d1944828d", null ]
 ];

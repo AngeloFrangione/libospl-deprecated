@@ -32,12 +32,14 @@ int main(int argc, char const *argv[])
 
 	remove(db.path);
 	create_database("test.db");
+	// db.transaction = 1;
 	///// Testing settings /////
 	char value1[10] = {0};
 	insert_setting(&db, "version", "0.1.0");
 	select_setting(&db, "version", value1);
 	printf("%s\n", value1);
 	update_setting(&db, "version", "0.52");
+	
 	select_setting(&db, "version", value1);
 	printf("%s\n", value1);
 
@@ -68,8 +70,8 @@ int main(int argc, char const *argv[])
 	strcpy(picc.hash, "Henlo");
 	select_photo(&db, 1, &picc);
 	printf("%s\n", picc.hash);
+	// db.commit = 1;
 	delete_photo(&db, 2);
-
 
 	return 0;
 }
