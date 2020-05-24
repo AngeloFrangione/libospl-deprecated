@@ -1,0 +1,170 @@
+\hypertarget{photos_8c}{}\doxysection{subprojects/stockage/src/queries/photos.c File Reference}
+\label{photos_8c}\index{subprojects/stockage/src/queries/photos.c@{subprojects/stockage/src/queries/photos.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}include/stockage.\+h\char`\"{}}\newline
+Include dependency graph for photos.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{photos_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{photos_8c_a0cead3d3c0a36d0b2c32d50cb2321349}{insert\+\_\+photo}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, \mbox{\hyperlink{stockage_8h_a75ff6c8e548d6350256ae886e1b4c54c}{t\+\_\+photos}} $\ast$pic)
+\begin{DoxyCompactList}\small\item\em insert a photo row into photos table \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photos_8c_a9dea76eff135a216b9c4bcac10db6a40}{update\+\_\+photo\+\_\+char}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int id, char $\ast$col, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em update a photo column that has a T\+E\+XT type \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photos_8c_a48c663f1e07e0c1b5129abeb04eada04}{update\+\_\+photo\+\_\+int}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int id, char $\ast$col, int value)
+\begin{DoxyCompactList}\small\item\em update a photo column that has a I\+N\+T\+E\+G\+ER type \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photos_8c_a5605efa2bcf80705544c7ef605889ae2}{update\+\_\+photo\+\_\+null}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int id, char $\ast$col)
+\begin{DoxyCompactList}\small\item\em update a photo column to N\+U\+LL \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photos_8c_ad5a67fc89a391ae685b58f43c4b6e8c7}{select\+\_\+photo\+\_\+single}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int id, char $\ast$col, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em select a single column into photos table \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photos_8c_a45a8514f73635948ddbb64ebcf571ad8}{select\+\_\+photo}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int id, \mbox{\hyperlink{stockage_8h_a75ff6c8e548d6350256ae886e1b4c54c}{t\+\_\+photos}} $\ast$pic)
+\begin{DoxyCompactList}\small\item\em select a single column into photos table \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{photos_8c_afd6420d46f98a6659eb0607ba88c2633}{delete\+\_\+photo}} (\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$db, int id)
+\begin{DoxyCompactList}\small\item\em delete a row into photos table \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{photos_8c_afd6420d46f98a6659eb0607ba88c2633}\label{photos_8c_afd6420d46f98a6659eb0607ba88c2633}} 
+\index{photos.c@{photos.c}!delete\_photo@{delete\_photo}}
+\index{delete\_photo@{delete\_photo}!photos.c@{photos.c}}
+\doxysubsubsection{\texorpdfstring{delete\_photo()}{delete\_photo()}}
+{\footnotesize\ttfamily int delete\+\_\+photo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+delete a row into photos table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+{\em id} & the unique identifier of the picture \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{photos_8c_a0cead3d3c0a36d0b2c32d50cb2321349}\label{photos_8c_a0cead3d3c0a36d0b2c32d50cb2321349}} 
+\index{photos.c@{photos.c}!insert\_photo@{insert\_photo}}
+\index{insert\_photo@{insert\_photo}!photos.c@{photos.c}}
+\doxysubsubsection{\texorpdfstring{insert\_photo()}{insert\_photo()}}
+{\footnotesize\ttfamily int insert\+\_\+photo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{\mbox{\hyperlink{stockage_8h_a75ff6c8e548d6350256ae886e1b4c54c}{t\+\_\+photos}} $\ast$}]{pic }\end{DoxyParamCaption})}
+
+
+
+insert a photo row into photos table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+{\em pic} & structure containing the photo data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{photos_8c_a45a8514f73635948ddbb64ebcf571ad8}\label{photos_8c_a45a8514f73635948ddbb64ebcf571ad8}} 
+\index{photos.c@{photos.c}!select\_photo@{select\_photo}}
+\index{select\_photo@{select\_photo}!photos.c@{photos.c}}
+\doxysubsubsection{\texorpdfstring{select\_photo()}{select\_photo()}}
+{\footnotesize\ttfamily int select\+\_\+photo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int}]{id,  }\item[{\mbox{\hyperlink{stockage_8h_a75ff6c8e548d6350256ae886e1b4c54c}{t\+\_\+photos}} $\ast$}]{pic }\end{DoxyParamCaption})}
+
+
+
+select a single column into photos table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+{\em id} & the unique identifier of the picture \\
+\hline
+{\em pic} & a pointer to an initialized memory location that points to a t\+\_\+photos structure, every will be stored into this structure. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{photos_8c_ad5a67fc89a391ae685b58f43c4b6e8c7}\label{photos_8c_ad5a67fc89a391ae685b58f43c4b6e8c7}} 
+\index{photos.c@{photos.c}!select\_photo\_single@{select\_photo\_single}}
+\index{select\_photo\_single@{select\_photo\_single}!photos.c@{photos.c}}
+\doxysubsubsection{\texorpdfstring{select\_photo\_single()}{select\_photo\_single()}}
+{\footnotesize\ttfamily int select\+\_\+photo\+\_\+single (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int}]{id,  }\item[{char $\ast$}]{col,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+select a single column into photos table 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+{\em id} & the unique identifier of the picture \\
+\hline
+{\em col} & the coloumn name you want to select \\
+\hline
+{\em value} & a pointer to an initialized memory location where the column will be stored into \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{photos_8c_a9dea76eff135a216b9c4bcac10db6a40}\label{photos_8c_a9dea76eff135a216b9c4bcac10db6a40}} 
+\index{photos.c@{photos.c}!update\_photo\_char@{update\_photo\_char}}
+\index{update\_photo\_char@{update\_photo\_char}!photos.c@{photos.c}}
+\doxysubsubsection{\texorpdfstring{update\_photo\_char()}{update\_photo\_char()}}
+{\footnotesize\ttfamily int update\+\_\+photo\+\_\+char (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int}]{id,  }\item[{char $\ast$}]{col,  }\item[{char $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+update a photo column that has a T\+E\+XT type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+{\em id} & the identifier of the picture \\
+\hline
+{\em col} & the coloumn name you want to update \\
+\hline
+{\em value} & the text value to be inserted instead of the old one \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{photos_8c_a48c663f1e07e0c1b5129abeb04eada04}\label{photos_8c_a48c663f1e07e0c1b5129abeb04eada04}} 
+\index{photos.c@{photos.c}!update\_photo\_int@{update\_photo\_int}}
+\index{update\_photo\_int@{update\_photo\_int}!photos.c@{photos.c}}
+\doxysubsubsection{\texorpdfstring{update\_photo\_int()}{update\_photo\_int()}}
+{\footnotesize\ttfamily int update\+\_\+photo\+\_\+int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int}]{id,  }\item[{char $\ast$}]{col,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+update a photo column that has a I\+N\+T\+E\+G\+ER type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+{\em id} & the unique identifier of the picture \\
+\hline
+{\em col} & the coloumn name you want to update \\
+\hline
+{\em value} & the integer value to be inserted instead of the old one \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{photos_8c_a5605efa2bcf80705544c7ef605889ae2}\label{photos_8c_a5605efa2bcf80705544c7ef605889ae2}} 
+\index{photos.c@{photos.c}!update\_photo\_null@{update\_photo\_null}}
+\index{update\_photo\_null@{update\_photo\_null}!photos.c@{photos.c}}
+\doxysubsubsection{\texorpdfstring{update\_photo\_null()}{update\_photo\_null()}}
+{\footnotesize\ttfamily int update\+\_\+photo\+\_\+null (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{stockage_8h_a9cd4765b18adf821209c91cadda4b16d}{t\+\_\+db}} $\ast$}]{db,  }\item[{int}]{id,  }\item[{char $\ast$}]{col }\end{DoxyParamCaption})}
+
+
+
+update a photo column to N\+U\+LL 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & database data structure \\
+\hline
+{\em id} & the unique identifier of the picture \\
+\hline
+{\em col} & the coloumn name you want to update \\
+\hline
+{\em value} & the integer value to be inserted instead of the old one \\
+\hline
+\end{DoxyParams}

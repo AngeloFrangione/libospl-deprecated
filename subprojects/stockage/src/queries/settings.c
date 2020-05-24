@@ -35,7 +35,7 @@
  * \brief insert a row into settings table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param name name of the setting
  * \param value value of the setting
  */
@@ -44,9 +44,7 @@ int insert_setting(t_db *db, char *name, char *value)
 	char	query[BUFFER_SIZE] = "insert into settings (name, value) ";
 	sprintf(query + 35, "values (\"%s\", \"%s\");", name, value);
 
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }
 
@@ -54,7 +52,7 @@ int insert_setting(t_db *db, char *name, char *value)
  * \brief update a row into settings table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param name name of the setting
  * \param value value of the setting
  */
@@ -63,9 +61,7 @@ int update_setting(t_db *db, char *name, char *value)
 	char	query[BUFFER_SIZE] = "update settings set value=";
 
 	sprintf(query + 26, "\"%s\" where name=\"%s\";", value, name);
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }
 
@@ -79,7 +75,7 @@ static int callback(char *param, int argc, char **argv, char **column)
  * \brief select a row into settings table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param name name of the setting to be selected
  * \param value a pointer to an initialized memory location where 
  * the value will be stored into
@@ -89,9 +85,7 @@ int select_setting(t_db *db, char *name, char *value)
 	char	query[BUFFER_SIZE] = "select * from settings ";
 	
 	sprintf(query + 23, "where name = \"%s\"", name);
-	init_db_transaction_rw(db);	
-	select_transaction_data(query, db, callback, value);
-	finalize_transaction(db);
+	stockage_read(db, query, callback, value);
 	return 0;
 }
 
@@ -99,7 +93,7 @@ int select_setting(t_db *db, char *name, char *value)
  * \brief delete a row into settings table
  *
  * 
- * \param dbpath path of the database
+ * \param db database data structure
  * \param name name of the setting to be removed
  */
 int delete_setting(t_db *db, char *name)
@@ -107,8 +101,6 @@ int delete_setting(t_db *db, char *name)
 	char	query[BUFFER_SIZE] = "delete from settings where name=";
 	
 	sprintf(query + 32, "%s;", name);
-	init_db_transaction_rw(db);
-	insert_transaction(query, db);
-	finalize_transaction(db);
+	stockage_write(db, query);
 	return 0;
 }

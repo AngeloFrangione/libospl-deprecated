@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['supported_5fimages_137',['SUPPORTED_IMAGES',['../ospl_8h.html#ab35aff9d1dd9c2e0e050016b60b2a0b7',1,'ospl.h']]],
-  ['syncronous_5foff_138',['SYNCRONOUS_OFF',['../stockage_8h.html#ab64c96b4b60885417fe148cc410782b8',1,'stockage.h']]]
+  ['nb_5fsupported_5fimages_189',['NB_SUPPORTED_IMAGES',['../ospl_8h.html#a2ce5e82a253f03c75268e75e9c7f6f18',1,'ospl.h']]]
 ];
