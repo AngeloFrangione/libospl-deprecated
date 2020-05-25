@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['journal_5fmode_5fmemory_133',['JOURNAL_MODE_MEMORY',['../stockage_8h.html#af407374125b6031f6f73b26ffc033166',1,'stockage.h']]]
+  ['import_5fopts_185',['IMPORT_OPTS',['../ospl_8h.html#a3e2fb97a6b0a03e35bdf6483516c7766',1,'ospl.h']]]
 ];

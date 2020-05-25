@@ -7,6 +7,7 @@ deps = [dependency('threads'),
 
 # Sources
 source =['src/stockage.c',
+		'src/queries/photos.c',
 		'src/queries/settings.c']
 
 # Library
