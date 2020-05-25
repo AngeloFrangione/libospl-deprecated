@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['main_37',['main',['../cli_8c.html#adacbe0175a79dff748855d8c9839f82b',1,'main(int ac, char *av[]):&#160;cli.c'],['../main_8c.html#abf9e6b7e6f15df4b525a2e7705ba3089',1,'main(int argc, char const *argv[]):&#160;main.c']]],
-  ['main_2ec_38',['main.c',['../main_8c.html',1,'']]]
+  ['library_5fexists_46',['library_exists',['../ospl_8h.html#ab988cdc167fe2781dee335fd423c3af9',1,'library_exists(char *path):&#160;common.c'],['../common_8c.html#ab988cdc167fe2781dee335fd423c3af9',1,'library_exists(char *path):&#160;common.c']]],
+  ['library_5fextention_47',['LIBRARY_EXTENTION',['../ospl_8h.html#a65ba9abfd6e80edd057c0e9c81287c81',1,'ospl.h']]],
+  ['library_5fextention_5flen_48',['LIBRARY_EXTENTION_LEN',['../ospl_8h.html#a82e7bbb3d760e680b8eb504b763d9fdb',1,'ospl.h']]]
 ];
