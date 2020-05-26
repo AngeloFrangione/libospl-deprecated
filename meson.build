@@ -18,10 +18,7 @@ deps = [thumbnailer,
 		stockage,
 		cwalk,
 		md5,
-		dependency('libjpeg'),
-		dependency('libexif'),
 		dependency('threads'),
-		dependency('sqlite3'),
 		meson.get_compiler('c').find_library('magic')]
 
 source =['srcs/ospl.c', 'srcs/common.c', 
