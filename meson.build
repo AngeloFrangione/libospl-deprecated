@@ -7,6 +7,8 @@ thumbnailer_proj = subproject('thumbnailer')
 thumbnailer = thumbnailer_proj.get_variable('thumbnailer_dep')
 stockage_proj = subproject('stockage')
 stockage = stockage_proj.get_variable('stockage_dep')
+md5_proj = subproject('md5')
+md5 = md5_proj.get_variable('md5_dep')
 
 cwalk_proj = subproject('cwalk')
 cwalk = cwalk_proj.get_variable('cwalk_dep')
@@ -15,6 +17,7 @@ cwalk = cwalk_proj.get_variable('cwalk_dep')
 deps = [thumbnailer,
 		stockage,
 		cwalk,
+		md5,
 		dependency('libjpeg'),
 		dependency('libexif'),
 		dependency('threads'),
