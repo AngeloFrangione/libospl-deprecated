@@ -27,12 +27,24 @@
 # define DATABASE_NAME_LEN 12
 # define LIBRARY_EXTENTION_LEN 5
 # define LIBRARY_EXTENTION ".ospl"
-# define VERSION_MAJOR 0
-# define VERSION_MINOR 1
+# define VERSION_MAJOR "0"
+# define VERSION_MINOR "1"
+# define VERSION_REVISION "0"
 # define CREATE_OPTS "v"
 # define IMPORT_OPTS "vfF"
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
 # define NB_SUPPORTED_IMAGES 1
+
+typedef struct	s_current_time
+{
+	unsigned int Y;
+	unsigned int M;
+	unsigned int d;
+	unsigned int h;
+	unsigned int m;
+	unsigned int s;
+	unsigned int ms;
+}				t_current_time;
 
 
 // Library related functions
