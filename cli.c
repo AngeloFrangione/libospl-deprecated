@@ -32,7 +32,7 @@ int print_mode = 0; // 0 = normal printing, 1 = verbose printing, 2 = json print
 
 void show_usage()
 {
-	printf("OSPL - Open source picture library v%d.%d\n", VERSION_MAJOR, VERSION_MINOR);
+	printf("OSPL - Open source picture library v%s.%s.%s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
 	printf("Utility to manage an OSPL\n");
 	printf("=========================================================================\n");
 	printf("Usage: ospl <verb> <librarypath> <options>, where <verb> is as follows:\n");
@@ -134,7 +134,7 @@ static int return_1()
 
 static int import(int ac, char **av)
 {
-	printf("create/ (args: %d) 1: %s 2: %s\n", ac, av[0], av[1]);
+	// printf("create/ (args: %d) 1: %s 2: %s 3: %s\n", ac, av[0], av[1], av[2]);
 	if (ac < 5)
 	{
 		usage_import();
