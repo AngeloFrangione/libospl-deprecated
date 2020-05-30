@@ -19,6 +19,7 @@ deps = [thumbnailer,
 		cwalk,
 		md5,
 		dependency('threads'),
+		meson.get_compiler('c').find_library('m'),
 		meson.get_compiler('c').find_library('magic')]
 
 source =['srcs/ospl.c', 'srcs/common.c', 

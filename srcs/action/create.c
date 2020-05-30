@@ -21,6 +21,7 @@
 #include <errno.h>
 #include <stockage.h>
 #include <cwalk.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "ospl.h"
@@ -39,16 +40,14 @@ static int create_folder(char *path)
 static int create_database_file(char *path)
 {
 	int r = 0;
-	int len = strlen(path) + DATABASE_NAME_LEN;
-	char *dbpath = calloc(len, sizeof(char) + 1);
-	r = cwk_path_join(path, DATABASE_FILENAME, dbpath, len);
-	if (r != len - 1)
-		return 1;
-	r = create_database(dbpath);
-	if (r)
-		return r;
-	free(dbpath);
-	return 0;
+	char tmp[4096] = {0};
+	t_db db;
+
+	cwk_path_join(path, DATABASE_FILENAME, tmp, sizeof(tmp));
+	r = create_database(tmp);
+	db.path = tmp;
+	r = r & insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION);
+	return r;
 }
 
 /**
@@ -60,10 +59,16 @@ static int create_database_file(char *path)
 int ospl_create_library(char *path)
 {
 	int r;
+	char tmp[4096];
 
 	r = create_folder(path);
+	cwk_path_join(path, "pictures", tmp, sizeof(tmp));
+	r = r & create_folder(tmp);
+	cwk_path_join(tmp, "import", tmp, sizeof(tmp));
+	r = r & create_folder(tmp);
+	cwk_path_join(path, "thumbnails", tmp, sizeof(tmp));
+	r = r & create_folder(tmp);
 	if (r)
 		return r;
-	r = create_database_file(path);
-	return r;
+	return create_database_file(path);
 }
