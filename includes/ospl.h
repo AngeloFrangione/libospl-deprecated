@@ -34,6 +34,8 @@
 # define IMPORT_OPTS "vfF"
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
 # define NB_SUPPORTED_IMAGES 1
+# define TRUE 1
+# define FALSE 0
 
 typedef struct	s_current_time
 {
