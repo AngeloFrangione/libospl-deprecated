@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
 	`original_name`		TEXT NOT NULL,
 	`new_name`			TEXT NOT NULL,
 	`import_datetime`	TEXT,
+	`random`			TEXT,
 	`import_year`		INTEGER,
 	`import_month`		INTEGER,
 	`import_day`		INTEGER,

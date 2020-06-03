@@ -2,6 +2,9 @@
 project('ospl', 'c')
 cmake = import('cmake')
 
+# Enable debugging
+add_global_arguments('-DDEBUG=TRUE', language: 'c')
+
 # Subprojects
 thumbnailer_proj = subproject('thumbnailer')
 thumbnailer = thumbnailer_proj.get_variable('thumbnailer_dep')
@@ -21,6 +24,7 @@ deps = [thumbnailer,
 		dependency('threads'),
 		meson.get_compiler('c').find_library('m'),
 		meson.get_compiler('c').find_library('magic')]
+
 
 source =['srcs/ospl.c', 'srcs/common.c', 
 		'srcs/action/create.c',

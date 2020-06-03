@@ -41,14 +41,14 @@
 int insert_photo(t_db *db, t_photos *pic)
 {
 	char	query[BUFFER_SIZE] = "insert into photos (hash, original_name, "
-	"new_name, import_datetime, import_year, import_month, import_day, "
+	"new_name, import_datetime, random, import_year, import_month, import_day, "
 	"import_hour, import_minut, import_second, exif_height, exif_width, "
 	"exif_brand, exif_peripheral) ";
 
-	sprintf(query + 203, "values (\"%s\", \"%s\", \"%s\", \"%s\", \"%d\", "
+	sprintf(query + 211, "values (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%d\", "
 		"\"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%s\", "
 		"\"%s\");", pic->hash, pic->original_name, pic->new_name,
-		pic->import_datetime, pic->import_year, pic->import_month,
+		pic->import_datetime, pic->random,pic->import_year, pic->import_month,
 		pic->import_day, pic->import_hour, pic->import_minut,
 		pic->import_second, pic->exif_height, pic->exif_width,
 		pic->exif_brand, pic->exif_peripheral);
