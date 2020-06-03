@@ -1,0 +1,20 @@
+ 0x000000000000000e (SONAME)             Library soname: [libstockage.so.0]
+check_sqlite_return T 7e
+create_database T b8
+delete_photo T da
+delete_setting T f7
+insert_photo T 395
+insert_setting T 105
+select_photo T 95
+select_photo_single T a3
+select_setting T f1
+stockage_commit T 7d
+stockage_init T 10e
+stockage_query_read T 57
+stockage_query_write T 51
+stockage_read T 16e
+stockage_write T 152
+update_photo_char T f2
+update_photo_int T f0
+update_photo_null T e1
+update_setting T ea

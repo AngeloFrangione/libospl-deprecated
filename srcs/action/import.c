@@ -19,6 +19,7 @@
 */
 
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
@@ -56,14 +57,15 @@ static void get_info(t_db *db, t_photos *pic, char *path, char *library)
 	t_current_time ct;
 	const char *name;
 
-	md5(path, pic->hash);
+	md5(path, hash);
 	get_time(&ct);
+	srand(time(0) + ct.ms);
 	cwk_path_get_basename(path, &name, &len);
+	sprintf(pic->random, "%010d", rand());
 	strcpy(pic->hash, hash);
 	strcpy(pic->original_name, name);
 	sprintf(pic->import_datetime, "%d-%02d-%02d-%02d-%02d-%02d-%03d", ct.Y, ct.M, ct.d, ct.h, ct.m, ct.s, ct.ms);
 	sprintf(pic->new_name, "%s_%s", pic->import_datetime, pic->original_name);
-	printf("%s\n", pic->import_datetime);
 	pic->import_year = ct.Y;
 	pic->import_month = ct.M;
 	pic->import_day = ct.d;
@@ -96,8 +98,26 @@ int ospl_import_picture(char *library, char *path)
 		printf("image %s not supported\n", path);
 		return 1;
 	}
-
 	get_info(&db, &pic, path, library);
-	// insert_photo(&db, &pic);
+	#ifdef DEBUG
+		printf("\t----------------DEBUGGING----------------\n");
+		printf("hash:\t\t\t|%s\n", pic.hash);
+		printf("original_name:\t\t|%s\n", pic.original_name);
+		printf("new_name:\t\t|%s\n", pic.new_name);
+		printf("import_datetime:\t|%s\n", pic.import_datetime);
+		printf("random:\t\t\t|%s\n", pic.random);
+		printf("import_year:\t\t|%d\n", pic.import_year);
+		printf("import_month:\t\t|%d\n", pic.import_month);
+		printf("import_day:\t\t|%d\n", pic.import_day);
+		printf("import_hour:\t\t|%d\n", pic.import_hour);
+		printf("import_minut:\t\t|%d\n", pic.import_minut);
+		printf("import_second:\t\t|%d\n", pic.import_second);
+		printf("exif_height:\t\t|%d\n", pic.exif_height);
+		printf("exif_width:\t\t|%d\n", pic.exif_width);
+		printf("exif_brand:\t\t|%s\n", pic.exif_brand);
+		printf("exif_peripheral:\t|%s\n", pic.exif_peripheral);
+		printf("fav:\t\t\t|%d\n", pic.fav);
+	#endif
+	insert_photo(&db, &pic);
 	return 0;
 }
