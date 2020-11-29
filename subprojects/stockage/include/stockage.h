@@ -38,7 +38,6 @@
 "	`original_name`		TEXT NOT NULL,"\
 "	`new_name`			TEXT NOT NULL,"\
 "	`import_datetime`	TEXT,"\
-"	`random`			TEXT,"\
 "	`import_year`		INTEGER,"\
 "	`import_month`		INTEGER,"\
 "	`import_day`		INTEGER,"\
@@ -51,6 +50,7 @@
 "	`exif_brand`		TEXT,"\
 "	`exif_peripheral`	TEXT,"\
 "	`fav`				INTEGER DEFAULT 0,"\
+"	`random`			TEXT,"\
 "	PRIMARY KEY(`id` AUTOINCREMENT)"\
 ");"\
 "CREATE TABLE IF NOT EXISTS `includes` ("\
