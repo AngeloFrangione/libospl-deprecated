@@ -64,7 +64,8 @@ static void get_info(t_db *db, t_photos *pic, char *path, char *library)
 	sprintf(pic->random, "%010d", rand());
 	strcpy(pic->hash, hash);
 	strcpy(pic->original_name, name);
-	sprintf(pic->import_datetime, "%d-%02d-%02d-%02d-%02d-%02d-%03d", ct.Y, ct.M, ct.d, ct.h, ct.m, ct.s, ct.ms);
+	sprintf(pic->import_datetime, "%d-%02d-%02d-%02d-%02d-%02d-%03d",
+	ct.Y, ct.M, ct.d, ct.h, ct.m, ct.s, ct.ms);
 	sprintf(pic->new_name, "%s_%s", pic->import_datetime, pic->original_name);
 	pic->import_year = ct.Y;
 	pic->import_month = ct.M;
@@ -118,6 +119,13 @@ int ospl_import_picture(char *library, char *path)
 		printf("exif_peripheral:\t|%s\n", pic.exif_peripheral);
 		printf("fav:\t\t\t|%d\n", pic.fav);
 	#endif
+	printf("adding %s to database\n", pic.original_name);
 	insert_photo(&db, &pic);
+	char import_path[512] = {0};
+	cwk_path_join(library, "/pictures/import", import_path, sizeof(import_path));
+	cwk_path_join(import_path, pic.new_name, import_path, sizeof(import_path));
+	printf("copying %s to %s\n", path, import_path);
+	copy_file(path, import_path);
+	
 	return 0;
 }
