@@ -37,6 +37,9 @@
 # define TRUE 1
 # define FALSE 0
 
+// Future maybe settings
+# define THUMB_HEIGHT 500
+
 typedef struct	s_current_time
 {
 	unsigned int Y;
