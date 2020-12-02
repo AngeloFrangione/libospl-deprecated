@@ -21,8 +21,6 @@
 #ifndef OSPL_H
 #define OSPL_H
 
-/// Number of ospl verbs that are available
-# define ARGS_COUNT 5
 # define DATABASE_FILENAME "database.db"
 # define DATABASE_NAME_LEN 12
 # define LIBRARY_EXTENTION_LEN 5
@@ -30,8 +28,7 @@
 # define VERSION_MAJOR "0"
 # define VERSION_MINOR "1"
 # define VERSION_REVISION "0"
-# define CREATE_OPTS "v"
-# define IMPORT_OPTS "vfF"
+
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
 # define NB_SUPPORTED_IMAGES 1
 # define TRUE 1

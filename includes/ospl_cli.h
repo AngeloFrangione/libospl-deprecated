@@ -21,6 +21,10 @@
 #ifndef OSPL_CLI_H
 #define OSPL_CLI_H
 
+# define ARGS_COUNT 5
+# define CREATE_OPTS "v"
+# define IMPORT_OPTS "vfF"
+
 extern char *ARGS[ARGS_COUNT];
 extern char *g_library_path;
 extern char *g_database_path;
