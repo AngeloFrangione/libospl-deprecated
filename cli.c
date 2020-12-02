@@ -134,7 +134,7 @@ static int return_1()
 
 static int import(int ac, char **av)
 {
-	// printf("create/ (args: %d) 1: %s 2: %s 3: %s\n", ac, av[0], av[1], av[2]);
+	printf("create/ (args: %d) 1: %s 2: %s 3: %s\n", ac, av[0], av[1], av[2]);
 	if (ac < 5)
 	{
 		usage_import();
