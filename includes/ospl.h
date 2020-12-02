@@ -27,12 +27,29 @@
 # define DATABASE_NAME_LEN 12
 # define LIBRARY_EXTENTION_LEN 5
 # define LIBRARY_EXTENTION ".ospl"
-# define VERSION_MAJOR 0
-# define VERSION_MINOR 1
+# define VERSION_MAJOR "0"
+# define VERSION_MINOR "1"
+# define VERSION_REVISION "0"
 # define CREATE_OPTS "v"
 # define IMPORT_OPTS "vfF"
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
 # define NB_SUPPORTED_IMAGES 1
+# define TRUE 1
+# define FALSE 0
+
+// Future maybe settings
+# define THUMB_HEIGHT 500
+
+typedef struct	s_current_time
+{
+	unsigned int Y;
+	unsigned int M;
+	unsigned int d;
+	unsigned int h;
+	unsigned int m;
+	unsigned int s;
+	unsigned int ms;
+}				t_current_time;
 
 
 // Library related functions
@@ -50,6 +67,7 @@ char *ospl_album_getname(char *library, unsigned id);
 
 // Common usage functions
 int create_directory(char *path);
+int copy_file(char* source, char* destination);
 int file_exists(char *path);
 int folder_exists(char *path);
 int indexof(char *string, char character);

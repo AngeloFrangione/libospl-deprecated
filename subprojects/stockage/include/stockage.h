@@ -50,6 +50,7 @@
 "	`exif_brand`		TEXT,"\
 "	`exif_peripheral`	TEXT,"\
 "	`fav`				INTEGER DEFAULT 0,"\
+"	`random`			TEXT,"\
 "	PRIMARY KEY(`id` AUTOINCREMENT)"\
 ");"\
 "CREATE TABLE IF NOT EXISTS `includes` ("\
@@ -100,14 +101,15 @@ typedef struct			s_photos
 	char				original_name[255];
 	char				new_name[255];
 	char				import_datetime[32];
+	char				random[10];
 	uint16_t			import_year;
-	int					import_month;
-	int					import_day;
-	int					import_hour;
-	int					import_minut;
-	int					import_second;
-	int					exif_height;
-	int					exif_width;
+	uint8_t				import_month;
+	uint8_t				import_day;
+	uint8_t				import_hour;
+	uint8_t				import_minut;
+	uint8_t				import_second;
+	uint32_t			exif_height;
+	uint32_t			exif_width;
 	char				exif_brand[32];
 	char				exif_peripheral[32];
 	uint8_t				fav;
