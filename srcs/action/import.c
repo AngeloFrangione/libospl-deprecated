@@ -122,10 +122,14 @@ int ospl_import_picture(char *library, char *path)
 	printf("adding %s to database\n", pic.original_name);
 	insert_photo(&db, &pic);
 	char import_path[512] = {0};
+	char thumb_path[512] = {0};
 	cwk_path_join(library, "/pictures/import", import_path, sizeof(import_path));
+	cwk_path_join(library, "/thumbnails/", thumb_path, sizeof(thumb_path));
+	cwk_path_join(thumb_path, pic.new_name, thumb_path, sizeof(thumb_path));
 	cwk_path_join(import_path, pic.new_name, import_path, sizeof(import_path));
 	printf("copying %s to %s\n", path, import_path);
 	copy_file(path, import_path);
-	
+	printf("creating thumbnail from %s to %s\n", import_path, thumb_path);
+	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
 	return 0;
 }
