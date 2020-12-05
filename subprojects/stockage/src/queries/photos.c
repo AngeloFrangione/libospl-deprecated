@@ -136,7 +136,7 @@ int select_photo_single(t_db *db, int id, char *col, char *value)
 	return 0;
 }
 
-static int callback(t_photos *pic, int ac, char **av, char **column)
+static int _callback(t_photos *pic, int ac, char **av, char **column)
 {
 	strcpy(pic->hash, av[1]);
 	strcpy(pic->original_name, av[2]);
@@ -172,7 +172,7 @@ int select_photo(t_db *db, int id, t_photos *pic)
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos where id=%d", id);
-	stockage_read(db, query, callback, pic);
+	stockage_read(db, query, _callback, pic);
 	return 0;
 }
 
