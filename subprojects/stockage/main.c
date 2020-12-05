@@ -60,6 +60,7 @@ int main(int argc, char const *argv[])
 	strcpy(pic.exif_brand, "");
 	strcpy(pic.exif_peripheral, "");
 	insert_photo(&db, &pic);
+	insert_photo(&db, &pic);
 	update_photo_null(&db, 1, "exif_brand");
 	char value2[255] = {0};
 	select_photo_single(&db, 1, "original_name", value2);
@@ -71,7 +72,23 @@ int main(int argc, char const *argv[])
 	select_photo(&db, 1, &picc);
 	printf("%s\n", picc.hash);
 	// db.commit = 1;
-	delete_photo(&db, 2);
+	create_album(&db, "Vacances");
+	create_album(&db, "Mon amour");
+	insert_contains(&db, 1, 1);
+	insert_contains(&db, 2, 2);
+	move_contains(&db, 1, 1, 2);
+	uint32_t list[65000];
+	memset(list, 0, sizeof(uint32_t) * 65000);
+	photo_contained(&db, 1, list);
+	for (int i = 0;list[i]; i++)
+	{
+		printf("[%d]\n", list[i]);
+	}
+	// delete_contains(&db, 1, 1);
+	// rename_album(&db, 1, "Vacances 2");
+	// delete_album(&db, 1);
+	// delete_photo(&db, 1);
+
 
 	return 0;
 }

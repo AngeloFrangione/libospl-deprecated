@@ -166,4 +166,19 @@ int select_photo_single(t_db *db, int id, char *col, char *value);
 int select_photo(t_db *db, int id, t_photos *pic);
 int delete_photo(t_db *db, int id);
 
+/*
+ * 
+ * Queries - albums table
+ * 
+ */
+int create_album(t_db *db, char *name);
+int rename_album(t_db *db, int id, char *name);
+int delete_album(t_db *db, int id);
+
+int insert_contains(t_db *db, int photo, int album);
+int delete_contains(t_db *db, int photo, int album);
+int move_contains(t_db *db, int photo, int old_album, int new_album);
+int list_contains(t_db *db, int id, uint32_t *list);
+int photo_contained(t_db *db, int id, uint32_t *list);
+
 #endif
