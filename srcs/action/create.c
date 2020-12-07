@@ -59,7 +59,7 @@ static int create_database_file(char *path)
 int ospl_create_library(char *path)
 {
 	int r;
-	char tmp[4096];
+	char tmp[4096] = { 0 };
 
 	r = create_folder(path);
 	cwk_path_join(path, "pictures", tmp, sizeof(tmp));
