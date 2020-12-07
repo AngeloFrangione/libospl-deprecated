@@ -22,8 +22,10 @@
 #define OSPL_CLI_H
 
 # define ARGS_COUNT 5
+# define ALB_ARG_CNT 8
 # define CREATE_OPTS "v"
 # define IMPORT_OPTS "vfF"
+# define ALB_LIMITS 255
 
 extern char *ARGS[ARGS_COUNT];
 extern char *g_library_path;
