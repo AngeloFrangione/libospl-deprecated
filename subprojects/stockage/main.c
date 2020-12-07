@@ -84,6 +84,11 @@ int main(int argc, char const *argv[])
 	{
 		printf("[%d]\n", list[i]);
 	}
+	t_album alb_list[2] = { 0 };
+	list_albums(&db, alb_list);
+	printf("name: [%s]\n", alb_list[0].name);
+	printf("name: [%s]\n", alb_list[1].name);
+
 	// delete_contains(&db, 1, 1);
 	// rename_album(&db, 1, "Vacances 2");
 	// delete_album(&db, 1);

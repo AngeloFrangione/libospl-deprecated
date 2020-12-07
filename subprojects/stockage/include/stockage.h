@@ -115,6 +115,12 @@ typedef struct			s_photos
 	uint8_t				fav;
 }						t_photos;
 
+typedef struct			s_album
+{
+	int					id;
+	char				name[255];
+}						t_album;
+
 typedef struct			s_db
 {
 	sqlite3				*db;
@@ -178,7 +184,8 @@ int delete_album(t_db *db, int id);
 int insert_contains(t_db *db, int photo, int album);
 int delete_contains(t_db *db, int photo, int album);
 int move_contains(t_db *db, int photo, int old_album, int new_album);
-int list_contains(t_db *db, int id, uint32_t *list);
-int photo_contained(t_db *db, int id, uint32_t *list);
+int list_contains(t_db *db, int album, uint32_t *list);
+int photo_contained(t_db *db, int photo, uint32_t *list);
+int list_albums(t_db *db, t_album *list);
 
 #endif
