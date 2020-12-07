@@ -34,6 +34,14 @@
 #include <cwalk.h>
 #include "ospl.h"
 
+void fill_tdb(t_db *db, char *library)
+{
+	static char db_path[4096];
+	memset(db, 0, sizeof(t_db));
+	cwk_path_join(library, DATABASE_FILENAME, db_path, sizeof(db_path));
+	db->path =  db_path;
+}
+
 /**
   * \brief Creates a directory for windows and UNIX
   *
