@@ -48,8 +48,12 @@ static int is_supported(char *src)
 	for (int i = 0; i < NB_SUPPORTED_IMAGES; i++)
 	{
 		if (!strcmp(p[i], magic))
+		{
+			free(magic);
 			return i;
+		}
 	}
+	free(magic);
 	return 0;
 }
 
