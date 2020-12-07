@@ -136,6 +136,31 @@ int select_photo_single(t_db *db, int id, char *col, char *value)
 	return 0;
 }
 
+static int _callback_multiple(t_photos *pic, int ac, char **av, char **column)
+{
+	static int current = 0;
+
+	strcpy(pic[current].hash, av[1]);
+	strcpy(pic[current].original_name, av[2]);
+	strcpy(pic[current].new_name, av[3]);
+	strcpy(pic[current].import_datetime, av[4]);
+	pic[current].import_year = atoi(av[5]);
+	pic[current].import_month = atoi(av[6]);
+	pic[current].import_day = atoi(av[7]);
+	pic[current].import_hour = atoi(av[8]);
+	pic[current].import_minut = atoi(av[9]);
+	pic[current].import_second = atoi(av[10]);
+	pic[current].exif_height = atoi(av[11]);
+	pic[current].exif_width = atoi(av[12]);
+	if (av[13])
+		strcpy(pic[current].exif_brand, av[13]);
+	if (av[14])
+		strcpy(pic[current].exif_peripheral, av[14]);
+	pic[current].fav = atoi(av[15]);
+	++current;
+	return 0;
+}
+
 static int _callback(t_photos *pic, int ac, char **av, char **column)
 {
 	strcpy(pic->hash, av[1]);
@@ -175,6 +200,26 @@ int select_photo(t_db *db, int id, t_photos *pic)
 	stockage_read(db, query, _callback, pic);
 	return 0;
 }
+
+int select_photo_multiple(t_db *db, int id, t_photos *pic)
+{
+	char		query[BUFFER_SIZE];
+
+	sprintf(query, "select * from photos where id=%d", id);
+	stockage_read(db, query, _callback_multiple, pic);
+	return 0;
+}
+
+
+int select_photo_all(t_db *db, t_photos *pics)
+{
+	char		query[BUFFER_SIZE];
+
+	sprintf(query, "select * from photos");
+	stockage_read(db, query, _callback_multiple, pics);
+	return 0;
+}
+
 
 /**
  * \brief delete a row into photos table

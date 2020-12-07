@@ -93,7 +93,14 @@ int main(int argc, char const *argv[])
 	// rename_album(&db, 1, "Vacances 2");
 	// delete_album(&db, 1);
 	// delete_photo(&db, 1);
-
+	printf("-----------------------------\n");
+	t_photos pic_list[255] = { 0 };
+	select_photo_all(&db, pic_list);
+	printf("original_name | import_year\n");
+	for (int i = 0;pic_list[i].import_year; i++)
+	{
+		printf("%13s %11d\n", pic_list[i].original_name, pic_list[i].import_year);
+	}
 
 	return 0;
 }
