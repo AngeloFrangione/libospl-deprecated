@@ -95,20 +95,38 @@ static int _callback(uint32_t *list, int ac, char **av, char **column)
 	return 0;
 }
 
-int list_contains(t_db *db, int id, uint32_t *list)
+static int _callback_album(t_album *list, int ac, char **av, char **column)
+{
+	static int current = 0;
+
+	list[current].id = atoi(av[0]);
+	strcpy(list[current].name, av[1]);
+	current++;
+	return 0;
+}
+
+int list_contains(t_db *db, int album, uint32_t *list)
 {
 	char	query[BUFFER_SIZE];
 
-	sprintf(query, "select contained_photo from contains where containing_album=%d;", id);	
+	sprintf(query, "select contained_photo from contains where containing_album=%d;", album);
 	stockage_read(db, query, _callback, list);
 	return 0;
 }
 
-int photo_contained(t_db *db, int id, uint32_t *list)
+int photo_contained(t_db *db, int pic, uint32_t *list)
 {
 	char	query[BUFFER_SIZE];
 
-	sprintf(query, "select containing_album from contains where contained_photo=%d;", id);	
+	sprintf(query, "select containing_album from contains where contained_photo=%d;", pic);
 	stockage_read(db, query, _callback, list);
+	return 0;
+}
+
+int list_albums(t_db *db, t_album *list)
+{
+	char	query[BUFFER_SIZE] = "select * from albums";
+
+	stockage_read(db, query, _callback_album, list);
 	return 0;
 }
