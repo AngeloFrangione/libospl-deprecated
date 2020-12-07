@@ -21,6 +21,8 @@
 #ifndef OSPL_H
 #define OSPL_H
 
+# include <stockage.h>
+
 # define DATABASE_FILENAME "database.db"
 # define DATABASE_NAME_LEN 12
 # define LIBRARY_EXTENTION_LEN 5
@@ -52,15 +54,20 @@ typedef struct	s_current_time
 // Library related functions
 int ospl_create_library(char *library);
 int ospl_import_picture(char *library, char *path);
-
-/*int ospl_import_folder(char *library, char *path);
-int ospl_export_picture(char *library, unsigned id);
-int ospl_export_album(char *library, unsigned id);
-int ospl_album_create(char *library, unsigned id);
-int ospl_album_rename(char *library, unsigned id, char *name);
-int ospl_album_remove(char *library, unsigned id);
-char *ospl_album_getname(char *library, unsigned id);
+/*
+** int ospl_import_folder(char *library, char *path);
 */
+int ospl_list_albums(char *library, t_album *list);
+int ospl_album_listpic(char *library, int album, uint32_t *list);
+int ospl_album_assocpic(char *library, int photo, uint32_t *list);
+int ospl_create_album(char *library, char *name);
+int ospl_rename_album(char *library, int id, char *name);
+int ospl_delete_album(char *library, int id);
+int ospl_album_addpic(char *library, int photo, int album);
+int ospl_album_delpic(char *library, int photo, int album);
+int ospl_album_movepic(char *library, int photo, int old, int new);
+
+
 
 // Common usage functions
 void fill_tdb(t_db *db, char *library);
