@@ -169,6 +169,8 @@ int update_photo_int(t_db *db, int id, char *col, int value);
 int update_photo_char(t_db *db, int id, char *col, char *value);
 int update_photo_null(t_db *db, int id, char *col);
 int select_photo_single(t_db *db, int id, char *col, char *value);
+int select_photo_multiple(t_db *db, int id, t_photos *pics);
+int select_photo_all(t_db *db, t_photos *pic);
 int select_photo(t_db *db, int id, t_photos *pic);
 int delete_photo(t_db *db, int id);
 
