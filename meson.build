@@ -29,6 +29,7 @@ deps = [thumbnailer,
 source =['srcs/ospl.c', 'srcs/common.c', 
 		'srcs/action/create.c',
 		'srcs/action/import.c',
+		'srcs/action/albums.c',
 		'srcs/action/export.c']
 
 # Library
