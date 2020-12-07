@@ -51,7 +51,7 @@ int create_directory(char *path)
 
 int copy_file(char* source, char* destination)
 {    
-	int input, output;    
+	int input, output;
 	if ((input = open(source, O_RDONLY)) == -1)
 	{
 		return -1;
@@ -156,8 +156,12 @@ int is_supported(char *src)
 	for (int i = 0; i < NB_SUPPORTED_IMAGES; i++)
 	{
 		if (!strcmp(p[i], magic))
+		{
+			free(magic);
 			return i + 1;
+		}
 	}
+	free(magic);
 	return 0;
 }
 
