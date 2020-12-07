@@ -63,6 +63,7 @@ char *ospl_album_getname(char *library, unsigned id);
 */
 
 // Common usage functions
+void fill_tdb(t_db *db, char *library);
 int create_directory(char *path);
 int copy_file(char* source, char* destination);
 int file_exists(char *path);

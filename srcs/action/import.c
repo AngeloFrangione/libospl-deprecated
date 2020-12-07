@@ -53,7 +53,6 @@ static void get_info(t_db *db, t_photos *pic, char *path, char *library)
 {
 	size_t len;
 	char hash[33] = {0};
-	char db_path[4096];
 	t_current_time ct;
 	const char *name;
 
@@ -73,8 +72,7 @@ static void get_info(t_db *db, t_photos *pic, char *path, char *library)
 	pic->import_hour = ct.h;
 	pic->import_minut = ct.m;
 	pic->import_second = ct.s;
-	cwk_path_join(library, DATABASE_FILENAME, db_path, sizeof(db_path));
-	db->path = db_path;
+	fill_tdb(db, library);
 }
 
 /**
@@ -128,7 +126,8 @@ int ospl_import_picture(char *library, char *path)
 	cwk_path_join(thumb_path, pic.new_name, thumb_path, sizeof(thumb_path));
 	cwk_path_join(import_path, pic.new_name, import_path, sizeof(import_path));
 	printf("copying %s to %s\n", path, import_path);
-	copy_file(path, import_path);
+	int r = copy_file(path, import_path);
+	printf("copied %d bytes\n", r);
 	printf("creating thumbnail from %s to %s\n", import_path, thumb_path);
 	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
 	return 0;
