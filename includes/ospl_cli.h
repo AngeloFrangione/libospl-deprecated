@@ -21,8 +21,10 @@
 #ifndef OSPL_CLI_H
 #define OSPL_CLI_H
 
-# define ARGS_COUNT 5
+# define ARGS_COUNT 6
 # define ALB_ARG_CNT 8
+# define PIC_ARG_CNT 3
+
 # define CREATE_OPTS "v"
 # define IMPORT_OPTS "vfF"
 # define ALB_LIMITS 255
