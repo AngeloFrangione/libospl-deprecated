@@ -27,8 +27,9 @@
 #include <errno.h>
 #include <ctype.h>
 
-char *ARGS[ARGS_COUNT] = {"create", "import", "export", "album", "folder"};
+char *ARGS[ARGS_COUNT] = {"create", "import", "picture", "export", "album", "folder"};
 char *ALBUM_ARGS[ALB_ARG_CNT] = {"list", "create", "rename", "delete", "picadd", "picdel", "piclist", "picmove"};
+char *PICTURE_ARGS[PIC_ARG_CNT] = {"list", "info", "delete"};
 char *g_library_path = NULL;
 char *g_database_path = NULL;
 int print_mode = 0; // 0 = normal printing, 1 = verbose printing, 2 = json printing
@@ -53,6 +54,7 @@ void show_usage()
 	printf("--------------------------------------------------------------------------------\n");
 	printf("ospl create         creating library\n");
 	printf("ospl import         importing pictures\n");
+	printf("ospl picture        managing pictures\n");
 	printf("ospl export         exporting pictures\n");
 	printf("ospl album          managing albums\n");
 	printf("ospl folder         managing folders\n");
@@ -103,7 +105,6 @@ void usage_album(char *arg)
 	printf("ospl album piclist <librarypath> <album>           list pictures inside an album\n");
 	printf("ospl album picmove <librarypath> <pic> <old> <new> move picture to another album\n");
 	printf("--------------------------------------------------------------------------------\n");
-	// printf("ospl album <verb> with no options will provide help on that verb\n");
 }
 
 void usage_folder(char *arg)
@@ -111,6 +112,18 @@ void usage_folder(char *arg)
 
 }
 
+void usage_picture(char **arg)
+{
+	printf("\nManages pictures at <librarypath>\n");
+	printf("--------------------------------------------------------------------------------\n");
+	printf("Usage: ospl picture <verb> <librarypath> <options>, where <verb> is as follows:\n");
+	printf("--------------------------------------------------------------------------------\n");
+	printf("ospl picture list   <librarypath>             list every picture\n");
+	printf("ospl picture info   <librarypath> <id>        show more info about a picture\n");
+	printf("ospl picture delete <librarypath> <id>        remove picture from library\n");
+	printf("--------------------------------------------------------------------------------\n");
+
+}
 /**
   * \brief Returns the index of given arg in available arguments
   *
@@ -306,19 +319,70 @@ static int create(int ac, char **av)
 	return 0;
 }
 
+static int picture(int ac, char **av)
+{
+	int r;
+	
+	printf("picture/ (args: %d) 1: %s 2: %s\n", ac, av[1], av[2]);
+	if (ac < 4)
+	{
+		usage_album(NULL);
+		return 0;
+	}
+	else if ((r = indexof_arg(av[0], PICTURE_ARGS, PIC_ARG_CNT)))
+	{
+		if(!library_exists(av[1]))
+		{
+			printf("Library not found: %s\n", av[1]);
+			return 0;
+		}
+		switch(r)
+		{
+			case 1 :
+				printf("list\n");
+				t_photos pic_list[255] = { 0 };
+				ospl_picture_list(av[1], pic_list);
+				printf("%32s|%52s|%24s|%11s|%10s\n", "hash", "original_name", "import_datetime", "exif_height", "exif_width");
+				for(int i = 0; pic_list[i].import_year; i++)
+					printf("%32s|%52s|%24s|%11d|%10d\n", pic_list[i].hash, pic_list[i].original_name, pic_list[i].import_datetime, pic_list[i].exif_height, pic_list[i].exif_width);
+				break;
+				break;
+			case 2:
+				printf("info\n");
+				if (!isnumeric(av[2]))
+				{
+					usage_picture(NULL);
+					return 0;
+				}
+				t_photos pic = { 0 };
+				ospl_picture_get(av[1], atoi(av[2]), &pic);
+				printf("%32s|%52s|%24s|%11s|%10s\n", "hash", "original_name", "import_datetime", "exif_height", "exif_width");
+				printf("%32s|%52s|%24s|%11d|%10d\n", pic.hash, pic.original_name, pic.import_datetime, pic.exif_height, pic.exif_width);
+				break;
+			case 3:
+				printf("delete\n");
+				break;
+		}
+	}
+	else
+		usage_picture(NULL);
+	return 0;
+}
 int main(int ac, char *av[])
 {
 if (ac == 1)
 		show_usage();
 	else if (ac == 2)
 	{
-		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_export, usage_album, usage_folder};
+		printf("index of %s: %d\n", av[1], indexof_arg(av[1], ARGS, ARGS_COUNT));
+		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_picture, usage_export, usage_album, usage_folder};
 		usage_launcher[indexof_arg(av[1], ARGS, ARGS_COUNT)](av[1]);
 	}
 	else
 	{
-		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_export, usage_album};
-		int (*function_launcher[1 + ARGS_COUNT])() = {return_1, create, import, export, album};
+		printf("index of %s: %d\n", av[1], indexof_arg(av[1], ARGS, ARGS_COUNT));
+		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_picture, usage_export, usage_album};
+		int (*function_launcher[1 + ARGS_COUNT])() = {return_1, create, import, picture, export, album};
 		if (function_launcher[indexof_arg(av[1], ARGS, ARGS_COUNT)](ac, &av[2]) == 1)
 			usage_launcher[indexof_arg(av[1], ARGS, ARGS_COUNT)](av[2]);
 	}
