@@ -54,6 +54,8 @@ typedef struct	s_current_time
 // Library related functions
 int ospl_create_library(char *library);
 int ospl_import_picture(char *library, char *path);
+int ospl_import_folder(char *library, char *path);
+
 /*
 ** int ospl_import_folder(char *library, char *path);
 */
