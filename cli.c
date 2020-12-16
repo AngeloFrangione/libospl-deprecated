@@ -348,7 +348,7 @@ static int picture(int ac, char **av)
 		{
 			case 1 :
 				printf("list\n");
-				t_photos pic_list[255] = { 0 };
+				t_photos pic_list[6500] = { 0 };
 				ospl_picture_list(av[1], pic_list);
 				printf("%5s|%32s|%52s|%24s|%11s|%10s\n",
 					"id", "hash", "original_name", "import_datetime",
