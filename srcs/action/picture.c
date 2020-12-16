@@ -18,6 +18,7 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#include <stdio.h>
 #include <string.h>
 #include <ospl.h>
 #include <cwalk.h>
@@ -38,5 +39,25 @@ int ospl_picture_list(char *library, t_photos *list)
 
 	fill_tdb(&db, library);
 	select_photo_all(&db, list);
+	return 0;
+}
+
+int ospl_picture_delete(char *library, int id)
+{
+	t_db db = {0};
+	t_photos pic;
+	char tmp_import[4096] = { 0 };
+	char tmp_thumb[4096] = { 0 };
+
+	fill_tdb(&db, library);
+	select_photo(&db, id, &pic);
+	delete_photo(&db, id);
+
+	cwk_path_join(library, "pictures/import", tmp_import, sizeof(tmp_import));
+	cwk_path_join(library, "thumbnails", tmp_thumb, sizeof(tmp_thumb));
+	cwk_path_join(tmp_import, pic.new_name, tmp_import, sizeof(tmp_import));
+	cwk_path_join(tmp_thumb, pic.new_name, tmp_thumb, sizeof(tmp_thumb));
+	remove(tmp_import);
+	remove(tmp_thumb);
 	return 0;
 }
