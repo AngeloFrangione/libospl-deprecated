@@ -326,7 +326,7 @@ static int picture(int ac, char **av)
 	printf("picture/ (args: %d) 1: %s 2: %s\n", ac, av[1], av[2]);
 	if (ac < 4)
 	{
-		usage_album(NULL);
+		usage_picture(NULL);
 		return 0;
 	}
 	else if ((r = indexof_arg(av[0], PICTURE_ARGS, PIC_ARG_CNT)))
@@ -342,22 +342,31 @@ static int picture(int ac, char **av)
 				printf("list\n");
 				t_photos pic_list[255] = { 0 };
 				ospl_picture_list(av[1], pic_list);
-				printf("%32s|%52s|%24s|%11s|%10s\n", "hash", "original_name", "import_datetime", "exif_height", "exif_width");
+				printf("%5s|%32s|%52s|%24s|%11s|%10s\n",
+					"id", "hash", "original_name", "import_datetime",
+					"exif_height", "exif_width");
 				for(int i = 0; pic_list[i].import_year; i++)
-					printf("%32s|%52s|%24s|%11d|%10d\n", pic_list[i].hash, pic_list[i].original_name, pic_list[i].import_datetime, pic_list[i].exif_height, pic_list[i].exif_width);
+					printf("%5d|%32s|%52s|%24s|%11d|%10d\n",
+						pic_list[i].id, pic_list[i].hash,
+						pic_list[i].original_name, pic_list[i].import_datetime,
+						pic_list[i].exif_height, pic_list[i].exif_width);
 				break;
 				break;
 			case 2:
 				printf("info\n");
-				if (!isnumeric(av[2]))
+				if (ac < 5 || !isnumeric(av[2]))
 				{
 					usage_picture(NULL);
 					return 0;
 				}
 				t_photos pic = { 0 };
 				ospl_picture_get(av[1], atoi(av[2]), &pic);
-				printf("%32s|%52s|%24s|%11s|%10s\n", "hash", "original_name", "import_datetime", "exif_height", "exif_width");
-				printf("%32s|%52s|%24s|%11d|%10d\n", pic.hash, pic.original_name, pic.import_datetime, pic.exif_height, pic.exif_width);
+				printf("%5s|%32s|%52s|%24s|%11s|%10s\n",
+					"id", "hash", "original_name", "import_datetime",
+					"exif_height", "exif_width");
+				printf("%5d|%32s|%52s|%24s|%11d|%10d\n",
+					pic.id, pic.hash, pic.original_name, pic.import_datetime,
+					pic.exif_height, pic.exif_width);
 				break;
 			case 3:
 				printf("delete\n");
