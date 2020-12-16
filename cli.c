@@ -369,7 +369,13 @@ static int picture(int ac, char **av)
 					pic.exif_height, pic.exif_width);
 				break;
 			case 3:
-				printf("delete\n");
+				if (ac < 5 || !isnumeric(av[2]))
+				{
+					usage_picture(NULL);
+					return 0;
+				}
+				ospl_picture_delete(av[1], atoi(av[2]));
+				printf("deleted picture %s from library\n", av[2]);
 				break;
 		}
 	}
