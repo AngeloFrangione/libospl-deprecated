@@ -140,6 +140,7 @@ static int _callback_multiple(t_photos *pic, int ac, char **av, char **column)
 {
 	static int current = 0;
 
+	pic[current].id = atoi(av[0]);
 	strcpy(pic[current].hash, av[1]);
 	strcpy(pic[current].original_name, av[2]);
 	strcpy(pic[current].new_name, av[3]);
@@ -163,6 +164,7 @@ static int _callback_multiple(t_photos *pic, int ac, char **av, char **column)
 
 static int _callback(t_photos *pic, int ac, char **av, char **column)
 {
+	pic->id = atoi(av[0]);
 	strcpy(pic->hash, av[1]);
 	strcpy(pic->original_name, av[2]);
 	strcpy(pic->new_name, av[3]);
