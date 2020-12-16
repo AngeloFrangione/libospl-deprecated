@@ -68,7 +68,7 @@ int ospl_album_delpic(char *library, int photo, int album);
 int ospl_album_movepic(char *library, int photo, int old, int new);
 int ospl_picture_get(char *library, int id, t_photos *list);
 int ospl_picture_list(char *library, t_photos *list);
-
+int ospl_picture_delete(char *library, int id);
 
 
 // Common usage functions
