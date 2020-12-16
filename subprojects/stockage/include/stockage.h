@@ -102,7 +102,7 @@ typedef struct			s_photos
 	char				original_name[255];
 	char				new_name[255];
 	char				import_datetime[32];
-	char				random[10];
+	char				random[11];
 	uint16_t			import_year;
 	uint8_t				import_month;
 	uint8_t				import_day;
