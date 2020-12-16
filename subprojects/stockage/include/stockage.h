@@ -97,6 +97,7 @@
 
 typedef struct			s_photos
 {
+	int					id;
 	char				hash[33];
 	char				original_name[255];
 	char				new_name[255];
