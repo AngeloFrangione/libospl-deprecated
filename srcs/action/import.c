@@ -20,9 +20,10 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <dirent.h>
 #include <math.h>
 #include <time.h>
+#include <stdio.h>
 
 #include <cwalk.h>
 #include <thumbnailer.h>
@@ -130,5 +131,29 @@ int ospl_import_picture(char *library, char *path)
 	printf("copied %d bytes\n", r);
 	printf("creating thumbnail from %s to %s\n", import_path, thumb_path);
 	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
+	printf("picture %s imported\n", pic.original_name);
+	return 0;
+}
+
+int ospl_import_folder(char *library, char *path)
+{
+	DIR *d;
+	struct dirent *dir;
+
+	printf("folder to import: %s\n", path);
+	if (!(d = opendir(path)))
+	{
+		printf("path not found, or is not a folder: %s\n", path);
+		return 1;
+	}
+	char tmp[4096] = { 0 };
+	readdir(d);
+	readdir(d);
+	while ((dir = readdir(d)))
+	{
+		cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
+		ospl_import_picture(library, tmp);
+	}
+	closedir(d);
 	return 0;
 }
