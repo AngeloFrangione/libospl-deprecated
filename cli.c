@@ -188,6 +188,14 @@ static int import(int ac, char **av)
 		else
 			printf("Library not found: %s\n", av[0]);
 	}
+	else if (!strcmp(av[1], "-F"))
+	{
+		initiate_path(av[0]);
+		if (library_exists(av[0]))
+			ospl_import_folder(av[0], av[2]);
+		else
+			printf("Library not found: %s\n", av[0]);
+	}
 	return 0;
 }
 
