@@ -57,6 +57,31 @@ int create_directory(char *path)
 	#endif
 }
 
+int remove_dir(char *path)
+{
+	DIR *d;
+	struct dirent *dir;
+	char tmp[4096] = { 0 };
+
+	if (!(d = opendir(path)))
+		return 1;
+	else
+	{
+		readdir(d);
+		readdir(d);
+		while ((dir = readdir(d)))
+		{
+			cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
+			if(folder_exists(tmp))
+				remove_dir(tmp);
+			remove(tmp);
+		}
+		remove(path);
+		closedir(d);
+		return 0;
+	}
+}
+
 int copy_file(char* source, char* destination)
 {    
 	int input, output;

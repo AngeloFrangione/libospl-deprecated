@@ -39,6 +39,15 @@
 // Future maybe settings
 # define THUMB_HEIGHT 500
 
+enum ERRORS
+{
+	SUCCESS = 0,
+	EAEXISTS,
+	EDBFAIL,
+	EERRNO,
+	ENOTFOUND
+};
+
 typedef struct	s_current_time
 {
 	unsigned int Y;
@@ -83,5 +92,6 @@ int indexof(char *string, char character);
 int is_supported(char *src);
 int get_magic(char *file_path, char **magic);
 int library_exists(char *path);
+int remove_dir(char *path);
 
 #endif

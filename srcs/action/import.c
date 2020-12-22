@@ -142,10 +142,7 @@ int ospl_import_folder(char *library, char *path)
 
 	printf("folder to import: %s\n", path);
 	if (!(d = opendir(path)))
-	{
-		printf("path not found, or is not a folder: %s\n", path);
-		return 1;
-	}
+		return ENOTFOUND;
 	char tmp[4096] = { 0 };
 	readdir(d);
 	readdir(d);
