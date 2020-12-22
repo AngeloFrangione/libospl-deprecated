@@ -19,6 +19,7 @@
 */
 
 #include <string.h>
+#include <stdio.h>
 #include <ospl.h>
 #include <cwalk.h>
 #include <stockage.h>
@@ -53,10 +54,19 @@ int ospl_album_assocpic(char *library, int photo, uint32_t *list)
 int ospl_create_album(char *library, char *name)
 {
 	t_db db = {0};
+	char tmp[512] = {0};
 
+	cwk_path_join(library, "/pictures/", tmp, sizeof(tmp));
+	cwk_path_join(tmp, name, tmp, sizeof(tmp));
 	fill_tdb(&db, library);
-	create_album(&db, name);
-	return 0;
+	if(folder_exists(tmp))
+		return EAEXISTS;
+	if (create_album(&db, name))
+		return EDBFAIL;
+	if (!create_directory(tmp))
+		return SUCCESS;
+	else
+		return EERRNO;
 }
 
 int ospl_rename_album(char *library, int id, char *name)
@@ -71,10 +81,21 @@ int ospl_rename_album(char *library, int id, char *name)
 int ospl_delete_album(char *library, int id)
 {
 	t_db db = {0};
+	char tmp[512] = { 0 };
+	t_album album = { 0 };
 
 	fill_tdb(&db, library);
-	delete_album(&db, id);
-	return 0;
+	if(!select_album(&db, id, &album))
+		return EDBFAIL;
+	if (!album.id)
+		return ENOTFOUND;
+	cwk_path_join(library, "/pictures/", tmp, sizeof(tmp));
+	cwk_path_join(tmp, album.name, tmp, sizeof(tmp));
+	if(!delete_album(&db, id))
+		remove_dir(tmp);
+	else
+		return EERRNO;
+	return SUCCESS;
 }
 
 int ospl_album_addpic(char *library, int photo, int album)

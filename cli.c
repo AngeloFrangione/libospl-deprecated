@@ -207,7 +207,7 @@ static int export(int ac, char **av)
 
 static int album (int ac, char **av)
 {
-	int r;
+	int r, ret;
 	printf("album/ (args: %d) 0: %s 1: %s\n", ac, av[0], av[1]);
 	if (ac < 4)
 	{
@@ -238,8 +238,11 @@ static int album (int ac, char **av)
 					usage_album(NULL);
 					return 0;
 				}
-				ospl_create_album(av[1], av[2]);
-				printf("album %s created\n", av[2]);
+				ret = ospl_create_album(av[1], av[2]);
+				if (ret == SUCCESS)
+					printf("album %s created\n", av[2]);
+				else
+					printf("error while creating album: %d\n", ret);
 				break;
 			case 3 :
 				if (ac < 6 || !isnumeric(av[2]))
