@@ -130,3 +130,12 @@ int list_albums(t_db *db, t_album *list)
 	stockage_read(db, query, _callback_album, list);
 	return 0;
 }
+
+int select_album(t_db *db, int id, t_album *album)
+{
+	char	query[BUFFER_SIZE];
+
+	sprintf(query, "select * from albums where id=%d;", id);
+	stockage_read(db, query, _callback_album, album);
+	return 0;
+}
