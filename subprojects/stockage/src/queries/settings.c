@@ -44,7 +44,8 @@ int insert_setting(t_db *db, char *name, char *value)
 	char	query[BUFFER_SIZE] = "insert into settings (name, value) ";
 	sprintf(query + 35, "values (\"%s\", \"%s\");", name, value);
 
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -61,7 +62,8 @@ int update_setting(t_db *db, char *name, char *value)
 	char	query[BUFFER_SIZE] = "update settings set value=";
 
 	sprintf(query + 26, "\"%s\" where name=\"%s\";", value, name);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -85,7 +87,8 @@ int select_setting(t_db *db, char *name, char *value)
 	char	query[BUFFER_SIZE] = "select * from settings ";
 	
 	sprintf(query + 23, "where name = \"%s\"", name);
-	stockage_read(db, query, callback, value);
+	if (stockage_read(db, query, callback, value))
+		return 1;
 	return 0;
 }
 
@@ -101,6 +104,7 @@ int delete_setting(t_db *db, char *name)
 	char	query[BUFFER_SIZE] = "delete from settings where name=";
 	
 	sprintf(query + 32, "%s;", name);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }

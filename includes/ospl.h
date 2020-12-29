@@ -41,11 +41,15 @@
 
 enum ERRORS
 {
-	SUCCESS = 0,
-	EAEXISTS,
-	EDBFAIL,
-	EERRNO,
-	ENOTFOUND
+	SUCCESS = 0,// No error
+	EOTHER,		// Other error
+	EAEXISTS,	// The file or folder already exists
+	EDBFAIL,	// Database communication failed
+	EERRNO,		// Use ERRNO for more information
+	ENOTFOUND,	// File not found
+	ENOSUPPORT,	// File not supported
+	EHASHFAIL,	// Hash creation failed
+	ETHUMBFAIL	// Thumbnail creation failed
 };
 
 typedef struct	s_current_time
@@ -59,6 +63,9 @@ typedef struct	s_current_time
 	unsigned int ms;
 }				t_current_time;
 
+
+// External functions
+char *enum_error(int error_code);
 
 // Library related functions
 int ospl_create_library(char *library);

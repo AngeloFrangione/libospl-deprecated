@@ -36,7 +36,8 @@ int create_album(t_db *db, char *name)
 	char	query[BUFFER_SIZE] = "insert into albums (name) ";
 
 	sprintf(query + 26, "values(\"%s\")", name);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -45,7 +46,8 @@ int rename_album(t_db *db, int id, char *name)
 	char	query[BUFFER_SIZE] = "update albums set name=";
 
 	sprintf(query + 23, "\"%s\" where id=%d;", name, id);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -54,7 +56,8 @@ int delete_album(t_db *db, int id)
 	char	query[BUFFER_SIZE] = "delete from albums where id=";
 
 	sprintf(query + 28, "%d;", id);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -63,7 +66,8 @@ int insert_contains(t_db *db, int photo, int album)
 	char	query[BUFFER_SIZE] = "insert into contains (containing_album, contained_photo) ";
 
 	sprintf(query + 57, "values(\"%d\",\"%d\")", album, photo);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -72,7 +76,8 @@ int delete_contains(t_db *db, int photo, int album)
 	char	query[BUFFER_SIZE] = "delete from contains where ";
 
 	sprintf(query + 27, "containing_album=%d and contained_photo=%d;", photo, album);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -82,7 +87,8 @@ int move_contains(t_db *db, int photo, int old_album, int new_album)
 
 	sprintf(query + 37, "%d where contained_photo=%d and containing_album=%d", 
 			new_album, photo, old_album);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -110,7 +116,8 @@ int list_contains(t_db *db, int album, uint32_t *list)
 	char	query[BUFFER_SIZE];
 
 	sprintf(query, "select contained_photo from contains where containing_album=%d;", album);
-	stockage_read(db, query, _callback, list);
+	if (stockage_read(db, query, _callback, list))
+		return 1;
 	return 0;
 }
 
@@ -119,7 +126,8 @@ int photo_contained(t_db *db, int pic, uint32_t *list)
 	char	query[BUFFER_SIZE];
 
 	sprintf(query, "select containing_album from contains where contained_photo=%d;", pic);
-	stockage_read(db, query, _callback, list);
+	if (stockage_read(db, query, _callback, list))
+		return 1;
 	return 0;
 }
 
@@ -127,7 +135,8 @@ int list_albums(t_db *db, t_album *list)
 {
 	char	query[BUFFER_SIZE] = "select * from albums";
 
-	stockage_read(db, query, _callback_album, list);
+	if (stockage_read(db, query, _callback_album, list))
+		return 1;
 	return 0;
 }
 
@@ -136,6 +145,7 @@ int select_album(t_db *db, int id, t_album *album)
 	char	query[BUFFER_SIZE];
 
 	sprintf(query, "select * from albums where id=%d;", id);
-	stockage_read(db, query, _callback_album, album);
+	if (stockage_read(db, query, _callback_album, album))
+		return 1;
 	return 0;
 }
