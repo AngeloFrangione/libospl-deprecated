@@ -19,3 +19,40 @@
 */
 
 #include "ospl.h"
+#include <string.h>
+#include <errno.h>
+#include <stdlib.h>
+
+char *enum_error(int error_code)
+{
+	switch (error_code)
+	{
+		case SUCCESS:
+			return NULL;
+			break;
+		case EAEXISTS :
+			return "the element already exists\n";
+			break;
+		case EDBFAIL :
+			return "something went wrong with the database\n";
+			break;
+		case EERRNO :
+			return strerror(errno);
+			break;
+		case ENOTFOUND :
+			return "element not found\n";
+			break;
+		case ENOSUPPORT :
+			return "not supported\n";
+			break;
+		case ETHUMBFAIL :
+			return "something went wrong with the thumbnail creation\n";
+			break;
+		case EHASHFAIL :
+			return "something went wrong with the md5 hash\n";
+			break;
+		default :
+			return "unknown error\n";
+			break;
+	}
+}
