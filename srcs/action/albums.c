@@ -29,8 +29,9 @@ int ospl_list_albums(char *library, t_album *list)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	list_albums(&db, list);
-	return 0;
+	if (list_albums(&db, list))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_album_listpic(char *library, int album, uint32_t *list)
@@ -38,8 +39,9 @@ int ospl_album_listpic(char *library, int album, uint32_t *list)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	list_contains(&db, album, list);
-	return 0;
+	if (list_contains(&db, album, list))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_album_assocpic(char *library, int photo, uint32_t *list)
@@ -47,8 +49,9 @@ int ospl_album_assocpic(char *library, int photo, uint32_t *list)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	photo_contained(&db, photo, list);
-	return 0;
+	if (photo_contained(&db, photo, list))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_create_album(char *library, char *name)
@@ -74,8 +77,9 @@ int ospl_rename_album(char *library, int id, char *name)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	rename_album(&db, id, name);
-	return 0;
+	if (rename_album(&db, id, name))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_delete_album(char *library, int id)
@@ -103,8 +107,9 @@ int ospl_album_addpic(char *library, int photo, int album)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	insert_contains(&db, photo, album);
-	return 0;
+	if (insert_contains(&db, photo, album))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_album_delpic(char *library, int photo, int album)
@@ -112,8 +117,9 @@ int ospl_album_delpic(char *library, int photo, int album)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	delete_contains(&db, photo, album);
-	return 0;
+	if (delete_contains(&db, photo, album))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_album_movepic(char *library, int photo, int old, int new)
@@ -121,6 +127,7 @@ int ospl_album_movepic(char *library, int photo, int old, int new)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	move_contains(&db, photo, old, new);
-	return 0;
+	if (move_contains(&db, photo, old, new))
+		return EDBFAIL;
+	return SUCCESS;
 }

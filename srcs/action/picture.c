@@ -29,8 +29,9 @@ int ospl_picture_get(char *library, int id, t_photos *list)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	select_photo(&db, id, list);
-	return 0;
+	if (select_photo(&db, id, list))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_picture_list(char *library, t_photos *list)
@@ -38,8 +39,9 @@ int ospl_picture_list(char *library, t_photos *list)
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	select_photo_all(&db, list);
-	return 0;
+	if (select_photo_all(&db, list))
+		return EDBFAIL;
+	return SUCCESS;
 }
 
 int ospl_picture_delete(char *library, int id)
@@ -57,7 +59,7 @@ int ospl_picture_delete(char *library, int id)
 	cwk_path_join(library, "thumbnails", tmp_thumb, sizeof(tmp_thumb));
 	cwk_path_join(tmp_import, pic.new_name, tmp_import, sizeof(tmp_import));
 	cwk_path_join(tmp_thumb, pic.new_name, tmp_thumb, sizeof(tmp_thumb));
-	remove(tmp_import);
-	remove(tmp_thumb);
-	return 0;
+	if (remove(tmp_import) || remove(tmp_thumb))
+		return EERRNO;
+	return SUCCESS;
 }
