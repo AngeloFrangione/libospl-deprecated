@@ -52,7 +52,8 @@ int insert_photo(t_db *db, t_photos *pic)
 		pic->import_day, pic->import_hour, pic->import_minut,
 		pic->import_second, pic->exif_height, pic->exif_width,
 		pic->exif_brand, pic->exif_peripheral);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -70,7 +71,8 @@ int update_photo_char(t_db *db, int id, char *col, char *value)
 	char	query[BUFFER_SIZE] = "update photos set ";
 
 	sprintf(query + 18, "%s=\"%s\" where id=%d;", col, value, id);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -88,7 +90,8 @@ int update_photo_int(t_db *db, int id, char *col, int value)
 	char	query[BUFFER_SIZE] = "update photos set ";
 
 	sprintf(query + 18, "%s=%d where id=%d;", col, value, id);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -106,7 +109,8 @@ int update_photo_null(t_db *db, int id, char *col)
 	char	query[BUFFER_SIZE] = "update photos set ";
 
 	sprintf(query + 18, "%s=NULL where id=%d;", col, id);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }
 
@@ -132,7 +136,8 @@ int select_photo_single(t_db *db, int id, char *col, char *value)
 	char	query[BUFFER_SIZE];
 
 	sprintf(query, "select %s from photos where id=%d", col, id);
-	stockage_read(db, query, callback_single, value);
+	if (stockage_read(db, query, callback_single, value))
+		return 1;
 	return 0;
 }
 
@@ -199,7 +204,8 @@ int select_photo(t_db *db, int id, t_photos *pic)
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos where id=%d", id);
-	stockage_read(db, query, _callback, pic);
+	if (stockage_read(db, query, _callback, pic))
+		return 1;
 	return 0;
 }
 
@@ -208,7 +214,8 @@ int select_photo_multiple(t_db *db, int id, t_photos *pic)
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos where id=%d", id);
-	stockage_read(db, query, _callback_multiple, pic);
+	if (stockage_read(db, query, _callback_multiple, pic))
+		return 1;
 	return 0;
 }
 
@@ -218,7 +225,8 @@ int select_photo_all(t_db *db, t_photos *pics)
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos");
-	stockage_read(db, query, _callback_multiple, pics);
+	if (stockage_read(db, query, _callback_multiple, pics))
+		return 1;
 	return 0;
 }
 
@@ -235,6 +243,7 @@ int delete_photo(t_db *db, int id)
 	char	query[BUFFER_SIZE] = "delete from photos where id=";
 	
 	sprintf(query + 28, "%d;", id);
-	stockage_write(db, query);
+	if (stockage_write(db, query))
+		return 1;
 	return 0;
 }

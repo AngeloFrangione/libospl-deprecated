@@ -47,17 +47,17 @@ void get_time(t_current_time *ct)
 	ct->m = tm.tm_min;
 	ct->s = tm.tm_sec;
 	ct->ms = round(spec.tv_nsec / 1.0e6);
-
 }
 
-static void get_info(t_db *db, t_photos *pic, char *path, char *library)
+static int get_info(t_db *db, t_photos *pic, char *path, char *library)
 {
 	size_t len;
 	char hash[33] = {0};
 	t_current_time ct;
 	const char *name;
 
-	md5(path, hash);
+	if(md5(path, hash))
+		return EHASHFAIL;
 	get_time(&ct);
 	srand(time(0) + ct.ms);
 	cwk_path_get_basename(path, &name, &len);
@@ -74,6 +74,7 @@ static void get_info(t_db *db, t_photos *pic, char *path, char *library)
 	pic->import_minut = ct.m;
 	pic->import_second = ct.s;
 	fill_tdb(db, library);
+	return SUCCESS;
 }
 
 /**
@@ -87,20 +88,16 @@ int ospl_import_picture(char *library, char *path)
 {
 	t_db db = {0};
 	t_photos pic = {0};
-	
+	int r = 0;
 	if (!file_exists(path))
-	{
-		perror(NULL);
-		return 1;
-	}
+		return ENOTFOUND;
 	if(!is_supported(path))
-	{
-		printf("image %s not supported\n", path);
-		return 1;
-	}
-	get_info(&db, &pic, path, library);
+		return ENOSUPPORT;
+	if (get_info(&db, &pic, path, library))
+		return EHASHFAIL;
 	#ifdef DEBUG
-		printf("\t----------------DEBUGGING----------------\n");
+		printf("\t----------------DEBUGGING-INFO-----------\n");
+		printf("library: %s\npath: %s\n\n", library, path);
 		printf("hash:\t\t\t|%s\n", pic.hash);
 		printf("original_name:\t\t|%s\n", pic.original_name);
 		printf("new_name:\t\t|%s\n", pic.new_name);
@@ -117,9 +114,12 @@ int ospl_import_picture(char *library, char *path)
 		printf("exif_brand:\t\t|%s\n", pic.exif_brand);
 		printf("exif_peripheral:\t|%s\n", pic.exif_peripheral);
 		printf("fav:\t\t\t|%d\n", pic.fav);
+		printf("\t------------END DEBUGGING----------------\n");
 	#endif
 	printf("adding %s to database\n", pic.original_name);
-	insert_photo(&db, &pic);
+	r = insert_photo(&db, &pic);
+	if (r)
+		return EDBFAIL;
 	char import_path[512] = {0};
 	char thumb_path[512] = {0};
 	cwk_path_join(library, "/pictures/import", import_path, sizeof(import_path));
@@ -127,12 +127,16 @@ int ospl_import_picture(char *library, char *path)
 	cwk_path_join(thumb_path, pic.new_name, thumb_path, sizeof(thumb_path));
 	cwk_path_join(import_path, pic.new_name, import_path, sizeof(import_path));
 	printf("copying %s to %s\n", path, import_path);
-	int r = copy_file(path, import_path);
+	r = copy_file(path, import_path);
+	if (r < 0)
+		return EERRNO;
 	printf("copied %d bytes\n", r);
 	printf("creating thumbnail from %s to %s\n", import_path, thumb_path);
-	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
+	r = create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
+	if (r)
+		return ETHUMBFAIL;
 	printf("picture %s imported\n", pic.original_name);
-	return 0;
+	return SUCCESS;
 }
 
 int ospl_import_folder(char *library, char *path)
@@ -152,5 +156,5 @@ int ospl_import_folder(char *library, char *path)
 		ospl_import_picture(library, tmp);
 	}
 	closedir(d);
-	return 0;
+	return SUCCESS;
 }
