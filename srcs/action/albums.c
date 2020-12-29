@@ -75,8 +75,21 @@ int ospl_create_album(char *library, char *name)
 int ospl_rename_album(char *library, int id, char *name)
 {
 	t_db db = {0};
-
+	t_album album = {0};
+	char tmp_new[512] = {0};
+	char tmp_old[512] = {0};
+	
+	cwk_path_join(library, "/pictures/", tmp_new, sizeof(tmp_new));
+	cwk_path_join(tmp_new, name, tmp_new, sizeof(tmp_new));
 	fill_tdb(&db, library);
+	if(select_album(&db, id, &album))
+		return EDBFAIL;
+	if (!album.id)
+		return ENOTFOUND;
+	cwk_path_join(library, "/pictures/", tmp_old, sizeof(tmp_old));
+	cwk_path_join(tmp_old, album.name, tmp_old, sizeof(tmp_old));
+	if (rename(tmp_old, tmp_new))
+		return EERRNO;
 	if (rename_album(&db, id, name))
 		return EDBFAIL;
 	return SUCCESS;
