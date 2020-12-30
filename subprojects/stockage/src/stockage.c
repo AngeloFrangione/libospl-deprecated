@@ -34,6 +34,11 @@
 #include <sqlite3.h>
 #include "stockage.h"
 
+int get_last_insert_rowid(sqlite3 *sqlite)
+{
+	return sqlite3_last_insert_rowid(sqlite);
+}
+
 /**
  * \brief Checks sqlite return
  *

@@ -39,17 +39,21 @@
 // Future maybe settings
 # define THUMB_HEIGHT 500
 
+enum SUCCESS
+{
+	SUCCESS = 0
+};
+
 enum ERRORS
 {
-	SUCCESS = 0,// No error
-	EOTHER,		// Other error
-	EAEXISTS,	// The file or folder already exists
-	EDBFAIL,	// Database communication failed
-	EERRNO,		// Use ERRNO for more information
-	ENOTFOUND,	// File not found
-	ENOSUPPORT,	// File not supported
-	EHASHFAIL,	// Hash creation failed
-	ETHUMBFAIL	// Thumbnail creation failed
+	EOTHER = - 50,	// Other error
+	EAEXISTS,		// The file or folder already exists
+	EDBFAIL,		// Database communication failed
+	EERRNO,			// Use ERRNO for more information
+	ENOTFOUND,		// File not found
+	ENOSUPPORT,		// File not supported
+	EHASHFAIL,		// Hash creation failed
+	ETHUMBFAIL		// Thumbnail creation failed
 };
 
 typedef struct	s_current_time
@@ -70,7 +74,9 @@ char *enum_error(int error_code);
 // Library related functions
 int ospl_create_library(char *library);
 int ospl_import_picture(char *library, char *path);
+int ospl_import_picture_in_album(char *library, char *path, int album);
 int ospl_import_folder(char *library, char *path);
+int ospl_import_folder_in_album(char *library, char *path, int album);
 
 /*
 ** int ospl_import_folder(char *library, char *path);

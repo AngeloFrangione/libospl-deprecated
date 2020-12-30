@@ -135,6 +135,7 @@ typedef struct			s_db
  * Generic read / write functions
  * 
  */
+int get_last_insert_rowid(sqlite3 *sqlite);
 int check_sqlite_return(int rc, t_db *db, char *query);
 int stockage_init(t_db *db);
 int create_database(char *path);
@@ -174,6 +175,7 @@ int select_photo_multiple(t_db *db, int id, t_photos *pics);
 int select_photo_all(t_db *db, t_photos *pic);
 int select_photo(t_db *db, int id, t_photos *pic);
 int delete_photo(t_db *db, int id);
+int select_last_photo_id(t_db *db);
 
 /*
  * 
