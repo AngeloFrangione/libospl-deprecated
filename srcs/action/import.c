@@ -30,6 +30,7 @@
 #include <stockage.h>
 #include <md5.h>
 
+
 #include "ospl.h"
 
 void get_time(t_current_time *ct)
@@ -136,7 +137,17 @@ int ospl_import_picture(char *library, char *path)
 	if (r)
 		return ETHUMBFAIL;
 	printf("picture %s imported\n", pic.original_name);
-	return SUCCESS;
+	return get_last_insert_rowid(db.db);
+}
+
+int ospl_import_picture_in_album(char *library, char *path, int album)
+{
+	int r;
+
+	r = ospl_import_picture(library, path);
+	if (r < 0)
+		return r;
+	return ospl_album_addpic(library, r, album);
 }
 
 int ospl_import_folder(char *library, char *path)
@@ -158,3 +169,24 @@ int ospl_import_folder(char *library, char *path)
 	closedir(d);
 	return SUCCESS;
 }
+
+int ospl_import_folder_in_album(char *library, char *path, int album)
+{
+	DIR *d;
+	struct dirent *dir;
+
+	printf("folder to import: %s\n", path);
+	if (!(d = opendir(path)))
+		return ENOTFOUND;
+	char tmp[4096] = { 0 };
+	readdir(d);
+	readdir(d);
+	while ((dir = readdir(d)))
+	{
+		cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
+		ospl_import_picture_in_album(library, tmp, album);
+	}
+	closedir(d);
+	return SUCCESS;
+}
+

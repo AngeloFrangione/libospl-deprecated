@@ -29,6 +29,7 @@
 
 char *ARGS[ARGS_COUNT] = {"create", "import", "picture", "export", "album", "folder"};
 char *ALBUM_ARGS[ALB_ARG_CNT] = {"list", "create", "rename", "delete", "picadd", "picdel", "piclist", "picmove"};
+enum {LIST = 1, CREATE, RENAME, DELETE, PICADD, PICDEL, PICLIST, PICMOVE};
 char *PICTURE_ARGS[PIC_ARG_CNT] = {"list", "info", "delete"};
 char *g_library_path = NULL;
 char *g_database_path = NULL;
@@ -78,8 +79,8 @@ void usage_import()
 	printf("Usage: ospl import <librarypath> <options>\n");
 	printf("OPTIONS:\n");
 	printf("At least one of the following :\n");
-	printf("    -f <path> : specifies a file to import\n");
-	printf("    -F <path> : specifies a folder to import\n");
+	printf("    -f <path> <optionnal album>: specifies a file to import into optionnal album\n");
+	printf("    -F <path> <optionnal album>: specifies a folder to import into optionnal album\n");
 	printf("Options that are not mandatory :\n");
 	printf("    -v : human readable maximum verbosity\n");
 	printf("//  -a <album_id> : import into album_id album (not implemented yet)\n");
@@ -180,12 +181,12 @@ static int import(int ac, char **av)
 		usage_import();
 		return 0;
 	}
-	else if (!strcmp(av[1], "-f"))
+	else if (!strcmp(av[1], "-f") && ac < 6)
 	{
 		initiate_path(av[0]);
 		if (library_exists(av[0]))
 		{
-			if (ospl_import_picture(av[0], av[2]))
+			if (ospl_import_picture(av[0], av[2]) >= 0)
 				printf("picture imported with success\n");
 			else
 				printf("failed importing picture\n");
@@ -193,11 +194,32 @@ static int import(int ac, char **av)
 		else
 			printf("Library not found: %s\n", av[0]);
 	}
-	else if (!strcmp(av[1], "-F"))
+	else if (!strcmp(av[1], "-F") && ac < 6)
 	{
 		initiate_path(av[0]);
 		if (library_exists(av[0]))
 			ospl_import_folder(av[0], av[2]);
+		else
+			printf("Library not found: %s\n", av[0]);
+	}
+	else if (!strcmp(av[1], "-f") && ac < 7)
+	{
+		initiate_path(av[0]);
+		if (library_exists(av[0]))
+		{
+			if (ospl_import_picture_in_album(av[0], av[2], 1) >= 0)
+				printf("picture imported with success\n");
+			else
+				printf("failed importing picture\n");
+		}
+		else
+			printf("Library not found: %s\n", av[0]);
+	}
+	else if (!strcmp(av[1], "-F") && ac < 7)
+	{
+		initiate_path(av[0]);
+		if (library_exists(av[0]))
+			ospl_import_folder_in_album(av[0], av[2], 1);
 		else
 			printf("Library not found: %s\n", av[0]);
 	}
@@ -228,7 +250,7 @@ static int album (int ac, char **av)
 		}
 		switch(r)
 		{
-			case 1 :
+			case LIST :
 				printf("Album list:\n=================\n");
 				printf("%3s | %10s\n", "id", "name");
 				printf("----------------\n");
@@ -237,43 +259,43 @@ static int album (int ac, char **av)
 				for(int i = 0; alb_list[i].id; i++)
 					printf("%3d | %10s\n", alb_list[i].id, alb_list[i].name);
 				break;
-			case 2 :
+			case CREATE :
 				if (ac < 5)
 				{
 					usage_album(NULL);
 					return 0;
 				}
 				ret = ospl_create_album(av[1], av[2]);
-				if (ret == SUCCESS)
+				if (ret >= SUCCESS)
 					printf("album %s created\n", av[2]);
 				else
 					printf("error while creating album: %d\n", ret);
 				break;
-			case 3 :
+			case RENAME :
 				if (ac < 6 || !isnumeric(av[2]))
 				{
 					usage_album(NULL);
 					return 0;
 				}
 				ret = ospl_rename_album(av[1], atoi(av[2]), av[3]);
-				if (ret == SUCCESS)
+				if (ret >= SUCCESS)
 					printf("album %d renamed to %s\n", atoi(av[2]), av[3]);
 				else
 					printf("error while creating album: %d\n", ret);
 				break;
-			case 4 :
+			case DELETE :
 				if (ac < 5 || !isnumeric(av[2]))
 				{
 					usage_album(NULL);
 					return 0;
 				}
-				char *er = enum_error(ospl_delete_album(av[1], atoi(av[2])));
-				if (er)
-					printf("error deleting album: %s\n", er);
+				ret = ospl_delete_album(av[1], atoi(av[2]));
+				if (ret < 0)
+					printf("error deleting album: %s\n", enum_error(ret));
 				else
 					printf("deleted album %s\n", av[2]);
 				break;
-			case 5 :
+			case PICADD :
 				if (ac < 6 || !isnumeric(av[2]) || !isnumeric(av[3]))
 				{
 					usage_album(NULL);
@@ -282,7 +304,7 @@ static int album (int ac, char **av)
 				ospl_album_addpic(av[1], atoi(av[2]), atoi(av[3]));
 				printf("picture %d added to album %d\n", atoi(av[2]), atoi(av[3]));
 				break;
-			case 6 :
+			case PICDEL :
 				if (ac < 6 || !isnumeric(av[2]) || !isnumeric(av[3]))
 				{
 					usage_album(NULL);
@@ -291,7 +313,7 @@ static int album (int ac, char **av)
 				ospl_album_delpic(av[1], atoi(av[2]), atoi(av[3]));
 				printf("picutre %d deleted from album %d\n", atoi(av[2]), atoi(av[3]));
 				break;
-			case 7 :
+			case PICLIST :
 				if (ac < 5 || !isnumeric(av[2]))
 				{
 					usage_album(NULL);
@@ -311,7 +333,7 @@ static int album (int ac, char **av)
 					++i;
 				}
 				break;
-			case 8 :
+			case PICMOVE :
 				if (ac < 7 || !isnumeric(av[2]) || !isnumeric(av[3]) || !isnumeric(av[4]))
 				{
 					usage_album(NULL);
@@ -335,7 +357,7 @@ static int create(int ac, char **av)
 		printf("g_library_path: {%s}\ng_database_path: {%s}\n",
 				g_library_path, g_database_path);
 	}
-	if (ospl_create_library(g_library_path))
+	if (ospl_create_library(g_library_path) < 0)
 		perror(NULL);
 	printf("created library at path: %s\n", av[0]);
 	return 0;
