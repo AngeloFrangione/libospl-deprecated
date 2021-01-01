@@ -83,8 +83,8 @@ int ospl_import_folder_in_album(char *library, char *path, int album);
 ** int ospl_import_folder(char *library, char *path);
 */
 int ospl_list_albums(char *library, t_album *list);
-int ospl_album_listpic(char *library, int album, uint32_t *list);
-int ospl_album_assocpic(char *library, int photo, uint32_t *list);
+int ospl_album_listpic(char *library, int album, t_photos *list);
+int ospl_album_assocpic(char *library, int photo, t_album *list);
 int ospl_create_album(char *library, char *name);
 int ospl_rename_album(char *library, int id, char *name);
 int ospl_delete_album(char *library, int id);

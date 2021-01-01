@@ -34,7 +34,7 @@ int ospl_list_albums(char *library, t_album *list)
 	return SUCCESS;
 }
 
-int ospl_album_listpic(char *library, int album, uint32_t *list)
+int ospl_album_listpic(char *library, int album, t_photos *list)
 {
 	t_db db = {0};
 
@@ -44,7 +44,7 @@ int ospl_album_listpic(char *library, int album, uint32_t *list)
 	return SUCCESS;
 }
 
-int ospl_album_assocpic(char *library, int photo, uint32_t *list)
+int ospl_album_assocpic(char *library, int photo, t_album *list)
 {
 	t_db db = {0};
 
