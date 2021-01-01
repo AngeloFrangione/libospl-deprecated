@@ -105,6 +105,11 @@ static int _callback_album(t_album *list, int ac, char **av, char **column)
 {
 	static int current = 0;
 
+	if (!list)
+	{
+		current = 0;
+		return 0;
+	}
 	list[current].id = atoi(av[0]);
 	strcpy(list[current].name, av[1]);
 	current++;
@@ -135,8 +140,10 @@ int list_albums(t_db *db, t_album *list)
 {
 	char	query[BUFFER_SIZE] = "select * from albums";
 
+	_callback_album(NULL, 0, NULL, NULL);
 	if (stockage_read(db, query, _callback_album, list))
 		return 1;
+	_callback_album(NULL, 0, NULL, NULL);
 	return 0;
 }
 
@@ -145,7 +152,9 @@ int select_album(t_db *db, int id, t_album *album)
 	char	query[BUFFER_SIZE];
 
 	sprintf(query, "select * from albums where id=%d;", id);
+	_callback_album(NULL, 0, NULL, NULL);
 	if (stockage_read(db, query, _callback_album, album))
 		return 1;
+	_callback_album(NULL, 0, NULL, NULL);
 	return 0;
 }
