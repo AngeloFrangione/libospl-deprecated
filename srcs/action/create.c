@@ -31,7 +31,7 @@ static int create_folder(char *path)
 	if (folder_exists(path))
 	{
 		errno = EEXIST;
-		return 1;
+		return -1;
 	}
 	else
 		return create_directory(path);
@@ -62,12 +62,18 @@ int ospl_create_library(char *path)
 	char tmp[4096] = { 0 };
 
 	r = create_folder(path);
+	if (r < 0)
+		return r;
 	cwk_path_join(path, "pictures", tmp, sizeof(tmp));
-	r = r & create_folder(tmp);
+	r = create_folder(tmp);
+	if (r < 0)
+		return r;
 	cwk_path_join(tmp, "import", tmp, sizeof(tmp));
-	r = r & create_folder(tmp);
+	r = create_folder(tmp);
+	if (r < 0)
+		return r;
 	cwk_path_join(path, "thumbnails", tmp, sizeof(tmp));
-	r = r & create_folder(tmp);
+	r = create_folder(tmp);
 	if (r)
 		return r;
 	return create_database_file(path);

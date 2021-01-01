@@ -20,11 +20,15 @@
 
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
-#if defined(__APPLE__) || defined(__FreeBSD__)
-#include <copyfile.h>
+#if defined(_WIN32)
+# include <Windows.h>
 #else
-#include <sys/sendfile.h>
+# include <unistd.h>
+#endif
+#if defined(__APPLE__) || defined(__FreeBSD__)
+# include <copyfile.h>
+#else
+# include <sys/sendfile.h>
 #endif
 #include <dirent.h>
 #include <magic.h>
@@ -55,6 +59,16 @@ int create_directory(char *path)
 	#else
 	return mkdir(path, 0777);
 	#endif
+}
+
+int hard_link(char *current, char * new)
+{
+	#if defined(_WIN32)
+	return CreateHardLink(new, current);
+	#else
+	return link(current, new);
+	#endif
+	
 }
 
 int remove_dir(char *path)
