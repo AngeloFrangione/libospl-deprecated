@@ -53,7 +53,8 @@ enum ERRORS
 	ENOTFOUND,		// File not found
 	ENOSUPPORT,		// File not supported
 	EHASHFAIL,		// Hash creation failed
-	ETHUMBFAIL		// Thumbnail creation failed
+	ETHUMBFAIL,		// Thumbnail creation failed
+	EHARDLINK		// Hard link creation failed
 };
 
 typedef struct	s_current_time
@@ -97,6 +98,7 @@ int ospl_picture_delete(char *library, int id);
 
 // Common usage functions
 void fill_tdb(t_db *db, char *library);
+int hard_link(char *current, char * new);
 int create_directory(char *path);
 int copy_file(char* source, char* destination);
 int file_exists(char *path);

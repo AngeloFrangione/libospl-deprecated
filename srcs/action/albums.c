@@ -118,29 +118,77 @@ int ospl_delete_album(char *library, int id)
 int ospl_album_addpic(char *library, int photo, int album)
 {
 	t_db db = {0};
+	t_photos pic = { 0 };
+	t_album alb = { 0 };
+	char tmp_original[512] = { 0 };
+	char tmp_link[512] = { 0 };
 
 	fill_tdb(&db, library);
-	if (insert_contains(&db, photo, album))
+	if (select_photo(&db, photo, &pic) < 0)
 		return EDBFAIL;
+	if (select_album(&db, album, &alb) < 0)
+		return EDBFAIL;
+	cwk_path_join(library, "/pictures/import/", tmp_original, sizeof(tmp_original));
+	cwk_path_join(tmp_original, pic.new_name, tmp_original, sizeof(tmp_original));
+
+	cwk_path_join(library, "/pictures/", tmp_link, sizeof(tmp_link));
+	cwk_path_join(tmp_link, alb.name, tmp_link, sizeof(tmp_link));
+	cwk_path_join(tmp_link, pic.new_name, tmp_link, sizeof(tmp_link));
+
+	if (insert_contains(&db, photo, album) < 0)
+		return EDBFAIL;
+	if (hard_link(tmp_original, tmp_link) < 0)
+		return EHARDLINK;
 	return SUCCESS;
 }
 
 int ospl_album_delpic(char *library, int photo, int album)
 {
 	t_db db = {0};
+	t_photos pic = { 0 };
+	t_album alb = { 0 };
+	char tmp[512] = { 0 };
 
 	fill_tdb(&db, library);
+	if (select_photo(&db, photo, &pic) < 0 || select_album(&db, album, &alb) < 0)
+		return EDBFAIL;
+
+	cwk_path_join(library, "/pictures/", tmp, sizeof(tmp));
+	cwk_path_join(tmp, alb.name, tmp, sizeof(tmp));
+	cwk_path_join(tmp, pic.new_name, tmp, sizeof(tmp));
+
 	if (delete_contains(&db, photo, album))
 		return EDBFAIL;
+	remove(tmp);
 	return SUCCESS;
 }
 
 int ospl_album_movepic(char *library, int photo, int old, int new)
 {
 	t_db db = {0};
+	t_photos pic = { 0 };
+	t_album alb_old = { 0 };
+	t_album alb_new = { 0 };
+	char tmp_old[512] = { 0 };
+	char tmp_new[512] = { 0 };
 
 	fill_tdb(&db, library);
+	if (select_photo(&db, photo, &pic) < 0 || select_album(&db, old, &alb_old) < 0)
+		return EDBFAIL;
+	if (select_album(&db, new, &alb_new) < 0)
+		return EDBFAIL;
+
+	cwk_path_join(library, "/pictures/", tmp_old, sizeof(tmp_old));
+	cwk_path_join(tmp_old, alb_old.name, tmp_old, sizeof(tmp_old));
+	cwk_path_join(tmp_old, pic.new_name, tmp_old, sizeof(tmp_old));
+
+	cwk_path_join(library, "/pictures/", tmp_new, sizeof(tmp_new));
+	cwk_path_join(tmp_new, alb_new.name, tmp_new, sizeof(tmp_new));
+	cwk_path_join(tmp_new, pic.new_name, tmp_new, sizeof(tmp_new));
+
 	if (move_contains(&db, photo, old, new))
 		return EDBFAIL;
+	printf("moving %s to %s\n", tmp_old, tmp_new);
+	rename(tmp_old, tmp_new);
 	return SUCCESS;
 }
