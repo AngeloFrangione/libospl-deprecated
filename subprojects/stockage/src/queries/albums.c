@@ -92,12 +92,34 @@ int move_contains(t_db *db, int photo, int old_album, int new_album)
 	return 0;
 }
 
-static int _callback(uint32_t *list, int ac, char **av, char **column)
+static int _callback_pictures(t_photos *pic, int ac, char **av, char **column)
 {
-	int i = 0;
-	while (list[i])
-		++i;
-	list[i] = atoi(av[0]);
+	static int current = 0;
+
+	if (!pic)
+	{
+		current = 0;
+		return 0;
+	}
+	pic[current].id = atoi(av[0]);
+	strcpy(pic[current].hash, av[1]);
+	strcpy(pic[current].original_name, av[2]);
+	strcpy(pic[current].new_name, av[3]);
+	strcpy(pic[current].import_datetime, av[4]);
+	pic[current].import_year = atoi(av[5]);
+	pic[current].import_month = atoi(av[6]);
+	pic[current].import_day = atoi(av[7]);
+	pic[current].import_hour = atoi(av[8]);
+	pic[current].import_minut = atoi(av[9]);
+	pic[current].import_second = atoi(av[10]);
+	pic[current].exif_height = atoi(av[11]);
+	pic[current].exif_width = atoi(av[12]);
+	if (av[13])
+		strcpy(pic[current].exif_brand, av[13]);
+	if (av[14])
+		strcpy(pic[current].exif_peripheral, av[14]);
+	pic[current].fav = atoi(av[15]);
+	++current;
 	return 0;
 }
 
@@ -116,23 +138,27 @@ static int _callback_album(t_album *list, int ac, char **av, char **column)
 	return 0;
 }
 
-int list_contains(t_db *db, int album, uint32_t *list)
+int list_contains(t_db *db, int album, t_photos *list)
 {
 	char	query[BUFFER_SIZE];
 
-	sprintf(query, "select contained_photo from contains where containing_album=%d;", album);
-	if (stockage_read(db, query, _callback, list))
+	sprintf(query, "SELECT DISTINCT photos.* FROM photos INNER JOIN contains ON photos.id = contains.contained_photo WHERE contains.containing_album = %d;", album);
+	_callback_pictures(NULL, 0, NULL, NULL);
+	if (stockage_read(db, query, _callback_pictures, list))
 		return 1;
+	_callback_pictures(NULL, 0, NULL, NULL);
 	return 0;
 }
 
-int photo_contained(t_db *db, int pic, uint32_t *list)
+int photo_contained(t_db *db, int pic, t_album *list)
 {
 	char	query[BUFFER_SIZE];
 
-	sprintf(query, "select containing_album from contains where contained_photo=%d;", pic);
-	if (stockage_read(db, query, _callback, list))
+	sprintf(query, "SELECT DISTINCT albums.* FROM albums INNER JOIN contains ON albums.id = contains.containing_album WHERE contains.contained_photo = %d;", pic);
+	_callback_album(NULL, 0, NULL, NULL);
+	if (stockage_read(db, query, _callback_album, list))
 		return 1;
+	_callback_album(NULL, 0, NULL, NULL);
 	return 0;
 }
 

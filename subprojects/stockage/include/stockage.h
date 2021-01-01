@@ -189,8 +189,8 @@ int delete_album(t_db *db, int id);
 int insert_contains(t_db *db, int photo, int album);
 int delete_contains(t_db *db, int photo, int album);
 int move_contains(t_db *db, int photo, int old_album, int new_album);
-int list_contains(t_db *db, int album, uint32_t *list);
-int photo_contained(t_db *db, int photo, uint32_t *list);
+int list_contains(t_db *db, int album, t_photos *list);
+int photo_contained(t_db *db, int photo, t_album *list);
 int list_albums(t_db *db, t_album *list);
 int select_album(t_db *db, int id, t_album *album);
 

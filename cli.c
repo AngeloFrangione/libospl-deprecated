@@ -319,17 +319,15 @@ static int album (int ac, char **av)
 					usage_album(NULL);
 					return 0;
 				}
-				uint32_t pic_list[6500];
-				memset(pic_list, 0, sizeof(uint32_t) * 6500);
+				t_photos pic_list[6500] = { 0 };
 				ospl_album_listpic(av[1], atoi(av[2]), pic_list);
-				
 				printf("Picture inside album %d:\n", atoi(av[2]));
 				printf("----------------------\n");
 				// printf("%d\n", pic_list[0]);
 				int i = 0;
-				while(pic_list[i])
+				while(pic_list[i].id)
 				{
-					printf("%d\n", pic_list[i]);
+					printf("%s : %s\n", pic_list[i].original_name, pic_list[i].new_name);
 					++i;
 				}
 				break;
@@ -359,7 +357,8 @@ static int create(int ac, char **av)
 	}
 	if (ospl_create_library(g_library_path) < 0)
 		perror(NULL);
-	printf("created library at path: %s\n", av[0]);
+	else
+		printf("created library at path: %s\n", av[0]);
 	return 0;
 }
 
