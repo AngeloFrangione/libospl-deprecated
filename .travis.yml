@@ -1,0 +1,22 @@
+dist: bionic
+group: travis_latest
+os: linux
+language: c
+addons:
+  apt:
+    packages:
+      - "python3"
+      - "python3-pip"
+      - "python3-setuptools"
+install:
+  - pip3 install meson ninja
+before_install:
+  - sudo apt-get install -y libmagic-dev libjpeg-dev libexif-dev libsqlite3-dev
+matrix:
+  include:
+    - env: CC=gcc
+    - env: CC=clang
+script:
+  - meson builddir
+  - meson compile -C builddir
+  - meson test -C builddir --print-errorlogs
