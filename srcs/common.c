@@ -164,30 +164,6 @@ int folder_exists(char *path)
 }
 
 /**
-  * \brief Get the index of *c in *s
-  *
-  * \param s string to search in
-  * \param c character to search with
-  * \return the index from c in s
-  * \return if c was not found in s returns -1
-  */
-int indexof(char *s, char c)
-{
-	int i;
-
-	i = 0;
-	if (!s)
-		return (-1);
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
-		++i;
-	}
-	return (-1);
-}
-
-/**
   * \brief Check if an image is supported
   *
   * \param src path of the image to check
