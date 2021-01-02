@@ -1,3 +1,5 @@
+[![Build Status](https://www.travis-ci.com/AngeloFrangione/libospl.svg?branch=master)](https://www.travis-ci.com/AngeloFrangione/libospl)
+
 # libospl - Open Source Photo Library
 ----------------------------------------
 ### OSP what?
