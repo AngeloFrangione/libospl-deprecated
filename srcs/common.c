@@ -81,10 +81,10 @@ int remove_dir(char *path)
 		return 1;
 	else
 	{
-		readdir(d);
-		readdir(d);
 		while ((dir = readdir(d)))
 		{
+			if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))
+				continue;
 			cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
 			if(folder_exists(tmp))
 				remove_dir(tmp);
