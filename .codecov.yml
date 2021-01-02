@@ -2,3 +2,4 @@ ignore:
   - "test_files/"
   - "subprojects/**/*"
   - "cli.c"
+  - "srcs/ospl.c"
