@@ -11,12 +11,15 @@ addons:
 install:
   - pip3 install meson ninja
 before_install:
-  - sudo apt-get install -y libmagic-dev libjpeg-dev libexif-dev libsqlite3-dev
+  - sudo apt-get install -y libmagic-dev libjpeg-dev libexif-dev libsqlite3-dev lcov 
 matrix:
   include:
     - env: CC=gcc
     - env: CC=clang
 script:
-  - meson builddir
+  - meson builddir -Db_coverage=true
   - meson compile -C builddir
   - meson test -C builddir --print-errorlogs
+  - ninja -C builddir coverage
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -v
