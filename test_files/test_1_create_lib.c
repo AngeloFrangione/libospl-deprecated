@@ -13,7 +13,7 @@ int main(void)
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
 	int r = rand();
-	sprintf(lib_name, "test_Library_2_%d", r);
+	sprintf(lib_name, "test_Library_1_%d", r);
 	if (ospl_create_library(lib_name) < 0)
 	{
 		printf("Error executing ospl_create_library\n");
