@@ -159,10 +159,10 @@ int ospl_import_folder(char *library, char *path)
 	if (!(d = opendir(path)))
 		return ENOTFOUND;
 	char tmp[4096] = { 0 };
-	readdir(d);
-	readdir(d);
 	while ((dir = readdir(d)))
 	{
+		if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))
+			continue;
 		cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
 		ospl_import_picture(library, tmp);
 	}
@@ -179,10 +179,10 @@ int ospl_import_folder_in_album(char *library, char *path, int album)
 	if (!(d = opendir(path)))
 		return ENOTFOUND;
 	char tmp[4096] = { 0 };
-	readdir(d);
-	readdir(d);
 	while ((dir = readdir(d)))
 	{
+		if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))
+			continue;
 		cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
 		ospl_import_picture_in_album(library, tmp, album);
 	}
