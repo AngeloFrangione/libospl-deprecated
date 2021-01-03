@@ -31,6 +31,7 @@ body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
+  background: black;
   color: $body-text-color;
 }
 
@@ -48,7 +49,7 @@ header nav {
 header a {
     font-size: 2.1em;
     margin-top: 1rem;
-    color: white;
+    color: $body-text-color;
     display: inline-block;
 }
 
