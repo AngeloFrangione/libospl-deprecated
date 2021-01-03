@@ -13,7 +13,7 @@ int main(void)
 		printf("Failed to create library: %s", ospl_enum_error(ret));
 		return 1;
 	}
-	if ((ret = ospl_import_picture(library, "path/to/pic.jpg/")) < 0)
+	if ((ret = ospl_import_picture(library, "path/to/pic.jpg")) < 0)
 	{
 		printf("Failed to import picture: %s", ospl_enum_error(ret));
 		return 1;
