@@ -20,7 +20,6 @@ cd build
 ninja
 ```
 ## GNU/Linux
-###### Install meson
 You will need to install [meson](https://mesonbuild.com/Quick-guide.html)
 ```shell
 sudo apt install python3 python3-pip python3-setuptools python3-wheel ninja-build cmake
