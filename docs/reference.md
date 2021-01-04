@@ -1,6 +1,6 @@
 # Reference
 ## Functions
-- **[ospl_create_library]()**  
+- **[ospl_create_library](reference/ospl_create_library)**  
 	create a ospl library.
 - **[ospl_import_picture]()**  
 	import a picture into library
