@@ -2,7 +2,7 @@
 ## Functions
 - **[ospl_create_library](/{{ site.baseurl }}/reference/ospl_create_library)**  
 	create a ospl library.
-- **[ospl_import_picture]()**  
+- **[ospl_import_picture](/{{ site.baseurl }}/reference/ospl_import_picture)**  
 	import a picture into library
 - **[ospl_import_picture_in_album]()**  
 	import a picture directly into an existing album
