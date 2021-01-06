@@ -37,13 +37,13 @@ int main(void)
 		printf("No thumbnails folder found\n");
 		return 1;
 	}
-	sprintf(tmp, "%s/pictures", lib_name);
+	sprintf(tmp, "%s/photos", lib_name);
 	if (!folder_exists(tmp))
 	{
-		printf("No pictures folder found\n");
+		printf("No photos folder found\n");
 		return 1;
 	}
-	sprintf(tmp, "%s/pictures/import/", lib_name);
+	sprintf(tmp, "%s/photos/import/", lib_name);
 	if (!folder_exists(tmp))
 	{
 		printf("No import folder found\n");

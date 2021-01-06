@@ -1,6 +1,6 @@
 /*	libospl - Open Source Photo Library
 	an opensource and multiplateform photo library management that can be used
-	to store and sort all your pictures.
+	to store and sort all your photos.
 	Copyright (C) 2019-2020 Angelo Frangione
 
 	This program is free software; you can redistribute it and/or modify
@@ -74,22 +74,22 @@ char *enum_error(int error_code);
 
 // Library related functions
 int ospl_create_library(char *library);
-int ospl_import_picture(char *library, char *path);
-int ospl_import_picture_in_album(char *library, char *path, int album);
+int ospl_import_photo(char *library, char *path);
+int ospl_import_photo_in_album(char *library, char *path, int album);
 int ospl_import_folder(char *library, char *path);
 int ospl_import_folder_in_album(char *library, char *path, int album);
 int ospl_album_list(char *library, t_album *list);
-int ospl_album_listpic(char *library, int album, t_photos *list);
-int ospl_album_assocpic(char *library, int photo, t_album *list);
+int ospl_album_list_photos(char *library, int album, t_photos *list);
 int ospl_album_create(char *library, char *name);
 int ospl_album_rename(char *library, int id, char *name);
 int ospl_album_delete(char *library, int id);
-int ospl_album_addpic(char *library, int photo, int album);
-int ospl_album_delpic(char *library, int photo, int album);
-int ospl_album_movepic(char *library, int photo, int old, int new);
-int ospl_picture_get(char *library, int id, t_photos *list);
-int ospl_picture_list(char *library, t_photos *list);
-int ospl_picture_delete(char *library, int id);
+int ospl_album_add_photo(char *library, int photo, int album);
+int ospl_album_delete_photo(char *library, int photo, int album);
+int ospl_album_move_photo(char *library, int photo, int old, int new);
+int ospl_photo_associated_album(char *library, int photo, t_album *list);
+int ospl_photo_get(char *library, int id, t_photos *list);
+int ospl_photo_list(char *library, t_photos *list);
+int ospl_photo_delete(char *library, int id);
 
 
 // Common usage functions

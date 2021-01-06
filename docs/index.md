@@ -1,5 +1,5 @@
 ### What is libospl ?
-libospl is a fast C library for easily managing a photolibrary. You can use libospl to manage your folders, albums, pictures, import folders of pictures. It will generate automaticly a thumbnail and put the pictures in the place. All informations are stored into an sqlite3 database.
+libospl is a fast C library for easily managing a photolibrary. You can use libospl to manage your folders, albums, photos, import folders of photos. It will generate automaticly a thumbnail and put the photos in the place. All informations are stored into an sqlite3 database.
 ### Example 
 ```c
 #include <ospl.h>
@@ -13,12 +13,12 @@ int main(void)
 		printf("Failed to create library: %s", ospl_enum_error(ret));
 		return 1;
 	}
-	if ((ret = ospl_import_picture(library, "path/to/pic.jpg")) < 0)
+	if ((ret = ospl_import_photo(library, "path/to/photo.jpg")) < 0)
 	{
-		printf("Failed to import picture: %s", ospl_enum_error(ret));
+		printf("Failed to import photo: %s", ospl_enum_error(ret));
 		return 1;
 	}
 }
 ```
 
-This will create a library at `path/to/photo/library` and import the picture located at `path/to/pic.jpg`
+This will create a library at `path/to/photo/library` and import the photo located at `path/to/photo.jpg`

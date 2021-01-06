@@ -31,7 +31,7 @@ int main(void)
 		printf("executing ospl_album_delete failed\n");
 		return 1;
 	}
-	sprintf(tmp, "%s/pictures/Vacances", lib_name);
+	sprintf(tmp, "%s/photos/Vacances", lib_name);
 	if (folder_exists(tmp))
 	{
 		printf("album folder still here altho it was deleted: %s\n", tmp);

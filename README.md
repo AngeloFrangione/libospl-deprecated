@@ -3,7 +3,7 @@
 # libospl - Open Source Photo Library
 ----------------------------------------
 ### OSP what?
-OSPL is a opensource and multiplateform photo library management that can be used to store and sort all your pictures.
+OSPL is a opensource and multiplateform photo library management that can be used to store and sort all your photos.
 
 ### Where is the GUI?
 This project is split in two main parts:

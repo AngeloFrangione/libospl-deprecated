@@ -21,23 +21,23 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_import_folder(lib_name, "../test_files/ressources/Album of random pictures/") < 0)
+	if (ospl_import_folder(lib_name, "../test_files/ressources/Album of random photos/") < 0)
 	{
 		printf("Error executing ospl_import_folder\n");
 		return 1;
 	}
-	t_photos pic[65] = { 0 };
-	if (ospl_picture_list(lib_name, pic) < 0)
+	t_photos pho[65] = { 0 };
+	if (ospl_photo_list(lib_name, pho) < 0)
 	{
-		printf("Error executing ospl_picture_list\n");
+		printf("Error executing ospl_photo_list\n");
 		return 1;
 	}
 	for (int i = 0; i < 57; ++i)
 	{
-		sprintf(tmp, "%s/pictures/import/%s", lib_name, pic[i].new_name);
+		sprintf(tmp, "%s/photos/import/%s", lib_name, pho[i].new_name);
 		if (!file_exists(tmp))
 		{
-			printf("picture not present in import folder: %s\n", tmp);
+			printf("photo not present in import folder: %s\n", tmp);
 			return 1;
 		}
 	}

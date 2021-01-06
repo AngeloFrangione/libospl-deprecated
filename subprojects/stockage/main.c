@@ -1,6 +1,6 @@
 /*	libospl - Open Source Photo Library
 	an opensource and multiplateform photo library management that can be used
-	to store and sort all your pictures.
+	to store and sort all your photos.
 	Copyright (C) 2019-2020 Angelo Frangione
 
 	This program is free software; you can redistribute it and/or modify
@@ -45,32 +45,32 @@ int main(int argc, char const *argv[])
 
 	//// Testing photos /////
 	// create_database(&db);
-	t_photos pic;
-	memset(&pic, 0, sizeof(t_photos));
-	strcpy(pic.hash, "dc93f5c86d19546fd6563fb7d806026d");
-	strcpy(pic.original_name, "IMG_0001.jpg");
-	strcpy(pic.new_name, "20207235139136407971_IMG_0001.jpg");
-	strcpy(pic.import_datetime, "20207235132633098006");
-	pic.import_year = 2020;
-	pic.import_month = 05;
-	pic.import_day = 22;
-	pic.import_hour = 4;
-	pic.import_minut = 41;
-	pic.import_second = 55;
-	strcpy(pic.exif_brand, "");
-	strcpy(pic.exif_peripheral, "");
-	insert_photo(&db, &pic);
-	insert_photo(&db, &pic);
+	t_photos pho;
+	memset(&pho, 0, sizeof(t_photos));
+	strcpy(pho.hash, "dc93f5c86d19546fd6563fb7d806026d");
+	strcpy(pho.original_name, "IMG_0001.jpg");
+	strcpy(pho.new_name, "20207235139136407971_IMG_0001.jpg");
+	strcpy(pho.import_datetime, "20207235132633098006");
+	pho.import_year = 2020;
+	pho.import_month = 05;
+	pho.import_day = 22;
+	pho.import_hour = 4;
+	pho.import_minut = 41;
+	pho.import_second = 55;
+	strcpy(pho.exif_brand, "");
+	strcpy(pho.exif_peripheral, "");
+	insert_photo(&db, &pho);
+	insert_photo(&db, &pho);
 	update_photo_null(&db, 1, "exif_brand");
 	char value2[255] = {0};
 	select_photo_single(&db, 1, "original_name", value2);
 	printf("%s\n", value2);
 
-	t_photos picc;
-	memset(&picc, 0, sizeof(t_photos));
-	strcpy(picc.hash, "Henlo");
-	select_photo(&db, 1, &picc);
-	printf("%s\n", picc.hash);
+	t_photos phoc;
+	memset(&phoc, 0, sizeof(t_photos));
+	strcpy(phoc.hash, "Henlo");
+	select_photo(&db, 1, &phoc);
+	printf("%s\n", phoc.hash);
 	// db.commit = 1;
 	create_album(&db, "Vacances");
 	create_album(&db, "Mon amour");
@@ -94,12 +94,12 @@ int main(int argc, char const *argv[])
 	// delete_album(&db, 1);
 	// delete_photo(&db, 1);
 	printf("-----------------------------\n");
-	t_photos pic_list[255] = { 0 };
-	select_photo_all(&db, pic_list);
+	t_photos pho_list[255] = { 0 };
+	select_photo_all(&db, pho_list);
 	printf("original_name | import_year\n");
-	for (int i = 0;pic_list[i].import_year; i++)
+	for (int i = 0;pho_list[i].import_year; i++)
 	{
-		printf("%13s %11d\n", pic_list[i].original_name, pic_list[i].import_year);
+		printf("%13s %11d\n", pho_list[i].original_name, pho_list[i].import_year);
 	}
 
 	return 0;

@@ -14,7 +14,7 @@ int main(void)
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
 	int r = rand();
-	sprintf(lib_name, "test_Library_4_%d", r);
+	sprintf(lib_name, "test_Library_9_%d", r);
 	if (ospl_create_library(lib_name) < 0)
 	{
 		printf("Error executing ospl_create_library\n");
@@ -53,7 +53,7 @@ int main(void)
 	sprintf(tmp, "%s/photos/Vacances/%s", lib_name, pho.new_name);
 	if (!file_exists(tmp))
 	{
-		printf("photo not present in import folder: %s\n", tmp);
+		printf("photo not present in the album folder: %s\n", tmp);
 		return 1;
 	}
 	t_album album;
@@ -64,7 +64,7 @@ int main(void)
 	}
 	if (album.id != 1)
 	{
-		printf("ospl_photo_associated_album doesn't get the right album_id. expected: 1 result: %d\n", album.id);
+		printf("assoc_pho doesn't get the right album_id. expected: 1 result: %d\n", album.id);
 		return 1;
 	}
 	if (ospl_album_list_photos(lib_name, 1, &pho) < 0)
@@ -74,7 +74,18 @@ int main(void)
 	}
 	if (pho.id != 1)
 	{
-		printf("ospl_album_list_photos doesn't get the right photo id. expected: 1 result: %d\n", pho.id);
+		printf("list_pho doesn't get the right pho_id. expected: 1 result: %d\n", pho.id);
+		return 1;
+	}
+	if (ospl_album_delete_photo(lib_name, 1, 1) < 0)
+	{
+		printf("error executing ospl_album_delete_photo\n");
+		return 1;
+	}
+	sprintf(tmp, "%s/photos/Vacances/%s", lib_name, pho.new_name);
+	if (file_exists(tmp))
+	{
+		printf("photo is present in album folder: %s\n", tmp);
 		return 1;
 	}
 	sprintf(tmp, "rm -rf %s", lib_name);

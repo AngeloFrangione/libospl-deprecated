@@ -29,7 +29,7 @@ deps = [thumbnailer,
 source =['srcs/ospl.c', 'srcs/common.c', 
 		'srcs/action/create.c',
 		'srcs/action/import.c',
-		'srcs/action/picture.c',
+		'srcs/action/photo.c',
 		'srcs/action/albums.c',
 		'srcs/action/export.c']
 
@@ -58,9 +58,9 @@ test_5_import_folder = executable('test_5_import_folder', 'test_files/test_5_imp
 test_6_import_folder_in_album = executable('test_6_import_folder_in_album', 'test_files/test_6_import_folder_in_album.c', link_with: ospl, dependencies : deps)
 test_7_rename_alb = executable('test_7_rename_alb', 'test_files/test_7_rename_alb.c', link_with: ospl, dependencies : deps)
 test_8_delete_alb = executable('test_8_delete_alb', 'test_files/test_8_delete_alb.c', link_with: ospl, dependencies : deps)
-test_9_alb_del_pic = executable('test_9_alb_del_pic', 'test_files/test_9_alb_del_pic.c', link_with: ospl, dependencies : deps)
-test_10_alb_mov_pic = executable('test_10_alb_mov_pic', 'test_files/test_10_alb_mov_pic.c', link_with: ospl, dependencies : deps)
-test_11_del_pic = executable('test_11_del_pic', 'test_files/test_11_del_pic.c', link_with: ospl, dependencies : deps)
+test_9_alb_del_photo = executable('test_9_alb_del_photo', 'test_files/test_9_alb_del_photo.c', link_with: ospl, dependencies : deps)
+test_10_alb_mov_photo = executable('test_10_alb_mov_photo', 'test_files/test_10_alb_mov_photo.c', link_with: ospl, dependencies : deps)
+test_11_del_photo = executable('test_11_del_photo', 'test_files/test_11_del_photo.c', link_with: ospl, dependencies : deps)
 test_12_list_albums = executable('test_12_list_albums', 'test_files/test_12_list_albums.c', link_with: ospl, dependencies : deps)
 
 
@@ -72,7 +72,7 @@ test('5_import_folder', test_5_import_folder)
 test('6_import_folder_in_album', test_6_import_folder_in_album)
 test('7_rename_alb', test_7_rename_alb)
 test('8_delete_alb', test_8_delete_alb)
-test('9_alb_del_pic', test_9_alb_del_pic)
-test('10_alb_mov_pic', test_10_alb_mov_pic)
-test('11_del_pic', test_11_del_pic)
+test('9_alb_del_photo', test_9_alb_del_photo)
+test('10_alb_mov_photo', test_10_alb_mov_photo)
+test('11_del_photo', test_11_del_photo)
 test('12_list_albums', test_12_list_albums)

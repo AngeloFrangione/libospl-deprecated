@@ -1,20 +1,20 @@
-# ospl_import_picture
+# ospl_import_photo
 
 (since version 0.1.0)  
-import a picture into library
+import a photo into library
 
 ## Description
 
 ```c
-int ospl_import_picture(char *library, char *path);
+int ospl_import_photo(char *library, char *path);
 ```
 
-This functions imports a picture located at ``path`` in an ospl library located at ``library``
+This functions imports a photo located at ``path`` in an ospl library located at ``library``
 
 ## Parameters
 
 **`library`**: the path of an ospl library.  
-**`path`**: the path of a picture.
+**`path`**: the path of a photo.
 
 
 
@@ -30,8 +30,8 @@ This functions imports a picture located at ``path`` in an ospl library located 
 
 | ``value``     | ``signification``                            |
 | ------------- | -------------------------------------------- |
-| ``SUCCESS``   | picture successfully imported                |
-| ``ENOTFOUND`` | the picture ``path`` given does not exist    |
+| ``SUCCESS``   | photo successfully imported                |
+| ``ENOTFOUND`` | the photo ``path`` given does not exist    |
 | ``EDBFAIL``   | an error occurred when accessing to database |
 
 
