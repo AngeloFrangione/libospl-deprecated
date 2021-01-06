@@ -1,6 +1,6 @@
 /*	libospl - Open Source Photo Library
 	an opensource and multiplateform photo library management that can be used
-	to store and sort all your pictures.
+	to store and sort all your photos.
 	Copyright (C) 2020 Angelo Frangione
 
 	This program is free software; you can redistribute it and/or modify

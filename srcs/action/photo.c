@@ -1,6 +1,6 @@
 /*	libospl - Open Source Photo Library
 	an opensource and multiplateform photo library management that can be used
-	to store and sort all your pictures.
+	to store and sort all your photos.
 	Copyright (C) 2019-2020 Angelo Frangione
 
 	This program is free software; you can redistribute it and/or modify
@@ -24,7 +24,7 @@
 #include <cwalk.h>
 #include <stockage.h>
 
-int ospl_picture_get(char *library, int id, t_photos *list)
+int ospl_photo_get(char *library, int id, t_photos *list)
 {
 	t_db db = {0};
 
@@ -34,7 +34,7 @@ int ospl_picture_get(char *library, int id, t_photos *list)
 	return SUCCESS;
 }
 
-int ospl_picture_list(char *library, t_photos *list)
+int ospl_photo_list(char *library, t_photos *list)
 {
 	t_db db = {0};
 
@@ -44,21 +44,21 @@ int ospl_picture_list(char *library, t_photos *list)
 	return SUCCESS;
 }
 
-int ospl_picture_delete(char *library, int id)
+int ospl_photo_delete(char *library, int id)
 {
 	t_db db = {0};
-	t_photos pic;
+	t_photos pho;
 	char tmp_import[4096] = { 0 };
 	char tmp_thumb[4096] = { 0 };
 
 	fill_tdb(&db, library);
-	select_photo(&db, id, &pic);
+	select_photo(&db, id, &pho);
 	delete_photo(&db, id);
 
-	cwk_path_join(library, "pictures/import", tmp_import, sizeof(tmp_import));
+	cwk_path_join(library, "photos/import", tmp_import, sizeof(tmp_import));
 	cwk_path_join(library, "thumbnails", tmp_thumb, sizeof(tmp_thumb));
-	cwk_path_join(tmp_import, pic.new_name, tmp_import, sizeof(tmp_import));
-	cwk_path_join(tmp_thumb, pic.new_name, tmp_thumb, sizeof(tmp_thumb));
+	cwk_path_join(tmp_import, pho.new_name, tmp_import, sizeof(tmp_import));
+	cwk_path_join(tmp_thumb, pho.new_name, tmp_thumb, sizeof(tmp_thumb));
 	if (remove(tmp_import) || remove(tmp_thumb))
 		return EERRNO;
 	return SUCCESS;

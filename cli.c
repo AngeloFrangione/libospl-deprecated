@@ -1,6 +1,6 @@
 /*	libospl - Open Source Photo Library
 	an opensource and multiplateform photo library management that can be used
-	to store and sort all your pictures.
+	to store and sort all your photos.
 	Copyright (C) 2019-2020 Angelo Frangione
 
 	This program is free software; you can redistribute it and/or modify
@@ -27,10 +27,10 @@
 #include <errno.h>
 #include <ctype.h>
 
-char *ARGS[ARGS_COUNT] = {"create", "import", "picture", "export", "album", "folder"};
-char *ALBUM_ARGS[ALB_ARG_CNT] = {"list", "create", "rename", "delete", "picadd", "picdel", "piclist", "picmove"};
-enum {LIST = 1, CREATE, RENAME, DELETE, PICADD, PICDEL, PICLIST, PICMOVE};
-char *PICTURE_ARGS[PIC_ARG_CNT] = {"list", "info", "delete"};
+char *ARGS[ARGS_COUNT] = {"create", "import", "photo", "export", "album", "folder"};
+char *ALBUM_ARGS[ALB_ARG_CNT] = {"list", "create", "rename", "delete", "phoadd", "phodel", "pholist", "phomove"};
+enum {LIST = 1, CREATE, RENAME, DELETE, PHOADD, PHODEL, PHOLIST, PHOMOVE};
+char *PHOTO_ARGS[PHO_ARG_CNT] = {"list", "info", "delete"};
 char *g_library_path = NULL;
 char *g_database_path = NULL;
 int print_mode = 0; // 0 = normal printing, 1 = verbose printing, 2 = json printing
@@ -48,15 +48,15 @@ int isnumeric(char *s)
 
 void show_usage()
 {
-	printf("\nOSPL - Open source picture library v%s.%s.%s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
+	printf("\nOSPL - Open source photo library v%s.%s.%s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_REVISION);
 	printf("Utility to manage an OSPL\n");
 	printf("================================================================================\n");
 	printf("Usage: ospl <verb> <librarypath> <options>, where <verb> is as follows:\n");
 	printf("--------------------------------------------------------------------------------\n");
 	printf("ospl create         creating library\n");
-	printf("ospl import         importing pictures\n");
-	printf("ospl picture        managing pictures\n");
-	printf("ospl export         exporting pictures\n");
+	printf("ospl import         importing photos\n");
+	printf("ospl photo          managing photos\n");
+	printf("ospl export         exporting photos\n");
 	printf("ospl album          managing albums\n");
 	printf("ospl folder         managing folders\n");
 	printf("--------------------------------------------------------------------------------\n");
@@ -74,7 +74,7 @@ void usage_create()
 
 void usage_import()
 {
-	printf("\nImport specified pictures into <librarypath>\n");
+	printf("\nImport specified photos into <librarypath>\n");
 	printf("--------------------------------------------------------------------------------\n");
 	printf("Usage: ospl import <librarypath> <options>\n");
 	printf("OPTIONS:\n");
@@ -101,10 +101,10 @@ void usage_album(char *arg)
 	printf("ospl album create  <librarypath> <name>            creating albums\n");
 	printf("ospl album rename  <librarypath> <album> <name>    renaming albums\n");
 	printf("ospl album delete  <librarypath> <album>           deleting albums\n");
-	printf("ospl album picadd  <librarypath> <album> <pic>     add a picture into album\n");
-	printf("ospl album picdel  <librarypath> <album> <pic>     delete a picture from album\n");
-	printf("ospl album piclist <librarypath> <album>           list pictures inside an album\n");
-	printf("ospl album picmove <librarypath> <pic> <old> <new> move picture to another album\n");
+	printf("ospl album phoadd  <librarypath> <album> <photo>   add a photo into album\n");
+	printf("ospl album phodel  <librarypath> <album> <photo>   delete a photo from album\n");
+	printf("ospl album pholist <librarypath> <album>           list photos inside an album\n");
+	printf("ospl album phomove <librarypath> <photo> <old> <new> move photo to another album\n");
 	printf("--------------------------------------------------------------------------------\n");
 }
 
@@ -113,15 +113,15 @@ void usage_folder(char *arg)
 
 }
 
-void usage_picture(char **arg)
+void usage_photo(char **arg)
 {
-	printf("\nManages pictures at <librarypath>\n");
+	printf("\nManages photos at <librarypath>\n");
 	printf("--------------------------------------------------------------------------------\n");
-	printf("Usage: ospl picture <verb> <librarypath> <options>, where <verb> is as follows:\n");
+	printf("Usage: ospl photo <verb> <librarypath> <options>, where <verb> is as follows:\n");
 	printf("--------------------------------------------------------------------------------\n");
-	printf("ospl picture list   <librarypath>             list every picture\n");
-	printf("ospl picture info   <librarypath> <id>        show more info about a picture\n");
-	printf("ospl picture delete <librarypath> <id>        remove picture from library\n");
+	printf("ospl photo list   <librarypath>             list every photo\n");
+	printf("ospl photo info   <librarypath> <id>        show more info about a photo\n");
+	printf("ospl photo delete <librarypath> <id>        remove photo from library\n");
 	printf("--------------------------------------------------------------------------------\n");
 
 }
@@ -186,10 +186,10 @@ static int import(int ac, char **av)
 		initiate_path(av[0]);
 		if (library_exists(av[0]))
 		{
-			if (ospl_import_picture(av[0], av[2]) >= 0)
-				printf("picture imported with success\n");
+			if (ospl_import_photo(av[0], av[2]) >= 0)
+				printf("photo imported with success\n");
 			else
-				printf("failed importing picture\n");
+				printf("failed importing photo\n");
 		}
 		else
 			printf("Library not found: %s\n", av[0]);
@@ -207,10 +207,10 @@ static int import(int ac, char **av)
 		initiate_path(av[0]);
 		if (library_exists(av[0]))
 		{
-			if (ospl_import_picture_in_album(av[0], av[2], 1) >= 0)
-				printf("picture imported with success\n");
+			if (ospl_import_photo_in_album(av[0], av[2], 1) >= 0)
+				printf("photo imported with success\n");
 			else
-				printf("failed importing picture\n");
+				printf("failed importing photo\n");
 		}
 		else
 			printf("Library not found: %s\n", av[0]);
@@ -295,50 +295,50 @@ static int album (int ac, char **av)
 				else
 					printf("deleted album %s\n", av[2]);
 				break;
-			case PICADD :
+			case PHOADD :
 				if (ac < 6 || !isnumeric(av[2]) || !isnumeric(av[3]))
 				{
 					usage_album(NULL);
 					return 0;
 				}
-				ospl_album_addpic(av[1], atoi(av[2]), atoi(av[3]));
-				printf("picture %d added to album %d\n", atoi(av[2]), atoi(av[3]));
+				ospl_album_add_photo(av[1], atoi(av[2]), atoi(av[3]));
+				printf("photo %d added to album %d\n", atoi(av[2]), atoi(av[3]));
 				break;
-			case PICDEL :
+			case PHODEL :
 				if (ac < 6 || !isnumeric(av[2]) || !isnumeric(av[3]))
 				{
 					usage_album(NULL);
 					return 0;
 				}
-				ospl_album_delpic(av[1], atoi(av[2]), atoi(av[3]));
-				printf("picutre %d deleted from album %d\n", atoi(av[2]), atoi(av[3]));
+				ospl_album_delete_photo(av[1], atoi(av[2]), atoi(av[3]));
+				printf("photo %d deleted from album %d\n", atoi(av[2]), atoi(av[3]));
 				break;
-			case PICLIST :
+			case PHOLIST :
 				if (ac < 5 || !isnumeric(av[2]))
 				{
 					usage_album(NULL);
 					return 0;
 				}
-				t_photos pic_list[6500] = { 0 };
-				ospl_album_listpic(av[1], atoi(av[2]), pic_list);
-				printf("Picture inside album %d:\n", atoi(av[2]));
+				t_photos pho_list[6500] = { 0 };
+				ospl_album_list_photos(av[1], atoi(av[2]), pho_list);
+				printf("Photo inside album %d:\n", atoi(av[2]));
 				printf("----------------------\n");
-				// printf("%d\n", pic_list[0]);
+				// printf("%d\n", pho_list[0]);
 				int i = 0;
-				while(pic_list[i].id)
+				while(pho_list[i].id)
 				{
-					printf("%s : %s\n", pic_list[i].original_name, pic_list[i].new_name);
+					printf("%s : %s\n", pho_list[i].original_name, pho_list[i].new_name);
 					++i;
 				}
 				break;
-			case PICMOVE :
+			case PHOMOVE :
 				if (ac < 7 || !isnumeric(av[2]) || !isnumeric(av[3]) || !isnumeric(av[4]))
 				{
 					usage_album(NULL);
 					return 0;
 				}
-				ospl_album_movepic(av[1], atoi(av[2]), atoi(av[3]), atoi(av[4]));
-				printf("picture %d moved from album %d to album %d\n", atoi(av[2]), atoi(av[3]), atoi(av[4]));
+				ospl_album_move_photo(av[1], atoi(av[2]), atoi(av[3]), atoi(av[4]));
+				printf("photo %d moved from album %d to album %d\n", atoi(av[2]), atoi(av[3]), atoi(av[4]));
 				break;
 		}
 	}
@@ -362,17 +362,17 @@ static int create(int ac, char **av)
 	return 0;
 }
 
-static int picture(int ac, char **av)
+static int photo(int ac, char **av)
 {
 	int r;
 	
-	printf("picture/ (args: %d) 1: %s 2: %s\n", ac, av[1], av[2]);
+	printf("photo/ (args: %d) 1: %s 2: %s\n", ac, av[1], av[2]);
 	if (ac < 4)
 	{
-		usage_picture(NULL);
+		usage_photo(NULL);
 		return 0;
 	}
-	else if ((r = indexof_arg(av[0], PICTURE_ARGS, PIC_ARG_CNT)))
+	else if ((r = indexof_arg(av[0], PHOTO_ARGS, PHO_ARG_CNT)))
 	{
 		if(!library_exists(av[1]))
 		{
@@ -383,47 +383,47 @@ static int picture(int ac, char **av)
 		{
 			case 1 :
 				printf("list\n");
-				t_photos pic_list[6500] = { 0 };
-				ospl_picture_list(av[1], pic_list);
+				t_photos pho_list[6500] = { 0 };
+				ospl_photo_list(av[1], pho_list);
 				printf("%5s|%32s|%52s|%24s|%11s|%10s\n",
 					"id", "hash", "original_name", "import_datetime",
 					"exif_height", "exif_width");
-				for(int i = 0; pic_list[i].import_year; i++)
+				for(int i = 0; pho_list[i].import_year; i++)
 					printf("%5d|%32s|%52s|%24s|%11d|%10d\n",
-						pic_list[i].id, pic_list[i].hash,
-						pic_list[i].original_name, pic_list[i].import_datetime,
-						pic_list[i].exif_height, pic_list[i].exif_width);
+						pho_list[i].id, pho_list[i].hash,
+						pho_list[i].original_name, pho_list[i].import_datetime,
+						pho_list[i].exif_height, pho_list[i].exif_width);
 				break;
 				break;
 			case 2:
 				printf("info\n");
 				if (ac < 5 || !isnumeric(av[2]))
 				{
-					usage_picture(NULL);
+					usage_photo(NULL);
 					return 0;
 				}
-				t_photos pic = { 0 };
-				ospl_picture_get(av[1], atoi(av[2]), &pic);
+				t_photos pho = { 0 };
+				ospl_photo_get(av[1], atoi(av[2]), &pho);
 				printf("%5s|%32s|%52s|%24s|%11s|%10s\n",
 					"id", "hash", "original_name", "import_datetime",
 					"exif_height", "exif_width");
 				printf("%5d|%32s|%52s|%24s|%11d|%10d\n",
-					pic.id, pic.hash, pic.original_name, pic.import_datetime,
-					pic.exif_height, pic.exif_width);
+					pho.id, pho.hash, pho.original_name, pho.import_datetime,
+					pho.exif_height, pho.exif_width);
 				break;
 			case 3:
 				if (ac < 5 || !isnumeric(av[2]))
 				{
-					usage_picture(NULL);
+					usage_photo(NULL);
 					return 0;
 				}
-				ospl_picture_delete(av[1], atoi(av[2]));
-				printf("deleted picture %s from library\n", av[2]);
+				ospl_photo_delete(av[1], atoi(av[2]));
+				printf("deleted photo %s from library\n", av[2]);
 				break;
 		}
 	}
 	else
-		usage_picture(NULL);
+		usage_photo(NULL);
 	return 0;
 }
 int main(int ac, char *av[])
@@ -433,14 +433,14 @@ if (ac == 1)
 	else if (ac == 2)
 	{
 		printf("index of %s: %d\n", av[1], indexof_arg(av[1], ARGS, ARGS_COUNT));
-		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_picture, usage_export, usage_album, usage_folder};
+		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_photo, usage_export, usage_album, usage_folder};
 		usage_launcher[indexof_arg(av[1], ARGS, ARGS_COUNT)](av[1]);
 	}
 	else
 	{
 		printf("index of %s: %d\n", av[1], indexof_arg(av[1], ARGS, ARGS_COUNT));
-		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_picture, usage_export, usage_album};
-		int (*function_launcher[1 + ARGS_COUNT])() = {return_1, create, import, picture, export, album};
+		void (*usage_launcher[1 + ARGS_COUNT])() = {usage_unrecognized, usage_create, usage_import, usage_photo, usage_export, usage_album};
+		int (*function_launcher[1 + ARGS_COUNT])() = {return_1, create, import, photo, export, album};
 		if (function_launcher[indexof_arg(av[1], ARGS, ARGS_COUNT)](ac, &av[2]) == 1)
 			usage_launcher[indexof_arg(av[1], ARGS, ARGS_COUNT)](av[2]);
 	}

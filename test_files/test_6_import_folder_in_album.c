@@ -22,36 +22,36 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_album_create(lib_name, "Album of random pictures") < 0)
+	if (ospl_album_create(lib_name, "Album of random photos") < 0)
 	{
 		printf("error executing ospl_album_create\n");
 		return 1;
 	}
-	if (ospl_import_folder_in_album(lib_name, "../test_files/ressources/Album of random pictures/", 1) < 0)
+	if (ospl_import_folder_in_album(lib_name, "../test_files/ressources/Album of random photos/", 1) < 0)
 	{
 		printf("Error executing ospl_import_folder_in_album\n");
 		return 1;
 	}
-	t_photos pic[65] = { 0 };
-	if (ospl_album_listpic(lib_name, 1, pic) < 0)
+	t_photos pho[65] = { 0 };
+	if (ospl_album_list_photos(lib_name, 1, pho) < 0)
 	{
-		printf("Error executing ospl_picture_list\n");
+		printf("Error executing ospl_photo_list\n");
 		return 1;
 	}
 	int i = 0;
-	while(pic[i].id)
+	while(pho[i].id)
 	{
-		sprintf(tmp, "%s/pictures/Album of random pictures/%s", lib_name, pic[i].new_name);
+		sprintf(tmp, "%s/photos/Album of random photos/%s", lib_name, pho[i].new_name);
 		if (!file_exists(tmp))
 		{
-			printf("%s picture not present in import folder: %s\n", pic[i].original_name, tmp);
+			printf("%s photo not present in import folder: %s\n", pho[i].original_name, tmp);
 			return 1;
 		}
 		++i;
 	}
 	if (i < 57)
 	{
-		printf("only found %d pics inside of the album instead of 57\n", i);
+		printf("only found %d phos inside of the album instead of 57\n", i);
 		return 1;
 	}
 	if (ospl_album_delete(lib_name, 1) < 0)
@@ -60,12 +60,12 @@ int main(void)
 		return 1;
 	}
 	i = 0;
-	while(pic[i].id)
+	while(pho[i].id)
 	{
-		sprintf(tmp, "%s/pictures/Album of random pictures/%s", lib_name, pic[i].new_name);
+		sprintf(tmp, "%s/photos/Album of random photos/%s", lib_name, pho[i].new_name);
 		if (file_exists(tmp))
 		{
-			printf("%s picture present in album folder altho it was deleted: %s\n", pic[i].original_name, tmp);
+			printf("%s photo present in album folder altho it was deleted: %s\n", pho[i].original_name, tmp);
 			return 1;
 		}
 		++i;

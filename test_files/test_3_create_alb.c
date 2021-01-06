@@ -26,7 +26,7 @@ int main(void)
 		printf("error executing ospl_album_create\n");
 		return 1;
 	}
-	sprintf(tmp, "%s/pictures/Vacances", lib_name);
+	sprintf(tmp, "%s/photos/Vacances", lib_name);
 	if (!folder_exists(tmp))
 	{
 		printf("album folder not found %s\n", tmp);

@@ -4,7 +4,7 @@
 - Nested Folders
 - Tagging photos (with words)
 - Automatic tagging (with AI)
-- Face recognition (tagging people on pictures with AI for suggestions)
+- Face recognition (tagging people on photos with AI for suggestions)
 - Favorite folders (marking some photos as fav)
 - Importing folders directly into albums
 - RAW support

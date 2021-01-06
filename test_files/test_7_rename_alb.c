@@ -31,7 +31,7 @@ int main(void)
 		printf("executing ospl_album_rename failed\n");
 		return 1;
 	}
-	sprintf(tmp, "%s/pictures/Vacances en France", lib_name);
+	sprintf(tmp, "%s/photos/Vacances en France", lib_name);
 	if (!folder_exists(tmp))
 	{
 		printf("album folder not found: %s\n", tmp);

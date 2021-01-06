@@ -21,31 +21,31 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_import_picture(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg") < 0)
+	if (ospl_import_photo(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg") < 0)
 	{
-		printf("Error executing ospl_import_picture\n");
+		printf("Error executing ospl_import_photo\n");
 		return 1;
 	}
-	t_photos pic;
-	if (ospl_picture_get(lib_name, 1, &pic) < 0)
+	t_photos pho;
+	if (ospl_photo_get(lib_name, 1, &pho) < 0)
 	{
-		printf("Error executing ospl_picture_get\n");
+		printf("Error executing ospl_photo_get\n");
 		return 1;
 	}
-	sprintf(tmp, "%s/pictures/import/%s", lib_name, pic.new_name);
+	sprintf(tmp, "%s/photos/import/%s", lib_name, pho.new_name);
 	if (!file_exists(tmp))
 	{
-		printf("picture not present in import folder: %s\n", tmp);
+		printf("photo not present in import folder: %s\n", tmp);
 		return 1;
 	}
-	if (ospl_picture_delete(lib_name, 1) < 0)
+	if (ospl_photo_delete(lib_name, 1) < 0)
 	{
-		printf("error executing ospl_picture_delete\n");
+		printf("error executing ospl_photo_delete\n");
 		return 1;
 	}
 	if (file_exists(tmp))
 	{
-		printf("picture present in import folder altho it was deleted: %s\n", tmp);
+		printf("photo present in import folder altho it was deleted: %s\n", tmp);
 		return 1;
 	}
 	sprintf(tmp, "rm -rf %s", lib_name);

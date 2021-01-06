@@ -1,6 +1,6 @@
 /*	libospl - Open Source Photo Library
 	an opensource and multiplateform photo library management that can be used
-	to store and sort all your pictures.
+	to store and sort all your photos.
 	Copyright (C) 2019-2020 Angelo Frangione
 
 	This program is free software; you can redistribute it and/or modify
@@ -36,9 +36,9 @@
  *
  * 
  * \param db database data structure
- * \param pic structure containing the photo data
+ * \param pho structure containing the photo data
  */
-int insert_photo(t_db *db, t_photos *pic)
+int insert_photo(t_db *db, t_photos *pho)
 {
 	char	query[BUFFER_SIZE] = "insert into photos (hash, original_name, "
 	"new_name, import_datetime, random, import_year, import_month, import_day, "
@@ -47,11 +47,11 @@ int insert_photo(t_db *db, t_photos *pic)
 
 	sprintf(query + 211, "values (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%d\", "
 		"\"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%s\", "
-		"\"%s\");", pic->hash, pic->original_name, pic->new_name,
-		pic->import_datetime, pic->random,pic->import_year, pic->import_month,
-		pic->import_day, pic->import_hour, pic->import_minut,
-		pic->import_second, pic->exif_height, pic->exif_width,
-		pic->exif_brand, pic->exif_peripheral);
+		"\"%s\");", pho->hash, pho->original_name, pho->new_name,
+		pho->import_datetime, pho->random,pho->import_year, pho->import_month,
+		pho->import_day, pho->import_hour, pho->import_minut,
+		pho->import_second, pho->exif_height, pho->exif_width,
+		pho->exif_brand, pho->exif_peripheral);
 	if (stockage_write(db, query))
 		return 1;
 	return 0;
@@ -62,7 +62,7 @@ int insert_photo(t_db *db, t_photos *pic)
  *
  * 
  * \param db database data structure
- * \param id the identifier of the picture
+ * \param id the identifier of the photo
  * \param col the coloumn name you want to update
  * \param value the text value to be inserted instead of the old one
  */
@@ -81,7 +81,7 @@ int update_photo_char(t_db *db, int id, char *col, char *value)
  *
  * 
  * \param db database data structure
- * \param id the unique identifier of the picture
+ * \param id the unique identifier of the photo
  * \param col the coloumn name you want to update
  * \param value the integer value to be inserted instead of the old one
  */
@@ -100,7 +100,7 @@ int update_photo_int(t_db *db, int id, char *col, int value)
  *
  * 
  * \param db database data structure
- * \param id the unique identifier of the picture
+ * \param id the unique identifier of the photo
  * \param col the coloumn name you want to update
  * \param value the integer value to be inserted instead of the old one
  */
@@ -125,7 +125,7 @@ static int callback_single(char *value, int ac, char **av, char **column)
  *
  * 
  * \param db database data structure
- * \param id the unique identifier of the picture
+ * \param id the unique identifier of the photo
  * \param col the coloumn name you want to select
  * \param value a pointer to an initialized memory location where 
  * the column will be stored into
@@ -141,33 +141,33 @@ int select_photo_single(t_db *db, int id, char *col, char *value)
 	return 0;
 }
 
-static int _callback(t_photos *pic, int ac, char **av, char **column)
+static int _callback(t_photos *pho, int ac, char **av, char **column)
 {
 	static int current = 0;
 
-	if (!pic)
+	if (!pho)
 	{
 		current = 0;
 		return 0;
 	}
-	pic[current].id = atoi(av[0]);
-	strcpy(pic[current].hash, av[1]);
-	strcpy(pic[current].original_name, av[2]);
-	strcpy(pic[current].new_name, av[3]);
-	strcpy(pic[current].import_datetime, av[4]);
-	pic[current].import_year = atoi(av[5]);
-	pic[current].import_month = atoi(av[6]);
-	pic[current].import_day = atoi(av[7]);
-	pic[current].import_hour = atoi(av[8]);
-	pic[current].import_minut = atoi(av[9]);
-	pic[current].import_second = atoi(av[10]);
-	pic[current].exif_height = atoi(av[11]);
-	pic[current].exif_width = atoi(av[12]);
+	pho[current].id = atoi(av[0]);
+	strcpy(pho[current].hash, av[1]);
+	strcpy(pho[current].original_name, av[2]);
+	strcpy(pho[current].new_name, av[3]);
+	strcpy(pho[current].import_datetime, av[4]);
+	pho[current].import_year = atoi(av[5]);
+	pho[current].import_month = atoi(av[6]);
+	pho[current].import_day = atoi(av[7]);
+	pho[current].import_hour = atoi(av[8]);
+	pho[current].import_minut = atoi(av[9]);
+	pho[current].import_second = atoi(av[10]);
+	pho[current].exif_height = atoi(av[11]);
+	pho[current].exif_width = atoi(av[12]);
 	if (av[13])
-		strcpy(pic[current].exif_brand, av[13]);
+		strcpy(pho[current].exif_brand, av[13]);
 	if (av[14])
-		strcpy(pic[current].exif_peripheral, av[14]);
-	pic[current].fav = atoi(av[15]);
+		strcpy(pho[current].exif_peripheral, av[14]);
+	pho[current].fav = atoi(av[15]);
 	++current;
 	return 0;
 }
@@ -177,40 +177,40 @@ static int _callback(t_photos *pic, int ac, char **av, char **column)
  *
  * 
  * \param db database data structure
- * \param id the unique identifier of the picture 
- * \param pic a pointer to an initialized memory location that points 
+ * \param id the unique identifier of the photo 
+ * \param pho a pointer to an initialized memory location that points 
  * to a t_photos structure, every will be stored into this structure. 
  */
-int select_photo(t_db *db, int id, t_photos *pic)
+int select_photo(t_db *db, int id, t_photos *pho)
 {
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos where id=%d", id);
 	_callback(NULL, 0, NULL, NULL);
-	if (stockage_read(db, query, _callback, pic))
+	if (stockage_read(db, query, _callback, pho))
 		return 1;
 	_callback(NULL, 0, NULL, NULL);
 	return 0;
 }
 
-int select_photo_multiple(t_db *db, int id, t_photos *pic)
+int select_photo_multiple(t_db *db, int id, t_photos *pho)
 {
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos where id=%d", id);
-	if (stockage_read(db, query, _callback, pic))
+	if (stockage_read(db, query, _callback, pho))
 		return 1;
 	return 0;
 }
 
 
-int select_photo_all(t_db *db, t_photos *pics)
+int select_photo_all(t_db *db, t_photos *phos)
 {
 	char		query[BUFFER_SIZE];
 
 	sprintf(query, "select * from photos");
 	_callback(NULL, 0, NULL, NULL);
-	if (stockage_read(db, query, _callback, pics))
+	if (stockage_read(db, query, _callback, phos))
 		return 1;
 	_callback(NULL, 0, NULL, NULL);
 	return 0;
@@ -222,7 +222,7 @@ int select_photo_all(t_db *db, t_photos *pics)
  *
  * 
  * \param db database data structure
- * \param id the unique identifier of the picture
+ * \param id the unique identifier of the photo
  */
 int delete_photo(t_db *db, int id)
 {

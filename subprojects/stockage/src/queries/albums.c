@@ -1,6 +1,6 @@
 /*	libospl - Open Source Photo Library
 	an opensource and multiplateform photo library management that can be used
-	to store and sort all your pictures.
+	to store and sort all your photos.
 	Copyright (C) 2019-2020 Angelo Frangione
 
 	This program is free software; you can redistribute it and/or modify
@@ -92,33 +92,33 @@ int move_contains(t_db *db, int photo, int old_album, int new_album)
 	return 0;
 }
 
-static int _callback_pictures(t_photos *pic, int ac, char **av, char **column)
+static int _callback_photos(t_photos *pho, int ac, char **av, char **column)
 {
 	static int current = 0;
 
-	if (!pic)
+	if (!pho)
 	{
 		current = 0;
 		return 0;
 	}
-	pic[current].id = atoi(av[0]);
-	strcpy(pic[current].hash, av[1]);
-	strcpy(pic[current].original_name, av[2]);
-	strcpy(pic[current].new_name, av[3]);
-	strcpy(pic[current].import_datetime, av[4]);
-	pic[current].import_year = atoi(av[5]);
-	pic[current].import_month = atoi(av[6]);
-	pic[current].import_day = atoi(av[7]);
-	pic[current].import_hour = atoi(av[8]);
-	pic[current].import_minut = atoi(av[9]);
-	pic[current].import_second = atoi(av[10]);
-	pic[current].exif_height = atoi(av[11]);
-	pic[current].exif_width = atoi(av[12]);
+	pho[current].id = atoi(av[0]);
+	strcpy(pho[current].hash, av[1]);
+	strcpy(pho[current].original_name, av[2]);
+	strcpy(pho[current].new_name, av[3]);
+	strcpy(pho[current].import_datetime, av[4]);
+	pho[current].import_year = atoi(av[5]);
+	pho[current].import_month = atoi(av[6]);
+	pho[current].import_day = atoi(av[7]);
+	pho[current].import_hour = atoi(av[8]);
+	pho[current].import_minut = atoi(av[9]);
+	pho[current].import_second = atoi(av[10]);
+	pho[current].exif_height = atoi(av[11]);
+	pho[current].exif_width = atoi(av[12]);
 	if (av[13])
-		strcpy(pic[current].exif_brand, av[13]);
+		strcpy(pho[current].exif_brand, av[13]);
 	if (av[14])
-		strcpy(pic[current].exif_peripheral, av[14]);
-	pic[current].fav = atoi(av[15]);
+		strcpy(pho[current].exif_peripheral, av[14]);
+	pho[current].fav = atoi(av[15]);
 	++current;
 	return 0;
 }
@@ -143,18 +143,18 @@ int list_contains(t_db *db, int album, t_photos *list)
 	char	query[BUFFER_SIZE];
 
 	sprintf(query, "SELECT DISTINCT photos.* FROM photos INNER JOIN contains ON photos.id = contains.contained_photo WHERE contains.containing_album = %d;", album);
-	_callback_pictures(NULL, 0, NULL, NULL);
-	if (stockage_read(db, query, _callback_pictures, list))
+	_callback_photos(NULL, 0, NULL, NULL);
+	if (stockage_read(db, query, _callback_photos, list))
 		return 1;
-	_callback_pictures(NULL, 0, NULL, NULL);
+	_callback_photos(NULL, 0, NULL, NULL);
 	return 0;
 }
 
-int photo_contained(t_db *db, int pic, t_album *list)
+int photo_contained(t_db *db, int pho, t_album *list)
 {
 	char	query[BUFFER_SIZE];
 
-	sprintf(query, "SELECT DISTINCT albums.* FROM albums INNER JOIN contains ON albums.id = contains.containing_album WHERE contains.contained_photo = %d;", pic);
+	sprintf(query, "SELECT DISTINCT albums.* FROM albums INNER JOIN contains ON albums.id = contains.containing_album WHERE contains.contained_photo = %d;", pho);
 	_callback_album(NULL, 0, NULL, NULL);
 	if (stockage_read(db, query, _callback_album, list))
 		return 1;
