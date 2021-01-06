@@ -19,10 +19,4 @@ thumbnailer = shared_library(	'thumbnailer', 'src/thumbnailer.c', 'src/epeg.c',
 install_headers('include/thumbnailer.h',  subdir : 'ospl')
 install_headers('include/epeg.h',  subdir : 'ospl')
 
-# CLI
-executable( 'cli', 'main.c', 
-			link_with: thumbnailer, 
-			dependencies : deps
-)
-
 thumbnailer_dep = declare_dependency(include_directories: 'include', link_with: thumbnailer)

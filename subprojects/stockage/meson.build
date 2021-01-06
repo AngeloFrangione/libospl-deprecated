@@ -21,10 +21,4 @@ stockage = shared_library(	'stockage', source,
 
 install_headers('include/stockage.h',  subdir : 'ospl')
 
-# CLI
-executable( 'cli', 'main.c', 
-			link_with: stockage, 
-			dependencies : deps
-)
-
 stockage_dep = declare_dependency(include_directories: 'include', link_with: stockage)
