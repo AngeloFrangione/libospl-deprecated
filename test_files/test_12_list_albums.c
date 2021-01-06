@@ -22,14 +22,14 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_create_album(lib_name, "Vacances") < 0)
+	if (ospl_album_create(lib_name, "Vacances") < 0)
 	{
-		printf("error executing ospl_create_album\n");
+		printf("error executing ospl_album_create\n");
 		return 1;
 	}
-	if (ospl_create_album(lib_name, "Vacances en Italie") < 0)
+	if (ospl_album_create(lib_name, "Vacances en Italie") < 0)
 	{
-		printf("error executing ospl_create_album\n");
+		printf("error executing ospl_album_create\n");
 		return 1;
 	}
 	sprintf(tmp, "%s/pictures/Vacances", lib_name);
@@ -45,7 +45,7 @@ int main(void)
 		return 1;
 	}
 	t_album list[10];
-	if (ospl_list_albums(lib_name, list) < 0)
+	if (ospl_album_list(lib_name, list) < 0)
 	{
 		printf("error executing ospl_list_albums\n");
 		return 1;

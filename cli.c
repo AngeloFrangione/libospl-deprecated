@@ -255,7 +255,7 @@ static int album (int ac, char **av)
 				printf("%3s | %10s\n", "id", "name");
 				printf("----------------\n");
 				t_album alb_list[ALB_LIMITS] = { 0 };
-				ospl_list_albums(av[1], alb_list);
+				ospl_album_list(av[1], alb_list);
 				for(int i = 0; alb_list[i].id; i++)
 					printf("%3d | %10s\n", alb_list[i].id, alb_list[i].name);
 				break;
@@ -265,7 +265,7 @@ static int album (int ac, char **av)
 					usage_album(NULL);
 					return 0;
 				}
-				ret = ospl_create_album(av[1], av[2]);
+				ret = ospl_album_create(av[1], av[2]);
 				if (ret >= SUCCESS)
 					printf("album %s created\n", av[2]);
 				else
@@ -277,7 +277,7 @@ static int album (int ac, char **av)
 					usage_album(NULL);
 					return 0;
 				}
-				ret = ospl_rename_album(av[1], atoi(av[2]), av[3]);
+				ret = ospl_album_rename(av[1], atoi(av[2]), av[3]);
 				if (ret >= SUCCESS)
 					printf("album %d renamed to %s\n", atoi(av[2]), av[3]);
 				else
@@ -289,7 +289,7 @@ static int album (int ac, char **av)
 					usage_album(NULL);
 					return 0;
 				}
-				ret = ospl_delete_album(av[1], atoi(av[2]));
+				ret = ospl_album_delete(av[1], atoi(av[2]));
 				if (ret < 0)
 					printf("error deleting album: %s\n", enum_error(ret));
 				else

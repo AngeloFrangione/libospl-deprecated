@@ -24,7 +24,7 @@
 #include <cwalk.h>
 #include <stockage.h>
 
-int ospl_list_albums(char *library, t_album *list)
+int ospl_album_list(char *library, t_album *list)
 {
 	t_db db = {0};
 
@@ -54,7 +54,7 @@ int ospl_album_assocpic(char *library, int photo, t_album *list)
 	return SUCCESS;
 }
 
-int ospl_create_album(char *library, char *name)
+int ospl_album_create(char *library, char *name)
 {
 	t_db db = {0};
 	char tmp[512] = {0};
@@ -72,7 +72,7 @@ int ospl_create_album(char *library, char *name)
 		return EERRNO;
 }
 
-int ospl_rename_album(char *library, int id, char *name)
+int ospl_album_rename(char *library, int id, char *name)
 {
 	t_db db = {0};
 	t_album album = {0};
@@ -95,7 +95,7 @@ int ospl_rename_album(char *library, int id, char *name)
 	return SUCCESS;
 }
 
-int ospl_delete_album(char *library, int id)
+int ospl_album_delete(char *library, int id)
 {
 	t_db db = {0};
 	char tmp[512] = { 0 };
