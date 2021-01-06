@@ -22,9 +22,9 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_create_album(lib_name, "Album of random pictures") < 0)
+	if (ospl_album_create(lib_name, "Album of random pictures") < 0)
 	{
-		printf("error executing ospl_create_album\n");
+		printf("error executing ospl_album_create\n");
 		return 1;
 	}
 	if (ospl_import_folder_in_album(lib_name, "../test_files/ressources/Album of random pictures/", 1) < 0)
@@ -54,9 +54,9 @@ int main(void)
 		printf("only found %d pics inside of the album instead of 57\n", i);
 		return 1;
 	}
-	if (ospl_delete_album(lib_name, 1) < 0)
+	if (ospl_album_delete(lib_name, 1) < 0)
 	{
-		printf("error executing ospl_delete_album\n");
+		printf("error executing ospl_album_delete\n");
 		return 1;
 	}
 	i = 0;

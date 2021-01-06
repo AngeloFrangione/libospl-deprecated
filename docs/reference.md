@@ -10,17 +10,17 @@
 	import a folder full of pictures
 - **[ospl_import_folder_in_album]()**  
 	import a folder full of pictures directly into an existing album
-- **[ospl_list_albums]()**  
+- **[ospl_album_list]()**  
 	get the entire album list stored in a library
 - **[ospl_album_listpic]()**  
 	get the picture list from an album
 - **[ospl_album_assocpic]()**  
 	get the albums were a specific picture is stored
-- **[ospl_create_album]()**  
+- **[ospl_album_create]()**  
 	create an album in a ospl library
-- **[ospl_rename_album]()**  
+- **[ospl_album_rename]()**  
 	rename an album from an ospl library
-- **[ospl_delete_album]()**  
+- **[ospl_album_delete]()**  
 	delete an album from an ospl library
 - **[ospl_album_addpic]()**  
 	add a picture to an existing album
