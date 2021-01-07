@@ -33,7 +33,7 @@
 
 #include "ospl.h"
 
-void get_time(t_current_time *ct)
+static void get_time(t_current_time *ct)
 {
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
