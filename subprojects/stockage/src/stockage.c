@@ -97,11 +97,31 @@ int create_database(char *path)
 	int				rc;
 	char			*vacuum = "PRAGMA auto_vacuum = FULL;";
 
+	if (!path)
+		return -1;
 	rc = sqlite3_open_v2(path, &db, SQLITE_OPEN_READWRITE | 
 							SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_CREATE, NULL);
+	if (rc != SQLITE_OK && rc != SQLITE_ROW && rc != SQLITE_DONE)
+	{
+		fprintf(stderr, "Error %d: %s\n", rc, sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return -1;
+	}
 	rc = sqlite3_exec(db, vacuum, 0, 0, NULL);
+	if (rc != SQLITE_OK && rc != SQLITE_ROW && rc != SQLITE_DONE)
+	{
+		fprintf(stderr, "Error %d: %s\n", rc, sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return -1;
+	}
 	rc = sqlite3_exec(db, TABLE, 0, 0, NULL);
-	rc = sqlite3_close(db);
+	if (rc != SQLITE_OK && rc != SQLITE_ROW && rc != SQLITE_DONE)
+	{
+		fprintf(stderr, "Error %d: %s\n", rc, sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return -1;
+	}
+	sqlite3_close(db);
 	return rc;
 }
 
@@ -207,6 +227,8 @@ int stockage_read(t_db *db, char *query, int callback(), void *value)
 		rc = stockage_commit(db);
 		rc = db->transaction = 0;
 	}
+	else
+		return -1;
 	return check_sqlite_return(rc, db, query);
 }
 
@@ -248,5 +270,7 @@ int stockage_write(t_db *db, char *query)
 		rc = stockage_commit(db);
 		rc = db->transaction = 0;
 	}
+	else
+		return -1;
 	return check_sqlite_return(rc, db, query);
 }
