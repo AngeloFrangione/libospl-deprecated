@@ -117,13 +117,11 @@ int copy_file(char* source, char* destination)
 	off_t bytesCopied = 0;
 	struct stat fileinfo = {0};
 	fstat(input, &fileinfo);
-	int result = sendfile(output, input, &bytesCopied, fileinfo.st_size);
+	long result = sendfile(output, input, &bytesCopied, fileinfo.st_size);
 	#endif
-
 	close(input);
 	close(output);
-
-	return result;
+	return (int)result;
 }
 
 /**

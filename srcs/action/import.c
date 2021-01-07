@@ -41,12 +41,12 @@ void get_time(t_current_time *ct)
 	
 	clock_gettime(CLOCK_REALTIME, &spec);
 
-	ct->Y = tm.tm_year + 1900;
-	ct->M = tm.tm_mon + 1;
-	ct->d = tm.tm_mday;
-	ct->h = tm.tm_hour;
-	ct->m = tm.tm_min;
-	ct->s = tm.tm_sec;
+	ct->Y = (unsigned int)tm.tm_year + 1900;
+	ct->M = (unsigned int)tm.tm_mon + 1;
+	ct->d = (unsigned int)tm.tm_mday;
+	ct->h = (unsigned int)tm.tm_hour;
+	ct->m = (unsigned int)tm.tm_min;
+	ct->s = (unsigned int)tm.tm_sec;
 	ct->ms = round(spec.tv_nsec / 1.0e6);
 }
 
@@ -68,12 +68,12 @@ static int get_info(t_db *db, t_photos *pho, char *path, char *library)
 	sprintf(pho->import_datetime, "%d-%02d-%02d-%02d-%02d-%02d-%03d",
 	ct.Y, ct.M, ct.d, ct.h, ct.m, ct.s, ct.ms);
 	sprintf(pho->new_name, "%s_%s", pho->import_datetime, pho->original_name);
-	pho->import_year = ct.Y;
-	pho->import_month = ct.M;
-	pho->import_day = ct.d;
-	pho->import_hour = ct.h;
-	pho->import_minut = ct.m;
-	pho->import_second = ct.s;
+	pho->import_year = (uint16_t)ct.Y;
+	pho->import_month = (uint8_t)ct.M;
+	pho->import_day = (uint8_t)ct.d;
+	pho->import_hour = (uint8_t)ct.h;
+	pho->import_minut = (uint8_t)ct.m;
+	pho->import_second = (uint8_t)ct.s;
 	fill_tdb(db, library);
 	return SUCCESS;
 }
