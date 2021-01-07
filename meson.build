@@ -34,11 +34,13 @@ source =['srcs/ospl.c', 'srcs/common.c',
 		'srcs/action/export.c']
 
 # Library
+cargs =['-Wall', '-Wextra']
 ospl = shared_library(	'ospl', source,
 						install: true,
 						include_directories : 'includes',
 						dependencies : deps,
-						soversion: 0, version: '0.0.1'
+						soversion: 0, version: '0.0.1',
+						c_args: cargs
 )
 
 install_headers('includes/ospl.h', subdir : 'ospl')
