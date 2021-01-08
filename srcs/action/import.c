@@ -72,7 +72,7 @@ static int get_info(t_db *db, t_photos *pho, char *path, char *library)
 	pho->import_month = (uint8_t)ct.M;
 	pho->import_day = (uint8_t)ct.d;
 	pho->import_hour = (uint8_t)ct.h;
-	pho->import_minut = (uint8_t)ct.m;
+	pho->import_minute = (uint8_t)ct.m;
 	pho->import_second = (uint8_t)ct.s;
 	fill_tdb(db, library);
 	return SUCCESS;
@@ -108,7 +108,7 @@ int ospl_import_photo(char *library, char *path)
 		printf("import_month:\t\t|%d\n", pho.import_month);
 		printf("import_day:\t\t|%d\n", pho.import_day);
 		printf("import_hour:\t\t|%d\n", pho.import_hour);
-		printf("import_minut:\t\t|%d\n", pho.import_minut);
+		printf("import_minute:\t\t|%d\n", pho.import_minute);
 		printf("import_second:\t\t|%d\n", pho.import_second);
 		printf("exif_height:\t\t|%d\n", pho.exif_height);
 		printf("exif_width:\t\t|%d\n", pho.exif_width);

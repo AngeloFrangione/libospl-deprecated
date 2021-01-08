@@ -20,7 +20,6 @@
 
 #include "includes/ospl.h"
 #include "includes/ospl_cli.h"
-#include "subprojects/stockage/include/stockage.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

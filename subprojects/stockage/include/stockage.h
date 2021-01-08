@@ -42,7 +42,7 @@
 "	`import_month`		INTEGER,"\
 "	`import_day`		INTEGER,"\
 "	`import_hour`		INTEGER,"\
-"	`import_minut`		INTEGER,"\
+"	`import_minute`		INTEGER,"\
 "	`import_second`		INTEGER,"\
 "	`exif_height`		INTEGER,"\
 "	`exif_width`		INTEGER,"\
@@ -107,7 +107,7 @@ typedef struct			s_photos
 	uint8_t				import_month;
 	uint8_t				import_day;
 	uint8_t				import_hour;
-	uint8_t				import_minut;
+	uint8_t				import_minute;
 	uint8_t				import_second;
 	uint32_t			exif_height;
 	uint32_t			exif_width;

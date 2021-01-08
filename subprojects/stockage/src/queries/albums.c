@@ -110,7 +110,7 @@ static int _callback_photos(t_photos *pho, int ac, char **av, char **column)
 	pho[current].import_month = atoi(av[6]);
 	pho[current].import_day = atoi(av[7]);
 	pho[current].import_hour = atoi(av[8]);
-	pho[current].import_minut = atoi(av[9]);
+	pho[current].import_minute = atoi(av[9]);
 	pho[current].import_second = atoi(av[10]);
 	pho[current].exif_height = atoi(av[11]);
 	pho[current].exif_width = atoi(av[12]);
