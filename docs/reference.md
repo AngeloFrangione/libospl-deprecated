@@ -40,11 +40,11 @@ When you create an ospl library (calling **[``ospl_create_library``](/{{ site.ba
 
 | ``path``                          | ``description``                                              | ``introduced in version`` |
 | --------------------------------- | ------------------------------------------------------------ | ---------------------- |
-| ``library_name/``                 | ``the folder of the entire library with its name``           | ``0.1.0``              |
-| ``library_name/database.db``      | ``the database containing all infos about the photos`` [database structure](#database) | ``0.1.0``              |
-| ``library_name/photos/``        | ``the folder where every album is created and stored``       | ``0.1.0``              |
-| ``library_name/photos/import/`` | ``the default folder where photos are imported``           | ``0.1.0``              |
-| ``library_name/thumbnails``       | ``the location of the thumbnails of every photo``          | ``0.1.0``              |
+| ``library_name/``                 | the folder of the entire library with its name           | ``0.1.0``              |
+| ``library_name/database.db``      | the database containing all infos about the photos [database structure](#database) | ``0.1.0``              |
+| ``library_name/photos/``        | the folder where every album is created and stored       | ``0.1.0``              |
+| ``library_name/photos/import/`` | the default folder where photos are imported           | ``0.1.0``              |
+| ``library_name/thumbnails``       | the location of the thumbnails of every photo          | ``0.1.0``              |
 
 ## Database
 
