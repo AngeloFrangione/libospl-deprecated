@@ -1,7 +1,7 @@
 # Reference
 ## Functions
 - **[``ospl_create_library``](/{{ site.baseurl }}/reference/ospl_create_library)**  
-	create a ospl library.
+	create an ospl library.
 - **[``ospl_import_photo``](/{{ site.baseurl }}/reference/ospl_import_photo)**  
 	import a photo into library
 - **[``ospl_import_photo_in_album``](/{{ site.baseurl }}/reference/ospl_import_photo_in_album)**  
@@ -15,9 +15,9 @@
 - **[``ospl_album_list_photos``]()**  
 	get the photo list from an album
 - **[``ospl_photo_associated_album``]()**  
-	get the albums were a specific photo is stored
+	get the albums where a specific photo is stored
 - **[``ospl_album_create``]()**  
-	create an album in a ospl library
+	create an album in an ospl library
 - **[``ospl_album_rename``]()**  
 	rename an album from an ospl library
 - **[``ospl_album_delete``]()**  
@@ -48,11 +48,11 @@ When you create an ospl library (calling **[``ospl_create_library``](/{{ site.ba
 
 ## Database
 
-for easier understanding here is a updated database diagram (captured from [here](https://dbdiagram.io/d/5ec97ad039d18f5553ffa8cf)):
+To understand better, here is a updated database diagram (captured from [here](https://dbdiagram.io/d/5ec97ad039d18f5553ffa8cf)):
 
 ![database_diagram.png](https://raw.githubusercontent.com/AngeloFrangione/libospl/master/database_diagram.png)
 
-In this section every table and column is explained, and an example is provided for best understanding of the database structure.
+In this section every table and column is explained, and an example is provided to better understand the database structure.
 
 ### Main tables
 
@@ -76,7 +76,7 @@ In this section every table and column is explained, and an example is provided 
 | ``exif_width``      | width of the image (optional)                                | ``1920``                                   | ``0.1.0``              |
 | ``exif_brand``      | brand of the camera that has taken the photo               | ``"Canon"``                                | ``0.1.0``              |
 | ``exif_model``      | model of the camera that has taken the photo               | ``"EOS 5D"``                               | ``0.1.0``              |
-| ``fav``             | indicate if the photo is market as a favorite              | ``1``                                      | ``0.1.0``              |
+| ``fav``             | indicate if the photo is marked as a favorite             | ``1``                                      | ``0.1.0``              |
 | ``random``          | random generated 10 digits number at import time             | ``0905043953``                             | ``0.1.0``              |
 
 #### albums (introduced in version ``0.1.0``)
@@ -113,8 +113,8 @@ In this section every table and column is explained, and an example is provided 
 
 | ``column name``    | ``description``                           | ``example`` | ``introduced in version`` |
 | ------------------ | ----------------------------------------- | ----------- | ---------------------- |
-| ``holded_album``   | ``id`` of the album holded by the folder  | ``2``       | ``0.1.0``              |
-| ``holding_folder`` | ``id`` of the folder that holds the album | ``3``       | ``0.1.0``              |
+| ``held_album`` | ``id`` of the album held by the folder | ``2``       | ``0.1.0``              |
+| ``held_folder`` | ``id`` of the folder that holds the album | ``3``       | ``0.1.0``              |
 
 #### includes  (folder holds folder) (introduced in version ``0.1.0``)
 
