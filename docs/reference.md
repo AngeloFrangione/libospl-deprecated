@@ -35,6 +35,54 @@
 - **[``ospl_photo_delete``]()**  
 	delete a specific photo from a library
 
+## Data structures
+
+### stockage.h
+
+```c
+typedef struct			s_photos
+{
+	int					id;
+	char				hash[33];
+	char				original_name[255];
+	char				new_name[255];
+	char				import_datetime[32];
+	char				random[11];
+	uint16_t			import_year;
+	uint8_t				import_month;
+	uint8_t				import_day;
+	uint8_t				import_hour;
+	uint8_t				import_minute;
+	uint8_t				import_second;
+	uint32_t			exif_height;
+	uint32_t			exif_width;
+	char				exif_brand[32];
+	char				exif_peripheral[32];
+	uint8_t				fav;
+}						t_photos;
+```
+The ``t_photos`` data structure  is used to get information about a photo or adding a photo to the database.
+
+```c
+typedef struct			s_album
+{
+	int					id;
+	char				name[255];
+}						t_album;
+```
+the ``t_album`` data structure is used to get information about an album or adding an album to the database.
+
+```c
+typedef struct			s_db
+{
+	sqlite3				*db;
+	char				*path;
+	uint8_t				transaction;
+	uint8_t				commit;
+}						t_db;
+```
+The ``t_db`` data structure is used to communicate with the database.
+
 ## Folder structure
 When you create an ospl library (calling **[``ospl_create_library``](/{{ site.baseurl }}/reference/ospl_create_library)** function) the following files and folders are created:
 
