@@ -11,7 +11,7 @@ This function will import an entire folder located at ``path`` of photos into an
 
 
 ## Parameters
-**`library`**: the path where the library will be created.  
+**`library`**: the path of an ospl library.  
 **``path``**: the path of the folder, containing photos.
 
 

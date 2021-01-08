@@ -9,7 +9,7 @@ int ospl_import_folder_in_album(char *library, char *path, int album);
 This function will import an entire folder located at ``path`` of photos into an ospl library located at ``library``
 
 ## Parameters
-**`library`**: the path where the library will be created.
+**`library`**: the path of an ospl library.  
 **``path``**: the path of the folder, containing photos.
 **``album``**: the ``id`` of an existing album  
 

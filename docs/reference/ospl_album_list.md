@@ -10,7 +10,7 @@ int ospl_album_list(char *library, t_album *list)
 This function lists every album from an ospl library and puts them into a [``t_album``](/{{ site.baseurl }}/reference#data-structures) ``struct``
 
 ## Parameters
-**`library`**: the path where the library will be created.
+**`library`**: the path of an ospl library.  
 **`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference) structure, this should be statically allocated or dynamically allocated with ``malloc``. 
 
 ## Return values
