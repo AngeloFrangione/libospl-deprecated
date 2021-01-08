@@ -9,7 +9,7 @@ import a photo into library
 int ospl_import_photo(char *library, char *path);
 ```
 
-This functions imports a photo located at ``path`` in an ospl library located at ``library``
+This functions imports a folder located at ``path`` in an ospl library located at  ``library`` into album with id ``album``
 
 ## Parameters
 
@@ -30,8 +30,8 @@ This functions imports a photo located at ``path`` in an ospl library located at
 
 | ``value``     | ``signification``                            |
 | ------------- | -------------------------------------------- |
-| ``SUCCESS``   | photo successfully imported                |
-| ``ENOTFOUND`` | the photo ``path`` given does not exist    |
+| ``id``        | the id of the photo is           |
+| ``ENOTFOUND`` | the photo ``path`` given does not exist      |
 | ``EDBFAIL``   | an error occurred when accessing to database |
 
 
@@ -55,7 +55,9 @@ int main(void)
 }
 ```
 
+## Behavior
 
+This function will extract informations about a picture, like the name, an ``md5`` hash. It will copy the actual time. And insert the photo into the database, if success, it will copy the picture into the ``library/photos/import`` folder with a new name composed of it's original name and the import date and time. If success, it will create a thumbnail into the ``library/thumbnails/`` folder. if success, the ``id`` of the just inserted photo is returned.
 
 ## Changelog
 
