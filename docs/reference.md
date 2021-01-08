@@ -12,7 +12,7 @@
 	import a folder full of photos directly into an existing album
 - **[``ospl_album_list``](/{{ site.baseurl }}/reference/ospl_album_list)**  
 	get the entire album list stored in a library
-- **[``ospl_album_list_photos``]()**  
+- **[``ospl_album_list_photos``](/{{ site.baseurl }}/reference/ospl_album_list_photos)**  
 	get the photo list from an album
 - **[``ospl_photo_associated_album``]()**  
 	get the albums where a specific photo is stored
