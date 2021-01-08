@@ -10,7 +10,7 @@ int ospl_album_list_photos(char *library, int album, t_photos *list);
 This function lists every photo inside a specific album from an ospl library and puts them into a [``t_photos``](/{{ site.baseurl }}/reference#data-structures) ``struct``
 
 ## Parameters
-**`library`**: the path where the library will be created.  
+**`library`**: the path of an ospl library.  
 **`list`**: a pointer to the first [`t_photos`](/{{ site.baseurl }}/reference#data-structures) structure, this should be statically allocated or dynamically allocated with ``malloc``. 
 
 ## Return values

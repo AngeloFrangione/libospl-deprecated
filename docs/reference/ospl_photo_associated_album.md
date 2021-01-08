@@ -11,7 +11,7 @@ This function lists every album where a specific photo is stored and puts them i
 
 
 ## Parameters
-**`library`**: the path where the library will be created.  
+**`library`**: the path of an ospl library.  
 **`photo`**: the ``id`` of the photo to lookup for.  
 **`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference) structure, this should be statically allocated or dynamically allocated with ``malloc``. 
 

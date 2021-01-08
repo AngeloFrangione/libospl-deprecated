@@ -9,7 +9,7 @@ int ospl_(char *library);
 
 
 ## Parameters
-**`library`**: the path where the library will be created.
+**`library`**: the path of an ospl library.  
 
 ## Return values
 
