@@ -1,42 +1,42 @@
 # Reference
 ## Functions
-- **[ospl_create_library](/{{ site.baseurl }}/reference/ospl_create_library)**  
+- **[``ospl_create_library``](/{{ site.baseurl }}/reference/ospl_create_library)**  
 	create a ospl library.
-- **[ospl_import_photo](/{{ site.baseurl }}/reference/ospl_import_photo)**  
+- **[``ospl_import_photo``](/{{ site.baseurl }}/reference/ospl_import_photo)**  
 	import a photo into library
-- **[ospl_import_photo_in_album](/{{ site.baseurl }}/reference/ospl_import_photo_in_album)**  
+- **[``ospl_import_photo_in_album``](/{{ site.baseurl }}/reference/ospl_import_photo_in_album)**  
 	import a photo directly into an existing album
-- **[ospl_import_folder](/{{ site.baseurl }}/reference/ospl_import_folder)**  
+- **[``ospl_import_folder``](/{{ site.baseurl }}/reference/ospl_import_folder)**  
 	import a folder full of photos
-- **[ospl_import_folder_in_album]()**  
+- **[``ospl_import_folder_in_album``]()**  
 	import a folder full of photos directly into an existing album
-- **[ospl_album_list]()**  
+- **[``ospl_album_list``]()**  
 	get the entire album list stored in a library
-- **[ospl_album_list_photos]()**  
+- **[``ospl_album_list_photos``]()**  
 	get the photo list from an album
-- **[ospl_photo_associated_album]()**  
+- **[``ospl_photo_associated_album``]()**  
 	get the albums were a specific photo is stored
-- **[ospl_album_create]()**  
+- **[``ospl_album_create``]()**  
 	create an album in a ospl library
-- **[ospl_album_rename]()**  
+- **[``ospl_album_rename``]()**  
 	rename an album from an ospl library
-- **[ospl_album_delete]()**  
+- **[``ospl_album_delete``]()**  
 	delete an album from an ospl library
-- **[ospl_album_add_photo]()**  
+- **[``ospl_album_add_photo``]()**  
 	add a photo to an existing album
-- **[ospl_album_delete_photo]()**  
+- **[``ospl_album_delete_photo``]()**  
 	delete a photo from an album
-- **[ospl_album_move_photo]()**  
+- **[``ospl_album_move_photo``]()**  
 	move a photo from an album to another album
-- **[ospl_photo_get]()**  
+- **[``ospl_photo_get``]()**  
 	get informations about a specific photo
-- **[ospl_photo_list]()**  
+- **[``ospl_photo_list``]()**  
 	list every photo from a library
-- **[ospl_photo_delete]()**  
+- **[``ospl_photo_delete``]()**  
 	delete a specific photo from a library
 
 ## Structure
-When you create an ospl library (calling **[ospl_create_library](/{{ site.baseurl }}/reference/ospl_create_library)** function) the following files and folders are created:
+When you create an ospl library (calling **[``ospl_create_library``](/{{ site.baseurl }}/reference/ospl_create_library)** function) the following files and folders are created:
 
 | ``path``                          | ``description``                                              | ``introduced in version`` |
 | --------------------------------- | ------------------------------------------------------------ | ---------------------- |
