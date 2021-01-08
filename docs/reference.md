@@ -121,4 +121,4 @@ In this section every table and column is explained, and an example is provided 
 | ``column name``      | ``description``                                   | ``example`` | ``introduced in version`` |
 | -------------------- | ------------------------------------------------- | ----------- | ---------------------- |
 | ``including_folder`` | ``id`` of the folder that includes another folder | ``2``       | ``0.1.0``              |
-| ``included_folder``  | ``id`` of the folder included by the other folded | ``3``       | ``0.1.0``              |
+| ``included_folder``  | ``id`` of the folder included by the other folder | ``3``       | ``0.1.0``              |

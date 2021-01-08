@@ -1,7 +1,7 @@
 # ospl_import_photo_in_album
 
 (since version 0.1.0)  
-import a photo into library directly into an specific album.
+import a photo directly into an existing album.
 
 ## Description
 
@@ -59,7 +59,7 @@ int main(void)
 
 ## Behavior
 
-This function imports the picture, then add it to the specified album. If the album doesn't exists, the photo is still being imported, but an error is returned.
+This function imports the picture, then adds  it to the specified album. If the album doesn't exist, the photo will still be imported, and no error is returned.
 
 
 ## Changelog
