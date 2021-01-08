@@ -6,7 +6,7 @@ create a ospl library
 ```c
 int ospl_create_library(char *library);
 ```
-This functions creates a ospl library at the given path. How is an ospl library structured ? see [ospl_structure](/{{ site.baseurl }}/reference#structure)
+This functions creates a ospl library at the given path. How is an ospl library structured ? see [``ospl_structure``](/{{ site.baseurl }}/reference#structure)
 
 ## Parameters
 **`library`**: the path where the library will be created.
@@ -37,8 +37,16 @@ int main(void)
 }
 ```
 
+## Behavior
+
+This function create a library by first creating the folder named after the library, if success, it will create the photos folder, then the import folder, and finally, the thumbnails fodlder. If every folder creation is a success, the database file is created. Learn more at [``ospl_structure``](/{{ site.baseurl }}/reference#structure)
+
 ## Changelog
 
 |``version`` | ``description``                     |
 |------------|-------------------------------------|
 |``v0.1.0``  | ``the function is introduced``      |
+
+## Enhancements
+
+- If a failure occurs, try to remove the already created folders.
