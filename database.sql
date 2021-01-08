@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS `includes` (
 	PRIMARY KEY(`including_folder`,`included_folder`)
 );
 CREATE TABLE IF NOT EXISTS `holds` (
-	`holding_folder`	INTEGER,
+	`held_folder`	INTEGER,
 	`holded_album`		INTEGER,
 	FOREIGN KEY(`holded_album`) REFERENCES `albums`(`id`),
-	FOREIGN KEY(`holding_folder`) REFERENCES `folders`(`id`),
-	PRIMARY KEY(`holding_folder`,`holded_album`)
+	FOREIGN KEY(`held_folder`) REFERENCES `folders`(`id`),
+	PRIMARY KEY(`held_folder`,`holded_album`)
 );
 CREATE TABLE IF NOT EXISTS `folders` (
 	`id`	INTEGER NOT NULL UNIQUE,
