@@ -6,18 +6,18 @@ create a ospl library
 ```c
 int ospl_create_library(char *library);
 ```
-This functions creates a ospl library at the given path. How is an ospl library structured ? see [``ospl_structure``](/{{ site.baseurl }}/reference#structure)
+This function creates a ospl library at the given path. To see how an ospl library is structured, see [``ospl_structure``](/{{ site.baseurl }}/reference#structure)
 
 ## Parameters
 **`library`**: the path where the library will be created.
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | ``library successfully created``                  |
-|``EAEXISTS`` | ``the path given already exists``                 |
-|``EDBFAIL``  | ``an error occured when accessing to database``   |
+| ``value``    | ``signification``                            |
+| ------------ | -------------------------------------------- |
+| ``SUCCESS``  | library successfully created                 |
+| ``EAEXISTS`` | the path given already exists                |
+| ``EDBFAIL``  | an error occurred when accessing to database |
 
 ## Example
 ```c
@@ -39,7 +39,7 @@ int main(void)
 
 ## Behavior
 
-This function create a library by first creating the folder named after the library, if success, it will create the photos folder, then the import folder, and finally, the thumbnails fodlder. If every folder creation is a success, the database file is created. Learn more at [``ospl_structure``](/{{ site.baseurl }}/reference#structure)
+This function creates a library by first creating the folder named after the library. If it succeeds, it will create the photos folder, then the import folder, and finally, the thumbnails folder. If every folder creation succeeds, the database file is created. Learn more at [``ospl_structure``](/{{ site.baseurl }}/reference#structure)
 
 ## Changelog
 
@@ -49,4 +49,4 @@ This function create a library by first creating the folder named after the libr
 
 ## Enhancements
 
-- If a failure occurs, try to remove the already created folders.
+- If a failure occurs, try removing the already created folders.

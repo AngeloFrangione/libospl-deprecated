@@ -1,5 +1,5 @@
 # Building
-In order to build the source, you will have to download it you can do it by cloning it directly from github using git.
+In order to build the source, you will have to download it. You can do so using git 
 ```shell
 git clone https://github.com/AngeloFrangione/libospl.git
 ```
@@ -37,10 +37,10 @@ cd build
 ninja
 ```
 ## Windows
-Comming later
+Coming later
 
 ## Running tests
-After building ospl you can run the tests to ensure everything is working correctly. To do that make sure you are in the build folder and then run this command:
+After building ospl you can run the tests to ensure everything is working correctly. To do so, make sure you are in the build folder and then run this command:
 ```shell
 ninja test
 ```
