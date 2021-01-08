@@ -125,10 +125,9 @@ a {
   }
 
   @include small {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 0.9rem;
+    padding: 1.5rem;
+    font-size: 1rem;
+    border-radius: 0;
 
     + .btn {
       margin-top: 1rem;
