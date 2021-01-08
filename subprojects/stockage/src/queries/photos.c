@@ -42,14 +42,14 @@ int insert_photo(t_db *db, t_photos *pho)
 {
 	char	query[BUFFER_SIZE] = "insert into photos (hash, original_name, "
 	"new_name, import_datetime, random, import_year, import_month, import_day, "
-	"import_hour, import_minut, import_second, exif_height, exif_width, "
+	"import_hour, import_minute, import_second, exif_height, exif_width, "
 	"exif_brand, exif_peripheral) ";
 
 	sprintf(query + 211, "values (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%d\", "
 		"\"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%d\", \"%s\", "
 		"\"%s\");", pho->hash, pho->original_name, pho->new_name,
 		pho->import_datetime, pho->random,pho->import_year, pho->import_month,
-		pho->import_day, pho->import_hour, pho->import_minut,
+		pho->import_day, pho->import_hour, pho->import_minute,
 		pho->import_second, pho->exif_height, pho->exif_width,
 		pho->exif_brand, pho->exif_peripheral);
 	if (stockage_write(db, query))
@@ -159,7 +159,7 @@ static int _callback(t_photos *pho, int ac, char **av, char **column)
 	pho[current].import_month = atoi(av[6]);
 	pho[current].import_day = atoi(av[7]);
 	pho[current].import_hour = atoi(av[8]);
-	pho[current].import_minut = atoi(av[9]);
+	pho[current].import_minute = atoi(av[9]);
 	pho[current].import_second = atoi(av[10]);
 	pho[current].exif_height = atoi(av[11]);
 	pho[current].exif_width = atoi(av[12]);

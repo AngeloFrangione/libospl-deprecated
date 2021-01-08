@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
 	`import_month`		INTEGER,
 	`import_day`		INTEGER,
 	`import_hour`		INTEGER,
-	`import_minut`		INTEGER,
+	`import_minute`		INTEGER,
 	`import_second`		INTEGER,
 	`exif_height`		INTEGER,
 	`exif_width`		INTEGER ,
