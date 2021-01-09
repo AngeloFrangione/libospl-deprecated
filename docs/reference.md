@@ -16,7 +16,7 @@
 	get the photo list from an album
 - **[``ospl_photo_associated_album``](/{{ site.baseurl }}/reference/ospl_photo_associated_album)**  
 	get the albums where a specific photo is stored
-- **[``ospl_album_create``]()**  
+- **[``ospl_album_create``](/{{ site.baseurl }}/reference/ospl_album_create)**  
 	create an album in an ospl library
 - **[``ospl_album_rename``]()**  
 	rename an album from an ospl library
