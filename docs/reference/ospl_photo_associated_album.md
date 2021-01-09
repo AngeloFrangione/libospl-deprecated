@@ -19,7 +19,7 @@ This function lists every album where a specific photo is stored and puts them i
 
 |``value``    | ``signification``                            |
 |-------------|----------------------------------------------|
-|``SUCCESS``  | library successfully created                 |
+|``SUCCESS``  | no errors occured during operation           |
 |``EDBFAIL``  | an error occurred when accessing to database |
 
 

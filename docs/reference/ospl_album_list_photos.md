@@ -17,7 +17,7 @@ This function lists every photo inside a specific album from an ospl library and
 
 |``value``    | ``signification``                            |
 |-------------|----------------------------------------------|
-|``SUCCESS``  | library successfully created                 |
+|``SUCCESS``  | no errors occured during operation           |
 |``EDBFAIL``  | an error occurred when accessing to database |
 
 

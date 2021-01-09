@@ -15,7 +15,7 @@ int ospl_(char *library);
 
 |``value``    | ``signification``                                 |
 |-------------|---------------------------------------------------|
-|``SUCCESS``  | library successfully created                      |
+|``SUCCESS``  |                                                   |
 |             |                                                   |
 
 
@@ -26,7 +26,7 @@ int ospl_(char *library);
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
 	if ((ret = ospl_(library)) < 0)
 	{
 		printf("Failed to : %s", ospl_enum_error(ret));

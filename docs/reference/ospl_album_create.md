@@ -16,7 +16,7 @@ This function creates an album named ``name`` into an ospl provided with ``libra
 
 |``value``    | ``signification``                                 |
 |-------------|---------------------------------------------------|
-|``SUCCESS``  | library successfully created                      |
+|``SUCCESS``  | album successfully created                      |
 |``EAEXISTS`` | the path given already exists                     |
 |``EDBFAIL``  | an error occurred when accessing to database      |
 |``EERRNO``   | a system error eccured, use perror() to show it   |
