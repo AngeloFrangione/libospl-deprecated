@@ -20,7 +20,7 @@
 	create an album in an ospl library
 - **[``ospl_album_rename``](/{{ site.baseurl }}/reference/ospl_album_rename)**  
 	rename an album from an ospl library
-- **[``ospl_album_delete``]()**  
+- **[``ospl_album_delete``](/{{ site.baseurl }}/reference/ospl_album_delete)**  
 	delete an album from an ospl library
 - **[``ospl_album_add_photo``]()**  
 	add a photo to an existing album
