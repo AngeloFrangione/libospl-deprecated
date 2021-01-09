@@ -29,11 +29,11 @@ This functions imports a photo located at ``path`` in an ospl library located at
 
 ## Return values
 
-| ``value``     | ``signification``                            |
-| ------------- | -------------------------------------------- |
-| ``SUCCESS``   | photo successfully imported                |
-| ``ENOTFOUND`` | the photo ``path`` given does not exist    |
-| ``EDBFAIL``   | an error occurred when accessing to database |
+| ``value``     | ``signification``                                |
+| ------------- | -------------------------------------------------|
+| ``SUCCESS``   | photo successfully imported  into album ``album``|
+| ``ENOTFOUND`` | the photo ``path`` given does not exist          |
+| ``EDBFAIL``   | an error occurred when accessing to database     |
 
 
 

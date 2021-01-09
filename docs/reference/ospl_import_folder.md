@@ -19,7 +19,7 @@ This function will import an entire folder located at ``path`` of photos into an
 
 |``value``    | ``signification``                                 |
 |-------------|---------------------------------------------------|
-|``SUCCESS``  | library successfully created                      |
+|``SUCCESS``  | folder successfully imported                      |
 |``ENOTFOUND``| the folder was not found                          |
 
 

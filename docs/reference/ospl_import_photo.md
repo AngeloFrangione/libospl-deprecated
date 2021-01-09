@@ -30,7 +30,7 @@ This functions imports a folder located at ``path`` in an ospl library located a
 
 | ``value``     | ``signification``                            |
 | ------------- | -------------------------------------------- |
-| ``id``        | the id of the photo is           |
+| ``id``        | the id of the photo is returned on success   |
 | ``ENOTFOUND`` | the photo ``path`` given does not exist      |
 | ``EDBFAIL``   | an error occurred when accessing to database |
 

@@ -17,7 +17,7 @@ This function lists every album from an ospl library and puts them into a [``t_a
 
 | ``value``   | ``signification``                            |
 | ----------- | -------------------------------------------- |
-| ``SUCCESS`` | library successfully created                 |
+| ``SUCCESS`` | no errors occured during operation           |
 | ``EDBFAIL`` | an error occurred when accessing to database |
 
 ## Example
