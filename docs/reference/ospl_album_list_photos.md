@@ -16,9 +16,9 @@ This function lists every photo inside a specific album from an ospl library and
 ## Return values
 
 |``value``    | ``signification``                            |
-|-------------|----------------------------------------------|
-|``SUCCESS``  | no errors occured during operation           |
-|``EDBFAIL``  | an error occurred when accessing to database |
+| ----------- | -------------------------------------------- |
+| ``SUCCESS`` | no errors occurred during operation          |
+| ``EDBFAIL`` | an error occurred when accessing to database |
 
 
 ## Example
@@ -28,7 +28,7 @@ This function lists every photo inside a specific album from an ospl library and
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
 	t_photos photos[1024] = { 0 };
 	int album_id = 1;
 
@@ -46,12 +46,13 @@ int main(void)
 			++i;
 		}
 	}
+	return 0;
 }
 ```
 
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |

@@ -44,7 +44,8 @@ This functions imports a folder located at ``path`` in an ospl library located a
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
+
 	if ((ret = ospl_create_library(library)) < 0)
 	{
 		printf("Failed to import photo: %s", ospl_enum_error(ret));
@@ -52,6 +53,7 @@ int main(void)
 	}
 	else
 		printf("Photo imported successfully");
+	return 0;
 }
 ```
 

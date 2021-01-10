@@ -29,11 +29,11 @@ This functions imports a photo located at ``path`` in an ospl library located at
 
 ## Return values
 
-| ``value``     | ``signification``                                |
-| ------------- | -------------------------------------------------|
-| ``SUCCESS``   | photo successfully imported  into album ``album``|
-| ``ENOTFOUND`` | the photo ``path`` given does not exist          |
-| ``EDBFAIL``   | an error occurred when accessing to database     |
+| ``value``     | ``signification``                                 |
+| ------------- | ------------------------------------------------- |
+| ``SUCCESS``   | photo successfully imported  into album ``album`` |
+| ``ENOTFOUND`` | the photo ``path`` given does not exist           |
+| ``EDBFAIL``   | an error occurred when accessing to database      |
 
 
 
@@ -45,8 +45,9 @@ This functions imports a photo located at ``path`` in an ospl library located at
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
 	int album_id = 1;
+
 	if ((ret = ospl_import_photo_in_album(library, "path/to/photo.jpg", album_id)) < 0)
 	{
 		printf("Failed to import photo: %s", ospl_enum_error(ret));
@@ -54,6 +55,7 @@ int main(void)
 	}
 	else
 		printf("Photo imported successfully in album %d", album_id);
+	return 0;
 }
 ```
 
@@ -64,9 +66,9 @@ This function imports the picture, then adds  it to the specified album. If the 
 
 ## Changelog
 
-| ``version`` | ``description``                |
-| ----------- | ------------------------------ |
-| ``v0.1.0``  | ``the function is introduced`` |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 
 

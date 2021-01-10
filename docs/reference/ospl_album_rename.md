@@ -16,12 +16,12 @@ It also renames the album folder located in ``library/photos/``
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | album successfully renamed                        |
-|``EDBFAIL``  | an error occurred when accessing to database      |
-|``ENOTFOUND``| album not found with this ``id``                  |
-|``EERRNO``   | a system error eccured, use perror() to show it   |
+| ``value``     | ``signification``                                |
+| ------------- | ------------------------------------------------ |
+| ``SUCCESS``   | album successfully renamed                       |
+| ``EDBFAIL``   | an error occurred when accessing to database     |
+| ``ENOTFOUND`` | album not found with this ``id``                 |
+| ``EERRNO``    | a system error occurred, use perror() to show it |
 
 
 ## Example
@@ -41,6 +41,7 @@ int main(void)
 	}
 	else
 		printf("Album successfully renamed.");
+	return 0;
 }
 ```
 
@@ -51,9 +52,9 @@ This function first try's to find if the album exists, then it renames the folde
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 
 ## Enhancements

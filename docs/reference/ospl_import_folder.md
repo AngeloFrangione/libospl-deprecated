@@ -17,10 +17,10 @@ This function will import an entire folder located at ``path`` of photos into an
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | folder successfully imported                      |
-|``ENOTFOUND``| the folder was not found                          |
+| ``value``     | ``signification``            |
+| ------------- | ---------------------------- |
+| ``SUCCESS``   | folder successfully imported |
+| ``ENOTFOUND`` | the folder was not found     |
 
 
 ## Example
@@ -30,7 +30,8 @@ This function will import an entire folder located at ``path`` of photos into an
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
+
 	if ((ret = ospl_import_folder(library, "path/to/folder/with/photos/")) < 0)
 	{
 		printf("Failed to import folder: %s", ospl_enum_error(ret));
@@ -38,6 +39,7 @@ int main(void)
 	}
 	else
 		printf("Successfully imported folder");
+	return 0;
 }
 ```
 
@@ -48,9 +50,9 @@ This function calls **[``ospl_import_photo``](/{{ site.baseurl }}/reference/ospl
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 
 ## Enhancements

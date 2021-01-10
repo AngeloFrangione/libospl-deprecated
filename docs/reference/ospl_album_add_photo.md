@@ -16,11 +16,11 @@ This function adds an existing photo ``photo`` to an existing album ``album``.
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | photo added to album with success                 |
-|``EDBFAIL``  | an error occurred when accessing to database      |
-|``EHARDLINK``| an error occured during hard link creation        |
+| ``value``     | ``signification``                                 |
+| ------------- | ------------------------------------------------- |
+| ``SUCCESS``   | photo added to album with success                 |
+| ``EDBFAIL``   | an error occurred when accessing to database      |
+| ``EHARDLINK`` | an error occurred during hard link creation       |
 
 
 ## Example
@@ -33,6 +33,7 @@ int main(void)
 	int album_id = 12;
 	int photo_id = 370;
 	char *library = "path/to/photo/library/";
+
 	if ((ret = ospl_album_add_photo(library, photo_id, album_id)) < 0)
 	{
 		printf("Failed to add photo %d to album %d: %s", photo_id, album_id, ospl_enum_error(ret));
@@ -40,6 +41,7 @@ int main(void)
 	}
 	else
 		printf("Photo successfully added to album.");
+	return 0;
 }
 ```
 
@@ -49,9 +51,9 @@ This function adds the photo ``photo`` to the album ``album`` by adding them to 
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 
 ## Enhancements

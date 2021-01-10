@@ -14,12 +14,12 @@ This function creates an album named ``name`` into an ospl provided with ``libra
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | album successfully created                      |
-|``EAEXISTS`` | the path given already exists                     |
-|``EDBFAIL``  | an error occurred when accessing to database      |
-|``EERRNO``   | a system error eccured, use perror() to show it   |
+|``value``     | ``signification``                                |
+| ------------ | ------------------------------------------------ |
+| ``SUCCESS``  | album successfully created                       |
+| ``EAEXISTS`` | the path given already exists                    |
+| ``EDBFAIL``  | an error occurred when accessing to database     |
+| ``EERRNO``   | a system error occurred, use perror() to show it |
 
 
 ## Example
@@ -29,7 +29,8 @@ This function creates an album named ``name`` into an ospl provided with ``libra
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
+
 	if ((ret = ospl_album_create(library, "Vacation in Tokyo - 1994")) < 0)
 	{
 		printf("Failed to create album: %s", ospl_enum_error(ret));
@@ -37,6 +38,7 @@ int main(void)
 	}
 	else
 		printf("Album successfully created.");
+	return 0;
 }
 ```
 
@@ -46,9 +48,9 @@ This function creates the album into the library first. If it fails the director
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 ## Enhancements
 
