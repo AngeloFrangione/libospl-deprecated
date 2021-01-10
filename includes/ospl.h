@@ -87,7 +87,7 @@ int ospl_album_add_photo(char *library, int photo, int album);
 int ospl_album_delete_photo(char *library, int photo, int album);
 int ospl_album_move_photo(char *library, int photo, int old, int new);
 int ospl_photo_associated_album(char *library, int photo, t_album *list);
-int ospl_photo_get(char *library, int id, t_photos *list);
+int ospl_photo_get(char *library, int id, t_photos *photo);
 int ospl_photo_list(char *library, t_photos *list);
 int ospl_photo_delete(char *library, int id);
 
