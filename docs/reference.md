@@ -24,7 +24,7 @@
 	delete an album from an ospl library
 - **[``ospl_album_add_photo``](/{{ site.baseurl }}/reference/ospl_album_add_photo)**  
 	add a photo to an existing album
-- **[``ospl_album_delete_photo``]()**  
+- **[``ospl_album_delete_photo``](/{{ site.baseurl }}/reference/ospl_album_delete_photo)**  
 	delete a photo from an album
 - **[``ospl_album_move_photo``]()**  
 	move a photo from an album to another album
