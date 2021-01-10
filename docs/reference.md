@@ -30,7 +30,7 @@
 	move a photo from an album to another album
 - **[``ospl_photo_get``](/{{ site.baseurl }}/reference/ospl_photo_get)**  
 	get informations about a specific photo
-- **[``ospl_photo_list``]()**  
+- **[``ospl_photo_list``](/{{ site.baseurl }}/reference/ospl_photo_list)**  
 	list every photo from a library
 - **[``ospl_photo_delete``]()**  
 	delete a specific photo from a library
