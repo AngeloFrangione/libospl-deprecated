@@ -24,12 +24,12 @@
 #include <cwalk.h>
 #include <stockage.h>
 
-int ospl_photo_get(char *library, int id, t_photos *list)
+int ospl_photo_get(char *library, int id, t_photos *photo)
 {
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	if (select_photo(&db, id, list))
+	if (select_photo(&db, id, photo))
 		return EDBFAIL;
 	return SUCCESS;
 }
