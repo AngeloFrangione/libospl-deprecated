@@ -16,10 +16,10 @@ This function will import an entire folder located at ``path`` of photos into an
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | folder successfully imported into the album       |
-|``ENOTFOUND``| folder ``path`` not found                         |
+| ``value``     | ``signification``                           |
+| ------------- |-------------------------------------------- |
+| ``SUCCESS``   | folder successfully imported into the album |
+| ``ENOTFOUND`` | folder ``path`` not found                   |
 
 
 
@@ -31,7 +31,8 @@ int main(void)
 {
 	int ret;
 	int album_id = 1;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
+
 	if ((ret = ospl_import_folder_in_album(library, "path/to/folder/with/photos/"), album_id) < 0)
 	{
 		printf("Failed to import folder: %s", ospl_enum_error(ret));
@@ -39,6 +40,7 @@ int main(void)
 	}
 	else
 		printf("Successfully imported folder in album %d", album_id);
+	return 0;
 }
 ```
 
@@ -49,9 +51,9 @@ This function calls **[``ospl_import_photo_in_album``](/{{ site.baseurl }}/refer
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 
 ## Enhancements

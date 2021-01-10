@@ -19,10 +19,10 @@ This function moves a photo ``photo`` from album ``old`` to album ``new``.
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | photo removed from album successfully             |
-|``EDBFAIL``  | an error occurred when accessing to database      |
+|``value``    | ``signification``                            |
+| ----------- | -------------------------------------------- |
+| ``SUCCESS`` | photo removed from album successfully        |
+| ``EDBFAIL`` | an error occurred when accessing to database |
 
 
 ## Example
@@ -44,6 +44,7 @@ int main(void)
 	}
 	else
 		printf("Photo successfully moved");
+	return 0;
 }
 ```
 
@@ -53,9 +54,9 @@ This function gets the photo name and album names from database, then it moves t
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 
 ## Enhancements

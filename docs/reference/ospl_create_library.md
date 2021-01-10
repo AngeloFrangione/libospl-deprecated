@@ -26,7 +26,8 @@ This function creates a ospl library at the given path. To see how an ospl libra
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
+
 	if ((ret = ospl_create_library(library)) < 0)
 	{
 		printf("Failed to create library: %s", ospl_enum_error(ret));
@@ -34,6 +35,7 @@ int main(void)
 	}
 	else
 		printf("library successfully created");
+	return 0;
 }
 ```
 
@@ -43,9 +45,10 @@ This function creates a library by first creating the folder named after the lib
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
+
 
 ## Enhancements
 

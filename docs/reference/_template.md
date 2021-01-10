@@ -13,9 +13,9 @@ int ospl_(char *library);
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  |                                                   |
+| ``value``   | ``signification``                                 |
+| ----------- | ------------------------------------------------- |
+| ``SUCCESS`` |                                                   |
 |             |                                                   |
 
 
@@ -27,6 +27,7 @@ int main(void)
 {
 	int ret;
 	char *library = "path/to/photo/library/";
+
 	if ((ret = ospl_(library)) < 0)
 	{
 		printf("Failed to : %s", ospl_enum_error(ret));
@@ -34,6 +35,7 @@ int main(void)
 	}
 	else
 		printf("");
+	return 0;
 }
 ```
 
@@ -41,9 +43,9 @@ int main(void)
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
 
 
 ## Enhancements

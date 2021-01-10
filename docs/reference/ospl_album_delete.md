@@ -14,12 +14,12 @@ This function deletes the album with id ``id`` from the databse, it also removes
 
 ## Return values
 
-|``value``    | ``signification``                                 |
-|-------------|---------------------------------------------------|
-|``SUCCESS``  | album successfully deleted                        |
-|``EDBFAIL``  | an error occurred when accessing to database      |
-|``ENOTFOUND``| album not found with this ``id``                  |
-|``EERRNO``   | a system error eccured, use perror() to show it   |
+| ``value``     | ``signification``                                |
+| ------------- | ------------------------------------------------ |
+| ``SUCCESS``   | album successfully deleted                       |
+| ``EDBFAIL``   | an error occurred when accessing to database     |
+| ``ENOTFOUND`` | album not found with this ``id``                 |
+| ``EERRNO``    | a system error occurred, use perror() to show it |
 
 
 ## Example
@@ -32,7 +32,6 @@ int main(void)
 	char *library = "path/to/photo/library/";
 	int album_id = 12;
 
-
 	if ((ret = ospl_album_delete(library, album_id)) < 0)
 	{
 		printf("Failed to delete album: %s", ospl_enum_error(ret));
@@ -40,6 +39,7 @@ int main(void)
 	}
 	else
 		printf("Album successfully deleted");
+	return 0;
 }
 ```
 
@@ -49,6 +49,6 @@ This function checks if the album exist, if it does, it will be deleted from the
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |

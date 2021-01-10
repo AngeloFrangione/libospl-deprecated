@@ -17,10 +17,10 @@ This function lists every album where a specific photo is stored and puts them i
 
 ## Return values
 
-|``value``    | ``signification``                            |
-|-------------|----------------------------------------------|
-|``SUCCESS``  | no errors occured during operation           |
-|``EDBFAIL``  | an error occurred when accessing to database |
+| ``value``   | ``signification``                            |
+| ----------- | -------------------------------------------- |
+| ``SUCCESS`` | no errors occurred during operation          |
+| ``EDBFAIL`` | an error occurred when accessing to database |
 
 
 ## Example
@@ -48,11 +48,12 @@ int main(void)
 			++i;
 		}
 	}
+	return 0;
 }
 ```
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |

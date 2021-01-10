@@ -11,13 +11,13 @@ This function lists every album from an ospl library and puts them into a [``t_a
 
 ## Parameters
 **`library`**: the path of an ospl library.  
-**`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference) structure, this should be statically allocated or dynamically allocated with ``malloc``. 
+**`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference#data-structures) structure, this should be statically allocated or dynamically allocated with ``malloc``. 
 
 ## Return values
 
 | ``value``   | ``signification``                            |
 | ----------- | -------------------------------------------- |
-| ``SUCCESS`` | no errors occured during operation           |
+| ``SUCCESS`` | no errors occurred during operation          |
 | ``EDBFAIL`` | an error occurred when accessing to database |
 
 ## Example
@@ -27,7 +27,7 @@ This function lists every album from an ospl library and puts them into a [``t_a
 int main(void)
 {
 	int ret;
-	char *library = "path/to/photo/library";
+	char *library = "path/to/photo/library/";
 	t_album albums[128] = { 0 };
 
 	if ((ret = ospl_album_list(library, albums)) < 0)
@@ -44,11 +44,12 @@ int main(void)
 			++i;
 		}
 	}
+	return 0;
 }
 ```
 
 ## Changelog
 
-|``version`` | ``description``                     |
-|------------|-------------------------------------|
-|``v0.1.0``  | ``the function is introduced``      |
+| ``version`` | ``description``                 |
+| ----------- | ------------------------------- |
+| ``v0.1.0``  | ``the function is introduced``  |
