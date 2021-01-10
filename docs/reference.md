@@ -32,7 +32,7 @@
 	get informations about a specific photo
 - **[``ospl_photo_list``](/{{ site.baseurl }}/reference/ospl_photo_list)**  
 	list every photo from a library
-- **[``ospl_photo_delete``]()**  
+- **[``ospl_photo_delete``](/{{ site.baseurl }}/reference/ospl_photo_delete)**  
 	delete a specific photo from a library
 
 ## Data structures
