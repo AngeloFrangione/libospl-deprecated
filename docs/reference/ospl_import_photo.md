@@ -57,7 +57,7 @@ int main(void)
 
 ## Behavior
 
-This function will extract information about a picture, such as the name and an ``md5`` hash. It will copy the current time. And insert the photo into the database, if it succeeds, it will copy the picture into the ``library/photos/import/`` folder with a new name composed of its original name, the import date and time. If this succeeds, it will create a thumbnail into the ``library/thumbnails/`` folder. And if finally this succeeds, the ``id`` of the just inserted photo is returned.
+This function will extract information about a photo, such as the name and an ``md5`` hash. It will copy the current time. And insert the photo into the database, if it succeeds, it will copy the photo into the ``library/photos/import/`` folder with a new name composed of its original name, the import date and time. If this succeeds, it will create a thumbnail into the ``library/thumbnails/`` folder. And if finally this succeeds, the ``id`` of the just inserted photo is returned.
 
 ## Changelog
 
