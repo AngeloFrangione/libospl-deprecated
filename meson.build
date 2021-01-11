@@ -27,6 +27,9 @@ deps = [thumbnailer,
 
 
 source =['srcs/ospl.c', 'srcs/common.c', 
+		'srcs/db/database_albums.c',
+		'srcs/db/database_settings.c',
+		'srcs/db/database_photos.c',
 		'srcs/action/create.c',
 		'srcs/action/import.c',
 		'srcs/action/photo.c',
@@ -34,7 +37,7 @@ source =['srcs/ospl.c', 'srcs/common.c',
 		'srcs/action/export.c']
 
 # Library
-cargs =['-Wall', '-Wextra']
+cargs =['-Wall', '-Wextra', '-Wno-unused-parameter']
 ospl = shared_library(	'ospl', source,
 						install: true,
 						include_directories : 'includes',

@@ -92,6 +92,33 @@ int ospl_photo_list(char *library, t_photos *list);
 int ospl_photo_delete(char *library, int id);
 
 
+///// Database common usage function
+/// PHOTOS ///
+int db_insert_photo(t_db *db, t_photos *pho);
+int db_select_photo(t_db *db, int id, t_photos *pho);
+int db_select_photo_multiple(t_db *db, int id, t_photos *pho);
+int db_select_photo_all(t_db *db, t_photos *phos);
+int db_delete_photo(t_db *db, int id);
+int db_update_photo_null(t_db *db, int id, char *col);
+int db_update_photo_int(t_db *db, int id, char *col, int value);
+int db_update_photo_char(t_db *db, int id, char *col, char *value);
+/// SETTINGS/ ///
+int db_insert_setting(t_db *db, char *name, char *value);
+int db_update_setting(t_db *db, char *name, char *value);
+int db_select_setting(t_db *db, char *name, char *value);
+int db_delete_setting(t_db *db, char *name);
+/// ALBUMS ///
+int db_create_album(t_db *db, char *name);
+int db_rename_album(t_db *db, int id, char *name);
+int db_delete_album(t_db *db, int id);
+int db_insert_contains(t_db *db, int photo, int album);
+int db_delete_contains(t_db *db, int photo, int album);
+int db_move_contains(t_db *db, int photo, int old_album, int new_album);
+int db_list_contains(t_db *db, int album, t_photos *list);
+int db_photo_contained(t_db *db, int pho, t_album *list);
+int db_list_albums(t_db *db, t_album *list);
+int db_select_album(t_db *db, int id, t_album *album);
+
 // Common usage functions
 void fill_tdb(t_db *db, char *library);
 int hard_link(char *current, char * new);

@@ -118,7 +118,7 @@ int ospl_import_photo(char *library, char *path)
 		printf("\t------------END DEBUGGING----------------\n");
 	#endif
 	printf("adding %s to database\n", pho.original_name);
-	r = insert_photo(&db, &pho);
+	r = db_insert_photo(&db, &pho);
 	if (r)
 		return EDBFAIL;
 	char import_path[512] = {0};

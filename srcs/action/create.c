@@ -46,7 +46,7 @@ static int create_database_file(char *path)
 	cwk_path_join(path, DATABASE_FILENAME, tmp, sizeof(tmp));
 	r = create_database(tmp);
 	db.path = tmp;
-	r = r & insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION);
+	r = r & db_insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION);
 	return r;
 }
 
