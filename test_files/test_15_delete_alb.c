@@ -14,7 +14,7 @@ int main(void)
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
 	int r = rand();
-	sprintf(lib_name, "test_Library_3_%d", r);
+	sprintf(lib_name, "test_Library_15_%d", r);
 	if (ospl_create_library(lib_name) < 0)
 	{
 		printf("Error executing ospl_create_library\n");
@@ -26,10 +26,15 @@ int main(void)
 		printf("error executing ospl_album_create\n");
 		return 1;
 	}
-	sprintf(tmp, "%s/photos/Vacances", lib_name);
-	if (!folder_exists(tmp))
+	if (ospl_album_delete(lib_name, 1) < 0)
 	{
-		printf("album folder not found %s\n", tmp);
+		printf("executing ospl_album_delete failed\n");
+		return 1;
+	}
+	sprintf(tmp, "%s/photos/Vacances", lib_name);
+	if (folder_exists(tmp))
+	{
+		printf("album folder still here altho it was deleted: %s\n", tmp);
 		return 1;
 	}
 	sprintf(tmp, "rm -rf %s", lib_name);

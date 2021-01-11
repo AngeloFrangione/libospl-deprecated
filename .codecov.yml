@@ -1,5 +1,6 @@
 ignore:
   - "test_files/"
+  - "srcs/db/*"
   - "subprojects/**/*"
   - "cli.c"
   - "srcs/ospl.c"

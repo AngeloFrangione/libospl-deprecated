@@ -52,9 +52,8 @@ int ospl_photo_delete(char *library, int id)
 	char tmp_thumb[4096] = { 0 };
 
 	fill_tdb(&db, library);
-	db_select_photo(&db, id, &pho);
-	db_delete_photo(&db, id);
-
+	if (db_select_photo(&db, id, &pho) || db_delete_photo(&db, id))
+		return EDBFAIL;
 	cwk_path_join(library, "photos/import", tmp_import, sizeof(tmp_import));
 	cwk_path_join(library, "thumbnails", tmp_thumb, sizeof(tmp_thumb));
 	cwk_path_join(tmp_import, pho.new_name, tmp_import, sizeof(tmp_import));
