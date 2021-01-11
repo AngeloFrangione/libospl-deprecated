@@ -14,28 +14,22 @@ int main(void)
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
 	int r = rand();
-	sprintf(lib_name, "test_Library_2_%d", r);
+	sprintf(lib_name, "test_Library_5_%d", r);
 	if (ospl_create_library(lib_name) < 0)
 	{
 		printf("Error executing ospl_create_library\n");
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_import_photo(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg") < 0)
+	if (ospl_album_create(lib_name, "Vacances") < 0)
 	{
-		printf("Error executing ospl_import_photo\n");
+		printf("error executing ospl_album_create\n");
 		return 1;
 	}
-	t_photos pho;
-	if (ospl_photo_get(lib_name, 1, &pho) < 0)
+	sprintf(tmp, "%s/photos/Vacances", lib_name);
+	if (!folder_exists(tmp))
 	{
-		printf("Error executing ospl_photo_get\n");
-		return 1;
-	}
-	sprintf(tmp, "%s/photos/import/%s", lib_name, pho.new_name);
-	if (!file_exists(tmp))
-	{
-		printf("photo not present in import folder: %s\n", tmp);
+		printf("album folder not found %s\n", tmp);
 		return 1;
 	}
 	sprintf(tmp, "rm -rf %s", lib_name);

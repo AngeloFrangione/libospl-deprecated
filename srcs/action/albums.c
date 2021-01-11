@@ -124,9 +124,7 @@ int ospl_album_add_photo(char *library, int photo, int album)
 	char tmp_link[512] = { 0 };
 
 	fill_tdb(&db, library);
-	if (db_select_photo(&db, photo, &pho) < 0)
-		return EDBFAIL;
-	if (db_select_album(&db, album, &alb) < 0)
+	if (db_select_photo(&db, photo, &pho) || db_select_album(&db, album, &alb))
 		return EDBFAIL;
 	cwk_path_join(library, "/photos/import/", tmp_original, sizeof(tmp_original));
 	cwk_path_join(tmp_original, pho.new_name, tmp_original, sizeof(tmp_original));
@@ -135,7 +133,7 @@ int ospl_album_add_photo(char *library, int photo, int album)
 	cwk_path_join(tmp_link, alb.name, tmp_link, sizeof(tmp_link));
 	cwk_path_join(tmp_link, pho.new_name, tmp_link, sizeof(tmp_link));
 
-	if (db_insert_contains(&db, photo, album) < 0)
+	if (db_insert_contains(&db, photo, album))
 		return EDBFAIL;
 	if (hard_link(tmp_original, tmp_link) < 0)
 		return EHARDLINK;
@@ -150,7 +148,7 @@ int ospl_album_delete_photo(char *library, int photo, int album)
 	char tmp[512] = { 0 };
 
 	fill_tdb(&db, library);
-	if (db_select_photo(&db, photo, &pho) < 0 || db_select_album(&db, album, &alb) < 0)
+	if (db_select_photo(&db, photo, &pho) || db_select_album(&db, album, &alb))
 		return EDBFAIL;
 
 	cwk_path_join(library, "/photos/", tmp, sizeof(tmp));
@@ -173,9 +171,8 @@ int ospl_album_move_photo(char *library, int photo, int old, int new)
 	char tmp_new[512] = { 0 };
 
 	fill_tdb(&db, library);
-	if (db_select_photo(&db, photo, &pho) < 0 || db_select_album(&db, old, &alb_old) < 0)
-		return EDBFAIL;
-	if (db_select_album(&db, new, &alb_new) < 0)
+	if (db_select_photo(&db, photo, &pho) || db_select_album(&db, old, &alb_old) ||
+		db_select_album(&db, new, &alb_new))
 		return EDBFAIL;
 
 	cwk_path_join(library, "/photos/", tmp_old, sizeof(tmp_old));

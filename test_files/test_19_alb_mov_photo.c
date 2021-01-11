@@ -14,7 +14,7 @@ int main(void)
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
 	int r = rand();
-	sprintf(lib_name, "test_Library_10_%d", r);
+	sprintf(lib_name, "test_Library_19_%d", r);
 	if (ospl_create_library(lib_name) < 0)
 	{
 		printf("Error executing ospl_create_library\n");
@@ -82,7 +82,7 @@ int main(void)
 		return 1;
 	}
 
-	if (ospl_album_move_photo(lib_name, 1, 1, 2))
+	if (ospl_album_move_photo(lib_name, 1, 1, 2) < 0)
 	{
 		printf("error executing ospl_album_move_photo\n");
 		return 1;
