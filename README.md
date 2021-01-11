@@ -19,12 +19,14 @@ OSPL is meant to be compatible with all photos types and metadata types, such as
 
 ### What is working now?
 - Creating a library folder with the right database file
+- Importing a single photo, as well as entire folders
+- Creating albums, managing them by adding photos to them, deleting them, etc..
 
 ### What are we working on?
-- The basic structure and functions of ospl such as create import export.
+- You can look at the current version project from github [here](https://github.com/AngeloFrangione/libospl/projects), we keep it updated as we move on.
 
 ### What is planed ?
-- See [IDEAS.md](https://github.com/AngeloFrangione/libospl/blob/master/IDEAS.md) for more details
+- See [IDEAS.md](https://github.com/AngeloFrangione/libospl/blob/master/IDEAS.md) for more details, or the github project page [here](https://github.com/AngeloFrangione/libospl/projects)
 
 ### Contribute
 - See [CONTRIBUTING.md](https://github.com/AngeloFrangione/libospl/blob/master/CONTRIBUTING.md) for more details
