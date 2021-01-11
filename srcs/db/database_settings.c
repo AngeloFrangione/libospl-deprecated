@@ -18,28 +18,17 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-/**
- * \file setting.c
- * \brief This file contains setting table manipulation wrapper
- * \author Angelo Frangione
- *
- * There is a function for every sql query type.
- */
-
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include "include/stockage.h"
+#include "ospl.h"
 
-/**
- * \brief insert a row into settings table
- *
- * 
- * \param db database data structure
- * \param name name of the setting
- * \param value value of the setting
- */
-int insert_setting(t_db *db, char *name, char *value)
+static int _callback_settings(char *param, int argc, char **argv, char **column)
+{
+	strcpy(param, argv[1]);
+	return 0;
+}
+
+int db_insert_setting(t_db *db, char *name, char *value)
 {
 	char	query[BUFFER_SIZE] = "insert into settings (name, value) ";
 	sprintf(query + 35, "values (\"%s\", \"%s\");", name, value);
@@ -49,15 +38,7 @@ int insert_setting(t_db *db, char *name, char *value)
 	return 0;
 }
 
-/**
- * \brief update a row into settings table
- *
- * 
- * \param db database data structure
- * \param name name of the setting
- * \param value value of the setting
- */
-int update_setting(t_db *db, char *name, char *value)
+int db_update_setting(t_db *db, char *name, char *value)
 {
 	char	query[BUFFER_SIZE] = "update settings set value=";
 
@@ -67,39 +48,17 @@ int update_setting(t_db *db, char *name, char *value)
 	return 0;
 }
 
-static int callback(char *param, int argc, char **argv, char **column)
-{
-	strcpy(param, argv[1]);
-	return 0;
-}
-
-/**
- * \brief select a row into settings table
- *
- * 
- * \param db database data structure
- * \param name name of the setting to be selected
- * \param value a pointer to an initialized memory location where 
- * the value will be stored into
- */
-int select_setting(t_db *db, char *name, char *value)
+int db_select_setting(t_db *db, char *name, char *value)
 {
 	char	query[BUFFER_SIZE] = "select * from settings ";
 	
 	sprintf(query + 23, "where name = \"%s\"", name);
-	if (stockage_read(db, query, callback, value))
+	if (stockage_read(db, query, _callback_settings, value))
 		return 1;
 	return 0;
 }
 
-/**
- * \brief delete a row into settings table
- *
- * 
- * \param db database data structure
- * \param name name of the setting to be removed
- */
-int delete_setting(t_db *db, char *name)
+int db_delete_setting(t_db *db, char *name)
 {
 	char	query[BUFFER_SIZE] = "delete from settings where name=";
 	

@@ -6,10 +6,7 @@ deps = [dependency('threads'),
 		dependency('sqlite3')]
 
 # Sources
-source =['src/stockage.c',
-		'src/queries/photos.c',
-		'src/queries/albums.c',
-		'src/queries/settings.c']
+source =['src/stockage.c']
 
 # Library
 stockage = shared_library(	'stockage', source,
