@@ -122,7 +122,7 @@ int create_database(char *path)
 		return -1;
 	}
 	sqlite3_close(db);
-	return rc;
+	return 0;
 }
 
 /**
