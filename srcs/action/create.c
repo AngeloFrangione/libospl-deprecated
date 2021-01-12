@@ -26,17 +26,6 @@
 #include <string.h>
 #include "ospl.h"
 
-static int create_folder(char *path)
-{
-	if (folder_exists(path))
-	{
-		errno = EEXIST;
-		return -1;
-	}
-	else
-		return create_directory(path);
-}
-
 static int create_database_file(char *path)
 {
 	int r = 0;
@@ -45,36 +34,49 @@ static int create_database_file(char *path)
 
 	cwk_path_join(path, DATABASE_FILENAME, tmp, sizeof(tmp));
 	r = create_database(tmp);
+	if (r)
+	 return -1;
 	db.path = tmp;
-	r = r & db_insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION);
-	return r;
+	r = db_insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION);
+	if (r)
+		return -1;
+	return 0;
 }
 
-/**
-  * \brief Creates an OSPL library
-  *
-  * \param path new library path
-  * \return 0 with success and 1 when an error occurs
-  */
 int ospl_create_library(char *path)
 {
 	int r;
 	char tmp[4096] = { 0 };
 
-	r = create_folder(path);
-	if (r < 0)
-		return r;
-	cwk_path_join(path, "photos", tmp, sizeof(tmp));
-	r = create_folder(tmp);
-	if (r < 0)
-		return r;
-	cwk_path_join(tmp, "import", tmp, sizeof(tmp));
-	r = create_folder(tmp);
-	if (r < 0)
-		return r;
-	cwk_path_join(path, "thumbnails", tmp, sizeof(tmp));
-	r = create_folder(tmp);
+	if (folder_exists(path))
+		return EAEXISTS;
+	else
+		r = create_directory(path);
 	if (r)
-		return r;
-	return create_database_file(path);
+		return EERRNO;
+	cwk_path_join(path, "photos", tmp, sizeof(tmp));
+	r = create_directory(tmp);
+	if (r < 0)
+	{
+		remove_dir(path);
+		return EERRNO;
+	}
+	cwk_path_join(tmp, "import", tmp, sizeof(tmp));
+	r = create_directory(tmp);
+	if (r < 0)
+	{
+		remove_dir(path);
+		return EERRNO;
+	}
+	cwk_path_join(path, "thumbnails", tmp, sizeof(tmp));
+	r = create_directory(tmp);
+	if (r)
+	{
+		remove_dir(path);
+		return EERRNO;
+	}
+	r = create_database_file(path);
+	if (r)
+		return EDBFAIL;
+	return 0;
 }
