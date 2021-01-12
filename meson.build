@@ -1,5 +1,5 @@
 # Project
-project('ospl', 'c')
+project('ospl', 'c', version : '0.1.1')
 cmake = import('cmake')
 
 # Enable debugging
@@ -42,7 +42,7 @@ ospl = shared_library(	'ospl', source,
 						install: true,
 						include_directories : 'includes',
 						dependencies : deps,
-						soversion: 0, version: '0.0.1',
+						soversion: 0, version: '0.1.1',
 						c_args: cargs
 )
 

@@ -29,7 +29,7 @@
 # define LIBRARY_EXTENTION ".ospl"
 # define VERSION_MAJOR "0"
 # define VERSION_MINOR "1"
-# define VERSION_REVISION "0"
+# define VERSION_REVISION "1"
 
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
 # define NB_SUPPORTED_IMAGES 1
