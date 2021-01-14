@@ -3,7 +3,9 @@
 delete a photo from an album
 
 
+
 ## Description
+
 ```c
 int ospl_album_delete_photo(char *library, int photo, int album);
 ```
@@ -11,19 +13,23 @@ This function removes a photo ``photo`` from an album ``album``.
 
 
 ## Parameters
+
 **`library`**: the path of an ospl library.  
 **``photo``**: the photo ``id`` that will be removed from the album.  
 **``album``**: the album ``id`` that contains the photo that will be removed.  
 
 ## Return values
 
-| ``value``   | ``signification``                            |
-| ----------- | -------------------------------------------- |
-| ``SUCCESS`` | photo removed from album successfully        |
-| ``EDBFAIL`` | an error occurred when accessing to database |
+| ``value``    | ``signification``                            |
+| ------------ | -------------------------------------------- |
+| ``SUCCESS``  | photo removed from album successfully        |
+| ``ERR_DB``   | an error occurred when accessing to database |
+| `ERR_ALB_NF` | album not found with `id` `album`            |
+| `ERR_PHO_NF` | photo not found with `id` `photo`            |
 
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -49,13 +55,10 @@ int main(void)
 
 This function gets the photo name and album name from database, then it removes the photo from the database, and finally delete the photo hard link.
 
+
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
-
-
-## Enhancements
-
-- return a not found value when an album or a photo does not exist
+| `version` | `description`                           |
+| --------- | --------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system |
+| `v0.1.0`  | the function is introduced              |

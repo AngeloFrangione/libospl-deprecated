@@ -35,6 +35,7 @@
 # define NB_SUPPORTED_IMAGES 1
 # define TRUE 1
 # define FALSE 0
+# define PATH_LEN_BUFFER 4096
 
 // Future maybe settings
 # define THUMB_HEIGHT 500
@@ -46,15 +47,14 @@ enum SUCCESS
 
 enum ERRORS
 {
-	EOTHER = - 50,	// Other error
-	EAEXISTS,		// The file or folder already exists
-	EDBFAIL,		// Database communication failed
-	EERRNO,			// Use ERRNO for more information
-	ENOTFOUND,		// File not found
-	ENOSUPPORT,		// File not supported
-	EHASHFAIL,		// Hash creation failed
-	ETHUMBFAIL,		// Thumbnail creation failed
-	EHARDLINK		// Hard link creation failed
+	ERR_OTHER = -1000,	// other error
+	ERR_EXISTS,			// the file or folder already exists
+	ERR_DB,				// database communication failed
+	ERR_NOT_FOUND,		// element not found
+	ERR_NOT_SUPPORTED,	// element not supported
+	ERR_THUMB,			// thumbnail creation failed
+	ERR_PHO_NF,			// photo not found in db
+	ERR_ALB_NF,			// album not found in db
 };
 
 typedef struct	s_current_time
@@ -81,15 +81,15 @@ int ospl_import_folder_in_album(char *library, char *path, int album);
 int ospl_album_list(char *library, t_album *list);
 int ospl_album_list_photos(char *library, int album, t_photos *list);
 int ospl_album_create(char *library, char *name);
-int ospl_album_rename(char *library, int id, char *name);
-int ospl_album_delete(char *library, int id);
+int ospl_album_rename(char *library, int album, char *name);
+int ospl_album_delete(char *library, int album);
 int ospl_album_add_photo(char *library, int photo, int album);
 int ospl_album_delete_photo(char *library, int photo, int album);
 int ospl_album_move_photo(char *library, int photo, int old, int new);
 int ospl_photo_associated_album(char *library, int photo, t_album *list);
-int ospl_photo_get(char *library, int id, t_photos *photo);
+int ospl_photo_get(char *library, int photo, t_photos *photos);
 int ospl_photo_list(char *library, t_photos *list);
-int ospl_photo_delete(char *library, int id);
+int ospl_photo_delete(char *library, int photo);
 
 
 ///// Database common usage function

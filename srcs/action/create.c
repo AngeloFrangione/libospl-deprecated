@@ -28,55 +28,39 @@
 
 static int create_database_file(char *path)
 {
-	int r = 0;
-	char tmp[4096] = {0};
+	char tmp[PATH_LEN_BUFFER] = {0};
 	t_db db;
 
 	cwk_path_join(path, DATABASE_FILENAME, tmp, sizeof(tmp));
-	r = create_database(tmp);
-	if (r)
-	 return -1;
 	db.path = tmp;
-	r = db_insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION);
-	if (r)
-		return -1;
+
+	if (create_database(tmp) | db_insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION))
+	 return ERR_DB;
 	return 0;
 }
 
 int ospl_create_library(char *path)
 {
-	int r;
-	char tmp[4096] = { 0 };
+	int ret = 0;
+	char tmp[PATH_LEN_BUFFER] = { 0 };
 
-	if (folder_exists(path))
-		return EAEXISTS;
-	else
-		r = create_directory(path);
-	if (r)
-		return EERRNO;
+	ret |= create_directory(path);
 	cwk_path_join(path, "photos", tmp, sizeof(tmp));
-	r = create_directory(tmp);
-	if (r < 0)
-	{
-		remove_dir(path);
-		return EERRNO;
-	}
+	ret |= create_directory(tmp);
 	cwk_path_join(tmp, "import", tmp, sizeof(tmp));
-	r = create_directory(tmp);
-	if (r < 0)
-	{
-		remove_dir(path);
-		return EERRNO;
-	}
+	ret |= create_directory(tmp);
 	cwk_path_join(path, "thumbnails", tmp, sizeof(tmp));
-	r = create_directory(tmp);
-	if (r)
+	ret |= create_directory(tmp);
+
+	if (ret < 0)
 	{
 		remove_dir(path);
-		return EERRNO;
+		return -1000 - errno;
 	}
-	r = create_database_file(path);
-	if (r)
-		return EDBFAIL;
+	if (create_database_file(path) < 0)
+	{
+		remove_dir(path);
+		return ERR_DB;
+	}
 	return 0;
 }

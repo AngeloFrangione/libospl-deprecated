@@ -2,26 +2,33 @@
 (since version 0.1.0)  
 get informations about a specific photo
 
+
+
 ## Description
+
 ```c
-int ospl_photo_get(char *library, int id, t_photos *photo);
+int ospl_photo_get(char *library, int photo, t_photos *photos);
 ```
-This function gets information about a photo and puts them into a [``t_photos``](/{{ site.baseurl }}/reference#data-structures) ``struct``
+This function gets information about a photo and puts them into a [`t_photos`](/{{ site.baseurl }}/reference#data-structures) `struct`
+
+
 
 ## Parameters
 **`library`**: the path of an ospl library.  
-**``id``**: the ``id`` of a photo.  
-**``photo``**: the [``t_photos``](/{{ site.baseurl }}/reference#data-structures) ``struct`` that will be completed, this should be statically allocated or dynamically allocated with ``malloc``. 
+**`photo`**: the `id` of a photo.  
+**`photos`**: the [`t_photos`](/{{ site.baseurl }}/reference#data-structures) `struct` that will be completed, this should be statically allocated or dynamically allocated with `malloc`. 
+
 
 ## Return values
 
-| ``value``   | ``signification``                            |
-| ----------- | -------------------------------------------- |
-| ``SUCCESS`` | no errors occurred during operation          |
-| ``EDBFAIL`` | an error occurred when accessing to database |
+| `value`   | `signification`                              |
+| --------- | -------------------------------------------- |
+| `SUCCESS` | no errors occurred during operation          |
+| `ERR_DB`  | an error occurred when accessing to database |
 
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -34,7 +41,7 @@ int main(void)
 
 	if ((ret = ospl_photo_get(library, photo_id, photo)) < 0)
 	{
-		printf("Failed to get info about picture with id %d: %s", photo_id, ospl_enum_error(ret));
+		printf("Failed to get info about photo with id %d: %s", photo_id, ospl_enum_error(ret));
 		return 1;
 	}
 	else
@@ -43,14 +50,15 @@ int main(void)
 }
 ```
 
+
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
+| `version` | `description`                           |
+| --------- | --------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system |
+| `v0.1.0`  | the function is introduced              |
 
 
 ## Enhancements
 
-- return a ENOTFOUND error if the picture doesn't exist.
-
+- Return a ERR_PHO_NF error if the photo doesn't exist. (scheduled for `v0.1.1`)
