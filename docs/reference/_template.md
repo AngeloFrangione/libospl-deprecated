@@ -2,24 +2,29 @@
 (since version 0.1.0)  
 
 
+
 ## Description
+
 ```c
 int ospl_(char *library);
 ```
 
 
 ## Parameters
+
 **`library`**: the path of an ospl library.  
+
 
 ## Return values
 
-| ``value``   | ``signification``                                 |
-| ----------- | ------------------------------------------------- |
-| ``SUCCESS`` |                                                   |
-|             |                                                   |
+| `value`   | `signification`                                   |
+| --------- | ------------------------------------------------- |
+| `SUCCESS` |                                                   |
+|           |                                                   |
 
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -39,13 +44,15 @@ int main(void)
 }
 ```
 
+
 ## Behavior
+
 
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
+| `version` | `description`              |
+| ----------- | ------------------------ |
+| `v0.1.0`  | the function is introduced |
 
 
 ## Enhancements

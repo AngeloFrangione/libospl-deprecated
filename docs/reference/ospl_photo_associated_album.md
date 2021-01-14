@@ -3,27 +3,32 @@
 get the albums where a specific photo is stored
 
 
+
 ## Description
+
 ```c
 int ospl_photo_associated_album(char *library, int photo, t_album *list);
 ```
-This function lists every album where a specific photo is stored and puts them into a [``t_album``](/{{ site.baseurl }}/reference#data-structures) ``struct``
+This function lists every album where a specific photo is stored and puts them into a [`t_album`](/{{ site.baseurl }}/reference#data-structures) `struct`
 
 
 ## Parameters
+
 **`library`**: the path of an ospl library.  
-**`photo`**: the ``id`` of the photo to lookup for.  
-**`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference) structure, this should be statically allocated or dynamically allocated with ``malloc``. 
+**`photo`**: the `id` of the photo to lookup for.  
+**`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference) structure, this should be statically allocated or dynamically allocated with `malloc`. 
+
 
 ## Return values
 
-| ``value``   | ``signification``                            |
-| ----------- | -------------------------------------------- |
-| ``SUCCESS`` | no errors occurred during operation          |
-| ``EDBFAIL`` | an error occurred when accessing to database |
+| `value`   | `signification`                              |
+| --------- | -------------------------------------------- |
+| `SUCCESS` | no errors occurred during operation          |
+| `ERR_DB`  | an error occurred when accessing to database |
 
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -52,8 +57,15 @@ int main(void)
 }
 ```
 
+
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
+| `version` | `description`                           |
+| --------- | --------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system |
+| `v0.1.0`  | the function is introduced              |
+
+
+## Enhancements
+
+- Check if the photo exist, if not return error message. (scheduled for `v0.1.1`)

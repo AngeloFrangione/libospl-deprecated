@@ -3,24 +3,31 @@
 get the entire album list stored in a library
 
 
+
 ## Description
+
 ```c
 int ospl_album_list(char *library, t_album *list)
 ```
-This function lists every album from an ospl library and puts them into a [``t_album``](/{{ site.baseurl }}/reference#data-structures) ``struct``
+This function lists every album from an ospl library and puts them into a [`t_album`](/{{ site.baseurl }}/reference#data-structures) `struct`
+
 
 ## Parameters
+
 **`library`**: the path of an ospl library.  
-**`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference#data-structures) structure, this should be statically allocated or dynamically allocated with ``malloc``. 
+**`list`**: a pointer to the first [`t_album`](/{{ site.baseurl }}/reference#data-structures) structure, this should be statically allocated or dynamically allocated with `malloc`. 
+
 
 ## Return values
 
-| ``value``   | ``signification``                            |
-| ----------- | -------------------------------------------- |
-| ``SUCCESS`` | no errors occurred during operation          |
-| ``EDBFAIL`` | an error occurred when accessing to database |
+| `value`   | `signification`                              |
+| --------- | -------------------------------------------- |
+| `SUCCESS` | no errors occurred during operation          |
+| `ERR_DB`  | an error occurred when accessing to database |
+
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -48,8 +55,10 @@ int main(void)
 }
 ```
 
+
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
+| `version` | `description`                           |
+| --------- | --------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system |
+| `v0.1.0`  | the function is introduced              |

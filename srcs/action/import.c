@@ -24,6 +24,7 @@
 #include <math.h>
 #include <time.h>
 #include <stdio.h>
+#include <errno.h>
 
 #include <cwalk.h>
 #include <thumbnailer.h>
@@ -57,8 +58,7 @@ static int get_info(t_db *db, t_photos *pho, char *path, char *library)
 	t_current_time ct;
 	const char *name;
 
-	if(md5(path, hash))
-		return EHASHFAIL;
+	md5(path, hash);
 	get_time(&ct);
 	srand(time(0) + ct.ms);
 	cwk_path_get_basename(path, &name, &len);
@@ -78,65 +78,29 @@ static int get_info(t_db *db, t_photos *pho, char *path, char *library)
 	return SUCCESS;
 }
 
-/**
-  * \brief Import a photo into the library
-  *
-  * \param library library path
-  * \param path photo path
-  * \return 0 with success and 1 when an error occurs
-  */
 int ospl_import_photo(char *library, char *path)
 {
 	t_db db = {0};
 	t_photos pho = {0};
-	int r = 0;
+	char import_path[PATH_LEN_BUFFER] = {0};
+	char thumb_path[PATH_LEN_BUFFER] = {0};
+
 	if (!file_exists(path))
-		return ENOTFOUND;
+		return ERR_NOT_FOUND;
 	if(!is_supported(path))
-		return ENOSUPPORT;
-	if (get_info(&db, &pho, path, library))
-		return EHASHFAIL;
-	#ifdef DEBUG
-		printf("\t----------------DEBUGGING-INFO-----------\n");
-		printf("library: %s\npath: %s\n\n", library, path);
-		printf("hash:\t\t\t|%s\n", pho.hash);
-		printf("original_name:\t\t|%s\n", pho.original_name);
-		printf("new_name:\t\t|%s\n", pho.new_name);
-		printf("import_datetime:\t|%s\n", pho.import_datetime);
-		printf("random:\t\t\t|%s\n", pho.random);
-		printf("import_year:\t\t|%d\n", pho.import_year);
-		printf("import_month:\t\t|%d\n", pho.import_month);
-		printf("import_day:\t\t|%d\n", pho.import_day);
-		printf("import_hour:\t\t|%d\n", pho.import_hour);
-		printf("import_minute:\t\t|%d\n", pho.import_minute);
-		printf("import_second:\t\t|%d\n", pho.import_second);
-		printf("exif_height:\t\t|%d\n", pho.exif_height);
-		printf("exif_width:\t\t|%d\n", pho.exif_width);
-		printf("exif_brand:\t\t|%s\n", pho.exif_brand);
-		printf("exif_peripheral:\t|%s\n", pho.exif_peripheral);
-		printf("fav:\t\t\t|%d\n", pho.fav);
-		printf("\t------------END DEBUGGING----------------\n");
-	#endif
-	printf("adding %s to database\n", pho.original_name);
-	r = db_insert_photo(&db, &pho);
-	if (r)
-		return EDBFAIL;
-	char import_path[512] = {0};
-	char thumb_path[512] = {0};
+		return ERR_NOT_SUPPORTED;
+	get_info(&db, &pho, path, library);
+	if (db_insert_photo(&db, &pho))
+		return ERR_DB;
+
 	cwk_path_join(library, "/photos/import", import_path, sizeof(import_path));
 	cwk_path_join(library, "/thumbnails/", thumb_path, sizeof(thumb_path));
 	cwk_path_join(thumb_path, pho.new_name, thumb_path, sizeof(thumb_path));
 	cwk_path_join(import_path, pho.new_name, import_path, sizeof(import_path));
-	printf("copying %s to %s\n", path, import_path);
-	r = copy_file(path, import_path);
-	if (r < 0)
-		return EERRNO;
-	printf("copied %d bytes\n", r);
-	printf("creating thumbnail from %s to %s\n", import_path, thumb_path);
-	r = create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
-	if (r)
-		return ETHUMBFAIL;
-	printf("photo %s imported\n", pho.original_name);
+
+	if (copy_file(path, import_path) < 0)
+		return -1000 - errno;
+	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
 	return get_last_insert_rowid(db.db);
 }
 
@@ -144,8 +108,7 @@ int ospl_import_photo_in_album(char *library, char *path, int album)
 {
 	int r;
 
-	r = ospl_import_photo(library, path);
-	if (r < 0)
+	if ((r = ospl_import_photo(library, path)) < 0)
 		return r;
 	return ospl_album_add_photo(library, r, album);
 }
@@ -154,11 +117,10 @@ int ospl_import_folder(char *library, char *path)
 {
 	DIR *d;
 	struct dirent *dir;
+	char tmp[PATH_LEN_BUFFER] = { 0 };
 
-	printf("folder to import: %s\n", path);
 	if (!(d = opendir(path)))
-		return ENOTFOUND;
-	char tmp[4096] = { 0 };
+		return ERR_NOT_FOUND;
 	while ((dir = readdir(d)))
 	{
 		if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))
@@ -174,11 +136,10 @@ int ospl_import_folder_in_album(char *library, char *path, int album)
 {
 	DIR *d;
 	struct dirent *dir;
+	char tmp[PATH_LEN_BUFFER] = { 0 };
 
-	printf("folder to import: %s\n", path);
 	if (!(d = opendir(path)))
-		return ENOTFOUND;
-	char tmp[4096] = { 0 };
+		return ERR_NOT_FOUND;
 	while ((dir = readdir(d)))
 	{
 		if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))

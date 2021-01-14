@@ -2,28 +2,32 @@
 (since version 0.1.0)  
 import a folder full of photos directly into an existing album
 
+
+
 ## Description
+
 ```c
 int ospl_import_folder_in_album(char *library, char *path, int album);
 ```
-This function will import an entire folder located at ``path`` of photos into an ospl library located at ``library``
+This function will import an entire folder located at `path` of photos into an ospl library located at `library`
+
 
 ## Parameters
 **`library`**: the path of an ospl library.  
-**``path``**: the path of the folder, containing photos.
-**``album``**: the ``id`` of an existing album  
+**`path`**: the path of the folder, containing photos.
+**`album`**: the `id` of an existing album  
 
 
 ## Return values
 
-| ``value``     | ``signification``                           |
-| ------------- |-------------------------------------------- |
-| ``SUCCESS``   | folder successfully imported into the album |
-| ``ENOTFOUND`` | folder ``path`` not found                   |
-
+| `value`         | `signification`                             |
+| --------------- |-------------------------------------------- |
+| `SUCCESS`       | folder successfully imported into the album |
+| `ERR_NOT_FOUND` | the folder was not found                    |
 
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -44,20 +48,22 @@ int main(void)
 }
 ```
 
+
 ## Behavior
 
-This function calls **[``ospl_import_photo_in_album``](/{{ site.baseurl }}/reference/ospl_import_photo_in_album)** with every file in the given folder.
+This function calls **[`ospl_import_photo_in_album`](/{{ site.baseurl }}/reference/ospl_import_photo_in_album)** with every file in the given folder.
 
 
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
+| `version` | `description`                           |
+| --------- | --------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system |
+| `v0.1.0`  | the function is introduced              |
 
 
 ## Enhancements
 
-- This function could return a specific error if the album does not exist by checking first if the album exists. Or do another function with this behavior.
-- This function should return a list of success/fail of every file found in the folder.
-- This function should use sqlite transactions to speed up the import process.
+- Do not import photo if album do not exist. (scheduled for `v0.1.1`).
+- This function should return a list of success/fail of every file found in the folder. (scheduled for `v0.1.1`)
+- This function should use sqlite transactions to speed up the import process. (scheduled for `v0.2.0`)

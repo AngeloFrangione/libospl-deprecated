@@ -3,27 +3,35 @@
 add a photo to an existing album
 
 
+
 ## Description
+
 ```c
 int ospl_album_add_photo(char *library, int photo, int album);
 ```
-This function adds an existing photo ``photo`` to an existing album ``album``.
+This function adds an existing photo `photo` to an existing album `album`.
+
 
 ## Parameters
+
 **`library`**: the path of an ospl library.  
-**``photo``**: the photo ``id`` that will be added to the album.  
-**``album``**: the album ``id`` that will contain the photo.  
+**`photo`**: the photo `id` that will be added to the album.  
+**`album`**: the album `id` that will contain the photo.  
+
 
 ## Return values
 
-| ``value``     | ``signification``                                 |
-| ------------- | ------------------------------------------------- |
-| ``SUCCESS``   | photo added to album with success                 |
-| ``EDBFAIL``   | an error occurred when accessing to database      |
-| ``EHARDLINK`` | an error occurred during hard link creation       |
+| `value`      | `signification`                                                                                 |
+| ------------ | ----------------------------------------------------------------------------------------------- |
+| `SUCCESS`    | photo added to album with success                                                               |
+| `ERR_DB`     | an error occurred when accessing to database                                                    |
+| `ERR_ALB_NF` | album not found with `id` `album`                                                               |
+| `ERR_PHO_NF` | photo not found with `id` `photo`                                                               |
+| `< -1000`    | a system error occurred, adding +1000 to this value gives the `errno` associated with the error |
 
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -45,17 +53,15 @@ int main(void)
 }
 ```
 
+
 ## Behavior
 
-This function adds the photo ``photo`` to the album ``album`` by adding them to the contains table, without verifying if any of them exists. Then it will create a hard link of the photo from the import folder to the album. A hard link does make show the same picture into another folder, without taking twice the space on the disk. 
+This function adds the photo `photo` to the album `album` by adding them to the contains table, without verifying if any of them exists. Then it will create a hard link of the photo from the import folder to the album. A hard link does make show the same photo into another folder, without taking twice the space on the disk. 
+
 
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
-
-
-## Enhancements
-
-- verify if the album and the photo exists before doing anything.
+| `version` | `description`                           |
+| --------- | --------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system |
+| `v0.1.0`  | the function is introduced              |

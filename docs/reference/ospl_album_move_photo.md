@@ -5,27 +5,34 @@ move a photo from an album to another album
 
 
 ## Description
+
 ```c
 int ospl_album_move_photo(char *library, int photo, int old, int new);
 ```
-This function moves a photo ``photo`` from album ``old`` to album ``new``.
+This function moves a photo `photo` from album `old` to album `new`.
 
 
 ## Parameters
+
 **`library`**: the path of an ospl library.  
-**``photo``**: the photo ``id`` that will be moved.  
-**``old``**: the album ``id`` where the photo is currently in.  
-**``new``**: the album ``id`` where the photo will be moved.  
+**`photo`**: the photo `id` that will be moved.  
+**`old`**: the album `id` where the photo is currently in.  
+**`new`**: the album `id` where the photo will be moved.  
+
 
 ## Return values
 
-|``value``    | ``signification``                            |
-| ----------- | -------------------------------------------- |
-| ``SUCCESS`` | photo removed from album successfully        |
-| ``EDBFAIL`` | an error occurred when accessing to database |
+| `value`      | `signification`                                              |
+| ------------ | ------------------------------------------------------------ |
+| `SUCCESS`    | photo removed from album successfully                        |
+| `ERR_DB`     | an error occurred when accessing to database                 |
+| `ERR_ALB_NF` | album with `id` `old` or `new` not found with                |
+| `ERR_PHO_NF` | photo with `id` `photo` not found                            |
+| `< -1000`    | a system error occurred, adding +1000 to this value gives the `errno` associated with the error |
 
 
 ## Example
+
 ```c
 #include <ospl.h>
 
@@ -48,17 +55,15 @@ int main(void)
 }
 ```
 
+
 ## Behavior
 
 This function gets the photo name and album names from database, then it moves the photo in the database, and finally moves the photo hard link to the new album.
 
+
 ## Changelog
 
-| ``version`` | ``description``                 |
-| ----------- | ------------------------------- |
-| ``v0.1.0``  | ``the function is introduced``  |
-
-
-## Enhancements
-
-- return a not found value when an album or a photo does not exist
+| `version` | `description`                           |
+| --------- | --------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system |
+| `v0.1.0`  | the function is introduced              |
