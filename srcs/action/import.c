@@ -106,11 +106,19 @@ int ospl_import_photo(char *library, char *path)
 
 int ospl_import_photo_in_album(char *library, char *path, int album)
 {
-	int r;
+	int r, id;
+	t_db db;
+	t_album alb;
 
-	if ((r = ospl_import_photo(library, path)) < 0)
+	fill_tdb(&db, library);
+	db_select_album(&db, album, &alb);
+	if (alb.id != album)
+		return ERR_ALB_NF;
+	if ((id = ospl_import_photo(library, path)) <= 0)
+		return id;
+	if ((r = ospl_album_add_photo(library, id, album)) < 0)
 		return r;
-	return ospl_album_add_photo(library, r, album);
+	return id;
 }
 
 int ospl_import_folder(char *library, char *path)
