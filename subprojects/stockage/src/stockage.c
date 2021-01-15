@@ -186,91 +186,24 @@ int stockage_commit(t_db *db)
 	return check_sqlite_return(rc, db, "empty");
 }
 
-/**
- * \brief high level interface for reading data from db
- *
- * this function is a wrapper of the wrapper, by default it will commit every
- * query. if you don't want this behavior you need to set the transaction 
- * variable into the t_db structure to 1; it will be set to two after first 
- * transaction sucessfully sent. to commit you will need to set the commit 
- * variable to 1 in the t_db parameter.
- * 
- * \param db database data structure
- * \param query read query (select...)
- * \param callback callback function should be prototyped with these arguments:
- * callback(void *data, int argc, char **argv, char **column_name)
- * \param value the data argument passed to the callback function
- */
 int stockage_read(t_db *db, char *query, int callback(), void *value)
 {
-	int rc;
-
-	if (db->transaction > 1 && !db->commit)
-	{
-		rc = stockage_query_read(query, db, callback, value);
-	}
-	else if (!db->transaction && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_read(query, db, callback, value);
-		rc = stockage_commit(db);
-	}
-	else if (db->transaction == 1 && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_read(query, db, callback, value);
-		rc = db->transaction++;
-	}
-	else if (db->commit && db->transaction)
-	{
-		rc = stockage_query_read(query, db, callback, value);
-		rc = stockage_commit(db);
-		rc = db->transaction = 0;
-	}
-	else
+	if (check_sqlite_return(stockage_init(db), db, query))
 		return -1;
-	return check_sqlite_return(rc, db, query);
+	if (check_sqlite_return(stockage_query_read(query, db, callback, value), db, query))
+		return -1;
+	if (check_sqlite_return(stockage_commit(db), db, query))
+		return -1;
+	return 0;
 }
 
-/**
- * \brief high level interface for writing data in db
- *
- * this function is a wrapper of the wrapper, by default it will commit every
- * query. if you don't want this behavior you need to set the transaction 
- * variable into the t_db structure to 1; it will be set to two after first 
- * transaction sucessfully sent. to commit you will need to set the commit 
- * variable to 1 in the t_db parameter.
- * 
- * \param db database data structure
- * \param query read query (insert, update, delete...)
- */
 int stockage_write(t_db *db, char *query)
 {
-	int rc;
-
-	if (db->transaction > 1 && !db->commit)
-	{
-		rc = stockage_query_write(query, db);
-	}
-	else if (!db->transaction && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_write(query, db);
-		rc = stockage_commit(db);
-	}
-	else if (db->transaction == 1 && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_write(query, db);
-		rc = db->transaction++;
-	}
-	else if (db->commit && db->transaction)
-	{
-		rc = stockage_query_write(query, db);
-		rc = stockage_commit(db);
-		rc = db->transaction = 0;
-	}
-	else
+	if (check_sqlite_return(stockage_init(db), db, query))
 		return -1;
-	return check_sqlite_return(rc, db, query);
+	if (check_sqlite_return(stockage_query_write(query, db), db, query))
+		return -1;
+	if (check_sqlite_return(stockage_commit(db), db, query))
+		return -1;
+	return 0;
 }
