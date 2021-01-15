@@ -21,10 +21,11 @@ This function gets information about a photo and puts them into a [`t_photos`](/
 
 ## Return values
 
-| `value`   | `signification`                              |
-| --------- | -------------------------------------------- |
-| `SUCCESS` | no errors occurred during operation          |
-| `ERR_DB`  | an error occurred when accessing to database |
+| `value`       | `signification`                              |
+| ------------- | -------------------------------------------- |
+| `SUCCESS`     | no errors occurred during operation          |
+| `ERR_DB`      | an error occurred when accessing to database |
+| `ERR_PHO_NF`  | photo not found in database                  |
 
 
 ## Example
@@ -53,12 +54,8 @@ int main(void)
 
 ## Changelog
 
-| `version` | `description`                           |
-| --------- | --------------------------------------- |
-| `v0.1.1`  | adapting to the new error return system |
-| `v0.1.0`  | the function is introduced              |
+| `version` | `description`                                                                |
+| --------- | ---------------------------------------------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system & return an error if photo not found |
+| `v0.1.0`  | the function is introduced                                                   |
 
-
-## Enhancements
-
-- Return a ERR_PHO_NF error if the photo doesn't exist. (scheduled for `v0.1.1`)
