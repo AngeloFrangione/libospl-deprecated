@@ -126,8 +126,6 @@ typedef struct			s_db
 {
 	sqlite3				*db;
 	char				*path;
-	uint8_t				transaction;
-	uint8_t				commit;
 }						t_db;
 
 /*
