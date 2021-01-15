@@ -15,11 +15,16 @@ int main(void)
 	srand(nstime.tv_usec);
 	int r = rand();
 	sprintf(lib_name, "test_Library_4_%d", r);
+	if (ospl_import_photo(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg") >= 0)
+	{
+		printf("No error executing ospl_import_photo\n");
+		return 0;
+	}
 	if (ospl_create_library(lib_name) < 0)
 	{
 		printf("Error executing ospl_create_library\n");
 		printf("lib_name: %s\n", lib_name);
-		return 1;
+		return 0;
 	}
 	if (ospl_import_photo(lib_name, "../test_files/ressources/not.jpg") >= 0)
 	{
