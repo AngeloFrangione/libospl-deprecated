@@ -37,11 +37,21 @@ int main(void)
 		printf("no error executing ospl_import_photo_in_album\n");
 		return 0;
 	}
+	if (ospl_album_add_photo(lib_name, 1, 1) >= 0) 
+	{
+		printf("no error executing ospl_album_add_photo\n");
+		return 0;
+	}
+	if (ospl_album_add_photo(lib_name, 1, 10) >= 0) 
+	{
+		printf("no error executing ospl_album_add_photo\n");
+		return 0;
+	}
 	sprintf(tmp, "rm -rf %s", lib_name);
 	if (system(tmp))
 	{
 		printf("executing the system command failed\n");
-		return 1;
+		return 0;
 	}
 	return 1;
 }

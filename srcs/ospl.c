@@ -43,6 +43,10 @@ char *enum_error(int error_code)
 			return "image not supported\n";
 		case ERR_THUMB :
 			return "something went wrong with the thumbnail creation\n";
+		case ERR_PHO_NF :
+			return "photo id provided not found in database\n";
+		case ERR_ALB_NF :
+			return "album id provided not found in database\n";
 		default :
 			return "unknown error\n";
 	}
