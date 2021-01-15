@@ -21,7 +21,7 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_album_create(lib_name, "Vacances") < 0)
+	if (ospl_album_create(lib_name, "Vacances") != 1)
 	{
 		printf("error executing ospl_album_create\n");
 		return 1;
