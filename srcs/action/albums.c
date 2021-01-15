@@ -73,7 +73,7 @@ int ospl_album_create(char *library, char *name)
 	if (db_create_album(&db, name))
 		return ERR_DB;
 	if (!create_directory(tmp))
-		return SUCCESS;
+		return get_last_insert_rowid(db.db);
 	else
 		return -1000 - errno;
 }

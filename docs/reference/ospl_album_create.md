@@ -22,7 +22,7 @@ This function creates an album named ``name`` into an ospl provided with ``libra
 
 | `value`      |  `signification`                                                                                |
 | ------------ | ----------------------------------------------------------------------------------------------- |
-| `SUCCESS`    | album successfully created                                                                      |
+| `id     `    | the id of the album is returned on success                                                      |
 | `ERR_EXISTS` | there is already an album with that name                                                        |
 | `ERR_DB`     | an error occurred when accessing to database                                                    |
 | `< -1000`    | a system error occurred, adding +1000 to this value gives the `errno` associated with the error |
@@ -44,7 +44,7 @@ int main(void)
 		return 1;
 	}
 	else
-		printf("Album successfully created.");
+		printf("Album successfully created with id %d.", ret);
 	return 0;
 }
 ```
@@ -57,12 +57,7 @@ This function creates the album into the database first. If it fails the directo
 
 ## Changelog
 
-| `version` | `description`                           |
-| --------- | --------------------------------------- |
-| `v0.1.1`  | adapting to the new error return system |
-| `v0.1.0`  | the function is introduced              |
-
-
-## Enhancements
-
-- Return the created album `id` on success. (scheduled for `v0.1.1`)
+| `version` | `description`                                                               |
+| --------- | --------------------------------------------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system & returning id of the created album |
+| `v0.1.0`  | the function is introduced                                                  |
