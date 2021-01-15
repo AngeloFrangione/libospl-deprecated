@@ -290,7 +290,7 @@ static int album (int ac, char **av)
 				}
 				ret = ospl_album_delete(av[1], atoi(av[2]));
 				if (ret < 0)
-					printf("error deleting album: %s\n", enum_error(ret));
+					printf("error deleting album: %s\n", ospl_enum_error(ret));
 				else
 					printf("deleted album %s\n", av[2]);
 				break;

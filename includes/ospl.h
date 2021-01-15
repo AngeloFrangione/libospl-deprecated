@@ -70,7 +70,7 @@ typedef struct	s_current_time
 
 
 // External functions
-char *enum_error(int error_code);
+char *ospl_enum_error(int error_code);
 
 // Library related functions
 int ospl_create_library(char *library);
