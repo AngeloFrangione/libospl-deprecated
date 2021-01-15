@@ -23,7 +23,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-char *enum_error(int error_code)
+char *ospl_enum_error(int error_code)
 {
 	if (error_code < -1000)
 	{
