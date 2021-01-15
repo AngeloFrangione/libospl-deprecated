@@ -32,7 +32,7 @@ int main(void)
 		printf("album folder not found %s\n", tmp);
 		return 1;
 	}
-	if (ospl_import_photo_in_album(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg", 1) < 0)
+	if (ospl_import_photo_in_album(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg", 1) != 1)
 	{
 		printf("error executing ospl_import_photo_in_album\n");
 		return 1;

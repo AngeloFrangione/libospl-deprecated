@@ -61,17 +61,13 @@ int main(void)
 
 ## Behavior
 
-This function imports the photo, then adds  it to the specified album. If the album doesn't exist, the photo will still be imported, and an error is reported.
+This function imports the photo, then adds  it to the specified album. If the album doesn't exist, the photo will not be imported, and an error is reported.
 
 
 ## Changelog
 
-| `version` | `description`                           |
-| --------- | --------------------------------------- |
-| `v0.1.1`  | adapting to the new error return system |
-| `v0.1.0`  | the function is introduced              |
+| `version` | `description`                                                          |
+| --------- | ---------------------------------------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system & error if album doesn't exist |
+| `v0.1.0`  | the function is introduced                                             |
 
-
-## Enhancements
-
-- Do not import photo if album do not exist. (scheduled for `v0.1.1`)

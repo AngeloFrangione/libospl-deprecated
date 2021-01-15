@@ -47,6 +47,11 @@ int main(void)
 		printf("no error executing ospl_album_add_photo\n");
 		return 0;
 	}
+	if (ospl_import_photo_in_album(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg", 50) >= 0)
+	{
+		printf("no error executing ospl_import_photo_in_album\n");
+		return 0;
+	}
 	sprintf(tmp, "rm -rf %s", lib_name);
 	if (system(tmp))
 	{
