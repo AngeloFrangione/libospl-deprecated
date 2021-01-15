@@ -32,6 +32,8 @@ int ospl_photo_get(char *library, int photo, t_photos *info)
 	fill_tdb(&db, library);
 	if (db_select_photo(&db, photo, info))
 		return ERR_DB;
+	if (info->id == 0)
+		return ERR_PHO_NF;
 	return SUCCESS;
 }
 
