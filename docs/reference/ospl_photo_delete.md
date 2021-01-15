@@ -20,10 +20,12 @@ This function deletes the photo with `id` `photo` photo from an ospl.
 
 ## Return values
 
-| `value`   | `signification`                                              |
-| --------- | ------------------------------------------------------------ |
-| `SUCCESS` | photo successfully removed from library                      |
-| `< -1000` | a system error occurred, adding +1000 to this value gives the `errno` associated with the error |
+| `value`      | `signification`                                                                                 |
+| ------------ | ----------------------------------------------------------------------------------------------- |
+| `SUCCESS`    | photo successfully removed from library                                                         |
+| `ERR_DB`     | an error occurred when accessing to database                                                    |
+| `ERR_PHO_NF` | photo not found with `id` `photo`                                                               |
+| `< -1000`    | a system error occurred, adding +1000 to this value gives the `errno` associated with the error |
 
 
 ## Example
@@ -56,13 +58,12 @@ This function gets the photo names then deletes the photo from library, and fina
 
 ## Changelog
 
-| `version` | `description`                           |
-| --------- | --------------------------------------- |
-| `v0.1.1`  | adapting to the new error return system |
-| `v0.1.0`  | the function is introduced              |
+| `version` | `description`                                                                   |
+| --------- | ------------------------------------------------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system & return error if photo does not exists |
+| `v0.1.0`  | the function is introduced                                                      |
 
 
 ## Enhancements
 
 - Delete also the photo from the album(s) it is. (scheduled for `v0.2.0`)
-- Check if the photo exist, if not return error message. (scheduled for `v0.1.1`)

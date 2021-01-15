@@ -49,14 +49,16 @@ int ospl_photo_list(char *library, t_photos *list)
 
 int ospl_photo_delete(char *library, int photo)
 {
-	t_db db = {0};
-	t_photos pho;
+	int t = 0;
+	t_db db = { 0 };
+	t_photos pho = { 0 };
 	char tmp_import[PATH_LEN_BUFFER] = { 0 };
 	char tmp_thumb[PATH_LEN_BUFFER] = { 0 };
 
 	fill_tdb(&db, library);
-	if (db_select_photo(&db, photo, &pho) || db_delete_photo(&db, photo))
-		return ERR_DB;
+	if (db_select_photo(&db, photo, &pho) || !(t = 1) || !pho.id ||
+		db_delete_photo(&db, photo))
+		return (t) ? ERR_PHO_NF : ERR_DB;
 	cwk_path_join(library, "photos/import", tmp_import, sizeof(tmp_import));
 	cwk_path_join(library, "thumbnails", tmp_thumb, sizeof(tmp_thumb));
 	cwk_path_join(tmp_import, pho.new_name, tmp_import, sizeof(tmp_import));
