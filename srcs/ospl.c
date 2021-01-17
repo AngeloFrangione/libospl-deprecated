@@ -51,3 +51,16 @@ char *ospl_enum_error(int error_code)
 			return "unknown error\n";
 	}
 }
+
+void free_import_status(t_import_status **status)
+{
+	t_import_status *tmp = *status;
+
+	while (tmp->path)
+	{
+		free(tmp->path);
+		tmp->path = NULL;
+		tmp++;
+	}
+	free(*status);
+}
