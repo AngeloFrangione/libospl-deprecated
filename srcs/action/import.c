@@ -121,23 +121,41 @@ int ospl_import_photo_in_album(char *library, char *path, int album)
 	return id;
 }
 
-int ospl_import_folder(char *library, char *path)
+t_import_status *ospl_import_folder(char *library, char *path)
 {
 	DIR *d;
+	int i = 0;
+	int j = 1;
 	struct dirent *dir;
 	char tmp[PATH_LEN_BUFFER] = { 0 };
+	t_import_status *status = NULL;
 
 	if (!(d = opendir(path)))
-		return ERR_NOT_FOUND;
+		return NULL;
 	while ((dir = readdir(d)))
 	{
+		if (!(i % 32000))
+		{
+			status = realloc(status, sizeof(t_import_status*) * (32000 * j) + 1);
+			if (!status)
+				return NULL;
+			j++;
+		}
 		if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))
 			continue;
 		cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
-		ospl_import_photo(library, tmp);
+		status[i].path = strdup(tmp);
+		if (!status[i].path)
+		{
+			free_import_status(&status);
+			return NULL;
+		}
+		status[i].id = ospl_import_photo(library, tmp);
+		++i;
 	}
+	status[i].path = NULL;
 	closedir(d);
-	return SUCCESS;
+	return status;
 }
 
 int ospl_import_folder_in_album(char *library, char *path, int album)

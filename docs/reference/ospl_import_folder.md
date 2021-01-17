@@ -19,10 +19,10 @@ This function will import an entire folder located at `path` of photos into an o
 
 ## Return values
 
-| `value`         | `signification`              |
-| --------------- | ---------------------------- |
-| `SUCCESS`       | folder successfully imported |
-| `ERR_NOT_FOUND` | the folder was not found     |
+| `value`            | `signification`                                                      |
+| ------------------ | -------------------------------------------------------------------- |
+| `t_import_status*` | folder successfully imported                                         |
+| `NULL`             | the folder was not found, or an error occured while executing malloc |
 
 
 ## Example
@@ -32,16 +32,27 @@ This function will import an entire folder located at `path` of photos into an o
 
 int main(void)
 {
-	int ret;
+	t_import_status *status;
 	char *library = "path/to/photo/library/";
 
-	if ((ret = ospl_import_folder(library, "path/to/folder/with/photos/")) < 0)
+	if (!(status = ospl_import_folder(library, "path/to/folder/with/photos/")))
 	{
-		printf("Failed to import folder: %s", ospl_enum_error(ret));
+		printf("Failed to import folder: It doesn't exist or allocating memory failed.");
 		return 1;
 	}
 	else
-		printf("Successfully imported folder");
+    {
+        printf("Successfully imported folder:");
+        while (status->path)
+        {
+            if (status->id < 0)
+                printf("status: %d |", ospl_enum_error(status->id));
+            else
+                printf("status: successfully imported |");
+            printf(" path: %s", status->path);
+        }
+        free_import_status(&status);
+    }
 	return 0;
 }
 ```
@@ -49,18 +60,26 @@ int main(void)
 
 ## Behavior
 
-This function calls **[`ospl_import_photo`](/{{ site.baseurl }}/reference/ospl_import_photo)** with every file in the given folder.
+This function calls **[`ospl_import_photo`](/{{ site.baseurl }}/reference/ospl_import_photo)** with every file in the given folder. 
+It will return an array of [**`t_import_status*`**](/{{ site.baseurl }}/reference#data-structures) structures.
+This array is dynamically allocated with malloc. The last element contains NULL in the `path` element from this structure.
+You can free the entire array by calling this function:
+
+```c
+ void free_import_status(t_import_status **status);
+```
+the `id` element from the structure is filled with the return value of **[`ospl_import_photo`](/{{ site.baseurl }}/reference/ospl_import_photo)**
+the `path` element from the structure is filled with the path of the file that ospl imported.
 
 
 ## Changelog
 
-| `version` | `description`                           |
-| --------- | --------------------------------------- |
-| `v0.1.1`  | adapting to the new error return system |
-| `v0.1.0`  | the function is introduced              |
+| `version` | `description`                                                       |
+| --------- | ------------------------------------------------------------------- |
+| `v0.1.1`  | adapting to the new error return system & return `t_status_import*` |
+| `v0.1.0`  | the function is introduced                                          |
 
 
 ## Enhancements
 
-- This function should return a list of success/fail of every file found in the folder. (scheduled for `v0.1.1`)
 - This function should use sqlite transactions to speed up the import process. (scheduled for `v0.2.0`)

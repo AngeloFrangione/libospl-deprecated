@@ -68,15 +68,21 @@ typedef struct	s_current_time
 	unsigned int ms;
 }				t_current_time;
 
+typedef struct	s_import_status
+{
+	int id;
+	char *path;
+}				t_import_status;
 
 // External functions
 char *ospl_enum_error(int error_code);
+void free_import_status(t_import_status **status);
 
 // Library related functions
 int ospl_create_library(char *library);
 int ospl_import_photo(char *library, char *path);
 int ospl_import_photo_in_album(char *library, char *path, int album);
-int ospl_import_folder(char *library, char *path);
+t_import_status *ospl_import_folder(char *library, char *path);
 int ospl_import_folder_in_album(char *library, char *path, int album);
 int ospl_album_list(char *library, t_album *list);
 int ospl_album_list_photos(char *library, int album, t_photos *list);

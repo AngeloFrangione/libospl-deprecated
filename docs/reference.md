@@ -1,4 +1,5 @@
 # Reference
+
 ## Functions
 - **[`ospl_create_library`](/{{ site.baseurl }}/reference/ospl_create_library)**  
 	create an ospl library.
@@ -82,6 +83,16 @@ typedef struct			s_db
 }						t_db;
 ```
 The `t_db` data structure is used to communicate with the database.
+
+```c
+typedef struct	s_import_status
+{
+	int id;
+	char *path;
+}				t_import_status;
+```
+the `t_import_status` structure is used to get the status of an imported photo, when multiple photos are imported from a folder for example.
+
 
 ## Folder structure
 When you create an ospl library (calling **[`ospl_create_library`](/{{ site.baseurl }}/reference/ospl_create_library)** function) the following files and folders are created:
