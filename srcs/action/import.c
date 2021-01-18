@@ -158,22 +158,27 @@ t_import_status *ospl_import_folder(char *library, char *path)
 	return status;
 }
 
-int ospl_import_folder_in_album(char *library, char *path, int album)
+t_import_status *ospl_import_folder_in_album(char *library, char *path, int album)
 {
-	DIR *d;
-	struct dirent *dir;
-	char tmp[PATH_LEN_BUFFER] = { 0 };
+	t_import_status *status;
+	int i = 0;
+	t_db db;
+	t_album alb;
 
-	if (!(d = opendir(path)))
-		return ERR_NOT_FOUND;
-	while ((dir = readdir(d)))
+	fill_tdb(&db, library);
+	db_select_album(&db, album, &alb);
+	if (alb.id != album)
+		return NULL;
+	status = ospl_import_folder(library, path);
+	if (!status)
+		return NULL;
+
+	while (status[i].path)
 	{
-		if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))
-			continue;
-		cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
-		ospl_import_photo_in_album(library, tmp, album);
+		if (status[i].id > 0)
+			ospl_album_add_photo(library, status[i].id, album);
+		++i;
 	}
-	closedir(d);
-	return SUCCESS;
+	return status;
 }
 
