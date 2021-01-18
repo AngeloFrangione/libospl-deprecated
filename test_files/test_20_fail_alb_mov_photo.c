@@ -46,6 +46,18 @@ int main(void)
 		printf("no error executing ospl_album_move_photo\n");
 		return 0;
 	}
+	t_album album;
+	if (ospl_photo_associated_album(lib_name, 1, &album) != ERR_PHO_NF)
+	{
+		printf("no error executing ospl_photo_associated_album\n");
+		return 0;
+	}
+	t_photos pho;
+	if (ospl_album_list_photos(lib_name, 2, &pho) != ERR_ALB_NF)
+	{
+		printf("no error executing ospl_album_list_photos\n");
+		return 0;
+	}
 	sprintf(tmp, "rm -rf %s", lib_name);
 	if (system(tmp))
 	{
