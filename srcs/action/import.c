@@ -129,6 +129,7 @@ t_import_status *ospl_import_folder(char *library, char *path)
 	struct dirent *dir;
 	char tmp[PATH_LEN_BUFFER] = { 0 };
 	t_import_status *status = NULL;
+	t_import_status *tmp_status = NULL;
 
 	if (!(d = opendir(path)))
 		return NULL;
@@ -136,9 +137,13 @@ t_import_status *ospl_import_folder(char *library, char *path)
 	{
 		if (!(i % 32000))
 		{
+			tmp_status = status;
 			status = realloc(status, sizeof(t_import_status*) * (32000 * j) + 1);
 			if (!status)
+			{
+				free_import_status(&tmp_status);
 				return NULL;
+			}
 			j++;
 		}
 		if (!strcmp(dir->d_name, ".") || !strcmp(dir->d_name, ".."))
@@ -153,7 +158,8 @@ t_import_status *ospl_import_folder(char *library, char *path)
 		status[i].id = ospl_import_photo(library, tmp);
 		++i;
 	}
-	status[i].path = NULL;
+	if (status)
+		status[i].path = NULL;
 	closedir(d);
 	return status;
 }
