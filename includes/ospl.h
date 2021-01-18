@@ -83,7 +83,7 @@ int ospl_create_library(char *library);
 int ospl_import_photo(char *library, char *path);
 int ospl_import_photo_in_album(char *library, char *path, int album);
 t_import_status *ospl_import_folder(char *library, char *path);
-int ospl_import_folder_in_album(char *library, char *path, int album);
+t_import_status *ospl_import_folder_in_album(char *library, char *path, int album);
 int ospl_album_list(char *library, t_album *list);
 int ospl_album_list_photos(char *library, int album, t_photos *list);
 int ospl_album_create(char *library, char *name);
@@ -96,6 +96,7 @@ int ospl_photo_associated_album(char *library, int photo, t_album *list);
 int ospl_photo_get(char *library, int photo, t_photos *photos);
 int ospl_photo_list(char *library, t_photos *list);
 int ospl_photo_delete(char *library, int photo);
+
 
 
 ///// Database common usage function
