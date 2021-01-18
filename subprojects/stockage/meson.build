@@ -9,11 +9,13 @@ deps = [dependency('threads'),
 source =['src/stockage.c']
 
 # Library
+cargs =['-Wall', '-Wextra', '-Wno-unused-parameter', '-Wno-restrict']
 stockage = shared_library(	'stockage', source,
 						            install: true,
 						            include_directories : 'include',
 					             	dependencies : deps,
-						            soversion: 0, version: '0.0.1'
+						            soversion: 0, version: '0.0.1',
+						            c_args: cargs
 )
 
 install_headers('include/stockage.h',  subdir : 'ospl')

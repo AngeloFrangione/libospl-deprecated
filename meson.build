@@ -39,7 +39,7 @@ source =['srcs/ospl.c', 'srcs/common.c',
 		'srcs/action/export.c']
 
 # Library
-cargs =['-Wall', '-Wextra', '-Wno-unused-parameter']
+cargs =['-Wall', '-Wextra', '-Wno-unused-parameter', '-Wno-restrict']
 ospl = shared_library(	'ospl', source,
 						install: true,
 						include_directories : 'includes',

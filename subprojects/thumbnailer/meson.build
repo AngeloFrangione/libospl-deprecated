@@ -9,11 +9,13 @@ deps = [dependency('libjpeg'),
 		meson.get_compiler('c').find_library('magic')]
 
 # Library
+cargs =['-Wall', '-Wextra', '-Wno-unused-parameter', '-Wno-restrict', '-Wno-sign-compare']
 thumbnailer = shared_library(	'thumbnailer', 'src/thumbnailer.c', 'src/epeg.c',
 						            install: true,
 						            include_directories : 'include',
 					             	dependencies : deps,
-						            soversion: 0, version: '0.0.1'
+						            soversion: 0, version: '0.0.1',
+						            c_args: cargs
 )
 
 install_headers('include/thumbnailer.h',  subdir : 'ospl')
