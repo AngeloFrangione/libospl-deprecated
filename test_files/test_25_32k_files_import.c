@@ -14,23 +14,25 @@ int main(void)
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
 	int r = rand();
-	sprintf(lib_name, "test_Library_10_%d", r);
+	sprintf(lib_name, "test_Library_25_%d", r);
 	if (ospl_create_library(lib_name) < 0)
 	{
 		printf("Error executing ospl_create_library\n");
 		printf("lib_name: %s\n", lib_name);
-		return 0;
+		return 1;
 	}
-	if (ospl_import_folder(lib_name, "../test_files/not/"))
+	t_import_status *status;
+	status = ospl_import_folder(lib_name, "../test_files/ressources/empty_files/");
+	if (status[0].id != ERR_NOT_SUPPORTED && status[32499].id != ERR_NOT_SUPPORTED)
 	{
-		printf("no error executing ospl_import_folder\n");
-		return 0;
+		printf("there is an error with more than 32k files in folder to import\n");
 	}
+	free_import_status(&status);
 	sprintf(tmp, "rm -rf %s", lib_name);
 	if (system(tmp))
 	{
 		printf("executing the system command failed\n");
-		return 0;
+		return 1;
 	}
-	return 1;
+	return 0;
 }

@@ -19,6 +19,8 @@ matrix:
 script:
   - meson builddir -Db_coverage=true
   - meson compile -C builddir
+  - chmod +x scripts/create_emptyfiles.sh
+  - meson compile empty_files -C builddir
   - meson test -C builddir --print-errorlogs
   - ninja -C builddir coverage
 after_success:
