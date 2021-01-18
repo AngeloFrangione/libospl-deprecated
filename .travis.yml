@@ -11,11 +11,12 @@ addons:
 install:
   - pip3 install meson ninja
 before_install:
-  - sudo apt-get install -y libmagic-dev libjpeg-dev libexif-dev libsqlite3-dev lcov 
+  - sudo apt-get install -y libmagic-dev libjpeg-dev libexif-dev libsqlite3-dev lcov
 matrix:
   include:
     - env: CC=gcc
     - env: CC=clang
+    - env: CC=gcc CFLAGS=-O2
 script:
   - meson builddir -Db_coverage=true
   - meson compile -C builddir
