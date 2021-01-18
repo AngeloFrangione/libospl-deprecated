@@ -8,8 +8,8 @@
 int main(void)
 {
 	struct timeval nstime;
+	char tmp[4096] = {0};
 	char lib_name[50];
-	char tmp[4096];
 
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
