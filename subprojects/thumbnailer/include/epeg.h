@@ -105,7 +105,7 @@ struct _Epeg_Image
 	struct stat						stat_info;
 	unsigned char					*pixels;
 	unsigned char					**lines;
-	char							scaled : 1;
+	char							scaled : 1; // lgtm [cpp/ambiguously-signed-bit-field]
 	int								error;
 	Epeg_Colorspace					color_space;
 
@@ -146,7 +146,7 @@ struct
 	FILE							*f;
 	struct jpeg_compress_struct		jinfo;
 	int								quality;
-	char							thumbnail_info : 1;
+	char							thumbnail_info : 1; // lgtm [cpp/ambiguously-signed-bit-field]
 	} out;
 };
 
