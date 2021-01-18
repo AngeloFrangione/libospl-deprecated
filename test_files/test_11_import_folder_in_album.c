@@ -11,6 +11,7 @@ int main(void)
 	struct timeval nstime;
 	char tmp[300] = {0};
 	char lib_name[50];
+	t_import_status *status;
 
 	gettimeofday(&nstime, NULL);
 	srand(nstime.tv_usec);
@@ -27,7 +28,7 @@ int main(void)
 		printf("error executing ospl_album_create\n");
 		return 1;
 	}
-	if (ospl_import_folder_in_album(lib_name, "../test_files/ressources/Album of random photos/", 1) < 0)
+	if (!(status = ospl_import_folder_in_album(lib_name, "../test_files/ressources/Album of random photos/", 1)))
 	{
 		printf("Error executing ospl_import_folder_in_album\n");
 		return 1;
@@ -70,6 +71,7 @@ int main(void)
 		}
 		++i;
 	}
+	free_import_status(&status);
 	sprintf(tmp, "rm -rf %s", lib_name);
 	if (system(tmp))
 	{

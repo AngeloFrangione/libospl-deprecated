@@ -2,6 +2,9 @@
 project('ospl', 'c', version : '0.1.1')
 cmake = import('cmake')
 
+run_target('empty_files',
+  command : 'scripts/create_emptyfiles.sh')
+
 # Enable debugging
 add_global_arguments('-DDEBUG=TRUE', language: 'c')
 
@@ -24,7 +27,6 @@ deps = [thumbnailer,
 		dependency('threads'),
 		meson.get_compiler('c').find_library('m'),
 		meson.get_compiler('c').find_library('magic')]
-
 
 source =['srcs/ospl.c', 'srcs/common.c', 
 		'srcs/db/database_albums.c',
@@ -79,7 +81,7 @@ test_21_del_photo = executable('test_21_del_photo', 'test_files/test_21_del_phot
 test_22_fail_del_photo = executable('test_22_fail_del_photo', 'test_files/test_22_fail_del_photo.c', link_with: ospl, dependencies : deps)
 test_23_list_albums = executable('test_23_list_albums', 'test_files/test_23_list_albums.c', link_with: ospl, dependencies : deps)
 test_24_fail_list_albums = executable('test_24_fail_list_albums', 'test_files/test_24_fail_list_albums.c', link_with: ospl, dependencies : deps)
-
+test_25_32k_files_import = executable('test_25_32k_files_import', 'test_files/test_25_32k_files_import.c',link_with: ospl, dependencies : deps)
 
 test('1_create_lib', test_1_create_lib)
 test('2_fail_create_lib', test_2_fail_create_lib, should_fail: true)
@@ -105,3 +107,4 @@ test('21_del_photo', test_21_del_photo)
 test('22_fail_del_photo', test_22_fail_del_photo, should_fail: true)
 test('23_list_albums', test_23_list_albums)
 test('24_fail_list_albums', test_24_fail_list_albums, should_fail: true)
+test('25_32k_files_import', test_25_32k_files_import, timeout: 60)
