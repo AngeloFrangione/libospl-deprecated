@@ -22,8 +22,8 @@ ninja
 ## GNU/Linux
 You will need to install [meson](https://mesonbuild.com/Quick-guide.html)
 ```shell
-sudo apt install python3 python3-pip python3-setuptools python3-wheel ninja-build cmake
-pip3 install meson pkg-config
+sudo apt install python3 python3-pip python3-setuptools python3-wheel ninja-build cmake pkg-config
+pip3 install meson ninja
 #Add the bin folder showed after installation to your PATH
 ```
 You will need to install the following dependencies
