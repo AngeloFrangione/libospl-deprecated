@@ -39,9 +39,13 @@ int ospl_album_list(char *library, t_album *list)
 int ospl_album_list_photos(char *library, int album, t_photos *list)
 {
 	t_db db = {0};
+	t_album alb;
 
 	fill_tdb(&db, library);
-
+	if (db_select_album(&db, album, &alb))
+		return ERR_DB;
+	if (alb.id == 0)
+		return ERR_ALB_NF;
 	if (db_list_contains(&db, album, list))
 		return ERR_DB;
 	return SUCCESS;
@@ -50,9 +54,13 @@ int ospl_album_list_photos(char *library, int album, t_photos *list)
 int ospl_photo_associated_album(char *library, int photo, t_album *list)
 {
 	t_db db = {0};
+	t_photos pho;
 
 	fill_tdb(&db, library);
-
+	if (db_select_photo(&db, photo, &pho))
+		return ERR_DB;
+	if (pho.id == 0)
+		return ERR_PHO_NF;
 	if (db_photo_contained(&db, photo, list))
 		return ERR_DB;
 	return SUCCESS;

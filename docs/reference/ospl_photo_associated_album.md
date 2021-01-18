@@ -21,10 +21,11 @@ This function lists every album where a specific photo is stored and puts them i
 
 ## Return values
 
-| `value`   | `signification`                              |
-| --------- | -------------------------------------------- |
-| `SUCCESS` | no errors occurred during operation          |
-| `ERR_DB`  | an error occurred when accessing to database |
+| `value`      | `signification`                              |
+| ------------ | -------------------------------------------- |
+| `SUCCESS`    | no errors occurred during operation          |
+| `ERR_PHO_NF` | photo with `id` `photo` not found            |
+| `ERR_DB`     | an error occurred when accessing to database |
 
 
 ## Example
@@ -64,8 +65,3 @@ int main(void)
 | --------- | --------------------------------------- |
 | `v0.1.1`  | adapting to the new error return system |
 | `v0.1.0`  | the function is introduced              |
-
-
-## Enhancements
-
-- Check if the photo exist, if not return error message. (scheduled for `v0.1.1`)
