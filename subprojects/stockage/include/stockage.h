@@ -99,7 +99,7 @@ typedef struct			s_photos
 {
 	int					id;
 	char				hash[33];
-	char				original_name[255];
+	char				original_name[223];
 	char				new_name[255];
 	char				import_datetime[32];
 	char				random[11];

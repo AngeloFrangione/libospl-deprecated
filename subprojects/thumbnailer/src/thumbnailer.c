@@ -42,9 +42,10 @@ static int get_magic(char *actual_file, char **magic)
 static int is_supported(char *src)
 {
 	char **p = SUPPORTED_IMAGES;
-	char *magic;
+	char *magic = NULL;
 	
-	get_magic(src, &magic);
+	if (get_magic(src, &magic))
+		return 0;
 	for (int i = 0; i < NB_SUPPORTED_IMAGES; i++)
 	{
 		if (!strcmp(p[i], magic))
