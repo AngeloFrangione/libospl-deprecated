@@ -135,8 +135,8 @@ typedef struct			s_db
  */
 int get_last_insert_rowid(sqlite3 *sqlite);
 int check_sqlite_return(int rc, t_db *db, char *query);
-int stockage_init(t_db *db);
 int create_database(char *path);
+int stockage_init(t_db *db);
 int stockage_query_write(char *query, t_db *db);
 int stockage_query_read(char *query, t_db *db, int callback(), void *data);
 int stockage_commit(t_db *db);
@@ -148,48 +148,5 @@ int stockage_commit(t_db *db);
  */
 int stockage_write(t_db *db, char *query);
 int stockage_read(t_db *db, char *query, int callback(), void *value);
-
-/*
- * 
- * Queries - settings table
- * 
- */
-int insert_setting(t_db *db, char *name, char *value);
-int update_setting(t_db *db, char *name, char *value);
-int select_setting(t_db *db, char *name, char *value);
-int delete_setting(t_db *db, char *name);
-
-/*
- * 
- * Queries - photos table
- * 
- */
-int insert_photo(t_db *db, t_photos *pho);
-int update_photo_int(t_db *db, int id, char *col, int value);
-int update_photo_char(t_db *db, int id, char *col, char *value);
-int update_photo_null(t_db *db, int id, char *col);
-int select_photo_single(t_db *db, int id, char *col, char *value);
-int select_photo_multiple(t_db *db, int id, t_photos *pho);
-int select_photo_all(t_db *db, t_photos *pho);
-int select_photo(t_db *db, int id, t_photos *pho);
-int delete_photo(t_db *db, int id);
-int select_last_photo_id(t_db *db);
-
-/*
- * 
- * Queries - albums table
- * 
- */
-int create_album(t_db *db, char *name);
-int rename_album(t_db *db, int id, char *name);
-int delete_album(t_db *db, int id);
-
-int insert_contains(t_db *db, int photo, int album);
-int delete_contains(t_db *db, int photo, int album);
-int move_contains(t_db *db, int photo, int old_album, int new_album);
-int list_contains(t_db *db, int album, t_photos *list);
-int photo_contained(t_db *db, int photo, t_album *list);
-int list_albums(t_db *db, t_album *list);
-int select_album(t_db *db, int id, t_album *album);
 
 #endif
