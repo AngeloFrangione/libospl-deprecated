@@ -1,40 +1,45 @@
 # Reference
 
-## Functions
-- **[`ospl_create_library`](/{{ site.baseurl }}/reference/ospl_create_library)**  
+## ospl functions
+- **[`ospl_create_library`](/{{ site.baseurl }}/reference/ospl/create_library)**  
 	create an ospl library.
-- **[`ospl_import_photo`](/{{ site.baseurl }}/reference/ospl_import_photo)**  
+- **[`ospl_import_photo`](/{{ site.baseurl }}/reference/ospl/import_photo)**  
 	import a photo into library
-- **[`ospl_import_photo_in_album`](/{{ site.baseurl }}/reference/ospl_import_photo_in_album)**  
+- **[`ospl_import_photo_in_album`](/{{ site.baseurl }}/reference/ospl/import_photo_in_album)**  
 	import a photo directly into an existing album
-- **[`ospl_import_folder`](/{{ site.baseurl }}/reference/ospl_import_folder)**  
+- **[`ospl_import_folder`](/{{ site.baseurl }}/reference/ospl/import_folder)**  
 	import a folder full of photos
-- **[`ospl_import_folder_in_album`](/{{ site.baseurl }}/reference/ospl_import_folder_in_album)**  
+- **[`ospl_import_folder_in_album`](/{{ site.baseurl }}/reference/ospl/import_folder_in_album)**  
 	import a folder full of photos directly into an existing album
-- **[`ospl_album_list`](/{{ site.baseurl }}/reference/ospl_album_list)**  
+- **[`ospl_album_list`](/{{ site.baseurl }}/reference/ospl/album_list)**  
 	get the entire album list stored in a library
-- **[`ospl_album_list_photos`](/{{ site.baseurl }}/reference/ospl_album_list_photos)**  
+- **[`ospl_album_list_photos`](/{{ site.baseurl }}/reference/ospl/album_list_photos)**  
 	get the photo list from an album
-- **[`ospl_photo_associated_album`](/{{ site.baseurl }}/reference/ospl_photo_associated_album)**  
+- **[`ospl_photo_associated_album`](/{{ site.baseurl }}/reference/ospl/photo_associated_album)**  
 	get the albums where a specific photo is stored
-- **[`ospl_album_create`](/{{ site.baseurl }}/reference/ospl_album_create)**  
+- **[`ospl_album_create`](/{{ site.baseurl }}/reference/ospl/album_create)**  
 	create an album in an ospl library
-- **[`ospl_album_rename`](/{{ site.baseurl }}/reference/ospl_album_rename)**  
+- **[`ospl_album_rename`](/{{ site.baseurl }}/reference/ospl/album_rename)**  
 	rename an album from an ospl library
-- **[`ospl_album_delete`](/{{ site.baseurl }}/reference/ospl_album_delete)**  
+- **[`ospl_album_delete`](/{{ site.baseurl }}/reference/ospl/album_delete)**  
 	delete an album from an ospl library
-- **[`ospl_album_add_photo`](/{{ site.baseurl }}/reference/ospl_album_add_photo)**  
+- **[`ospl_album_add_photo`](/{{ site.baseurl }}/reference/ospl/album_add_photo)**  
 	add a photo to an existing album
-- **[`ospl_album_delete_photo`](/{{ site.baseurl }}/reference/ospl_album_delete_photo)**  
+- **[`ospl_album_delete_photo`](/{{ site.baseurl }}/reference/ospl/album_delete_photo)**  
 	delete a photo from an album
-- **[`ospl_album_move_photo`](/{{ site.baseurl }}/reference/ospl_album_move_photo)**  
+- **[`ospl_album_move_photo`](/{{ site.baseurl }}/reference/ospl/album_move_photo)**  
 	move a photo from an album to another album
-- **[`ospl_photo_get`](/{{ site.baseurl }}/reference/ospl_photo_get)**  
+- **[`ospl_photo_get`](/{{ site.baseurl }}/reference/ospl/photo_get)**  
 	get informations about a specific photo
-- **[`ospl_photo_list`](/{{ site.baseurl }}/reference/ospl_photo_list)**  
+- **[`ospl_photo_list`](/{{ site.baseurl }}/reference/ospl/photo_list)**  
 	list every photo from a library
-- **[`ospl_photo_delete`](/{{ site.baseurl }}/reference/ospl_photo_delete)**  
+- **[`ospl_photo_delete`](/{{ site.baseurl }}/reference/ospl/photo_delete)**  
 	delete a specific photo from a library
+
+
+## stockage functions
+- **[`stockage_read`](/{{ site.baseurl }}/reference/stockage/read)**  
+
 
 ## Data structures
 
@@ -106,6 +111,29 @@ When you create an ospl library (calling **[`ospl_create_library`](/{{ site.base
 | `library_name/thumbnails`       | the location of the thumbnails of every photo          | `0.1.0`              |
 
 ## Database
+
+### Stockage functions
+
+#### Higher level
+**[`stockage_read`](/{{ site.baseurl }}/reference/stockage/read)**  
+execute a read query on database
+**[`stockage_write`]()**  
+execute a write query on database
+
+#### lower level
+**[`create_database`]()**  
+create the database file
+**[`stockage_init`]()**  
+inititates a database connection
+**[`stockage_query_read`]()**  
+execute a read query on database
+**[`stockage_query_write`]()**  
+execute a write query on database
+**[`stockage_commit`]()**  
+commit a query on database
+
+
+### Database structure
 
 To understand better, here is a updated database diagram (captured from [here](https://dbdiagram.io/d/5ec97ad039d18f5553ffa8cf)):
 
