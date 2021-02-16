@@ -9,7 +9,7 @@ addons:
       - "python3-pip"
       - "python3-setuptools"
 install:
-  - pip3 install meson ninja
+  - pip3 install meson==0.56.2 ninja==1.10.0
 before_install:
   - sudo apt-get install -y libmagic-dev libjpeg-dev libexif-dev libsqlite3-dev lcov
 matrix:
