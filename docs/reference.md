@@ -39,6 +39,9 @@
 
 ## stockage functions
 - **[`stockage_read`](/{{ site.baseurl }}/reference/stockage/read)**  
+execute a read query on database
+- **[`stockage_write`](/{{ site.baseurl }}/reference/stockage/write)**  
+execute a write query on database
 
 
 ## Data structures
