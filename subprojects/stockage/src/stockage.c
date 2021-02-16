@@ -61,29 +61,6 @@ int check_sqlite_return(int rc, t_db *db, char *query)
 }
 
 /**
- * \brief Create connection to the database in read write / transaction mode
- *
- * Create connection to the database in read and write mode.
- * This start a sql transaction, need to be closed with stockage_commit()
- * \param db database data structur
- * \return the sqlite return code;
- */
-int stockage_init(t_db *db)
-{
-	int rc;
-
-	rc = sqlite3_open_v2(db->path, &db->db, SQLITE_OPEN_READWRITE | 
-							SQLITE_OPEN_FULLMUTEX, NULL);
-	check_sqlite_return(rc, db, "empty");
-	rc = sqlite3_exec(db->db, JOURNAL_MODE_MEMORY, 0, 0, NULL);
-	check_sqlite_return(rc, db, "empty");
-	rc = sqlite3_exec(db->db, SYNCRONOUS_OFF, 0, 0, NULL);
-	check_sqlite_return(rc, db, "empty");
-	rc = sqlite3_exec(db->db, "BEGIN TRANSACTION", NULL, NULL, NULL);
-	return check_sqlite_return(rc, db, "BEGIN TRANSACTION");
-}
-
-/**
  * \brief Create an empty ospl databse
  *
  * Creates the whole tables needed for ospl into the databases.
@@ -124,6 +101,30 @@ int create_database(char *path)
 	sqlite3_close(db);
 	return 0;
 }
+
+/**
+ * \brief Create connection to the database in read write / transaction mode
+ *
+ * Create connection to the database in read and write mode.
+ * This start a sql transaction, need to be closed with stockage_commit()
+ * \param db database data structur
+ * \return the sqlite return code;
+ */
+int stockage_init(t_db *db)
+{
+	int rc;
+
+	rc = sqlite3_open_v2(db->path, &db->db, SQLITE_OPEN_READWRITE | 
+							SQLITE_OPEN_FULLMUTEX, NULL);
+	check_sqlite_return(rc, db, "empty");
+	rc = sqlite3_exec(db->db, JOURNAL_MODE_MEMORY, 0, 0, NULL);
+	check_sqlite_return(rc, db, "empty");
+	rc = sqlite3_exec(db->db, SYNCRONOUS_OFF, 0, 0, NULL);
+	check_sqlite_return(rc, db, "empty");
+	rc = sqlite3_exec(db->db, "BEGIN TRANSACTION", NULL, NULL, NULL);
+	return check_sqlite_return(rc, db, "BEGIN TRANSACTION");
+}
+
 
 /**
  * \brief executes any writing query
