@@ -30,7 +30,7 @@ This function is a higher level function that initializes the database connectio
 
 ## Behavior
 
-This functions will execute respectively  `stockage_init()` `stockage_query_read()` and `stockage_commit()`
+This functions will execute respectively  `stockage_init()` **[`stockage_query_read`](/{{ site.baseurl }}/reference/stockage/query_read)** and `stockage_commit()`
 
 
 ## Changelog

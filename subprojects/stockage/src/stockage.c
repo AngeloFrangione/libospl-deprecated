@@ -144,20 +144,6 @@ int stockage_query_write(char *query, t_db *db)
 	return check_sqlite_return(rc, db, query);
 }
 
-/**
- * \brief executes any reading query
- *
- * executes any reading query and sends the rows to a callback function
- * Additionally this function takes a data parameter for storing the result
- * (select...)
- *
- * \param query pointer to the SQL query
- * \param db database data structure
- * \param callback callback function should be prototyped with these arguments:
- * callback(void *data, int argc, char **argv, char **column_name)
- * \param data data that will be passed to the callback function
- * \return the sqlite return code;
- */
 int stockage_query_read(char *query, t_db *db, int callback(), void *data)
 {
 	int rc;
