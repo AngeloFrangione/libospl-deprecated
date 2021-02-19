@@ -1,4 +1,8 @@
-[![docs](https://img.shields.io/badge/docs-libospl-success)](https://angelofrangione.github.io/libospl/) master: [![Build Status](https://www.travis-ci.com/AngeloFrangione/libospl.svg?branch=master)](https://www.travis-ci.com/AngeloFrangione/libospl) [![codecov](https://codecov.io/gh/AngeloFrangione/libospl/branch/master/graph/badge.svg?token=53EckTgSg7)](https://codecov.io/gh/AngeloFrangione/libospl) dev: [![Build Status](https://www.travis-ci.com/AngeloFrangione/libospl.svg?branch=dev)](https://www.travis-ci.com/AngeloFrangione/libospl) [![codecov](https://codecov.io/gh/AngeloFrangione/libospl/branch/dev/graph/badge.svg?token=53EckTgSg7)](https://codecov.io/gh/AngeloFrangione/libospl)
+master:  [![Build Status](https://www.travis-ci.com/AngeloFrangione/libospl.svg?branch=master)](https://www.travis-ci.com/AngeloFrangione/libospl) [![codecov](https://codecov.io/gh/AngeloFrangione/libospl/branch/master/graph/badge.svg?token=53EckTgSg7)](https://codecov.io/gh/AngeloFrangione/libospl)
+
+dev:     [![Build Status](https://www.travis-ci.com/AngeloFrangione/libospl.svg?branch=dev)](https://www.travis-ci.com/AngeloFrangione/libospl) [![codecov](https://codecov.io/gh/AngeloFrangione/libospl/branch/dev/graph/badge.svg?token=53EckTgSg7)](https://codecov.io/gh/AngeloFrangione/libospl)
+
+docs:   [![docs](https://img.shields.io/badge/docs-libospl-success)](https://angelofrangione.github.io/libospl/) 
 
 
 # libospl - Open Source Photo Library
