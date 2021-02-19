@@ -44,7 +44,8 @@ execute a read query on database
 execute a write query on database
 - **[`stockage_query_read`](/{{ site.baseurl }}/reference/stockage/query_read)**  
 executes any reading query
-
+- **[`stockage_query_write`](/{{ site.baseurl }}/reference/stockage/query_write)**  
+executes any writing query
 
 
 ## Data structures
