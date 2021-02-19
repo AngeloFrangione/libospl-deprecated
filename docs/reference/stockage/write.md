@@ -28,7 +28,7 @@ This function is a higher level function that initializes the database connectio
 
 ## Behavior
 
-This functions will execute respectively  `stockage_init()` **[`stockage_query_write`](/{{ site.baseurl }}/reference/stockage/query_write)** and `stockage_commit()`
+This functions will execute respectively **[`stockage_init`](/{{ site.baseurl }}/reference/stockage/init)** **[`stockage_query_write`](/{{ site.baseurl }}/reference/stockage/query_write)** and **[`stockage_commit`](/{{ site.baseurl }}/reference/stockage/commit)**
 
 
 ## Changelog
