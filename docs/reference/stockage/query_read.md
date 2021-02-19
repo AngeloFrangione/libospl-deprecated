@@ -11,7 +11,7 @@ int stockage_query_read(t_db *db, char *query, int callback(), void *data);
 
 Executes any reading query and sends the rows to a callback function (select...)
 Additionally this function takes a data parameter to store the result.
-You need to call `stockage_init()` before calling this function to start the transaction. And you also need to call `stockage_commit()` to apply the changes from the transaction.
+You need to call **[`stockage_init`](/{{ site.baseurl }}/reference/stockage/init)** before calling this function to start the transaction. And you also need to call **[`stockage_commit`](/{{ site.baseurl }}/reference/stockage/commit)**  to apply the changes from the transaction.
 
 
 ## Parameters
