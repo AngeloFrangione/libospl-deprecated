@@ -46,6 +46,8 @@ execute a write query on database
 executes any reading query
 - **[`stockage_query_write`](/{{ site.baseurl }}/reference/stockage/query_write)**  
 executes any writing query
+- **[`stockage_init`](/{{ site.baseurl }}/reference/stockage/init)**  
+initiates a transaction
 
 
 ## Data structures

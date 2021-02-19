@@ -102,14 +102,6 @@ int create_database(char *path)
 	return 0;
 }
 
-/**
- * \brief Create connection to the database in read write / transaction mode
- *
- * Create connection to the database in read and write mode.
- * This start a sql transaction, need to be closed with stockage_commit()
- * \param db database data structur
- * \return the sqlite return code;
- */
 int stockage_init(t_db *db)
 {
 	int rc;
