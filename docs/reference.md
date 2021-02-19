@@ -48,6 +48,9 @@ executes any reading query
 executes any writing query
 - **[`stockage_init`](/{{ site.baseurl }}/reference/stockage/init)**  
 initiates a transaction
+- **[`stockage_commit`](/{{ site.baseurl }}/reference/stockage/commit)**  
+finalizes a transaction
+
 
 
 ## Data structures
