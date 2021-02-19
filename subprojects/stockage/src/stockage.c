@@ -133,17 +133,7 @@ int stockage_query_read(char *query, t_db *db, int callback(), void *data)
 	return check_sqlite_return(rc, db, query);
 }
 
-/**
- * \brief finalizes a transaction connection and writes data to the disk
- *
- * this function should be called after every use of stockage_init();
- * and of course after you read and wrote all necessary data.
- * In a sqlite transaction, if the commit fails because of any reason (such as
- * power loss, system crash) no previous query will be saved.
- *
- * \param db database data structure
- * \return the sqlite return code;
- */
+
 int stockage_commit(t_db *db)
 {
 	int rc;
