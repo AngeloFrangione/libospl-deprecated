@@ -9,7 +9,7 @@ initiates a transaction
 int stockage_init(t_db *db);
 ```
 
-This function initiates a database connection and start the transaction mode. The connection needs to be closed with `stockage_commit()` 
+This function initiates a database connection and start the transaction mode. The connection needs to be closed with **[`stockage_commit`](/{{ site.baseurl }}/reference/stockage/commit)** 
 
 
 ## Parameters
