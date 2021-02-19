@@ -125,17 +125,6 @@ int stockage_init(t_db *db)
 	return check_sqlite_return(rc, db, "BEGIN TRANSACTION");
 }
 
-
-/**
- * \brief executes any writing query
- *
- * executes any query that writes into an initiated database
- * insert, delete, update...
- *
- * \param query pointer to the SQL query
- * \param db database data structure
- * \return the sqlite return code;
- */
 int stockage_query_write(char *query, t_db *db)
 {
 	int rc;
