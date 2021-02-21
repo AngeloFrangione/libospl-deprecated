@@ -101,7 +101,7 @@ int ospl_import_photo(char *library, char *path)
 	if (copy_file(path, import_path) < 0)
 		return -1000 - errno;
 	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
-	return get_last_insert_rowid(db.db);
+	return stockage_get_last_insert_rowid(db.db);
 }
 
 int ospl_import_photo_in_album(char *library, char *path, int album)
