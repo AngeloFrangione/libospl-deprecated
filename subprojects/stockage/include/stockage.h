@@ -133,9 +133,8 @@ typedef struct			s_db
  * Generic read / write functions
  * 
  */
-int get_last_insert_rowid(sqlite3 *sqlite);
-int check_sqlite_return(int rc, t_db *db, char *query);
-int create_database(char *path);
+int stockage_get_last_insert_rowid(sqlite3 *sqlite);
+int stockage_create_db(char *path);
 int stockage_init(t_db *db);
 int stockage_query_write(char *query, t_db *db);
 int stockage_query_read(char *query, t_db *db, int callback(), void *data);

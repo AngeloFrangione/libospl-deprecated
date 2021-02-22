@@ -34,7 +34,7 @@ static int create_database_file(char *path)
 	cwk_path_join(path, DATABASE_FILENAME, tmp, sizeof(tmp));
 	db.path = tmp;
 
-	if (create_database(tmp) | db_insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION))
+	if (stockage_create_db(tmp) | db_insert_setting(&db, "version", VERSION_MAJOR"."VERSION_MINOR"."VERSION_REVISION))
 	 return ERR_DB;
 	return 0;
 }
