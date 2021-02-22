@@ -8,7 +8,7 @@
 int main(void)
 {
 	struct timeval nstime;
-	char tmp[300] = {0};
+	char tmp[4096] = {0};
 	char lib_name[50];
 
 	gettimeofday(&nstime, NULL);
@@ -21,7 +21,7 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_album_create(lib_name, "Vacances") < 0)
+	if (ospl_album_create(lib_name, "Vacances") != 1)
 	{
 		printf("error executing ospl_album_create\n");
 		return 1;
@@ -32,7 +32,7 @@ int main(void)
 		printf("album folder not found %s\n", tmp);
 		return 1;
 	}
-	if (ospl_import_photo_in_album(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg", 1) < 0)
+	if (ospl_import_photo_in_album(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg", 1) != 1)
 	{
 		printf("error executing ospl_import_photo_in_album\n");
 		return 1;

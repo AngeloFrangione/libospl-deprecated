@@ -7,7 +7,7 @@
 int main(void)
 {
 	struct timeval nstime;
-	char tmp[50] = {0};
+	char tmp[4096] = {0};
 	char lib_name[50];
 
 	gettimeofday(&nstime, NULL);

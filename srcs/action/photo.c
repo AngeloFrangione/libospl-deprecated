@@ -23,14 +23,17 @@
 #include <ospl.h>
 #include <cwalk.h>
 #include <stockage.h>
+#include <errno.h>
 
-int ospl_photo_get(char *library, int id, t_photos *photo)
+int ospl_photo_get(char *library, int photo, t_photos *info)
 {
 	t_db db = {0};
 
 	fill_tdb(&db, library);
-	if (db_select_photo(&db, id, photo))
-		return EDBFAIL;
+	if (db_select_photo(&db, photo, info))
+		return ERR_DB;
+	if (info->id == 0)
+		return ERR_PHO_NF;
 	return SUCCESS;
 }
 
@@ -40,25 +43,27 @@ int ospl_photo_list(char *library, t_photos *list)
 
 	fill_tdb(&db, library);
 	if (db_select_photo_all(&db, list))
-		return EDBFAIL;
+		return ERR_DB;
 	return SUCCESS;
 }
 
-int ospl_photo_delete(char *library, int id)
+int ospl_photo_delete(char *library, int photo)
 {
-	t_db db = {0};
-	t_photos pho;
-	char tmp_import[4096] = { 0 };
-	char tmp_thumb[4096] = { 0 };
+	int t = 0;
+	t_db db = { 0 };
+	t_photos pho = { 0 };
+	char tmp_import[PATH_LEN_BUFFER] = { 0 };
+	char tmp_thumb[PATH_LEN_BUFFER] = { 0 };
 
 	fill_tdb(&db, library);
-	if (db_select_photo(&db, id, &pho) || db_delete_photo(&db, id))
-		return EDBFAIL;
+	if (db_select_photo(&db, photo, &pho) || !(t = 1) || !pho.id ||
+		db_delete_photo(&db, photo))
+		return (t) ? ERR_PHO_NF : ERR_DB;
 	cwk_path_join(library, "photos/import", tmp_import, sizeof(tmp_import));
 	cwk_path_join(library, "thumbnails", tmp_thumb, sizeof(tmp_thumb));
 	cwk_path_join(tmp_import, pho.new_name, tmp_import, sizeof(tmp_import));
 	cwk_path_join(tmp_thumb, pho.new_name, tmp_thumb, sizeof(tmp_thumb));
 	if (remove(tmp_import) || remove(tmp_thumb))
-		return EERRNO;
+		return -1000 - errno;
 	return SUCCESS;
 }
