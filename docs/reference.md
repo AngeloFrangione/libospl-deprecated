@@ -50,6 +50,8 @@ executes any writing query
 initiates a transaction
 - **[`stockage_commit`](/{{ site.baseurl }}/reference/stockage/commit)**  
 finalizes a transaction
+- **[`stockage_create_db`](/{{ site.baseurl }}/reference/stockage/create_db)**  
+creates an empty ospl database file
 
 
 

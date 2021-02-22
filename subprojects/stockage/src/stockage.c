@@ -52,14 +52,6 @@ int stockage_get_last_insert_rowid(sqlite3 *sqlite)
 	return sqlite3_last_insert_rowid(sqlite);
 }
 
-/**
- * \brief Create an empty ospl databse
- *
- * Creates the whole tables needed for ospl into the databases.
- * Creates the database file if it doesn't exists
- * \param path path to the db file
- * \return the sqlite return code;
- */
 int stockage_create_db(char *path)
 {
 	sqlite3 		*db;
