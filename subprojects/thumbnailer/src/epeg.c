@@ -242,7 +242,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 1);
+	pix = malloc(w * h * 1); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -263,7 +263,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 3);
+	pix = malloc(w * h * 3); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -286,7 +286,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 3);
+	pix = malloc(w * h * 3); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -309,7 +309,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 3);
+	pix = malloc(w * h * 3); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -332,7 +332,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 4);
+	pix = malloc(w * h * 4); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -356,7 +356,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 4);
+	pix = malloc(w * h * 4); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -380,7 +380,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned int *pix, *p;
 
-	pix = malloc(w * h * 4);
+	pix = malloc(w * h * 4); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -401,7 +401,7 @@ epeg_pixels_get(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 4);
+	pix = malloc(w * h * 4); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -488,7 +488,7 @@ epeg_pixels_get_as_RGB8(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 3);
+	pix = malloc(w * h * 3); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -511,7 +511,7 @@ epeg_pixels_get_as_RGB8(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 3);
+	pix = malloc(w * h * 3); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -534,7 +534,7 @@ epeg_pixels_get_as_RGB8(Epeg_Image *im, int x, int y,  int w, int h)
      {
 	unsigned char *pix, *p;
 
-	pix = malloc(w * h * 3);
+	pix = malloc(w * h * 3); // lgtm [cpp/integer-multiplication-cast-to-long]
 	if (!pix) return NULL;
 	for (yy = y + oy; yy < hh; yy++)
 	  {
@@ -733,7 +733,7 @@ epeg_encode(Epeg_Image *im)
    return 0;
 }
 
-/**
+/** lgtm [cpp/fixme-comment]
  * FIXME: Document this
  * @param im A handle to an opened Epeg image.
  *
@@ -979,7 +979,7 @@ _epeg_decode(Epeg_Image *im)
 
    jpeg_calc_output_dimensions(&(im->in.jinfo));
 
-   im->pixels = malloc(im->in.jinfo.output_width * im->in.jinfo.output_height * im->in.jinfo.output_components);
+   im->pixels = malloc(im->in.jinfo.output_width * im->in.jinfo.output_height * im->in.jinfo.output_components); // lgtm [cpp/integer-multiplication-cast-to-long]
    if (!im->pixels) return 1;
 
    im->lines = malloc(im->in.jinfo.output_height * sizeof(char *));
@@ -1097,7 +1097,7 @@ _epeg_decode_for_trim(Epeg_Image *im)
 
    jpeg_calc_output_dimensions(&(im->in.jinfo));
 
-   im->pixels = malloc(im->in.jinfo.output_width * im->in.jinfo.output_height * im->in.jinfo.output_components);
+   im->pixels = malloc(im->in.jinfo.output_width * im->in.jinfo.output_height * im->in.jinfo.output_components); // lgtm [cpp/integer-multiplication-cast-to-long]
    if (!im->pixels) return 1;
 
    im->lines = malloc(im->in.jinfo.output_height * sizeof(char *));

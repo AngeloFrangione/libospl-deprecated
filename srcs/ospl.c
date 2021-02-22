@@ -23,27 +23,44 @@
 #include <errno.h>
 #include <stdlib.h>
 
-char *enum_error(int error_code)
+char *ospl_enum_error(int error_code)
 {
+	if (error_code < -1000)
+	{
+		return strerror(error_code + 1000);
+	}
 	switch (error_code)
 	{
 		case SUCCESS:
 			return NULL;
-		case EAEXISTS :
-			return "the element already exists\n";
-		case EDBFAIL :
+		case ERR_EXISTS :
+			return "the file or element already exists\n";
+		case ERR_DB :
 			return "something went wrong with the database\n";
-		case EERRNO :
-			return strerror(errno);
-		case ENOTFOUND :
-			return "element not found\n";
-		case ENOSUPPORT :
-			return "not supported\n";
-		case ETHUMBFAIL :
+		case ERR_NOT_FOUND :
+			return "file or element not found\n";
+		case ERR_NOT_SUPPORTED :
+			return "image not supported\n";
+		case ERR_THUMB :
 			return "something went wrong with the thumbnail creation\n";
-		case EHASHFAIL :
-			return "something went wrong with the md5 hash\n";
+		case ERR_PHO_NF :
+			return "photo id provided not found in database\n";
+		case ERR_ALB_NF :
+			return "album id provided not found in database\n";
 		default :
 			return "unknown error\n";
 	}
+}
+
+void free_import_status(t_import_status **status)
+{
+	t_import_status *tmp = *status;
+
+	while (tmp->path)
+	{
+		free(tmp->path);
+		tmp->path = NULL;
+		tmp++;
+	}
+	free(*status);
 }

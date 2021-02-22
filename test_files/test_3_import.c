@@ -8,7 +8,7 @@
 int main(void)
 {
 	struct timeval nstime;
-	char tmp[300] = {0};
+	char tmp[4096] = {0};
 	char lib_name[50];
 
 	gettimeofday(&nstime, NULL);
@@ -21,7 +21,7 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_import_photo(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg") < 0)
+	if (ospl_import_photo(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg") != 1)
 	{
 		printf("Error executing ospl_import_photo\n");
 		return 1;

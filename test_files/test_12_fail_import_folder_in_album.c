@@ -9,7 +9,7 @@
 int main(void)
 {
 	struct timeval nstime;
-	char tmp[300] = {0};
+	char tmp[4096] = {0};
 	char lib_name[50];
 
 	gettimeofday(&nstime, NULL);
@@ -27,7 +27,7 @@ int main(void)
 		printf("error executing ospl_album_create\n");
 		return 0;
 	}
-	if (ospl_import_folder_in_album(lib_name, "../test_files/not/", 1) >= 0)
+	if (ospl_import_folder_in_album(lib_name, "../test_files/not/", 1))
 	{
 		printf("no error executing ospl_import_folder_in_album\n");
 		return 0;

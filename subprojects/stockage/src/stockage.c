@@ -18,15 +18,6 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-/**
- * \file sqlitewrapper.c
- * \brief This file contains the sqlite3 wrapper
- * \author Angelo Frangione
- *
- * the sqlite3 wrapper for ospl contains all functions needed
- * for communicating with the sqlit3 database
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,10 +25,6 @@
 #include <sqlite3.h>
 #include "stockage.h"
 
-int get_last_insert_rowid(sqlite3 *sqlite)
-{
-	return sqlite3_last_insert_rowid(sqlite);
-}
 
 /**
  * \brief Checks sqlite return
@@ -48,7 +35,7 @@ int get_last_insert_rowid(sqlite3 *sqlite)
  * \param db database data structur
  * \return 0 if success, or the sqlite error code if failed
  */
-int check_sqlite_return(int rc, t_db *db, char *query)
+static int check_sqlite_return(int rc, t_db *db, char *query)
 {
 	if (rc != SQLITE_OK && rc != SQLITE_ROW && rc != SQLITE_DONE)
 	{
@@ -60,38 +47,12 @@ int check_sqlite_return(int rc, t_db *db, char *query)
 	return 0;
 }
 
-/**
- * \brief Create connection to the database in read write / transaction mode
- *
- * Create connection to the database in read and write mode.
- * This start a sql transaction, need to be closed with stockage_commit()
- * \param db database data structur
- * \return the sqlite return code;
- */
-int stockage_init(t_db *db)
+int stockage_get_last_insert_rowid(sqlite3 *sqlite)
 {
-	int rc;
-
-	rc = sqlite3_open_v2(db->path, &db->db, SQLITE_OPEN_READWRITE | 
-							SQLITE_OPEN_FULLMUTEX, NULL);
-	check_sqlite_return(rc, db, "empty");
-	rc = sqlite3_exec(db->db, JOURNAL_MODE_MEMORY, 0, 0, NULL);
-	check_sqlite_return(rc, db, "empty");
-	rc = sqlite3_exec(db->db, SYNCRONOUS_OFF, 0, 0, NULL);
-	check_sqlite_return(rc, db, "empty");
-	rc = sqlite3_exec(db->db, "BEGIN TRANSACTION", NULL, NULL, NULL);
-	return check_sqlite_return(rc, db, "BEGIN TRANSACTION");
+	return sqlite3_last_insert_rowid(sqlite);
 }
 
-/**
- * \brief Create an empty ospl databse
- *
- * Creates the whole tables needed for ospl into the databases.
- * Creates the database file if it doesn't exists
- * \param path path to the db file
- * \return the sqlite return code;
- */
-int create_database(char *path)
+int stockage_create_db(char *path)
 {
 	sqlite3 		*db;
 	int				rc;
@@ -122,19 +83,24 @@ int create_database(char *path)
 		return -1;
 	}
 	sqlite3_close(db);
-	return rc;
+	return 0;
 }
 
-/**
- * \brief executes any writing query
- *
- * executes any query that writes into an initiated database
- * insert, delete, update...
- *
- * \param query pointer to the SQL query
- * \param db database data structure
- * \return the sqlite return code;
- */
+int stockage_init(t_db *db)
+{
+	int rc;
+
+	rc = sqlite3_open_v2(db->path, &db->db, SQLITE_OPEN_READWRITE | 
+							SQLITE_OPEN_FULLMUTEX, NULL);
+	check_sqlite_return(rc, db, "empty");
+	rc = sqlite3_exec(db->db, JOURNAL_MODE_MEMORY, 0, 0, NULL);
+	check_sqlite_return(rc, db, "empty");
+	rc = sqlite3_exec(db->db, SYNCRONOUS_OFF, 0, 0, NULL);
+	check_sqlite_return(rc, db, "empty");
+	rc = sqlite3_exec(db->db, "BEGIN TRANSACTION", NULL, NULL, NULL);
+	return check_sqlite_return(rc, db, "BEGIN TRANSACTION");
+}
+
 int stockage_query_write(char *query, t_db *db)
 {
 	int rc;
@@ -143,20 +109,6 @@ int stockage_query_write(char *query, t_db *db)
 	return check_sqlite_return(rc, db, query);
 }
 
-/**
- * \brief executes any reading query
- *
- * executes any reading query and sends the rows to a callback function
- * Additionally this function takes a data parameter for storing the result
- * (select...)
- *
- * \param query pointer to the SQL query
- * \param db database data structure
- * \param callback callback function should be prototyped with these arguments:
- * callback(void *data, int argc, char **argv, char **column_name)
- * \param data data that will be passed to the callback function
- * \return the sqlite return code;
- */
 int stockage_query_read(char *query, t_db *db, int callback(), void *data)
 {
 	int rc;
@@ -165,17 +117,6 @@ int stockage_query_read(char *query, t_db *db, int callback(), void *data)
 	return check_sqlite_return(rc, db, query);
 }
 
-/**
- * \brief finalizes a transaction connection and writes data to the disk
- *
- * this function should be called after every use of stockage_init();
- * and of course after you read and wrote all necessary data.
- * In a sqlite transaction, if the commit fails because of any reason (such as
- * power loss, system crash) no previous query will be saved.
- *
- * \param db database data structure
- * \return the sqlite return code;
- */
 int stockage_commit(t_db *db)
 {
 	int rc;
@@ -186,91 +127,24 @@ int stockage_commit(t_db *db)
 	return check_sqlite_return(rc, db, "empty");
 }
 
-/**
- * \brief high level interface for reading data from db
- *
- * this function is a wrapper of the wrapper, by default it will commit every
- * query. if you don't want this behavior you need to set the transaction 
- * variable into the t_db structure to 1; it will be set to two after first 
- * transaction sucessfully sent. to commit you will need to set the commit 
- * variable to 1 in the t_db parameter.
- * 
- * \param db database data structure
- * \param query read query (select...)
- * \param callback callback function should be prototyped with these arguments:
- * callback(void *data, int argc, char **argv, char **column_name)
- * \param value the data argument passed to the callback function
- */
 int stockage_read(t_db *db, char *query, int callback(), void *value)
 {
-	int rc;
-
-	if (db->transaction > 1 && !db->commit)
-	{
-		rc = stockage_query_read(query, db, callback, value);
-	}
-	else if (!db->transaction && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_read(query, db, callback, value);
-		rc = stockage_commit(db);
-	}
-	else if (db->transaction == 1 && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_read(query, db, callback, value);
-		rc = db->transaction++;
-	}
-	else if (db->commit && db->transaction)
-	{
-		rc = stockage_query_read(query, db, callback, value);
-		rc = stockage_commit(db);
-		rc = db->transaction = 0;
-	}
-	else
+	if (check_sqlite_return(stockage_init(db), db, query))
 		return -1;
-	return check_sqlite_return(rc, db, query);
+	if (check_sqlite_return(stockage_query_read(query, db, callback, value), db, query))
+		return -1;
+	if (check_sqlite_return(stockage_commit(db), db, query))
+		return -1;
+	return 0;
 }
 
-/**
- * \brief high level interface for writing data in db
- *
- * this function is a wrapper of the wrapper, by default it will commit every
- * query. if you don't want this behavior you need to set the transaction 
- * variable into the t_db structure to 1; it will be set to two after first 
- * transaction sucessfully sent. to commit you will need to set the commit 
- * variable to 1 in the t_db parameter.
- * 
- * \param db database data structure
- * \param query read query (insert, update, delete...)
- */
 int stockage_write(t_db *db, char *query)
 {
-	int rc;
-
-	if (db->transaction > 1 && !db->commit)
-	{
-		rc = stockage_query_write(query, db);
-	}
-	else if (!db->transaction && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_write(query, db);
-		rc = stockage_commit(db);
-	}
-	else if (db->transaction == 1 && !db->commit)
-	{
-		rc = stockage_init(db);
-		rc = stockage_query_write(query, db);
-		rc = db->transaction++;
-	}
-	else if (db->commit && db->transaction)
-	{
-		rc = stockage_query_write(query, db);
-		rc = stockage_commit(db);
-		rc = db->transaction = 0;
-	}
-	else
+	if (check_sqlite_return(stockage_init(db), db, query))
 		return -1;
-	return check_sqlite_return(rc, db, query);
+	if (check_sqlite_return(stockage_query_write(query, db), db, query))
+		return -1;
+	if (check_sqlite_return(stockage_commit(db), db, query))
+		return -1;
+	return 0;
 }

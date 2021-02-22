@@ -8,7 +8,7 @@
 int main(void)
 {
 	struct timeval nstime;
-	char tmp[300] = {0};
+	char tmp[4096] = {0};
 	char lib_name[50];
 
 	gettimeofday(&nstime, NULL);
@@ -21,7 +21,7 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 0;
 	}
-	if (ospl_import_folder(lib_name, "../test_files/not/") >= 0)
+	if (ospl_import_folder(lib_name, "../test_files/not/"))
 	{
 		printf("no error executing ospl_import_folder\n");
 		return 0;
