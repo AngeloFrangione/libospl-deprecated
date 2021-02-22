@@ -16,7 +16,7 @@ Let's help us to make this photo library the best open source solution !
   Each line should be prefixed with the type of change you made like this : `[ADD]`, `[FIX]`, ...
 * We use git flow. Take a look at [this](https://medium.com/@muneebsajjad/git-flow-explained-quick-and-simple-7a753313572f) article about git-flow
 * For build instructions see [BUILD.md](https://github.com/AngeloFrangione/libospl/blob/master/BUILD.md)
-
+* We have a documentation that explains most of the functions behaviors [here](https://angelofrangione.github.io/libospl/reference)
 ### Subprojects
 There are multiple modules in the subproject folder, for now, there is the thumbnailer module, and the interface between sqlite (stockage) module. Theses two meant to be upgradable without modifying the main code of the library. For example, the thumbnailer has a generic thumbnail creation function that determines the image format and create automaticly the thumbnail. So adding a supported format shouldn't affect libospl
 
@@ -28,13 +28,7 @@ There is also a .sql file at the [root directory](https://github.com/AngeloFrang
 
 ## Milestones
 
-* First step  
- _The ability to add files to the library and also exporting them. (create the thumbnail, import all exif into the database)_
- _Supporting at least two or three image formats such as jpeg, png and raw_
-* Second step  
-  _The ability to group images to albums (and folders), the ability to remove files from your ospl_
-* Third step  
-  _not defined_
+You can look at the current milestones [here](https://github.com/AngeloFrangione/libospl/milestones)
 
 ## Big ideas
 * For all awesome ideas look at [IDEAS.md](https://github.com/AngeloFrangione/libospl/blob/master/IDEAS.md) 
