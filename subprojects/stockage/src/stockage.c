@@ -18,15 +18,6 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-/**
- * \file sqlitewrapper.c
- * \brief This file contains the sqlite3 wrapper
- * \author Angelo Frangione
- *
- * the sqlite3 wrapper for ospl contains all functions needed
- * for communicating with the sqlit3 database
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,10 +25,6 @@
 #include <sqlite3.h>
 #include "stockage.h"
 
-int get_last_insert_rowid(sqlite3 *sqlite)
-{
-	return sqlite3_last_insert_rowid(sqlite);
-}
 
 /**
  * \brief Checks sqlite return
@@ -48,7 +35,7 @@ int get_last_insert_rowid(sqlite3 *sqlite)
  * \param db database data structur
  * \return 0 if success, or the sqlite error code if failed
  */
-int check_sqlite_return(int rc, t_db *db, char *query)
+static int check_sqlite_return(int rc, t_db *db, char *query)
 {
 	if (rc != SQLITE_OK && rc != SQLITE_ROW && rc != SQLITE_DONE)
 	{
@@ -60,15 +47,12 @@ int check_sqlite_return(int rc, t_db *db, char *query)
 	return 0;
 }
 
-/**
- * \brief Create an empty ospl databse
- *
- * Creates the whole tables needed for ospl into the databases.
- * Creates the database file if it doesn't exists
- * \param path path to the db file
- * \return the sqlite return code;
- */
-int create_database(char *path)
+int stockage_get_last_insert_rowid(sqlite3 *sqlite)
+{
+	return sqlite3_last_insert_rowid(sqlite);
+}
+
+int stockage_create_db(char *path)
 {
 	sqlite3 		*db;
 	int				rc;
@@ -132,7 +116,6 @@ int stockage_query_read(char *query, t_db *db, int callback(), void *data)
 	rc = sqlite3_exec(db->db, query, callback, data, NULL);
 	return check_sqlite_return(rc, db, query);
 }
-
 
 int stockage_commit(t_db *db)
 {
