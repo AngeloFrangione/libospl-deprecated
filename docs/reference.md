@@ -52,6 +52,8 @@ initiates a transaction
 finalizes a transaction
 - **[`stockage_create_db`](/{{ site.baseurl }}/reference/stockage/create_db)**  
 creates an empty ospl database file
+- **[`stockage_get_last_insert_rowid`](/{{ site.baseurl }}/reference/stockage/get_last_insert_rowid)**  
+returns the last insert row id
 
 
 
