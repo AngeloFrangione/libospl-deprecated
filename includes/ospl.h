@@ -81,6 +81,7 @@ void free_import_status(t_import_status **status);
 // Library related functions
 int ospl_create_library(char *library);
 int ospl_import_photo(char *library, char *path);
+int ospl_import_photo_t(char *library, char *path, t_db *transaction_db);
 int ospl_import_photo_in_album(char *library, char *path, int album);
 t_import_status *ospl_import_folder(char *library, char *path);
 t_import_status *ospl_import_folder_in_album(char *library, char *path, int album);
@@ -101,6 +102,7 @@ int ospl_photo_delete(char *library, int photo);
 
 ///// Database common usage function
 /// PHOTOS ///
+int db_insert_photo_t(t_db *db, t_photos *pho);
 int db_insert_photo(t_db *db, t_photos *pho);
 int db_select_photo(t_db *db, int id, t_photos *pho);
 int db_select_photo_multiple(t_db *db, int id, t_photos *pho);

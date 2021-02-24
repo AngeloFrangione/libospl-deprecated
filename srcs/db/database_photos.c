@@ -56,6 +56,16 @@ static int _callback_photos(t_photos *pho, int ac, char **av, char **column)
 
 int db_insert_photo(t_db *db, t_photos *pho)
 {
+	int r;
+	stockage_init(db);
+	r = db_insert_photo_t(db, pho);
+	stockage_commit(db);
+	return r;
+}
+
+
+int db_insert_photo_t(t_db *db, t_photos *pho)
+{
 	char	query[BUFFER_SIZE] = "insert into photos (hash, original_name, "
 	"new_name, import_datetime, random, import_year, import_month, import_day, "
 	"import_hour, import_minute, import_second, exif_height, exif_width, "
@@ -68,8 +78,8 @@ int db_insert_photo(t_db *db, t_photos *pho)
 		pho->import_day, pho->import_hour, pho->import_minute,
 		pho->import_second, pho->exif_height, pho->exif_width,
 		pho->exif_brand, pho->exif_peripheral);
-	if (stockage_write(db, query))
-		return 1;
+		if (stockage_query_write(query, db))
+			return 1;
 	return 0;
 }
 
