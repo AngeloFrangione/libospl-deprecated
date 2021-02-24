@@ -77,8 +77,12 @@ static int get_info(t_db *db, t_photos *pho, char *path, char *library)
 	fill_tdb(db, library);
 	return SUCCESS;
 }
-
 int ospl_import_photo(char *library, char *path)
+{
+	return ospl_import_photo_t(library, path, NULL);
+}
+
+int ospl_import_photo_t(char *library, char *path, t_db *transaction_db)
 {
 	t_db db = {0};
 	t_photos pho = {0};
@@ -90,9 +94,16 @@ int ospl_import_photo(char *library, char *path)
 	if(!is_supported(path))
 		return ERR_NOT_SUPPORTED;
 	get_info(&db, &pho, path, library);
-	if (db_insert_photo(&db, &pho))
-		return ERR_DB;
-
+	if (!transaction_db)
+	{
+		if (db_insert_photo(&db, &pho))
+			return ERR_DB;
+	}
+	else
+	{
+		if(db_insert_photo_t(transaction_db, &pho))
+			return ERR_DB;
+	}
 	cwk_path_join(library, "/photos/import", import_path, sizeof(import_path));
 	cwk_path_join(library, "/thumbnails/", thumb_path, sizeof(thumb_path));
 	cwk_path_join(thumb_path, pho.new_name, thumb_path, sizeof(thumb_path));
@@ -101,7 +112,11 @@ int ospl_import_photo(char *library, char *path)
 	if (copy_file(path, import_path) < 0)
 		return -1000 - errno;
 	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
-	return stockage_get_last_insert_rowid(db.db);
+	if (!transaction_db)
+		return stockage_get_last_insert_rowid(db.db);
+	else
+		return stockage_get_last_insert_rowid(transaction_db->db);
+
 }
 
 int ospl_import_photo_in_album(char *library, char *path, int album)
@@ -126,6 +141,7 @@ t_import_status *ospl_import_folder(char *library, char *path)
 	DIR *d;
 	int i = 0;
 	int j = 1;
+	t_db transaction_db = {0};
 	struct dirent *dir;
 	char tmp[PATH_LEN_BUFFER] = { 0 };
 	t_import_status *status = NULL;
@@ -133,6 +149,8 @@ t_import_status *ospl_import_folder(char *library, char *path)
 
 	if (!(d = opendir(path)))
 		return NULL;
+	fill_tdb(&transaction_db, library);
+	stockage_init(&transaction_db);
 	while ((dir = readdir(d)))
 	{
 		if (!(i % 32000))
@@ -155,9 +173,10 @@ t_import_status *ospl_import_folder(char *library, char *path)
 			free_import_status(&status);
 			return NULL;
 		}
-		status[i].id = ospl_import_photo(library, tmp);
+		status[i].id = ospl_import_photo_t(library, tmp, &transaction_db);
 		++i;
 	}
+	stockage_commit(&transaction_db);
 	if (status)
 		status[i].path = NULL;
 	closedir(d);
