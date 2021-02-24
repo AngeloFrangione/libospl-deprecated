@@ -4,8 +4,6 @@ project('thumbnailer', 'c')
 # Dependencies
 deps = [dependency('libjpeg'),
 		dependency('libexif'),
-		dependency('threads'),
-		dependency('sqlite3'),
 		meson.get_compiler('c').find_library('magic')]
 
 # Library
