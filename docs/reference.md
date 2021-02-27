@@ -5,6 +5,8 @@
 	create an ospl library.
 - **[`ospl_import_photo`](/{{ site.baseurl }}/reference/ospl/import_photo)**  
 	import a photo into library
+- **[`ospl_import_photo_t`](/{{ site.baseurl }}/reference/ospl/import_photo_t)**  
+	import a photo into library
 - **[`ospl_import_photo_in_album`](/{{ site.baseurl }}/reference/ospl/import_photo_in_album)**  
 	import a photo directly into an existing album
 - **[`ospl_import_folder`](/{{ site.baseurl }}/reference/ospl/import_folder)**  

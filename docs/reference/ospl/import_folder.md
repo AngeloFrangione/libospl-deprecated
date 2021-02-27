@@ -68,7 +68,7 @@ You can free the entire array by calling this function:
 ```c
  void free_import_status(t_import_status **status);
 ```
-the `id` element from the structure is filled with the return value of **[`ospl_import_photo`](/{{ site.baseurl }}/reference/ospl_import_photo)**
+the `id` element from the structure is filled with the return value of **[`ospl_import_photo_t`](/{{ site.baseurl }}/reference/ospl_import_photo_t)**
 the `path` element from the structure is filled with the path of the file that ospl imported.
 
 
@@ -76,10 +76,7 @@ the `path` element from the structure is filled with the path of the file that o
 
 | `version` | `description`                                                       |
 | --------- | ------------------------------------------------------------------- |
+| `v0.2.0`  | using sqlite transaction mode to speed up the process               |
 | `v0.1.1`  | adapting to the new error return system & return `t_status_import*` |
 | `v0.1.0`  | the function is introduced                                          |
 
-
-## Enhancements
-
-- This function should use sqlite transactions to speed up the import process. (scheduled for `v0.2.0`)
