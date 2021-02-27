@@ -1,9 +1,14 @@
 # Project
 project('thumbnailer', 'c')
 
+
+# Subprojects
+exif_proj = subproject('libexif')
+exif = exif_proj.get_variable('exif_dep')
+
 # Dependencies
 deps = [dependency('libjpeg'),
-		dependency('libexif'),
+		exif,
 		meson.get_compiler('c').find_library('magic')]
 
 # Library
