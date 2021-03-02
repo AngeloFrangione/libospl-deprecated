@@ -21,13 +21,13 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #if defined(_WIN32)
-# include <Windows.h>
+# include <windows.h>
 #else
 # include <unistd.h>
 #endif
 #if defined(__APPLE__) || defined(__FreeBSD__)
 # include <copyfile.h>
-#else
+#elif defined (__UNIX__)
 # include <sys/sendfile.h>
 #endif
 #include <dirent.h>
@@ -64,11 +64,10 @@ int create_directory(char *path)
 int hard_link(char *current, char * new)
 {
 	#if defined(_WIN32)
-	return CreateHardLink(new, current);
+	return CreateHardLink(new, current, NULL);
 	#else
 	return link(current, new);
 	#endif
-	
 }
 
 int remove_dir(char *path)
@@ -98,30 +97,31 @@ int remove_dir(char *path)
 
 int copy_file(char* source, char* destination)
 {    
-	int input, output;
-	if ((input = open(source, O_RDONLY)) == -1)
-	{
-		return -1;
-	}    
-	if ((output = creat(destination, 0660)) == -1)
-	{
-		close(input);
-		return -1;
-	}
-
-	#if defined(__APPLE__) || defined(__FreeBSD__)
-	//fcopyfile works on FreeBSD and OS X 10.5+ 
-	int result = fcopyfile(input, output, 0, COPYFILE_ALL);
-	#else
-	//sendfile will work with non-socket output (i.e. regular file) on Linux 2.6.33+
-	off_t bytesCopied = 0;
-	struct stat fileinfo = {0};
-	fstat(input, &fileinfo);
-	long result = sendfile(output, input, &bytesCopied, fileinfo.st_size);
+	#if defined(__APPLE__) || defined(__FreeBSD__) || defined(__UNIX__)
+		int input, output;
+		if ((input = open(source, O_RDONLY)) == -1)
+			return -1;
+		if ((output = creat(destination, 0660)) == -1)
+		{
+			close(input);
+			return -1;
+		}
 	#endif
-	close(input);
-	close(output);
-	return (int)result;
+	#if defined(__APPLE__) || defined(__FreeBSD__)
+		int result = fcopyfile(input, output, 0, COPYFILE_ALL);
+	#elif defined(__UNIX__)
+		off_t bytesCopied = 0;
+		struct stat fileinfo = {0};
+		fstat(input, &fileinfo);
+		long result = sendfile(output, input, &bytesCopied, fileinfo.st_size);
+	#elif defined (_WIN32)
+		return CopyFile(source, destination, 0);
+	#endif
+	#if defined(__APPLE__) || defined(__FreeBSD__) || defined(__UNIX__)
+		close(input);
+		close(output);
+		return (int)result;
+	#endif
 }
 
 /**
@@ -172,7 +172,7 @@ int is_supported(char *src)
 {
 	char **p = SUPPORTED_IMAGES;
 	char *magic = NULL;
-	
+
 	if (get_magic(src, &magic))
 		return 0;
 	for (int i = 0; i < NB_SUPPORTED_IMAGES; i++)
