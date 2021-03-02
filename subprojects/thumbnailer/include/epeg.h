@@ -48,25 +48,25 @@ struct _Epeg_Thumbnail_Info
 	char										*mimetype;
 };
 
-EAPI Epeg_Image	*epeg_file_open					(const char *file);
-EAPI Epeg_Image	*epeg_memory_open				(unsigned char *data, int size);
-EAPI Epeg_Image	*epeg_memory_open				(unsigned char *data, int size);
-EAPI void		epeg_size_get					(Epeg_Image *im, int *w, int *h);
-EAPI void		epeg_decode_size_set			(Epeg_Image *im, int w, int h);
-EAPI void		epeg_colorspace_get				(Epeg_Image *im, int *space);
-EAPI void		epeg_decode_colorspace_set		(Epeg_Image *im, Epeg_Colorspace colorspace);
-EAPI const void	*epeg_pixels_get				(Epeg_Image *im, int x, int y, int w, int h);
-EAPI void		epeg_pixels_free				(Epeg_Image *im, const void *data);
-EAPI const char	*epeg_comment_get				(Epeg_Image *im);
-EAPI void		epeg_thumbnail_comments_get		(Epeg_Image *im, Epeg_Thumbnail_Info *info);
-EAPI void		epeg_comment_set				(Epeg_Image *im, const char *comment);
-EAPI void		epeg_quality_set				(Epeg_Image *im, int quality);
-EAPI void		epeg_thumbnail_comments_enable	(Epeg_Image *im, int onoff);
-EAPI void		epeg_file_output_set			(Epeg_Image *im, const char *file);
-EAPI void		epeg_memory_output_set			(Epeg_Image *im, unsigned char **data, int *size);
-EAPI int		epeg_encode						(Epeg_Image *im);
-EAPI int		epeg_trim						(Epeg_Image *im);
-EAPI void		epeg_close						(Epeg_Image *im);
+Epeg_Image	*epeg_file_open					(const char *file);
+Epeg_Image	*epeg_memory_open				(unsigned char *data, int size);
+Epeg_Image	*epeg_memory_open				(unsigned char *data, int size);
+void		epeg_size_get					(Epeg_Image *im, int *w, int *h);
+void		epeg_decode_size_set			(Epeg_Image *im, int w, int h);
+void		epeg_colorspace_get				(Epeg_Image *im, int *space);
+void		epeg_decode_colorspace_set		(Epeg_Image *im, Epeg_Colorspace colorspace);
+const void	*epeg_pixels_get				(Epeg_Image *im, int x, int y, int w, int h);
+void		epeg_pixels_free				(Epeg_Image *im, const void *data);
+const char	*epeg_comment_get				(Epeg_Image *im);
+void		epeg_thumbnail_comments_get		(Epeg_Image *im, Epeg_Thumbnail_Info *info);
+void		epeg_comment_set				(Epeg_Image *im, const char *comment);
+void		epeg_quality_set				(Epeg_Image *im, int quality);
+void		epeg_thumbnail_comments_enable	(Epeg_Image *im, int onoff);
+void		epeg_file_output_set			(Epeg_Image *im, const char *file);
+void		epeg_memory_output_set			(Epeg_Image *im, unsigned char **data, int *size);
+int		epeg_encode						(Epeg_Image *im);
+int		epeg_trim						(Epeg_Image *im);
+void		epeg_close						(Epeg_Image *im);
 
 # ifdef __cplusplus
 }

@@ -26,7 +26,7 @@ static int get_magic(char *actual_file, char **magic)
 {
 	magic_t magic_cookie;
 
-	magic_cookie = magic_open(MAGIC_MIME_TYPE);	
+	magic_cookie = magic_open(MAGIC_MIME_TYPE);
 	if (magic_cookie == NULL)
 		return 1;
 	if (magic_load(magic_cookie, NULL) != 0)
