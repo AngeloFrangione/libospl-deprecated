@@ -18,6 +18,9 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#ifdef _WIN32
+# include <windows.h>
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include <dirent.h>
@@ -36,11 +39,12 @@
 
 static void get_time(t_current_time *ct)
 {
+	#if defined(__APPLE__) || defined(__FreeBSD__) || defined(__UNIX__)
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	struct timespec spec;
 	
-	clock_gettime(CLOCK_REALTIME, &spec);
+	clock_gettime(CLOCK_REALTIME_COARSE, &spec);
 
 	ct->Y = (unsigned int)tm.tm_year + 1900;
 	ct->M = (unsigned int)tm.tm_mon + 1;
@@ -49,6 +53,18 @@ static void get_time(t_current_time *ct)
 	ct->m = (unsigned int)tm.tm_min;
 	ct->s = (unsigned int)tm.tm_sec;
 	ct->ms = round(spec.tv_nsec / 1.0e6);
+	#endif
+	#if defined(_WIN32)
+	SYSTEMTIME wintime;
+	GetSystemTime(&wintime);
+	ct->Y = wintime.wYear;
+	ct->M = wintime.wMonth;
+	ct->d = wintime.wDay;
+	ct->h = wintime.wHour;
+	ct->m = wintime.wMinute;
+	ct->s = wintime.wSecond;
+	ct->ms = wintime.wMilliseconds;
+	#endif
 }
 
 static int get_info(t_db *db, t_photos *pho, char *path, char *library)
