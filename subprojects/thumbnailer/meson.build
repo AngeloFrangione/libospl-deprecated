@@ -6,10 +6,20 @@ project('thumbnailer', 'c')
 exif_proj = subproject('libexif')
 exif = exif_proj.get_variable('exif_dep')
 
+if not meson.is_cross_build()
+	cc = meson.get_compiler('c')
+	magic = cc.find_library('magic', required : false)
+endif
+
 # Dependencies
-deps = [dependency('libjpeg'),
-		exif,
-		meson.get_compiler('c').find_library('magic')]
+if meson.is_cross_build()
+	deps = [dependency('libjpeg'), exif]
+else
+	deps = [dependency('libjpeg'), exif, magic]
+endif
+
+
+
 
 # Library
 cargs =['-Wall', '-Wextra', '-Wno-unused-parameter', '-Wno-restrict', '-Wno-sign-compare']
