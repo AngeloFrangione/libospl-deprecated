@@ -36,8 +36,11 @@ meson . build
 cd build
 ninja
 ```
-## Windows
-Coming later
+## Windows crosscompilation with Mingw-w64
+You will need to install `mingw-w64`
+```shell
+sudo apt install mingw-w64 mingw-w64-tools 
+```
 
 ## Running tests
 After building ospl you can run the tests to ensure everything is working correctly. To do so, make sure you are in the build folder and then run this command:
