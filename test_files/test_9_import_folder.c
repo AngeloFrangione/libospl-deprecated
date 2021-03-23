@@ -49,10 +49,9 @@ int main(void)
 		}
 	}
 	free_import_status(&status);
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 1;
 	}
 	return 0;

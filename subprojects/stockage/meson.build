@@ -2,8 +2,7 @@
 project('stockage', 'c')
 
 # Dependencies
-deps = [dependency('threads'),
-		dependency('sqlite3')]
+deps = [dependency('sqlite3')]
 
 # Sources
 source =['src/stockage.c']

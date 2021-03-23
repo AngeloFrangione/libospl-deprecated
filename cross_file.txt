@@ -1,13 +1,11 @@
 [binaries]
-c = 'x86_64-w64-mingw32-gcc'
+c = 'x86_64-w64-mingw32-gcc-win32'
+strip = '/usr/bin/x86_64-w64-mingw32-strip'
 [properties]
 needs_exe_wrapper = false
-pkgconfig = 'pkg-config'
-pkg_config_libdir = '/usr/lib/pkgconfig'
-c_thumbnailer = ['mylibc', 'mylibc_dep'] 
 
 [host_machine]
 system = 'windows'
-cpu_family = 'x86'
+cpu_family = 'x86_64'
 cpu = 'i686'
 endian = 'little'

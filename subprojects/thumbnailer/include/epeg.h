@@ -5,9 +5,9 @@
 # endif
 # ifdef WIN32
 #  ifdef BUILDING_DLL
-#   define EAPI __declspec(dllexport)
+#   define EAPI
 #  else
-#   define EAPI __declspec(dllimport)
+#   define EAPI
 #  endif
 # else
 #  ifdef __GNUC__

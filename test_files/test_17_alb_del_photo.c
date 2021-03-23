@@ -88,10 +88,9 @@ int main(void)
 		printf("photo is present in album folder: %s\n", tmp);
 		return 1;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 1;
 	}
 	return 0;

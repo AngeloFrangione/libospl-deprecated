@@ -1,4 +1,13 @@
+winbuild
 build
+builddir
 install
 *.DS_Store
+test_files/ressources/empty_files/i
+sqlite-amalgamation-3340100
+jpeg-9c
 test_files/ressources/empty_files/
+packagecache
+/subprojects/*.wrap
+*.dll
+*.ini

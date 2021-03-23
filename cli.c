@@ -185,10 +185,15 @@ static int import(int ac, char **av)
 		initiate_path(av[0]);
 		if (library_exists(av[0]))
 		{
-			if (ospl_import_photo(av[0], av[2]) >= 0)
+			int r;
+			r = ospl_import_photo(av[0], av[2]);
+			if (r > 0)
 				printf("photo imported with success\n");
 			else
+			{
 				printf("failed importing photo\n");
+				printf("%s\n", ospl_enum_error(r));
+			}
 		}
 		else
 			printf("Library not found: %s\n", av[0]);

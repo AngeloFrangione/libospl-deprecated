@@ -21,17 +21,15 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #if defined(_WIN32)
-# include <Windows.h>
+# include <windows.h>
 #else
+# include <sys/sendfile.h>
 # include <unistd.h>
 #endif
 #if defined(__APPLE__) || defined(__FreeBSD__)
 # include <copyfile.h>
-#else
-# include <sys/sendfile.h>
 #endif
 #include <dirent.h>
-#include <magic.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -64,11 +62,10 @@ int create_directory(char *path)
 int hard_link(char *current, char * new)
 {
 	#if defined(_WIN32)
-	return CreateHardLink(new, current);
+	return CreateHardLink(new, current, NULL);
 	#else
 	return link(current, new);
 	#endif
-	
 }
 
 int remove_dir(char *path)
@@ -78,7 +75,10 @@ int remove_dir(char *path)
 	char tmp[4096] = { 0 };
 
 	if (!(d = opendir(path)))
+	{
+		perror(NULL);
 		return 1;
+	}
 	else
 	{
 		while ((dir = readdir(d)))
@@ -88,29 +88,42 @@ int remove_dir(char *path)
 			cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
 			if(folder_exists(tmp))
 				remove_dir(tmp);
-			remove(tmp);
+			printf("removing %s\n", tmp);
+			#ifdef _WIN32
+				DeleteFileA(tmp);
+			#else
+				remove(tmp);
+			#endif
 		}
-		remove(path);
+		#ifdef _WIN32
+			RemoveDirectoryA(path);
+		#else
+			remove(path);
+		#endif
 		closedir(d);
 		return 0;
 	}
 }
 
+#if defined (_WIN32)
+int copy_file(char* source, char* destination)
+{
+	return CopyFile(source, destination, 0);
+}
+#else
 int copy_file(char* source, char* destination)
 {    
+
 	int input, output;
 	if ((input = open(source, O_RDONLY)) == -1)
-	{
 		return -1;
-	}    
 	if ((output = creat(destination, 0660)) == -1)
 	{
 		close(input);
 		return -1;
 	}
-
 	#if defined(__APPLE__) || defined(__FreeBSD__)
-	//fcopyfile works on FreeBSD and OS X 10.5+ 
+	//fcopyfile works on FreeBSD and OS X 10.5+
 	int result = fcopyfile(input, output, 0, COPYFILE_ALL);
 	#else
 	//sendfile will work with non-socket output (i.e. regular file) on Linux 2.6.33+
@@ -123,7 +136,7 @@ int copy_file(char* source, char* destination)
 	close(output);
 	return (int)result;
 }
-
+#endif
 /**
   * \brief Checks if file the given in parameter exists
   *
@@ -159,62 +172,6 @@ int folder_exists(char *path)
 	}
 	else
 		return 0;
-}
-
-/**
-  * \brief Check if an image is supported
-  *
-  * \param src path of the image to check
-  * \return the index of the MimeType + 1 if supported
-  * \return 0 if not supported
-  */
-int is_supported(char *src)
-{
-	char **p = SUPPORTED_IMAGES;
-	char *magic = NULL;
-	
-	if (get_magic(src, &magic))
-		return 0;
-	for (int i = 0; i < NB_SUPPORTED_IMAGES; i++)
-	{
-		if (!strcmp(p[i], magic))
-		{
-			free(magic);
-			return i + 1;
-		}
-	}
-	free(magic);
-	return 0;
-}
-
-/**
-  * \brief Get the mime type from file with the magic number
-  *
-  * \param file_path path of the file to look for the magic
-  * \param magic buffer were the mimetype will be put 
-  * in (don't have to be allocaded)
-  * \return 1 if an error occured
-  * \return 0 if the mime type was succefully put into magic
-  */
-int get_magic(char *file_path, char **magic)
-{
-	magic_t magic_cookie;
-
-	magic_cookie = magic_open(MAGIC_MIME_TYPE);	
-	if (!magic_cookie)
-	{
-		printf("unable to initialize magic library\n");
-		return 1;
-	}
-	if (magic_load(magic_cookie, NULL))
-	{
-		printf("cannot load magic database - %s\n", magic_error(magic_cookie));
-		magic_close(magic_cookie);
-		return 1;
-	}
-	*magic = strdup(magic_file(magic_cookie, file_path));
-	magic_close(magic_cookie);
-	return 0;
 }
 
 /**

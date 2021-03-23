@@ -77,10 +77,9 @@ int main(void)
 		printf("ospl_album_list_photos doesn't get the right photo id. expected: 1 result: %d\n", pho.id);
 		return 1;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 1;
 	}
 	return 0;

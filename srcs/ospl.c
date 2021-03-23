@@ -27,7 +27,9 @@ char *ospl_enum_error(int error_code)
 {
 	if (error_code < -1000)
 	{
-		return strerror(error_code + 1000);
+		error_code += 1000;
+		error_code *= -1;
+		return strerror(error_code);
 	}
 	switch (error_code)
 	{
@@ -47,6 +49,8 @@ char *ospl_enum_error(int error_code)
 			return "photo id provided not found in database\n";
 		case ERR_ALB_NF :
 			return "album id provided not found in database\n";
+		case ERR_WIN_REM :
+			return "an error occured while deleting directory with win32 api\n";
 		default :
 			return "unknown error\n";
 	}

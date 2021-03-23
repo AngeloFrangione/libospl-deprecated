@@ -129,7 +129,10 @@ int ospl_album_delete(char *library, int album)
 	cwk_path_join(tmp, alb.name, tmp, sizeof(tmp));
 
 	if(!db_delete_album(&db, album))
-		remove_dir(tmp);
+	{
+		printf("removing dir {%s}\n", tmp);
+		return - remove_dir(tmp);
+	}
 	else
 		return -1000 - errno;
 	return SUCCESS;

@@ -8,7 +8,6 @@
 int main(void)
 {
 	struct timeval nstime;
-	char tmp[4096] = {0};
 	char lib_name[50];
 	int ret;
 
@@ -32,10 +31,9 @@ int main(void)
 		printf("wrong error returned executing ospl_photo_delete(expected: %d): %d\n",ERR_PHO_NF, ret);
 		return 0;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 0;
 	}
 	return 1;

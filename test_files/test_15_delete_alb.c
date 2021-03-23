@@ -26,9 +26,11 @@ int main(void)
 		printf("error executing ospl_album_create\n");
 		return 1;
 	}
-	if (ospl_album_delete(lib_name, 1) < 0)
+	r = ospl_album_delete(lib_name, 1);
+	if (r < 0)
 	{
 		printf("executing ospl_album_delete failed\n");
+		printf("%s", ospl_enum_error(r));
 		return 1;
 	}
 	sprintf(tmp, "%s/photos/Vacances", lib_name);
@@ -37,10 +39,9 @@ int main(void)
 		printf("album folder still here altho it was deleted: %s\n", tmp);
 		return 1;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 1;
 	}
 	return 0;

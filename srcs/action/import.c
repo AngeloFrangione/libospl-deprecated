@@ -18,6 +18,9 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
+#ifdef _WIN32
+# include <windows.h>
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include <dirent.h>
@@ -36,11 +39,12 @@
 
 static void get_time(t_current_time *ct)
 {
+	#if defined(__APPLE__) || defined(__FreeBSD__) || defined(__UNIX__)
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	struct timespec spec;
 	
-	clock_gettime(CLOCK_REALTIME, &spec);
+	clock_gettime(CLOCK_REALTIME_COARSE, &spec);
 
 	ct->Y = (unsigned int)tm.tm_year + 1900;
 	ct->M = (unsigned int)tm.tm_mon + 1;
@@ -49,6 +53,18 @@ static void get_time(t_current_time *ct)
 	ct->m = (unsigned int)tm.tm_min;
 	ct->s = (unsigned int)tm.tm_sec;
 	ct->ms = round(spec.tv_nsec / 1.0e6);
+	#endif
+	#if defined(_WIN32)
+	SYSTEMTIME wintime;
+	GetSystemTime(&wintime);
+	ct->Y = wintime.wYear;
+	ct->M = wintime.wMonth;
+	ct->d = wintime.wDay;
+	ct->h = wintime.wHour;
+	ct->m = wintime.wMinute;
+	ct->s = wintime.wSecond;
+	ct->ms = wintime.wMilliseconds;
+	#endif
 }
 
 static int get_info(t_db *db, t_photos *pho, char *path, char *library)
@@ -88,35 +104,25 @@ int ospl_import_photo_t(char *library, char *path, t_db *transaction_db)
 	t_photos pho = {0};
 	char import_path[PATH_LEN_BUFFER] = {0};
 	char thumb_path[PATH_LEN_BUFFER] = {0};
-
 	if (!file_exists(path))
 		return ERR_NOT_FOUND;
 	if(!is_supported(path))
 		return ERR_NOT_SUPPORTED;
 	get_info(&db, &pho, path, library);
-	if (!transaction_db)
-	{
-		if (db_insert_photo(&db, &pho))
-			return ERR_DB;
-	}
-	else
-	{
-		if(db_insert_photo_t(transaction_db, &pho))
-			return ERR_DB;
-	}
+	if (db_insert_photo(&db, &pho))
+		return ERR_DB;
+	int id = stockage_get_last_insert_rowid(db.db);
 	cwk_path_join(library, "/photos/import", import_path, sizeof(import_path));
 	cwk_path_join(library, "/thumbnails/", thumb_path, sizeof(thumb_path));
 	cwk_path_join(thumb_path, pho.new_name, thumb_path, sizeof(thumb_path));
 	cwk_path_join(import_path, pho.new_name, import_path, sizeof(import_path));
 
 	if (copy_file(path, import_path) < 0)
+	{
 		return -1000 - errno;
+	}
 	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
-	if (!transaction_db)
-		return stockage_get_last_insert_rowid(db.db);
-	else
-		return stockage_get_last_insert_rowid(transaction_db->db);
-
+	return id;
 }
 
 int ospl_import_photo_in_album(char *library, char *path, int album)

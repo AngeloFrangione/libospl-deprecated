@@ -9,24 +9,23 @@ run_target('empty_files',
 add_global_arguments('-DDEBUG=TRUE', language: 'c')
 
 # Subprojects
-thumbnailer_proj = subproject('thumbnailer')
-thumbnailer = thumbnailer_proj.get_variable('thumbnailer_dep')
 stockage_proj = subproject('stockage')
 stockage = stockage_proj.get_variable('stockage_dep')
 md5_proj = subproject('md5')
 md5 = md5_proj.get_variable('md5_dep')
+thumbnailer_proj = subproject('thumbnailer')
+thumbnailer = thumbnailer_proj.get_variable('thumbnailer_dep')
 
 cwalk_proj = subproject('cwalk')
 cwalk = cwalk_proj.get_variable('cwalk_dep')
 
 # Dependencies
-deps = [thumbnailer,
-		stockage,
+deps = [stockage,
 		cwalk,
 		md5,
 		dependency('threads'),
-		meson.get_compiler('c').find_library('m'),
-		meson.get_compiler('c').find_library('magic')]
+		thumbnailer,
+		meson.get_compiler('c').find_library('m')]
 
 source =['srcs/ospl.c', 'srcs/common.c', 
 		'srcs/db/database_albums.c',

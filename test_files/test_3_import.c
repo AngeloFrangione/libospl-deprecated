@@ -21,8 +21,10 @@ int main(void)
 		printf("lib_name: %s\n", lib_name);
 		return 1;
 	}
-	if (ospl_import_photo(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg") != 1)
+	if ((r = ospl_import_photo(lib_name, "../test_files/ressources/1b3BAEr6IJk.jpg")) != 1)
 	{
+		printf("%d: %s\n", r, ospl_enum_error(r));
+
 		printf("Error executing ospl_import_photo\n");
 		return 1;
 	}
@@ -38,10 +40,9 @@ int main(void)
 		printf("photo not present in import folder: %s\n", tmp);
 		return 1;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 1;
 	}
 	return 0;

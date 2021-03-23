@@ -21,9 +21,15 @@
 #ifndef H_THUMBNAILER
 # define H_THUMBNAILER
 # define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
+# define SUPPORTED_IMAGE_EXT (char *[]) {".jpeg", ".jpg"}
 # define NB_SUPPORTED_IMAGES 1
+# define NB_SUPPORTED_EXT 2
 
-enum {JPEG = 0, PNG = 1};
+#ifdef _WIN32
+enum {JPEG = 1, JPG = 2, PNG = 3};
+#else
+enum {JPEG = 1, PNG = 2};
+#endif
 
 enum {E_PATH = 50, E_ENCODE = 51, E_NOSUPPORT = 52};
 
@@ -31,5 +37,6 @@ enum {E_PATH = 50, E_ENCODE = 51, E_NOSUPPORT = 52};
 int create_thumbnail_jpeg(char *src, char *dst, int width);
 // Create thumbnail and guess the type of the file returns 0 if success
 int create_thumbnail(char *src, char *dst, int width);
+int is_supported(char *src);
 
 #endif

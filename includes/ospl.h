@@ -28,11 +28,8 @@
 # define LIBRARY_EXTENTION_LEN 5
 # define LIBRARY_EXTENTION ".ospl"
 # define VERSION_MAJOR "0"
-# define VERSION_MINOR "1"
-# define VERSION_REVISION "1"
-
-# define SUPPORTED_IMAGES (char *[]) {"image/jpeg"}
-# define NB_SUPPORTED_IMAGES 1
+# define VERSION_MINOR "2"
+# define VERSION_REVISION "0"
 # define TRUE 1
 # define FALSE 0
 # define PATH_LEN_BUFFER 4096
@@ -55,6 +52,7 @@ enum ERRORS
 	ERR_THUMB,			// thumbnail creation failed
 	ERR_PHO_NF,			// photo not found in db
 	ERR_ALB_NF,			// album not found in db
+	ERR_WIN_REM,		// win32 delete file error
 };
 
 typedef struct	s_current_time

@@ -17,7 +17,9 @@
 	with this program; if not, write to the Free Software Foundation, Inc.,
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
+#if defined(_WIN32)
+# include <windows.h>
+# endif
 #include <stdio.h>
 #include <string.h>
 #include <ospl.h>
@@ -63,7 +65,14 @@ int ospl_photo_delete(char *library, int photo)
 	cwk_path_join(library, "thumbnails", tmp_thumb, sizeof(tmp_thumb));
 	cwk_path_join(tmp_import, pho.new_name, tmp_import, sizeof(tmp_import));
 	cwk_path_join(tmp_thumb, pho.new_name, tmp_thumb, sizeof(tmp_thumb));
-	if (remove(tmp_import) || remove(tmp_thumb))
-		return -1000 - errno;
+	#ifdef _WIN32
+		if (!DeleteFileA(tmp_import))
+			return ERR_WIN_REM;
+		if (!DeleteFileA(tmp_thumb))
+			return ERR_WIN_REM;
+	#else
+		if (remove(tmp_import) || remove(tmp_thumb))
+			return -1000 - errno;
+	#endif
 	return SUCCESS;
 }
