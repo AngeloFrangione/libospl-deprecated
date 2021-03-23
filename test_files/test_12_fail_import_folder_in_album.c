@@ -9,7 +9,6 @@
 int main(void)
 {
 	struct timeval nstime;
-	char tmp[4096] = {0};
 	char lib_name[50];
 
 	gettimeofday(&nstime, NULL);
@@ -32,10 +31,9 @@ int main(void)
 		printf("no error executing ospl_import_folder_in_album\n");
 		return 0;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 0;
 	}
 	return 1;

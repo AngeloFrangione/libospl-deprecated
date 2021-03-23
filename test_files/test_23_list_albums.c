@@ -60,10 +60,9 @@ int main(void)
 		printf("album not listed correctly expected \"Vacances en Italie\" got: %s\n", list[0].name);
 		return 1;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 1;
 	}
 	return 0;

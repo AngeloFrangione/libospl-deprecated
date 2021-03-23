@@ -42,10 +42,9 @@ int main(void)
 		printf("No error executing ospl_import_photo\n");
 		return 0;
 	}
-	sprintf(tmp, "rm -rf %s", lib_name);
-	if (system(tmp))
+	if (remove_dir(lib_name))
 	{
-		printf("executing the system command failed\n");
+		printf("executing remove_dir function failed\n");
 		return 0;
 	}
 	if (ospl_photo_get(lib_name, 1, &pho) >= 0)
