@@ -52,6 +52,7 @@ enum ERRORS
 	ERR_THUMB,			// thumbnail creation failed
 	ERR_PHO_NF,			// photo not found in db
 	ERR_ALB_NF,			// album not found in db
+	ERR_WIN_REM,		// win32 delete file error
 };
 
 typedef struct	s_current_time

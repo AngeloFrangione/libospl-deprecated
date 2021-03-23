@@ -100,7 +100,6 @@ int ospl_import_photo(char *library, char *path)
 	t_photos pho = {0};
 	char import_path[PATH_LEN_BUFFER] = {0};
 	char thumb_path[PATH_LEN_BUFFER] = {0};
-
 	if (!file_exists(path))
 		return ERR_NOT_FOUND;
 	if(!is_supported(path))
@@ -108,16 +107,18 @@ int ospl_import_photo(char *library, char *path)
 	get_info(&db, &pho, path, library);
 	if (db_insert_photo(&db, &pho))
 		return ERR_DB;
-
+	int id = stockage_get_last_insert_rowid(db.db);
 	cwk_path_join(library, "/photos/import", import_path, sizeof(import_path));
 	cwk_path_join(library, "/thumbnails/", thumb_path, sizeof(thumb_path));
 	cwk_path_join(thumb_path, pho.new_name, thumb_path, sizeof(thumb_path));
 	cwk_path_join(import_path, pho.new_name, import_path, sizeof(import_path));
 
 	if (copy_file(path, import_path) < 0)
+	{
 		return -1000 - errno;
+	}
 	create_thumbnail(import_path, thumb_path, THUMB_HEIGHT);
-	return stockage_get_last_insert_rowid(db.db);
+	return id;
 }
 
 int ospl_import_photo_in_album(char *library, char *path, int album)

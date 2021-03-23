@@ -23,12 +23,11 @@
 #if defined(_WIN32)
 # include <windows.h>
 #else
+# include <sys/sendfile.h>
 # include <unistd.h>
 #endif
 #if defined(__APPLE__) || defined(__FreeBSD__)
 # include <copyfile.h>
-#elif defined (__UNIX__)
-# include <sys/sendfile.h>
 #endif
 #include <dirent.h>
 #include <stdlib.h>
@@ -76,7 +75,10 @@ int remove_dir(char *path)
 	char tmp[4096] = { 0 };
 
 	if (!(d = opendir(path)))
+	{
+		perror(NULL);
 		return 1;
+	}
 	else
 	{
 		while ((dir = readdir(d)))
@@ -86,43 +88,55 @@ int remove_dir(char *path)
 			cwk_path_join(path, dir->d_name, tmp, sizeof(tmp));
 			if(folder_exists(tmp))
 				remove_dir(tmp);
-			remove(tmp);
+			printf("removing %s\n", tmp);
+			#ifdef _WIN32
+				DeleteFileA(tmp);
+			#else
+				remove(tmp);
+			#endif
 		}
-		remove(path);
+		#ifdef _WIN32
+			RemoveDirectoryA(path);
+		#else
+			remove(path);
+		#endif
 		closedir(d);
 		return 0;
 	}
 }
 
+#if defined (_WIN32)
+int copy_file(char* source, char* destination)
+{
+	return CopyFile(source, destination, 0);
+}
+#else
 int copy_file(char* source, char* destination)
 {    
-	#if defined(__APPLE__) || defined(__FreeBSD__) || defined(__UNIX__)
-		int input, output;
-		if ((input = open(source, O_RDONLY)) == -1)
-			return -1;
-		if ((output = creat(destination, 0660)) == -1)
-		{
-			close(input);
-			return -1;
-		}
-	#endif
-	#if defined(__APPLE__) || defined(__FreeBSD__)
-		int result = fcopyfile(input, output, 0, COPYFILE_ALL);
-	#elif defined(__UNIX__)
-		off_t bytesCopied = 0;
-		struct stat fileinfo = {0};
-		fstat(input, &fileinfo);
-		long result = sendfile(output, input, &bytesCopied, fileinfo.st_size);
-	#elif defined (_WIN32)
-		return CopyFile(source, destination, 0);
-	#endif
-	#if defined(__APPLE__) || defined(__FreeBSD__) || defined(__UNIX__)
-		close(input);
-		close(output);
-		return (int)result;
-	#endif
-}
 
+	int input, output;
+	if ((input = open(source, O_RDONLY)) == -1)
+		return -1;
+	if ((output = creat(destination, 0660)) == -1)
+	{
+		close(input);
+		return -1;
+	}
+	#if defined(__APPLE__) || defined(__FreeBSD__)
+	//fcopyfile works on FreeBSD and OS X 10.5+
+	int result = fcopyfile(input, output, 0, COPYFILE_ALL);
+	#else
+	//sendfile will work with non-socket output (i.e. regular file) on Linux 2.6.33+
+	off_t bytesCopied = 0;
+	struct stat fileinfo = {0};
+	fstat(input, &fileinfo);
+	long result = sendfile(output, input, &bytesCopied, fileinfo.st_size);
+	#endif
+	close(input);
+	close(output);
+	return (int)result;
+}
+#endif
 /**
   * \brief Checks if file the given in parameter exists
   *
