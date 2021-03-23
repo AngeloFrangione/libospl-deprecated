@@ -25,8 +25,7 @@ deps = [stockage,
 		md5,
 		dependency('threads'),
 		thumbnailer,
-		meson.get_compiler('c').find_library('m'),
-		meson.get_compiler('c').find_library('magic')]
+		meson.get_compiler('c').find_library('m')]
 
 source =['srcs/ospl.c', 'srcs/common.c', 
 		'srcs/db/database_albums.c',
