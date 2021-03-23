@@ -93,8 +93,12 @@ static int get_info(t_db *db, t_photos *pho, char *path, char *library)
 	fill_tdb(db, library);
 	return SUCCESS;
 }
-
 int ospl_import_photo(char *library, char *path)
+{
+	return ospl_import_photo_t(library, path, NULL);
+}
+
+int ospl_import_photo_t(char *library, char *path, t_db *transaction_db)
 {
 	t_db db = {0};
 	t_photos pho = {0};
@@ -143,6 +147,7 @@ t_import_status *ospl_import_folder(char *library, char *path)
 	DIR *d;
 	int i = 0;
 	int j = 1;
+	t_db transaction_db = {0};
 	struct dirent *dir;
 	char tmp[PATH_LEN_BUFFER] = { 0 };
 	t_import_status *status = NULL;
@@ -150,6 +155,8 @@ t_import_status *ospl_import_folder(char *library, char *path)
 
 	if (!(d = opendir(path)))
 		return NULL;
+	fill_tdb(&transaction_db, library);
+	stockage_init(&transaction_db);
 	while ((dir = readdir(d)))
 	{
 		if (!(i % 32000))
@@ -172,9 +179,10 @@ t_import_status *ospl_import_folder(char *library, char *path)
 			free_import_status(&status);
 			return NULL;
 		}
-		status[i].id = ospl_import_photo(library, tmp);
+		status[i].id = ospl_import_photo_t(library, tmp, &transaction_db);
 		++i;
 	}
+	stockage_commit(&transaction_db);
 	if (status)
 		status[i].path = NULL;
 	closedir(d);
