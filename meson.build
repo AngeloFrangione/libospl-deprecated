@@ -5,6 +5,9 @@ cmake = import('cmake')
 run_target('empty_files',
   command : 'scripts/create_emptyfiles.sh')
 
+run_target('copy_dlls',
+	command: 'scripts/copy_dlls.sh')
+
 # Enable debugging
 add_global_arguments('-DDEBUG=TRUE', language: 'c')
 

@@ -42,19 +42,38 @@ additionally you will need to install `mingw-w64`
 ```shell
 sudo apt install mingw-w64 mingw-w64-tools 
 ```
-The following commands will cross build ospl:
-```
-meson . winbuild --cross-file cross_file.txt
+
+The following commands will cross build ospl if you are in the Windows subsystem for Linux:
+```shell
+meson . winbuild --cross-file windows-subsystem.cross
 cd winbuild
 ninja
 ```
+
+The following commands will cross build ospl if you are under Linux:
+```shell
+meson . winbuild --cross-file windows-linux.cross
+cd winbuild
+ninja
+```
+note: this does not work atm because libjpeg does not compile with wine as exe_wrapper, please use the subsystem cross file and run tests manually for now.
+
 after the build process completed you need to copy the dlls from the individual subprojects and put them in the build folder in order to run ospl.exe
 
 note: you need to run ospl.exe in an admin shell in order to create the thumbnails. This bug will be adressed in future versions of ospl.
 
 ## Running tests
-After building ospl you can run the tests to ensure everything is working correctly. To do so, make sure you are in the build folder and then run this command:
+After building ospl you can run the tests to ensure everything is working correctly. To do so, make sure you are in the build folder and then
+
+for linux run this command:
 ```shell
 meson compile empty_files
+ninja test
+```
+
+for windows cross compilation (subsystem or Linux) run this command:
+```shell 
+meson compile empty_files
+meson compile copy_dlls
 ninja test
 ```
