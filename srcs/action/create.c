@@ -44,8 +44,13 @@ int ospl_create_library(char *path)
 	int ret = 0;
 	char tmp[PATH_LEN_BUFFER] = { 0 };
 
+	debug_printf("creating library at %s\n", path);
+
 	if (folder_exists(path))
+	{
+		debug_printf("folder exists, returning an error\n");
 		return ERR_EXISTS;
+	}
 	ret |= create_directory(path);
 	cwk_path_join(path, "photos", tmp, sizeof(tmp));
 	ret |= create_directory(tmp);

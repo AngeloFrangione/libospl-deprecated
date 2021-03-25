@@ -127,6 +127,7 @@ int db_list_albums(t_db *db, t_album *list);
 int db_select_album(t_db *db, int id, t_album *album);
 
 // Common usage functions
+int debug_printf(char *fmt, ...);
 void fill_tdb(t_db *db, char *library);
 int hard_link(char *current, char * new);
 int create_directory(char *path);

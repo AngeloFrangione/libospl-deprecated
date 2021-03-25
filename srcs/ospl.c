@@ -22,6 +22,19 @@
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
+
+int debug_printf(char *format, ...)
+{
+	int done;
+	va_list argptr;
+
+	va_start(argptr, format);
+	done = vfprintf(stdout, format, argptr);
+	va_end(argptr);
+	return done;
+}
 
 char *ospl_enum_error(int error_code)
 {
