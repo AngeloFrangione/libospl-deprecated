@@ -359,10 +359,12 @@ static int create(int ac, char **av)
 		printf("g_library_path: {%s}\ng_database_path: {%s}\n",
 				g_library_path, g_database_path);
 	}
-	if (ospl_create_library(g_library_path) < 0)
-		perror(NULL);
-	else
-		printf("created library at path: %s\n", av[0]);
+	int r = ospl_create_library(g_library_path);
+	if (r < 0)
+	{
+		printf("%s", ospl_enum_error(r));
+		return -1;
+	}
 	return 0;
 }
 
