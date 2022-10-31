@@ -1,4 +1,2 @@
-build
-install
-*.DS_Store
-test_files/ressources/empty_files/
+/target
+/Cargo.lock
