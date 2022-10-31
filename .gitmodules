@@ -1,4 +1,0 @@
-[submodule "subprojects/cwalk"]
-	path = subprojects/cwalk
-	url = https://github.com/likle/cwalk.git
-	branch = stable

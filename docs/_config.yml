@@ -1,8 +1,0 @@
-title: libospl
-email: ospl@frangione.fr
-baseurl: "libospl"
-url: "https://angelofrangione.github.io/libospl/" 
-# Build settings
-theme: jekyll-theme-cayman
-plugins:
-  - jekyll-feed
